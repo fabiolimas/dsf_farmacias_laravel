@@ -1,0 +1,1 @@
+<div id="<?php echo $id; ?>"></div><?php /**PATH /home/u292571460/domains/indutivatecnologia.com/public_html/dsf/vendor/arielmejiadev/larapex-charts/src/../stubs/resources/views/chart/container.blade.php ENDPATH**/ ?>
