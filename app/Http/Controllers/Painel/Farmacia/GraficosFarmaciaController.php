@@ -15,7 +15,7 @@ class GraficosFarmaciaController extends Controller
             ->setXAxis(['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'])
             ->setDataset([[
                 'name'  =>  'Vendas',
-                'data'  =>  [6, 9, 3, 4, 10, 8, 5, 6, 9, 3, 4, 10, 8, 5]
+                'data'  =>  [90, 9, 3, 4, 10, 8, 5, 6, 9, 3, 4, 10, 8, 5]
             ]])
             ->setColors(['#0E6664'])
             ->setSparkline()

@@ -248,10 +248,10 @@
 
                                                 </div>
                                             </div>
-                                        
+
                                             <div class="fs-20px  fw-600 d-flex gap-2 align-items-center">
                                                 <div class="text-truncate">
-                                                    PagueMenos 
+                                                    PagueMenos
                                                 </div>
                                                 <div class="position-relative" style="">
                                                     <div
