@@ -1,9 +1,10 @@
 
-<?php $__env->startSection('title', 'Cadastrar novo exame'); ?>
+<?php $__env->startSection('title', 'Editar exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
-        <form action="<?php echo e(route('painel.admin.exames.store-2', $exame->id)); ?>" method="post" target="">
+        <form action="<?php echo e(route('painel.admin.exames.update', $exame->id)); ?>" method="post">
             <?php echo csrf_field(); ?>
+            <?php echo method_field('PUT'); ?>
             <div class="row gy-4">
 
 
@@ -12,7 +13,7 @@
                     <div class="card ">
                         <div class="card-body p-3 p-lg-4">
 
-                            <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Cadastrar novo exame</h1>
+                            <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Editar exame</h1>
 
 
 
@@ -98,7 +99,11 @@ unset($__errorArgs, $__bag); ?>
 
                             <div class="pt-3 mt-5">
                                 <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
-                                    Cadastrar
+                                    Salvar
+                                </button>
+                                <button type="button" class="mt-3 btn btn-primary-light text-green  w-100 py-2 fw-600"
+                                    data-bs-toggle="modal" data-bs-target="#modal-remover">
+                                    Excluir exame
                                 </button>
 
                             </div>
@@ -118,12 +123,148 @@ unset($__errorArgs, $__bag); ?>
 
                             <!-- lista de parguntas -->
                             <div class="" id="lista-perguntas">
-                                <?php $__currentLoopData = []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $exame->perguntas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="">
+                                        <div class="border-green-light p-3 rounded-3 mb-4 pergunta-item"
+                                            id="pergunta-item-<?php echo e($key); ?>">
+                                            <div class="row">
+                                                <!-- Pergunta -->
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3 pb-2">
+                                                        <label for="pergunta-<?php echo e($key); ?>"
+                                                            class="form-label text-green fw-500 fs-18px">Pergunta</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-custom fs-18px fw-500"
+                                                            name="perguntas[<?php echo e($key); ?>][pergunta]"
+                                                            value="<?php echo e($pergunta['pergunta']); ?>"
+                                                            id="pergunta-<?php echo e($key); ?>"
+                                                            placeholder="Forma de aplicação do exame?" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-6">
+                                                    <!-- Tipo -->
+                                                    <div class="mb-3 pb-2">
+                                                        <label for="tipo-<?php echo e($key); ?>"
+                                                            class="form-label text-green fw-500 fs-18px opacity-0">Tipo</label>
+                                                        <select class="form-select form-control-custom fw-500 fs-18px"
+                                                            style="background-color: #CCEFEE"
+                                                            name="perguntas[<?php echo e($key); ?>][tipo]"
+                                                            id="tipo-<?php echo e($key); ?>" required>
+                                                            <option value="multipla-escolha"
+                                                                <?php if($pergunta['tipo'] == 'multipla-escolha'): ?> selected <?php endif; ?>>Múltipla
+                                                                escolha</option>
+                                                            <option value="selecao"
+                                                                <?php if($pergunta['tipo'] == 'selecao'): ?> selected <?php endif; ?>>Seleção
+                                                            </option>
+                                                            <option value="resposta-curta"
+                                                                <?php if($pergunta['tipo'] == 'resposta-curta'): ?> selected <?php endif; ?>>Resposta
+                                                                curta</option>
+                                                            <option value="paragrafo"
+                                                                <?php if($pergunta['tipo'] == 'paragrafo'): ?> selected <?php endif; ?>>Parágrafo
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- Opções -->
+                                                <!-- op -->
+                                                <div class="col-12">
+                                                    <div class="row flex-column" id="opcoes-resposta-<?php echo e($key); ?>">
+
+                                                        <!--  -->
+                                                        <?php $__currentLoopData = $pergunta['opcoes']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $keyOp => $opcao): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <div class="col-12 col-lg-6 item-opcoes-<?php echo e($key); ?>">
+                                                                <div class="mb-3 pb-2 position-relative">
+                                                                    <label
+                                                                        for="opcao-<?php echo e($key); ?>-<?php echo e($keyOp); ?>"
+                                                                        class="form-label text-green fw-500 fs-18px">
+                                                                        Opção <span
+                                                                            class="numero-opcao-<?php echo e($key); ?>"><?php echo e($keyOp + 1); ?></span>
+                                                                    </label>
+                                                                    <div class=" "
+                                                                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
+                                                                        <button type="button"
+                                                                            onclick="this.parentNode.parentNode.remove(); setNumeroOpcao(<?php echo e($key); ?>)"
+                                                                            class="btn btn-none border-0 p-1 text-green fs-18px">
+                                                                            <i class="" data-feather="x"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class=" <?php if($keyOp != array_key_last($pergunta['opcoes'])): ?> d-none <?php endif; ?>  "
+                                                                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
+                                                                        <button type="button"
+                                                                            class="btn btn-none border-0 p-1 text-green fs-18px"
+                                                                            onclick="this.parentNode.remove();setOpcao(<?php echo e($key); ?>)">
+                                                                            <i class=""
+                                                                                data-feather="plus-circle"></i>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <input type="text"
+                                                                        class="form-control form-control-custom fs-18px fw-500 opcoes-item-<?php echo e($key); ?>"
+                                                                        name="perguntas[<?php echo e($key); ?>][opcoes][]"
+                                                                        id="opcao-<?php echo e($key); ?>-<?php echo e($keyOp); ?>"
+                                                                        placeholder="Nasal" value="<?php echo e($opcao); ?>"
+                                                                        required />
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                    </div>
+                                                </div>
+                                                <!-- op -->
+                                                <div class="col-12">
+                                                    <div class="form-control form-control-custom d-flex align-items-center justify-content-end gap-3  border-end-0 border-start-0 border-bottom-0"
+                                                        style="border-top-left-radius: 0;  border-top-right-radius: 0">
+
+                                                        <button type="button"
+                                                            class="btn btn-none border-0 p-0 text-green-3"
+                                                            title="Copiar pergunta"
+                                                            onclick="copiarPegunta(<?php echo e($key); ?>)">
+                                                            <i class="" data-feather="copy"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-none border-0 p-0 text-green-3"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            title="Remover"
+                                                            onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.remove()">
+                                                            <i class="" data-feather="trash"></i>
+                                                        </button>
+
+
+                                                        <div class=""
+                                                            style="height: 20px; border-left: 1px solid #B2D2D2">
+
+                                                        </div>
+                                                        <div class="fw-500 d-flex gap-1 align-items-center">
+
+                                                            <label class="form-check-label"
+                                                                for="pergunta-obrigatoria-<?php echo e($key); ?>">Obrigatória</label>
+
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="perguntas[<?php echo e($key); ?>][obrigatorio]"
+                                                                    role="switch"
+                                                                    id="pergunta-obrigatoria-<?php echo e($key); ?>"
+                                                                    <?php if($pergunta['obrigatorio']): ?> checked <?php endif; ?>>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
 
                             <div class="mt-3 text-end">
-                                <button type="button" class="btn btn-primary-light-3 px-4 fw-500" onclick="setPergunta()">
+                                <button type="button" class="btn btn-primary-light-3 px-4 fw-500"
+                                    onclick="setPergunta()">
                                     <i class="" data-feather="plus-circle" width="20" height="20"></i>
                                     Adicionar mais
                                 </button>
@@ -138,6 +279,53 @@ unset($__errorArgs, $__bag); ?>
         </form>
     </div>
 
+
+    <!-- Modal remover -->
+    <div class="modal modal-custom fade" id="modal-remover" tabindex="-1" data-bs-backdrop="static"
+        data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
+            <div class="modal-content bg-transparent ">
+                <div class="modal-body p-lg-5  border-0">
+
+                    <div class="p-4 shadow rounded-3  bg-white border">
+
+
+                        <div class="fs-5 text-center">
+                            Tem certeza que deseja remover este exame?
+                        </div>
+
+
+                        <form action="<?php echo e(route('painel.admin.exames.destroy', $exame->id)); ?>" method="post">
+                            <?php echo method_field('DELETE'); ?>
+                            <?php echo csrf_field(); ?>
+                            <div class="row mt-4 pt-2 gy-2">
+                                <div class="col-12 col-lg-6">
+                                    <button type="button" data-bs-dismiss="modal"
+                                        class="btn btn-danger w-100 py-2 fs-16px " id="modal-link-editar-user">
+                                        Cancelar
+                                    </button>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <button type="submit" id="modal-link-ver-mais"
+                                        class="btn btn-primary w-100 py-2 fs-16px">Sim</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="fechar-modal text-center pt-2 pt-lg-4">
+                        <button type="button" class="btn btn-ligth shadow bg-white text-green-2 py-1"
+                            data-bs-dismiss="modal">
+                            <i data-feather="x"></i>
+                            Fechar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php $__env->stopSection(); ?>
 
@@ -200,7 +388,7 @@ unset($__errorArgs, $__bag); ?>
             }
         }
 
-        var contadorPerguntas = 0
+        var contadorPerguntas = document.querySelectorAll('.pergunta-item').length + 2
 
         /*
          * Adicionar perguntas no html
@@ -332,8 +520,9 @@ unset($__errorArgs, $__bag); ?>
 
             /* activer feather icons */
             feather.replace();
+
+            setNumeroOpcao(key)
         }
-        setPergunta()
 
         /**
          * Copiar pergunta
@@ -359,12 +548,12 @@ unset($__errorArgs, $__bag); ?>
 
             console.log(textPegunta, tipo, opcoes, obrigatorio);
 
-            let htmlOpcoes= ``
-            let countInteration= 0;
-            for(let item of opcoes) {
-                
+            let htmlOpcoes = ``
+            let countInteration = 0;
+            for (let item of opcoes) {
+
                 countInteration++;
-                
+
                 htmlOpcoes += `
                 <div class="mb-3 pb-2 position-relative">
                     <label for="opcao-${key}"
@@ -397,7 +586,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
                 `
             }
-            
+
             newDiv.innerHTML = `
             <div class="border-green-light p-3 rounded-3 mb-4 pergunta-item" id="pergunta-item-${key}">
                 <div class="row">
@@ -485,7 +674,7 @@ unset($__errorArgs, $__bag); ?>
             divPerguntas.appendChild(newDiv);
 
             setNumeroOpcao(key)
-            
+
             /* activer feather icons */
             feather.replace();
 
@@ -493,4 +682,4 @@ unset($__errorArgs, $__bag); ?>
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.painel.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\indutiva\dsf_farmacias_laravel\resources\views/pages/painel/admin/exames/create_2.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.painel.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\indutiva\dsf_farmacias_laravel\resources\views/pages/painel/admin/exames/edit.blade.php ENDPATH**/ ?>

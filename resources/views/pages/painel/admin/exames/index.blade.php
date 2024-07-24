@@ -116,6 +116,52 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!-- Modal remover -->
+    <div class="modal modal-custom fade" id="modal-remover" tabindex="-1" data-bs-backdrop="static"
+    data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
+        <div class="modal-content bg-transparent ">
+            <div class="modal-body p-lg-5  border-0">
+
+                <div class="p-4 shadow rounded-3  bg-white border">
+
+
+                    <div class="fs-5 text-center">
+                        Tem certeza que deseja remover este exame?
+                    </div>
+
+
+                    <form action="{{ route('painel.admin.exames.destroy', $exame->id) }}" method="post" id="form-remover">
+                       @method('delete')
+                        @csrf
+                        <div class="row mt-4 pt-2 gy-2">
+                            <div class="col-12 col-lg-6">
+                                <button type="button" data-bs-dismiss="modal"
+                                    class="btn btn-danger w-100 py-2 fs-16px " id="modal-link-editar-user">
+                                    Cancelar
+                                </button>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <button type="submit" id="modal-link-ver-mais"
+                                    class="btn btn-primary w-100 py-2 fs-16px">Sim</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="fechar-modal text-center pt-2 pt-lg-4">
+                    <button type="button" class="btn btn-ligth shadow bg-white text-green-2 py-1"
+                        data-bs-dismiss="modal">
+                        <i data-feather="x"></i>
+                        Fechar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
                                             @endforeach
 
                                         </div>
@@ -140,52 +186,7 @@
 
 
 
-    <!-- Modal remover -->
-    <div class="modal modal-custom fade" id="modal-remover" tabindex="-1" data-bs-backdrop="static"
-        data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
-            <div class="modal-content bg-transparent ">
-                <div class="modal-body p-lg-5  border-0">
-
-                    <div class="p-4 shadow rounded-3  bg-white border">
-
-
-                        <div class="fs-5 text-center">
-                            Tem certeza que deseja remover este exame?
-                        </div>
-
-
-                        <form action="" method="post" id="form-remover">
-                            @method('DELETE')
-                            @csrf
-                            <div class="row mt-4 pt-2 gy-2">
-                                <div class="col-12 col-lg-6">
-                                    <button type="button" data-bs-dismiss="modal"
-                                        class="btn btn-danger w-100 py-2 fs-16px " id="modal-link-editar-user">
-                                        Cancelar
-                                    </button>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <button type="submit" id="modal-link-ver-mais"
-                                        class="btn btn-primary w-100 py-2 fs-16px">Sim</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-
-                    <div class="fechar-modal text-center pt-2 pt-lg-4">
-                        <button type="button" class="btn btn-ligth shadow bg-white text-green-2 py-1"
-                            data-bs-dismiss="modal">
-                            <i data-feather="x"></i>
-                            Fechar
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
 @endsection
 

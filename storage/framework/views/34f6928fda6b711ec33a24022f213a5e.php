@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Visualizar Exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">

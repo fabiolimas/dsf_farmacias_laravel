@@ -52,14 +52,16 @@
                     </li>
                     <!-- atualizar -->
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                        <a class="nav-link" href="#" onClick="window.location.reload()"data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Atualizar">
                             <img src="{{ asset('assets/img/icons/atualizar.svg') }}" alt="Atualizar" width="37">
                         </a>
                     </li>
                     <li class="nav-item ps-lg-5 ">
                         <span class="nav-link">
-                            17:14 · 15 de outubro de 2023
+                          
+                            {{$dataAtual= date('H:i - d  M  Y');}}
+                          
                         </span>
                     </li>
                 </ul>
