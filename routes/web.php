@@ -139,6 +139,9 @@ Route::prefix('/fm')->group(function () {
 
         Route::get('/create', [AgendaController::class, 'create'])->name('painel.farmacia.agenda.create');
         Route::post('/store', [AgendaController::class, 'store'])->name('painel.farmacia.agenda.store');
+        Route::get('/edit/{id}', [AgendaController::class, 'edit'])->name('painel.farmacia.agenda.edit');
+        Route::put('/edit/{id}', [AgendaController::class, 'update'])->name('painel.farmacia.agenda.update');
+        Route::post('/busca', [AgendaController::class, 'buscaAgendados'])->name('painel.farmacia.agenda.busca');
     });
 
 

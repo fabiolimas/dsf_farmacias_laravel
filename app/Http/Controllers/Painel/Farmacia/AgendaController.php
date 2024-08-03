@@ -14,12 +14,24 @@ class AgendaController extends Controller
     public function index(){
 
         $farmacia=Cliente::where('user_id', auth()->id())->first();
+       
 
         $clientesFarma=ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
         $exames=Exame::all();
-        $agendas=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')->where('agendas.cliente_id', $farmacia->id)->orderBy('agendas.hora_exame', 'asc')->get();
+        $agendas=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')
+        ->join('users','users.id','agendas.user_id')
+        ->select('agendas.*','agendas.id as agendaId','cliente_farmacias.email as emailCliente','cliente_farmacias.telefone as telefone','cliente_farmacias.cpf as cpf','users.*')
+        ->where('agendas.cliente_id', $farmacia->id)
+        ->where('agendas.status','aberto')
+        ->orderBy('agendas.hora_exame', 'asc')->get();
 
-       $examesDia=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')->where('agendas.cliente_id', $farmacia->id)->where('agendas.data_exame', date('Y-m-d'))->orderBy('agendas.hora_exame', 'asc')->get();
+       $examesDia=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')
+       ->join('users','users.id','agendas.user_id')
+       ->select('agendas.*','agendas.id as agendaId','cliente_farmacias.email as emailCliente','cliente_farmacias.telefone as telefone','cliente_farmacias.cpf as cpf','users.*')
+       ->where('agendas.cliente_id', $farmacia->id)
+       ->where('agendas.status','aberto')
+       ->orderBy('agendas.hora_exame', 'asc')->get();
+     
 
         return view('pages.painel.farmacia.agenda.index', compact('examesDia','agendas','farmacia', 'clientesFarma','exames'));
     }
@@ -32,6 +44,31 @@ class AgendaController extends Controller
         $agendas=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')->where('agendas.cliente_id', $farmacia->id)->orderBy('agendas.hora_exame', 'asc')->get();
 
         return view('pages.painel.farmacia.agenda.create', compact('agendas','exames','farmacia','clientesFarma'));
+    }
+
+    public function edit(Request $request){
+       
+        $agenda=Agenda::find($request->id);
+       
+        $farmacia=Cliente::where('user_id', auth()->id())->first();
+        $clientesFarma=ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
+        $clienteAgendado=ClienteFarmacia::find($agenda->cliente_farmacia_id);
+        $exames=Exame::all();
+        $exameAgendado=Exame::find($agenda->exame_id);
+        $agendas=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')->where('agendas.cliente_id', $farmacia->id)->orderBy('agendas.hora_exame', 'asc')->get();
+        return view('pages.painel.farmacia.agenda.edit',compact('exames','agendas','exameAgendado','agenda','farmacia','clientesFarma','clienteAgendado'));
+    }
+
+    public function update(Request $request){
+
+
+        $agenda=Agenda::find($request->id);
+        $exame=Exame::find($agenda->exame_id);
+       
+        $agenda->update($request->all());
+        $agenda->update(['nome_exame'=>$exame->nome]);
+
+        return redirect()->route('painel.farmacia.agenda.index')->with('success','Agendamento editado com sucesso!');
     }
 
     public function store(Request $request){
@@ -48,10 +85,61 @@ class AgendaController extends Controller
         $agenda->data_exame=$request->data_exame;
         $agenda->hora_exame=$request->hora_exame;
         $agenda->cliente_id=$request->cliente_id;
+        $agenda->user_id=auth()->id();
+        $agenda->status='aberto';
         $agenda->save();
 
         return redirect()->route('painel.farmacia.agenda.index')->with('success','Exame agendado com sucesso!');
 
         
+    }
+
+    public function buscaAgendados(Request $request){
+        $busca=$request->pesquisa;
+
+       
+
+        $farmacia=Cliente::where('user_id', auth()->id())->first();
+       
+
+        $clientesFarma=ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
+        $exames=Exame::all();
+        if($busca==''){
+            $examesDia=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')
+            ->join('users','users.id','agendas.user_id')
+            ->select('agendas.*','agendas.id as agendaId','cliente_farmacias.email as emailCliente','cliente_farmacias.telefone as telefone','cliente_farmacias.cpf as cpf','users.*')
+            ->where('agendas.cliente_id', $farmacia->id)
+            ->where('agendas.status','aberto')
+         
+            ->orderBy('agendas.hora_exame', 'asc')->get();
+        }else{
+            $examesDia=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')
+            ->join('users','users.id','agendas.user_id')
+            ->select('agendas.*','agendas.id as agendaId','cliente_farmacias.email as emailCliente','cliente_farmacias.telefone as telefone','cliente_farmacias.cpf as cpf','users.*')
+            ->where('agendas.cliente_id', $farmacia->id)
+            ->where('agendas.status','aberto')
+            ->where('agendas.nome_cliente','like','%'.$busca.'%')
+             ->orWhere('agendas.nome_exame','like','%'.$busca.'%')
+            ->orderBy('agendas.hora_exame', 'asc')->get();
+        }
+        $agendas=Agenda::join('cliente_farmacias','cliente_farmacias.id','agendas.cliente_farmacia_id')
+        ->join('users','users.id','agendas.user_id')
+        ->select('agendas.*','agendas.id as agendaId','cliente_farmacias.email as emailCliente','cliente_farmacias.telefone as telefone','cliente_farmacias.cpf as cpf','users.*')
+        ->where('agendas.cliente_id', $farmacia->id)
+        ->where('agendas.status','aberto')
+        
+        ->orderBy('agendas.hora_exame', 'asc')->get();
+
+        if($examesDia->count() >=1){
+            return view('pages.painel.farmacia.buscas.exames_agendados', compact('examesDia','agendas','farmacia', 'clientesFarma','exames')); 
+        }else{
+            return response()->json(['status'=>'Nenhum agendamento encontrado']);
+        }
+
+     
+     
+
+       
+
     }
 }
