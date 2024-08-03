@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Pagamento de clientes'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">

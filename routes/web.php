@@ -10,6 +10,8 @@ use App\Http\Controllers\Painel\Config\ConfigController;
 use App\Http\Controllers\Painel\Admin\ExameAdmController;
 use App\Http\Controllers\Painel\Admin\PagamentoController;
 use App\Http\Controllers\Painel\Config\ColaboradorController;
+use App\Http\Controllers\Painel\Farmacia\AgendaController;
+use App\Http\Controllers\Painel\Farmacia\ClienteController as FarmaciaClienteController;
 use App\Http\Controllers\Painel\Farmacia\GraficosFarmaciaController;
 
 /*
@@ -112,29 +114,31 @@ Route::prefix('/fm')->group(function () {
     /* Clietes */
     Route::prefix('/clientes')->group(function () {
 
-        Route::get('/', function () {
-            return view('pages.painel.farmacia.clientes.index');
-        })->name('painel.farmacia.clientes.index');
+        Route::get('/', [FarmaciaClienteController::class, 'index'])
+        ->name('painel.farmacia.clientes.index');
 
-        Route::get('/create', function () {
-            return view('pages.painel.farmacia.clientes.create');
-        })->name('painel.farmacia.clientes.create');
+        Route::get('/create', [FarmaciaClienteController::class, 'create'])            
+        ->name('painel.farmacia.clientes.create');
 
-        Route::get('/edit/{id}', function () {
-            return view('pages.painel.farmacia.clientes.edit');
-        })->name('painel.farmacia.clientes.edit');
+        Route::post('/create', [FarmaciaClienteController::class, 'store'])            
+        ->name('painel.farmacia.clientes.store');
+
+        Route::get('/edit/{id}', [FarmaciaClienteController::class, 'edit'])
+        ->name('painel.farmacia.clientes.edit');
+        Route::put('/update/{id}', [FarmaciaClienteController::class, 'update'])
+        ->name('painel.farmacia.clientes.update');
+        Route::post('/busca', [FarmaciaClienteController::class, 'buscaCliente'])
+        ->name('painel.farmacia.clientes.busca');
     });
 
     /* agenda */
     Route::prefix('agenda')->group(function () {
 
-        Route::get('/', function () {
-            return view('pages.painel.farmacia.agenda.index');
-        })->name('painel.farmacia.agenda.index');
+        Route::get('/', [AgendaController::class, 'index']
+        )->name('painel.farmacia.agenda.index');
 
-        Route::get('/create', function () {
-            return view('pages.painel.farmacia.agenda.create');
-        })->name('painel.farmacia.agenda.create');
+        Route::get('/create', [AgendaController::class, 'create'])->name('painel.farmacia.agenda.create');
+        Route::post('/store', [AgendaController::class, 'store'])->name('painel.farmacia.agenda.store');
     });
 
 

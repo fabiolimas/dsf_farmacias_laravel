@@ -20,7 +20,44 @@ body {
 .fw-500 {
     font-weight: 500;
 }
-
+.select2-container--default .select2-selection--single{
+    background-color: var(--verde-hover, #E6F2F1);
+    border: 1px solid var(--verde-detalhe, #B2D2D2);
+    box-shadow: none;
+    color: #386160;
+    height: 50px;
+    border-radius: 5px;
+}
+.fc .fc-col-header-cell-cushion {
+    display: inline-block;
+    padding: 2px 4px;
+   text-decoration:none;
+   color: #0E6664;
+   
+   
+  }
+  th.fc-col-header-cell.fc-day {
+    background-color: #CCEFEE;
+    border-radius: 2px;
+    border: none;
+    padding: 8px 16px;
+    color: #0E6664;
+}
+.fc .fc-daygrid-day-number{
+    text-decoration:none;
+    color: #0E6664;
+}
+.fc-view-harness.fc-view-harness-active {
+    border-radius: 5px;
+    border: 2px solid #CCEFEE;
+}
+span.select2-selection__arrow {
+    display: none;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 3;
+}
 .fw-600 {
     font-weight: 600;
 }

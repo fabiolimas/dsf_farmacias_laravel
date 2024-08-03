@@ -1,6 +1,43 @@
 @extends('layouts.painel.app')
 @section('title', 'Agendar novo exame')
+
+@section('head')
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarEl = document.getElementById('calendar')
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        locale:'pt-br',
+       themeSystem: 'bootstrap5',
+
+       headerToolbar: { left: 'title' },
+       
+        
+        selectMirror: true,
+       
+        initialView: 'dayGridMonth',
+        selectable: true,
+
+        events:[
+            @foreach($agendas as $agenda)
+
+            {
+            title:'{{$agenda->hora_exame}}-{{$agenda->nome_exame}}',
+            start: '{{$agenda->data_exame}}',
+        },
+            @endforeach
+
+        ],
+      })
+      calendar.render()
+    })
+
+  </script>
+@stop
+
 @section('content')
+
+
     <div class="">
         <div class="row gy-4">
 
@@ -18,8 +55,8 @@
 
 
 
-                        <form action="#" method="post">
-
+                        <form action="{{route('painel.farmacia.agenda.store')}}" method="post">
+@csrf
                             <div class="px-3">
 
                                 <!-- pesquisa -->
@@ -36,10 +73,19 @@
 
                                         </label>
                                         <div class="position-relative">
-                                            <input type="text" class="form-control form-control-custom fs-18px fw-500"
-                                                name="" id="pesquisa" placeholder="Pesquisar" />
+                                            {{-- <input type="text" class="form-control form-control-custom fs-18px fw-500"
+                                                name="" id="pesquisa" placeholder="Pesquisar" /> --}}
+                                                <select name="cliente_farmacia_id" id="cliente" class="form-select form-control-custom">
+                                                    <option value="">Pesquisar</option>
+                                                    @foreach($clientesFarma as $cliente)
+                                                    
+                                                        <option value="{{$cliente->id}}">{{$cliente->nome}}</option>
+                                                    
+                                                    
+                                                    @endforeach
+                                                </select>
 
-                                            <button type="submit" class="btn btn-none text-green p-1"
+                                            <button type="button" class="btn btn-none text-green p-1"
                                                 style="position: absolute; top:7px; right: 12px">
                                                 <i data-feather="search"></i>
                                             </button>
@@ -61,9 +107,13 @@
 
                                     </label>
                                     <select
-                                        class="form-select form-control-custom fs-18px @error('cargo') is-invalid @enderror"
-                                        name="cargo" id="cargo" required>
-                                        <option value="">Administrador</option>
+                                        class="form-select form-control-custom fs-18px @error('exame') is-invalid @enderror"
+                                        name="exame_id" id="cargo" required>
+                                        <option value="">Selecione o Exame</option>
+                                        @foreach($exames as $exame)
+                                        <option value="{{$exame->id}}">{{$exame->nome}}</option>
+                                        @endforeach
+                                        
                                     </select>
                                     @error('cargo')
                                         <div class="invalid-feedback fw-500">{{ $message }}</div>
@@ -87,20 +137,21 @@
                                 </div>
                                 <!-- Horário de início -->
                                 <div class="mb-3 pb-3">
-                                    <label for="hora_inicio" class="form-label text-green fw-500 fs-18px">
+                                    <label for="hora_exame" class="form-label text-green fw-500 fs-18px">
                                         Horário de início
                                     </label>
                                     <input type="time"
                                         class="form-control form-control-custom fs-18px fw-500 @error('hora_inicio') is-invalid @enderror"
-                                        name="hora_inicio" id="hora_inicio" placeholder=""
+                                        name="hora_exame" id="hora_exame" placeholder=""
                                         value="{{ old('hora_inicio', date('H:i')) }}" required />
                                     @error('hora_inicio')
                                         <div class="invalid-feedback fw-500">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <input type="hidden" name="cliente_id" value="{{$farmacia->id}}">
 
                                 <div class="pt-5">
-                                    <button type="button" class="btn btn-primary w-100 py-2 fw-600">
+                                    <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
                                         Agendar
                                     </button>
 
@@ -123,151 +174,8 @@
                         <div class="px-3 d-flex justify-content-between align-items-center mb-4 pt-2">
                             <h2 class="fs-4 fw-600 text-green-2 ">Calendário de exames</h2>
                         </div>
-
-                        <div class="px-3">
-                            <div class="calendario">
-                                <!-- dias semana -->
-                                <div class="calendario-semana d-flex text-center rounded-3 fw-600 fs-20 text-green">
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                </div>
-
-                                <!-- dias -->
-                                <div class="mt-4 calendario-dias d-flex flex-wrap text-center rounded-3 fw-500 fs-16px">
-                                    <div class="calendario-dia  px-3 py-2"></div>
-
-                                    <!--  -->
-                                    <div class="calendario-dia p-1 position-relative ">
-                                        <!-- data -->
-                                        <div
-                                            class="calendario-dia-data rounded-2 d-flex  fs-14px text-white align-items-center gap-2 justify-content-center">
-                                            02 de Out
-                                            <span class=" d-flex">
-                                                <span
-                                                    class="badge rounded-pill text-bg-white bg-white text-green-2">8</span>
-                                            </span>
-                                        </div>
-                                        <!-- agendas -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda roxo rounded-2 d-flex fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-                                        <!--  -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda laranja rounded-2 d-flex  fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-
-                                        <!-- ver mais -->
-                                        <div class="position-absolute pb-1" style="bottom: 0;width:100%; left: 0">
-                                            <button type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modal-ver-todas-agenda"
-                                                class="btn mb-1 btn-light bg-white border-0 shadow rounded-3 py-1 px-2 text-green fw-600 fs-12px">
-                                                Ver mais
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <!--  -->
-                                    <div class="calendario-dia p-1 position-relative ">
-                                        <!-- data -->
-                                        <div
-                                            class="calendario-dia-data rounded-2 d-flex  fs-14px text-white align-items-center gap-2 justify-content-center">
-                                            03 de Out
-                                            <span class=" d-flex">
-                                                <span
-                                                    class="badge rounded-pill text-bg-white bg-white text-green-2">1</span>
-                                            </span>
-                                        </div>
-                                        <!-- agendas -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda verde rounded-2 d-flex fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - BETA-hCG
-                                            </div>
-                                        </div>
-
-
-                                        <!-- ver mais -->
-                                        <div class="position-absolute pb-1 d-none" style="bottom: 0;width:100%; left: 0">
-                                            <button type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modal-ver-todas-agenda"
-                                                class="btn mb-1 btn-light bg-white border-0 shadow rounded-3 py-1 px-2 text-green fw-600 fs-12px">
-                                                Ver mais
-                                            </button>
-                                        </div>
-
-                                    </div>
-
-                                    <!--  -->
-                                    <div class="calendario-dia p-1 position-relative ">
-                                        <!-- data -->
-                                        <div
-                                            class="calendario-dia-data rounded-2 d-flex  fs-14px text-white align-items-center gap-2 justify-content-center">
-                                            04 de Out
-                                            <span class=" d-flex">
-                                                <span
-                                                    class="badge rounded-pill text-bg-white bg-white text-green-2">16</span>
-                                            </span>
-                                        </div>
-                                        <!-- agendas -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda vermelho rounded-2 d-flex fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-                                        <!--  -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda laranja rounded-2 d-flex  fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-
-                                        <!-- ver mais -->
-                                        <div class="position-absolute pb-1" style="bottom: 0;width:100%; left: 0">
-                                            <button type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modal-ver-todas-agenda"
-                                                class="btn mb-1 btn-light bg-white border-0 shadow rounded-3 py-1 px-2 text-green fw-600 fs-12px">
-                                                Ver mais
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="calendario-dia  px-3 py-2"></div>
-                                    <div class="calendario-dia  px-3 py-2"></div>
-                                    <div class="calendario-dia  px-3 py-2"></div>
-                                    <div class="calendario-dia  px-3 py-2"></div>
-
-                                    @foreach ([3, 3, 33, 3, 3, 3, 3, 3, 3, 3, 33, 3, 3, 3, 3, 3, 33, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3] as $item)
-                                        <div class="calendario-dia  px-3 py-2"></div>
-                                    @endforeach
-
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <div id='calendar'></div>
+                        {{--  --}}
 
                     </div>
                 </div>
@@ -547,10 +455,9 @@
 
 @section('scripts')
     <script>
-        const myModal = new bootstrap.Modal(document.getElementById("modal-ver-todas-agenda"), {});
-
-        function fecharModalAgendas() {
-            myModal.hide()
-        }
+       
+        $(document).ready(function() {
+    $('#cliente').select2();
+});
     </script>
 @endsection

@@ -1,5 +1,43 @@
+
 <?php $__env->startSection('title', 'Agendar novo exame'); ?>
+
+<?php $__env->startSection('head'); ?>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarEl = document.getElementById('calendar')
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        locale:'pt-br',
+       themeSystem: 'bootstrap5',
+
+       headerToolbar: { left: 'title' },
+       
+        
+        selectMirror: true,
+       
+        initialView: 'dayGridMonth',
+        selectable: true,
+
+        events:[
+            <?php $__currentLoopData = $agendas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agenda): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+            {
+            title:'<?php echo e($agenda->hora_exame); ?>-<?php echo e($agenda->nome_exame); ?>',
+            start: '<?php echo e($agenda->data_exame); ?>',
+        },
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+        ],
+      })
+      calendar.render()
+    })
+
+  </script>
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
+
+
     <div class="">
         <div class="row gy-4">
 
@@ -17,8 +55,8 @@
 
 
 
-                        <form action="#" method="post">
-
+                        <form action="<?php echo e(route('painel.farmacia.agenda.store')); ?>" method="post">
+<?php echo csrf_field(); ?>
                             <div class="px-3">
 
                                 <!-- pesquisa -->
@@ -35,10 +73,18 @@
 
                                         </label>
                                         <div class="position-relative">
-                                            <input type="text" class="form-control form-control-custom fs-18px fw-500"
-                                                name="" id="pesquisa" placeholder="Pesquisar" />
+                                            
+                                                <select name="cliente_farmacia_id" id="cliente" class="form-select form-control-custom">
+                                                    <option value="">Pesquisar</option>
+                                                    <?php $__currentLoopData = $clientesFarma; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    
+                                                        <option value="<?php echo e($cliente->id); ?>"><?php echo e($cliente->nome); ?></option>
+                                                    
+                                                    
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
 
-                                            <button type="submit" class="btn btn-none text-green p-1"
+                                            <button type="button" class="btn btn-none text-green p-1"
                                                 style="position: absolute; top:7px; right: 12px">
                                                 <i data-feather="search"></i>
                                             </button>
@@ -60,7 +106,7 @@
 
                                     </label>
                                     <select
-                                        class="form-select form-control-custom fs-18px <?php $__errorArgs = ['cargo'];
+                                        class="form-select form-control-custom fs-18px <?php $__errorArgs = ['exame'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -68,8 +114,12 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        name="cargo" id="cargo" required>
-                                        <option value="">Administrador</option>
+                                        name="exame_id" id="cargo" required>
+                                        <option value="">Selecione o Exame</option>
+                                        <?php $__currentLoopData = $exames; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $exame): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($exame->id); ?>"><?php echo e($exame->nome); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        
                                     </select>
                                     <?php $__errorArgs = ['cargo'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -114,7 +164,7 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <!-- Horário de início -->
                                 <div class="mb-3 pb-3">
-                                    <label for="hora_inicio" class="form-label text-green fw-500 fs-18px">
+                                    <label for="hora_exame" class="form-label text-green fw-500 fs-18px">
                                         Horário de início
                                     </label>
                                     <input type="time"
@@ -126,7 +176,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        name="hora_inicio" id="hora_inicio" placeholder=""
+                                        name="hora_exame" id="hora_exame" placeholder=""
                                         value="<?php echo e(old('hora_inicio', date('H:i'))); ?>" required />
                                     <?php $__errorArgs = ['hora_inicio'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -139,9 +189,10 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
+                                <input type="hidden" name="cliente_id" value="<?php echo e($farmacia->id); ?>">
 
                                 <div class="pt-5">
-                                    <button type="button" class="btn btn-primary w-100 py-2 fw-600">
+                                    <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
                                         Agendar
                                     </button>
 
@@ -164,151 +215,8 @@ unset($__errorArgs, $__bag); ?>
                         <div class="px-3 d-flex justify-content-between align-items-center mb-4 pt-2">
                             <h2 class="fs-4 fw-600 text-green-2 ">Calendário de exames</h2>
                         </div>
-
-                        <div class="px-3">
-                            <div class="calendario">
-                                <!-- dias semana -->
-                                <div class="calendario-semana d-flex text-center rounded-3 fw-600 fs-20 text-green">
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                    <div class="calendario-semana-dia  px-3 py-2">Seg</div>
-                                </div>
-
-                                <!-- dias -->
-                                <div class="mt-4 calendario-dias d-flex flex-wrap text-center rounded-3 fw-500 fs-16px">
-                                    <div class="calendario-dia  px-3 py-2"></div>
-
-                                    <!--  -->
-                                    <div class="calendario-dia p-1 position-relative ">
-                                        <!-- data -->
-                                        <div
-                                            class="calendario-dia-data rounded-2 d-flex  fs-14px text-white align-items-center gap-2 justify-content-center">
-                                            02 de Out
-                                            <span class=" d-flex">
-                                                <span
-                                                    class="badge rounded-pill text-bg-white bg-white text-green-2">8</span>
-                                            </span>
-                                        </div>
-                                        <!-- agendas -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda roxo rounded-2 d-flex fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-                                        <!--  -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda laranja rounded-2 d-flex  fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-
-                                        <!-- ver mais -->
-                                        <div class="position-absolute pb-1" style="bottom: 0;width:100%; left: 0">
-                                            <button type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modal-ver-todas-agenda"
-                                                class="btn mb-1 btn-light bg-white border-0 shadow rounded-3 py-1 px-2 text-green fw-600 fs-12px">
-                                                Ver mais
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <!--  -->
-                                    <div class="calendario-dia p-1 position-relative ">
-                                        <!-- data -->
-                                        <div
-                                            class="calendario-dia-data rounded-2 d-flex  fs-14px text-white align-items-center gap-2 justify-content-center">
-                                            03 de Out
-                                            <span class=" d-flex">
-                                                <span
-                                                    class="badge rounded-pill text-bg-white bg-white text-green-2">1</span>
-                                            </span>
-                                        </div>
-                                        <!-- agendas -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda verde rounded-2 d-flex fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - BETA-hCG
-                                            </div>
-                                        </div>
-
-
-                                        <!-- ver mais -->
-                                        <div class="position-absolute pb-1 d-none" style="bottom: 0;width:100%; left: 0">
-                                            <button type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modal-ver-todas-agenda"
-                                                class="btn mb-1 btn-light bg-white border-0 shadow rounded-3 py-1 px-2 text-green fw-600 fs-12px">
-                                                Ver mais
-                                            </button>
-                                        </div>
-
-                                    </div>
-
-                                    <!--  -->
-                                    <div class="calendario-dia p-1 position-relative ">
-                                        <!-- data -->
-                                        <div
-                                            class="calendario-dia-data rounded-2 d-flex  fs-14px text-white align-items-center gap-2 justify-content-center">
-                                            04 de Out
-                                            <span class=" d-flex">
-                                                <span
-                                                    class="badge rounded-pill text-bg-white bg-white text-green-2">16</span>
-                                            </span>
-                                        </div>
-                                        <!-- agendas -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda vermelho rounded-2 d-flex fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-                                        <!--  -->
-                                        <div
-                                            class="mt-1 calendario-dia-agenda laranja rounded-2 d-flex  fs-14px align-items-center gap-2 justify-content-center text-uppercase">
-                                            <div class="text-truncate" style="width: 80%">
-                                                17:45 - Dengue Antígeno NS1
-                                            </div>
-                                        </div>
-
-                                        <!-- ver mais -->
-                                        <div class="position-absolute pb-1" style="bottom: 0;width:100%; left: 0">
-                                            <button type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modal-ver-todas-agenda"
-                                                class="btn mb-1 btn-light bg-white border-0 shadow rounded-3 py-1 px-2 text-green fw-600 fs-12px">
-                                                Ver mais
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="calendario-dia  px-3 py-2"></div>
-                                    <div class="calendario-dia  px-3 py-2"></div>
-                                    <div class="calendario-dia  px-3 py-2"></div>
-                                    <div class="calendario-dia  px-3 py-2"></div>
-
-                                    <?php $__currentLoopData = [3, 3, 33, 3, 3, 3, 3, 3, 3, 3, 33, 3, 3, 3, 3, 3, 33, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <div class="calendario-dia  px-3 py-2"></div>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                    <div class="calendario-dia  px-3 py-2" style="height: auto"></div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <div id='calendar'></div>
+                        
 
                     </div>
                 </div>
@@ -588,11 +496,10 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->startSection('scripts'); ?>
     <script>
-        const myModal = new bootstrap.Modal(document.getElementById("modal-ver-todas-agenda"), {});
-
-        function fecharModalAgendas() {
-            myModal.hide()
-        }
+       
+        $(document).ready(function() {
+    $('#cliente').select2();
+});
     </script>
 <?php $__env->stopSection(); ?>
 

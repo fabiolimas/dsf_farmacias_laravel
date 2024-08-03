@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Editar cliente'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -10,7 +11,9 @@
 
                         <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2 pb-3">Editar cliente</h1>
 
-                        <form action="#" method="post">
+                        <form action="<?php echo e(route('painel.farmacia.clientes.update', $cliente->id)); ?>" method="post">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('put'); ?>
 
                             <!-- Nome  -->
                             <div class="mb-3 pb-2">
@@ -26,7 +29,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                    name="nome" id="nome" value="<?php echo e(old('nome')); ?>" placeholder="ex: Pedro Henrique" required />
+                                    name="nome" id="nome"  value="<?php echo e($cliente->nome); ?>" />
                                 <?php $__errorArgs = ['nome'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -54,7 +57,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                     name="cpf" id="cpf" placeholder="000.000.000-01"
-                                    value="<?php echo e(old('cpf')); ?>" required />
+                                   value="<?php echo e($cliente->cpf); ?>" />
                                 <?php $__errorArgs = ['cpf'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -68,7 +71,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <!-- Data de nascimento  -->
                             <div class="mb-3 pb-2">
-                                <label for="dt_nascimento" class="form-label text-green fw-500 fs-18px">
+                                <label for="data_nascimento" class="form-label text-green fw-500 fs-18px">
                                     Data de nascimento
                                 </label>
                                 <input type="date"
@@ -80,8 +83,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                    name="dt_nascimento" id="dt_nascimento" placeholder=""
-                                    value="<?php echo e(old('dt_nascimento', date('Y-m-d'))); ?>" required />
+                                    name="data_nascimento" id="data_nascimento" placeholder=""
+                                     value="<?php echo e(date('Y-m-d', strtotime($cliente->data_nascimento))); ?>" />
                                 <?php $__errorArgs = ['dt_nascimento'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -105,11 +108,21 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                    name="sexo" id="sexo" required>
+                                    name="sexo" id="sexo">
                                     <!-- tood: ver no figma se tem opcoes -->
-                                    <option value="" class="fw-500">Selecionar</option>
-                                    <option value="" class="fw-500">Masculino</option>
-                                    <option value="" class="fw-500">Feminino</option>
+                                    <?php switch($cliente->sexo):
+                                        case ('Masculino'): ?>
+                                        <option value="Masculino" class="fw-500" selected>Masculino</option>
+                                        <option value="Feminino" class="fw-500">Feminino</option>
+                                            <?php break; ?>
+                                        <?php case ('Feminino'): ?>
+                                        <option value="Masculino" class="fw-500" >Masculino</option>
+                                        <option value="Feminino" class="fw-500" selected>Feminino</option>
+                                            <?php break; ?>
+                                        <?php default: ?>
+                                            
+                                    <?php endswitch; ?>
+                                    
                                 </select>
                                 <?php $__errorArgs = ['sexo'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -137,7 +150,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                    name="email" value="<?php echo e(old('email')); ?>" id="email" placeholder="usuario@email.com" required />
+                                    name="email"id="email" placeholder="usuario@email.com" value="<?php echo e($cliente->email); ?>" />
                                 <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -165,7 +178,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                     name="telefone" id="telefone" placeholder="(99) 99999-9999"
-                                    value="<?php echo e(old('telefone')); ?>" required />
+                                     value="<?php echo e($cliente->telefone); ?>" />
                                 <?php $__errorArgs = ['telefone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -180,7 +193,7 @@ unset($__errorArgs, $__bag); ?>
                            
 
                             <div class="pt-3">
-                                <button type="button" class="btn btn-primary w-100 py-2 fw-600">
+                                <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
                                     Salvar
                                 </button>
 

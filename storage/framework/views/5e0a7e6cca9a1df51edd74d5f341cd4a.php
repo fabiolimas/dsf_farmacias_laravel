@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Cadastrar novo cliente'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -10,8 +11,8 @@
 
                         <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2 pb-3">Cadastrar novo cliente</h1>
 
-                        <form action="#" method="post">
-
+                        <form action="<?php echo e(route('painel.farmacia.clientes.store')); ?>" method="post">
+<?php echo csrf_field(); ?>
                             <!-- Nome  -->
                             <div class="mb-3 pb-2">
                                 <label for="nome" class="form-label text-green fw-500 fs-18px">
@@ -68,7 +69,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <!-- Data de nascimento  -->
                             <div class="mb-3 pb-2">
-                                <label for="dt_nascimento" class="form-label text-green fw-500 fs-18px">
+                                <label for="data_nascimento" class="form-label text-green fw-500 fs-18px">
                                     Data de nascimento
                                 </label>
                                 <input type="date"
@@ -80,7 +81,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                    name="dt_nascimento" id="dt_nascimento" placeholder=""
+                                    name="data_nascimento" id="data_nascimento" placeholder=""
                                     value="<?php echo e(old('dt_nascimento', date('Y-m-d'))); ?>" required />
                                 <?php $__errorArgs = ['dt_nascimento'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -108,8 +109,8 @@ unset($__errorArgs, $__bag); ?>"
                                     name="sexo" id="sexo" required>
                                     <!-- tood: ver no figma se tem opcoes -->
                                     <option value="" class="fw-500">Selecionar</option>
-                                    <option value="" class="fw-500">Masculino</option>
-                                    <option value="" class="fw-500">Feminino</option>
+                                    <option value="Masculino" class="fw-500">Masculino</option>
+                                    <option value="Feminino" class="fw-500">Feminino</option>
                                 </select>
                                 <?php $__errorArgs = ['sexo'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -177,10 +178,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
+                            <input type="hidden" name="cliente_id" value="<?php echo e($farmacia->id); ?>">
                            
 
                             <div class="pt-3">
-                                <button type="button" class="btn btn-primary w-100 py-2 fw-600">
+                                <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
                                     Cadastrar
                                 </button>
 
