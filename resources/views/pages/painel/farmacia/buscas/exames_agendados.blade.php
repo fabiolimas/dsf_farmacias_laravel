@@ -1,12 +1,15 @@
 <div class="position-relative mt-4 resultPesquisa">
     <!-- Lista -->
     <div class=" lista-scroll p-3 pt-0 clientes-lista-assinantes " style="max-height: 550px">
+                               
+        @foreach ($examesDia as $dataExame => $exame)
         <div class=" mb-2 pb-1">
             <div class="fs-20 text-green fw-600">
-                {{ $dataAtual = date('d  M  ') }}
+                {{   date('d  M  ', strtotime($dataExame)) }}
             </div>
         </div>
-        @foreach ($examesDia as $agenda)
+     
+        @foreach($exame as $agenda)
             <div class="px-2 pb-4">
                 <!--  -->
 
@@ -259,6 +262,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         @endforeach
     </div>
     @if ($examesDia->count() >= 3)

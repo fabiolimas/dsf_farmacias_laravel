@@ -77,13 +77,16 @@
                         <div class="position-relative mt-4 resultBusca">
                             <!-- Lista -->
                             <div class=" lista-scroll p-3 pt-0 clientes-lista-assinantes " style="max-height: 550px">
+                               
+                                <?php $__currentLoopData = $examesDia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dataExame => $exame): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class=" mb-2 pb-1">
                                     <div class="fs-20 text-green fw-600">
-                                        <?php echo e($dataAtual = date('d  M  ')); ?>
+                                        <?php echo e(date('d  M  ', strtotime($dataExame))); ?>
 
                                     </div>
                                 </div>
-                                <?php $__currentLoopData = $examesDia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agenda): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                             
+                                <?php $__currentLoopData = $exame; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agenda): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="px-2 pb-4">
                                         <!--  -->
 
@@ -341,6 +344,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <?php if($examesDia->count() >= 3): ?>
