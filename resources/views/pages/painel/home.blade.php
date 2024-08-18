@@ -650,10 +650,7 @@
                             </div>
 
                             <div class="">
-                               <!-- {{-- <a href="{{ route('painel.clientes.edit', ['id' => 1]) }}"
-                                    class="btn btn-primary-light w-100  py-2 fs-20px text-green fw-500">
-                                    Editar informações
-                                </a> --}}-->
+                            
 
                                 <a href="#"
                                     class="btn btn-primary-light w-100  py-2 fs-20px text-green fw-500">
