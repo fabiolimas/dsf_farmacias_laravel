@@ -47,7 +47,7 @@
                             <h2 class="fs-4 fw-600 text-green-2 ">Próximos exames</h2>
                             <div class="">
 
-                                <a href="<?php echo e(route('painel.farmacia.exames.create')); ?>" data-bs-toggle="tooltip"
+                                <a href="<?php echo e(route('painel.farmacia.agenda.create')); ?>" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Cadastrar novo exame"
                                     class="btn btn-primary d-flex align-items-center justify-content-center p-0 rounded-circle"
                                     style="width: 40px; height: 40px">
@@ -92,7 +92,7 @@
 
                                         <a href="#"
                                             class="px-2 py-2 proximo-horarios mb-2 rounded-3 text-decoration-none d-block"
-                                            data-bs-toggle="modal" data-bs-target="#modal-ver-agenda-<?php echo e($agenda->id); ?>">
+                                            data-bs-toggle="modal" data-bs-target="#modal-ver-agenda-<?php echo e($agenda->agendaId); ?>">
                                             <div class="d-flex gap-4 align-items-center">
                                                 <div class="text-green-2 fw-700 lh-1">
                                                     <div class="fs-3 mb-1">
@@ -117,7 +117,7 @@
 
                                     </div>
                                     <!-- Modal ver agenda -->
-                                    <div class="modal modal-custom fade" id="modal-ver-agenda-<?php echo e($agenda->id); ?>"
+                                    <div class="modal modal-custom fade" id="modal-ver-agenda-<?php echo e($agenda->agendaId); ?>"
                                         tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
                                         aria-labelledby="modalTitleId" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg border-0"

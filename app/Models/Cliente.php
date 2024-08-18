@@ -30,7 +30,9 @@ class Cliente extends Model
         'cnpj_cpf_cartao',
         'user_id',
 
-        'dt_pagamento'
+        'dt_pagamento',
+        'logo',
+        'razao_social',
     ];
 
     protected $appends = [

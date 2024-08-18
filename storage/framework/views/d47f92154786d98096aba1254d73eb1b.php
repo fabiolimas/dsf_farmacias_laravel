@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Gráficos'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">

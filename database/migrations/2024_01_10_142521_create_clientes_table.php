@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('cnpj')->nullable();
             $table->string('classe')->nullable();
             $table->string('telefone')->nullable();
+            
 
             $table->string('cep')->nullable();
             $table->string('estado')->nullable();

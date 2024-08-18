@@ -266,6 +266,17 @@ span.select2-selection__arrow {
     border-color: #B2D2D2;
     color: #0E6664;
 }
+.logoResultado {
+    width: 104px;
+    margin-left: 22%;
+ 
+}
+.border-green-light.p-3.rounded-3.mb-4 {
+    font-size: 13px;
+}
+span.titleResult {
+    font-weight: 500;
+}
 
 .btn.btn-primary-light-2:hover {
     background: #00B1AC;

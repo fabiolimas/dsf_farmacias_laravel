@@ -12,6 +12,7 @@ use App\Http\Controllers\Painel\Admin\PagamentoController;
 use App\Http\Controllers\Painel\Config\ColaboradorController;
 use App\Http\Controllers\Painel\Farmacia\AgendaController;
 use App\Http\Controllers\Painel\Farmacia\ClienteController as FarmaciaClienteController;
+use App\Http\Controllers\Painel\Farmacia\ExamesController;
 use App\Http\Controllers\Painel\Farmacia\GraficosFarmaciaController;
 
 /*
@@ -148,25 +149,29 @@ Route::prefix('/fm')->group(function () {
     /* Exames */
     Route::prefix('/exames')->group(function () {
 
-        Route::get('/', function () {
-            return view('pages.painel.farmacia.exames.index');
-        })->name('painel.farmacia.exames.index');
+        Route::get('/', [ExamesController::class, 'index'])->name('painel.farmacia.exames.index');
 
         Route::get('/atendimento', function () {
             return view('pages.painel.farmacia.exames.atendimento');
         })->name('painel.farmacia.exames.atendimento');
 
-        Route::get('/show/{id}', function () {
-            return view('pages.painel.farmacia.exames.show');
-        })->name('painel.farmacia.exames.show');
+        Route::get('/exppdf', function () {
+            return view('pages.painel.farmacia.exames.exame_pdf');
+        })->name('painel.farmacia.exames.exame_pdf');
+        Route::get('/show/{id}', [ExamesController::class, 'ShowResult'])->name('painel.farmacia.exames.show');
+        
 
-        Route::get('/lista', function () {
-            return view('pages.painel.farmacia.exames.list');
-        })->name('painel.farmacia.exames.lista');
+        Route::get('/lista', [ExamesController::class, 'examesProntos'])->name('painel.farmacia.exames.lista');
+        Route::get('/gerar-pdf/{id}', [ExamesController::class, 'gerarPDF'])->name('gerar.pdf');
 
         Route::get('/create', function () {
             return view('pages.painel.farmacia.exames.create');
         })->name('painel.farmacia.exames.create');
+
+        Route::get('/update-presenca/{id}/{status}', [ExamesController::class, 'updatePresenca'])->name('painel.farmacia.exames.presenca');
+        Route::get('/exames-confirmados', [ExamesController::class, 'confirmados'])->name('painel.farmacia.exames.confirmados');
+        Route::get('/dados-exame/{id}', [ExamesController::class, 'dadosExame'])->name('painel.farmacia.exames.dados-exame');
+        Route::post('/dados-exame', [ExamesController::class, 'storeResultado'])->name('painel.farmacia.exames.result-exame');
     });
 
     Route::get('/graficos', [GraficosFarmaciaController::class, 'index'])->name('painel.farmacia.graficos.index');

@@ -64,6 +64,7 @@ class ClienteController extends Controller
 
         $cliente = (new Cliente)->fill($request->all());
         $cliente->user_id = $user->id;
+        $cliente->razao_social=$user->name;
         $cliente->save();
 
         return redirect()
@@ -140,6 +141,8 @@ class ClienteController extends Controller
 
         $user->cliente->telefone = $request->telefone;
         $user->cliente->cnpj = $request->cnpj;
+        $user->cliente->razao_social = $request->name;
+    
         $user->cliente->classe = $request->classe;
         if ($request->has('password') && $request->password != '') :
             $user->password = bcrypt($request->password);
@@ -149,7 +152,11 @@ class ClienteController extends Controller
 
         $cliente = $user->cliente->fill($request->all());
         $cliente->user_id = $user->id;
+    
         $cliente->save();
+
+        $farmacia=Cliente::where('user_id',$user->id)->first();
+        $farmacia->update(['razao_social'=>$user->name]);
 
         return redirect()
             ->back()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Painel\Config;
 
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,9 +20,10 @@ class ConfigController extends Controller
 
     public function updateProfile(Request $request)
     {
-
+        
 
         $user = User::find(auth()->user()->id);
+        $cliente=Cliente::where('user_id', $user->id)->first();
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -30,11 +32,16 @@ class ConfigController extends Controller
         ]);
 
         $user->name = $request->name;
+        $cliente->update(['razao_social'=>$request->name]);
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
 
-        if ($request->img_profile != null && $request->img_profile != '')
+        if ($request->img_profile != null && $request->img_profile != ''){
             $user->img_perfil = $this->imgBase64ToFileUpload($request->img_profile);
+            $cliente->update(['logo'=>$this->imgBase64ToFileUpload($request->img_profile)]);
+
+        }
+            
 
         $user->save();
 

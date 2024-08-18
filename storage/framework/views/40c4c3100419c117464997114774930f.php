@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Adicionar colaborador'); ?>
 <?php $__env->startSection('head'); ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">
