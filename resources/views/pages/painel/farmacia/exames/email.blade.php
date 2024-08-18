@@ -4,7 +4,7 @@
     <title>Resultado Exame</title>
 </head>
 <body>
-    <h1>Olá, </h1>
-    <p>Por favor, encontre o PDF anexado.</p>
+    <h5>Olá, {{$clienteFarma->nome}},  tudo bem?</h5>
+    <p>Segue em anexo o resultado do seu exame</p>
 </body>
 </html>

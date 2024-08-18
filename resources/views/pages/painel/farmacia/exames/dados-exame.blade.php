@@ -187,8 +187,8 @@
                                     <label for="via_ministracao">Via de Ministração</label>
                                     <select class="form-select " name="via_ministracao" id="via_ministracao">
                                         <option value="">Selecione uma opção</option>
-                                        <option value="gluteo_direito">Gluteo Direito</option>
-                                        <option value="gluteo_esquerdo">Gluteo Esquerdo</option>
+                                        <option value="Gluteo Direito">Gluteo Direito</option>
+                                        <option value="Gluteo Esquerdo">Gluteo Esquerdo</option>
                                     </select>
                                 </div>
 
@@ -246,7 +246,7 @@
                                 <div class="col-md-4 mt-3">
                                     <label for="lote_brinco">Número de lote do brinco</label>
 
-                                    <input type="text" class="form-control " name="lote_pistola" id="lote_pistola">
+                                    <input type="text" class="form-control " name="lote_brinco" id="lote_pistola">
                                 </div>
                                 <div class="col-md-4 mt-3">
                                     <label for="responsavel_atendimento">Responsavel pelo atendimento</label>

@@ -5,20 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Resultado - DSF</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+   
 </head>
 <style>
     td {
     padding: 9px;
 }
 .row.mt-2, .row.mt-3, .row.mt-4 {
-    margin-top:10px;
+    margin-top:20px;
+    margin-bottom:5px;
     font-size: 13px;
+}
+.logoResultado {
+    width: 104px;
+   
+    position:absolute; 
+    left:20px;
+ 
+}
+.titleResult{
+    margin-bottom:5px;
+    margin-left:5px;
+}
+table, th, td {
+    border-collapse: collapse;
+    border-bottom: 1px solid #b2d2d2;
+        width: 100%;
 }
     </style>
 <body style="font-family:sans-serif">
     <div class="">
-        <div class="row gy-4">
+        <div class="row gy-4" style="padding:5px">
 
             <!-- Visualizar exame -->
             <div class="col-12 col-lg-8 col-xl-9">
@@ -32,7 +49,7 @@
                         <div class="px-3 folhaResultado">
                             {{-- <img src="{{ asset('assets/img/ilustracoes/exame.png') }}" alt="" class="w-100"> --}}
                             <div class="row cabecalho">
-                                <div class="col-md-3 " style="position:absolute; left:20px; top:4%">
+                                <div class="col-md-3 ">
                                     <div class="logoResultado">
                                         <img src="{{ asset($farmacia->logo ?? 'assets/img/ilustracoes/profile.png') }}"
                                             class="w-100" style="width:100%">
@@ -50,7 +67,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-3">
                                    <p> Data:{{ date('d/m/Y') }}
-                                  <span style="text-align: center; font-weight:700; margin-left: 10%">Declaração de serviços farmaceuticos</span> <span style="margin-left:20%">  Nº {{ $resultado->id }}</span></p>
+                                  <span style="text-align: center; font-weight:700; margin-left: 20%">Declaração de serviços farmaceuticos</span> <span style="margin-left:25%">  Nº {{ $resultado->id }}</span></p>
                                 </div>
                                 <div class="col-md-8">
                                    
@@ -61,8 +78,7 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
-                                    <p style="font-size: 12px;
-    text-align: center;">Este estabelecimento através de seu
+                                    <p style="font-size: 12px; text-align: center;">Este estabelecimento através de seu
                                         responsável tecnico, prestou assistência farmacêutica conforme abaixo. O(a) Sr.
                                         (Sra.).</p>
                                     <table>
@@ -173,14 +189,14 @@
                                             <td class="col-md-4 mt-3">
                                                 DCB : {{ $resultado->dcb }}
                                             </td>
-                                            <td colspan="2">
+                                            <td colspan="3">
                                                 Via de Ministração : {{ $resultado->via_ministracao }}
                                             </td>
-                                            <td class="col-m-4 "></td>
+                                           
                                             </tr>
                                            
                                             <tr>
-                                            <td colspan="3">
+                                            <td colspan="4">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
                                             </td>
                                             </tr>
@@ -205,17 +221,18 @@
                                     <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
                                         <table>
                                         <tr class="row">
-                                            <td class="col-md-4 mt-3">
+                                            <td colspan="2">
                                                 Nome do Fabricante : {{ $resultado->nome_fab_auricular }}
                                             </td>
                                             <td class="col-md-4 mt-3">
                                                 CNPJ : {{ $resultado->cnpj_fab_auricular }}
                                             </td>
+                                            
+                                        </tr>
+                                        <tr>
                                             <td class="col-md-4 mt-3">
                                                 Número lote pistola : {{ $resultado->lote_pistola }}
                                             </td>
-                                        </tr>
-                                        <tr>
                                             <td class="col-md-4 mt-3">
                                                 Número lote brinco : {{ $resultado->lote_brinco }}
                                             </td>
@@ -234,7 +251,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
+                                    <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
                                 </div>
                             </div>
                         </div>

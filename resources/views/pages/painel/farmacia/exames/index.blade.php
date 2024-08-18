@@ -25,7 +25,7 @@
                                 style="padding: 16px 24px;">
                                 <div class="d-flex gap-2 align-items-center">
                                     <i data-feather="archive"></i>
-                                    Ver exames
+                                    Ver exames prontos
                                 </div>
                             </a>
                         </div>

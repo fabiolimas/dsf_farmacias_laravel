@@ -144,8 +144,8 @@ class ExamesController extends Controller
        $resultado->crm=$request->crm;
        $resultado->endereco_medico=$request->endereco_medico;
        $resultado->telefone_medico=$request->telefone_medico;
-       $resultado->nome_fab_auricular=$request->nome_fab_auricular;
-       $resultado->cnpj_fab_auricular=$request->cnpj_fab_auricular;
+       $resultado->nome_fab_auricular=$request->nome_fabricante;
+       $resultado->cnpj_fab_auricular=$request->cnpj_fabricante;
        $resultado->lote_pistola=$request->lote_pistola;
        $resultado->lote_brinco=$request->lote_brinco;
        $resultado->responsavel_atendimento=$request->responsavel_atendimento;
@@ -170,9 +170,9 @@ class ExamesController extends Controller
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-    // return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
+     return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
 
-     $pdf = \PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+    // $pdf = \PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
      return $pdf->download('resultado.pdf');
 }
 
@@ -187,9 +187,8 @@ public function enviarPDFPorEmail(Request $request)
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-    // return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
-
-     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'));
+    
+     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
       // Converter o PDF para uma string binária
     $pdfContent = $pdf->output();
 
@@ -202,7 +201,7 @@ public function enviarPDFPorEmail(Request $request)
                 ]);
     });
 
-    return response()->json(['message' => 'E-mail enviado com sucesso!']);
+  return redirect()->back()->with('success','Resultado enviado com sucesso!');
 }
 
 
