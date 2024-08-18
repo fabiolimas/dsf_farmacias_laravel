@@ -176,7 +176,10 @@ Route::prefix('/fm')->group(function () {
         Route::get('/exames-confirmados', [ExamesController::class, 'confirmados'])->name('painel.farmacia.exames.confirmados');
         Route::get('/dados-exame/{id}', [ExamesController::class, 'dadosExame'])->name('painel.farmacia.exames.dados-exame');
         Route::post('/dados-exame', [ExamesController::class, 'storeResultado'])->name('painel.farmacia.exames.result-exame');
+        Route::post('/busca-exame-pronto', [ExamesController::class, 'buscaExamesProntos'])->name('painel.farmacia.exame.busca');
     });
+
+    
 
     Route::get('/graficos', [GraficosFarmaciaController::class, 'index'])->name('painel.farmacia.graficos.index');
 });

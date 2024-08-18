@@ -236,7 +236,10 @@ table, th, td {
                                             <td class="col-md-4 mt-3">
                                                 Número lote brinco : {{ $resultado->lote_brinco }}
                                             </td>
-                                            <td class="col-md-4 mt-3">
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
                                                 Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
                                             </td>
                                         </tr>

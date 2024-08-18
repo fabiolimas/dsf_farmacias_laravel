@@ -204,5 +204,24 @@ public function enviarPDFPorEmail(Request $request)
   return redirect()->back()->with('success','Resultado enviado com sucesso!');
 }
 
+public function buscaExamesProntos(Request $request){
+    $busca=$request->pesquisa;
+
+    $farmacia = Cliente::where('user_id', auth()->id())->first();
+
+    if ($busca == '') {
+        $examesProntos=Agenda::where('status', 'pronto')->get();
+    }else{
+        $examesProntos=Agenda::
+        where('nome_exame','like','%'.$busca.'%')
+        ->orWhere('nome_cliente','like','%'.$busca.'%')->get();
+     
+
+    }
+    
+  
+   return view('pages.painel.farmacia.buscas.exames_prontos',compact('examesProntos'));
+}
+
 
 }

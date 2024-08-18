@@ -391,6 +391,7 @@
                                     @endforeach
                                 @endforeach
                             </div>
+                            @if($examesDia->count() > 4)
                             <div class="ver-mais-lista-scroll text-center">
                                 <!-- todo: ver no figma, n tem esse ver mais -->
                                 <button type="button"
@@ -398,6 +399,9 @@
                                     Ver mais
                                 </button>
                             </div>
+                            @else
+
+                            @endif
                         </div>
 
 
@@ -426,7 +430,7 @@
                                         <div class="mb-3 position-relative">
                                             <label for="pesquisa" class="visually-hidden">Pesquisar</label>
                                             <input type="text" class="form-control input-pesquisar-cliente"
-                                                name="" id="pesquisa" placeholder="Pesquisar" />
+                                                name="" id="pesquisa_exames_prontos" placeholder="Pesquisar" />
 
                                             <button type="submit" class="btn btn-none text-green p-1"
                                                 style="position: absolute; top:3px; right: 20px">
@@ -444,7 +448,7 @@
 
                                 <!-- lista -->
                                 <div class="mt-4">
-                                    <div class="px-2 px-lg-4">
+                                    <div class="px-2 px-lg-4 resultExames">
                                         @foreach ($examesProntos as $examePronto)
                                             <div class="bloco-exames-realizados bg-green-light rounded-3 mb-3 p-3 p-md-4 ">
 
@@ -459,7 +463,7 @@
                                                         </div>
 
                                                         <div class="fs-20px fw-500 ">
-                                                            <a href="{{ route('painel.farmacia.exames.show', ['id' => 1]) }}"
+                                                            <a href="{{ route('painel.farmacia.exames.show', ['id' => $examePronto->id]) }}"
                                                                 class="text-decoration-none d-block">
                                                                 <div class="text-green-2">{{$examePronto->nome_exame}}</div>
                                                                 <div class="text-green">{{$examePronto->nome_cliente}}</div>
@@ -470,7 +474,7 @@
                                                     <div
                                                         class="flex-bloco-img d-xl-flex gap-3 mt-lg-3 mt-lg-0 justify-content-center justify-content-lg-start">
                                                         <div class="">
-                                                            <a href="{{ route('painel.farmacia.exames.show', ['id' => 1]) }}"
+                                                            <a href="{{ route('painel.farmacia.exames.show', ['id' => $examePronto->id]) }}"
                                                                 class="text-decoration-none d-block">
                                                                 <img src="{{ asset('assets/img/ilustracoes/exame.jpg') }}"
                                                                     alt=""
@@ -555,5 +559,42 @@
 
         });
     </script>
+
+<script>
+    $('document').ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        let resultado = $('.resultExames');
+
+        $('#pesquisa_exames_prontos').keyup(function() {
+
+            $.ajax({
+                url: "{{ route('painel.farmacia.exame.busca') }}", // Arquivo PHP que processará a busca
+                type: "post",
+                data: {
+                    pesquisa: $('#pesquisa_exames_prontos').val(),
+
+
+                }, // Dados a serem enviados para o servidor
+                success: function(response) {
+
+                    resultado.html(response);
+                    resultado.html(response.status);
+                },
+                error: function(result) {
+                    console.log(result);
+                }
+
+
+
+            });
+        });
+
+    });
+</script>
 
 @endsection

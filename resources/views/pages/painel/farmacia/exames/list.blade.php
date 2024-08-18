@@ -36,7 +36,7 @@
                                         <div class=" position-relative">
                                             <label for="pesquisa" class="visually-hidden">Pesquisar</label>
                                             <input type="text" class="form-control input-pesquisar-cliente"
-                                                name="" id="pesquisa" placeholder="Pesquisar" />
+                                                name="" id="pesquisa_exames_prontos" placeholder="Pesquisar" />
 
                                             <button type="submit" class="btn btn-none text-green p-1"
                                                 style="position: absolute; top:3px; right: 20px">
@@ -54,7 +54,7 @@
 
                                 <!-- lista -->
                                 <div class="mt-4 px-2 px-md-0">
-                                    <div class="px-2 px-lg-4">
+                                    <div class="px-2 px-lg-4 resultExames">
                                         @foreach ($examesProntos as $examePronto)
                                             <div class="bloco-exames-realizados bg-green-light rounded-3 mb-3 p-3 p-md-4 ">
 
@@ -92,7 +92,7 @@
                                                         <!-- acoes -->
 
 
-                                                        <a href="{{ route('painel.farmacia.exames.show', ['id' => 1]) }}"
+                                                        <a href="{{ route('painel.farmacia.exames.show', ['id' => $examePronto->id]) }}"
                                                             class="btn btn-primary-light text-center  py-2  text-green d-flex align-items-center"
                                                             style="background: #B2D2D2" title="Visualizar">
                                                             <i class="mx-auto" data-feather="printer"
@@ -121,7 +121,42 @@
         </div>
 
     </div>
-
+    <script>
+        $('document').ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    
+            let resultado = $('.resultExames');
+    
+            $('#pesquisa_exames_prontos').keyup(function() {
+    
+                $.ajax({
+                    url: "{{ route('painel.farmacia.exame.busca') }}", // Arquivo PHP que processará a busca
+                    type: "post",
+                    data: {
+                        pesquisa: $('#pesquisa_exames_prontos').val(),
+    
+    
+                    }, // Dados a serem enviados para o servidor
+                    success: function(response) {
+    
+                        resultado.html(response);
+                        resultado.html(response.status);
+                    },
+                    error: function(result) {
+                        console.log(result);
+                    }
+    
+    
+    
+                });
+            });
+    
+        });
+    </script>
 @endsection
 
 @section('scripts')
