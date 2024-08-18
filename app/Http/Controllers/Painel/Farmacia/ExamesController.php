@@ -6,11 +6,12 @@ use App\Models\Exame;
 use App\Models\Agenda;
 use App\Models\Cliente;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Resultado;
 use Illuminate\Http\Request;
 use App\Models\ClienteFarmacia;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class ExamesController extends Controller
 {
@@ -171,7 +172,38 @@ class ExamesController extends Controller
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
     // return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
 
-     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'));
-     return $pdf->stream('resultado.pdf');
+     $pdf = \PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+     return $pdf->download('resultado.pdf');
 }
+
+public function enviarPDFPorEmail(Request $request)
+{
+
+    $farmacia = Cliente::where('user_id', auth()->id())->first();
+ 
+
+    $resultado=Resultado::where('agendas_id',$request->id)->first();
+
+    $array = json_decode($resultado->perguntas, true);
+
+    $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
+    // return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
+
+     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'));
+      // Converter o PDF para uma string binária
+    $pdfContent = $pdf->output();
+
+    // Enviar o PDF por e-mail
+    Mail::send('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'), function($message) use ($pdfContent, $clienteFarma) {
+        $message->to($clienteFarma->email, $clienteFarma->nome)
+                ->subject('Resultado de Exame')
+                ->attachData($pdfContent, 'Resultado_Exame.pdf', [
+                    'mime' => 'application/pdf',
+                ]);
+    });
+
+    return response()->json(['message' => 'E-mail enviado com sucesso!']);
+}
+
+
 }

@@ -157,12 +157,16 @@ Route::prefix('/fm')->group(function () {
 
         Route::get('/exppdf', function () {
             return view('pages.painel.farmacia.exames.exame_pdf');
+
         })->name('painel.farmacia.exames.exame_pdf');
+
         Route::get('/show/{id}', [ExamesController::class, 'ShowResult'])->name('painel.farmacia.exames.show');
         
 
         Route::get('/lista', [ExamesController::class, 'examesProntos'])->name('painel.farmacia.exames.lista');
         Route::get('/gerar-pdf/{id}', [ExamesController::class, 'gerarPDF'])->name('gerar.pdf');
+
+        Route::get('/enviar-pdf/{id}', [ExamesController::class, 'enviarPDFPorEmail'])->name('enviar.pdf');
 
         Route::get('/create', function () {
             return view('pages.painel.farmacia.exames.create');

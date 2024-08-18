@@ -186,7 +186,7 @@
 
                         <div class=" px-3 mt-4 d-lg-flex">
                             <a class="w-100  btn btn-primary d-block d-md-inline-block mb-3 me-lg-3   "
-                                href="{{ route('painel.farmacia.clientes.create') }}" role="button"
+                                href="{{ route('enviar.pdf',$resultado->agendas_id ) }}" role="button"
                                 style="padding: 16px 24px;">
                                 <div class="d-flex gap-2 align-items-center justify-content-center">
                                     <i data-feather="send"></i>

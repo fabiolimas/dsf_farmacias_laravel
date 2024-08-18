@@ -32,7 +32,7 @@
                             <div class="row cabecalho">
                                 <div class="col-md-3 " style="position:absolute; left:20px; top:4%">
                                     <div class="logoResultado">
-                                        <img src="<?php echo e(asset($farmacia->logo)); ?>"
+                                        <img src="<?php echo e(asset($farmacia->logo ?? 'assets/img/ilustracoes/profile.png')); ?>"
                                             class="w-100" style="width:100%">
                                     </div>
                                 </div>
