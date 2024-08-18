@@ -234,7 +234,7 @@
                                                                                 Exame: <?php echo e($agenda->nome_exame); ?>
 
                                                                             </div>
-                                                                            <div class="text-green text-truncate">38 em
+                                                                            <div class="text-green text-truncate"><?php echo e($agenda->estoqueExame); ?> em
                                                                                 estoque</div>
                                                                         </a>
                                                                     </div>
@@ -324,8 +324,58 @@
                                                             </div>
                                                             <div class="col-12 col-lg-6">
                                                                 <button type="button"
-                                                                    class="btn btn-primary w-100 py-2 fs-20px fw-400">Iniciar
-                                                                    exame</button>
+                                                                    class="btn btn-primary w-100 py-2 fs-20px fw-400" data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-presenca-<?php echo e($agenda->agendaId); ?>">Confirmar</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="fechar-modal text-center pt-2 pt-lg-4">
+                                                        <button type="button"
+                                                            class="btn btn-ligth shadow bg-white text-green-2 py-1"
+                                                            data-bs-dismiss="modal">
+                                                            <i data-feather="x"></i>
+                                                            Fechar
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="modal modal-custom fade" id="modal-presenca-<?php echo e($agenda->agendaId); ?>" tabindex="-1"
+                                        data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+                                        aria-labelledby="modalTitleId" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg border-0"
+                                            role="document">
+                                            <div class="modal-content bg-transparent ">
+                                                <div class="modal-body p-lg-5  border-0">
+
+                                                    <div class="p-4 shadow rounded-3  bg-white border">
+
+                                                        <div class="d-flex flex-column flex-lg-row flex-wrap gap-4">
+
+                                                            <!--  -->
+                                                           <h4>Confirma Presença?</h4>
+
+                                                            <!--  -->
+                                                            
+                                                        </div>
+
+                                                       
+
+                                                        <div class="row mt-4 pt-2 gy-2">
+                                                            <div class="col-12 col-lg-6">
+                                                                <a href="<?php echo e(route('painel.farmacia.exames.presenca', ['id'=>$agenda->agendaId, 'status'=>'confirmado'])); ?>" id="modal-link-editar-user"
+                                                                    class="btn btn-primary-light w-100 py-2 fs-20px text-green">
+                                                                    Cliente Compareceu
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <a href="<?php echo e(route('painel.farmacia.exames.presenca', ['id'=>$agenda->agendaId, 'status'=>'cancelado'])); ?>" id="modal-link-ver-mais"
+                                                                    class="btn btn-danger w-100 py-2 fs-20px">Cliente Cancelou</a>
                                                             </div>
                                                         </div>
 

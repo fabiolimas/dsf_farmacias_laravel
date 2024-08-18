@@ -168,9 +168,8 @@ Route::prefix('/fm')->group(function () {
 
         Route::get('/enviar-pdf/{id}', [ExamesController::class, 'enviarPDFPorEmail'])->name('enviar.pdf');
 
-        Route::get('/create', function () {
-            return view('pages.painel.farmacia.exames.create');
-        })->name('painel.farmacia.exames.create');
+        Route::get('/entrada-estoque', [ExamesController::class, 'entradaEstoque'])->name('painel.farmacia.exames.create');
+        Route::post('/update-estoque', [ExamesController::class, 'updateEstoque'])->name('painel.farmacia.exames.update-estoque');
 
         Route::get('/update-presenca/{id}/{status}', [ExamesController::class, 'updatePresenca'])->name('painel.farmacia.exames.presenca');
         Route::get('/exames-confirmados', [ExamesController::class, 'confirmados'])->name('painel.farmacia.exames.confirmados');

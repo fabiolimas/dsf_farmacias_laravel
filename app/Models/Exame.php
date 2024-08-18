@@ -13,7 +13,10 @@ class Exame extends Model
         'nome',
         'laboratorio',
         'registro_ms',
-        'perguntas'
+        'perguntas',
+        'preco',
+        'estoque',
+        'lote'
     ];
 
     protected $casts = [

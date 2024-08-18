@@ -80,10 +80,20 @@ class ExamesController extends Controller
    public function updatePresenca(Request $request){
 
         $agenda=Agenda::find($request->id);
+        $exame=Exame::find($agenda->exame_id);
 
-       
-
+        $estoqueAtual=$exame->estoque;
+       if($request->status == 'confirmado'){
         $agenda->update(['status'=>$request->status]);
+        $estoqueAtual-=1;
+        $exame->update(['estoque'=>$estoqueAtual]);
+
+
+       }else{
+        $agenda->update(['status'=>$request->status]);
+       }
+
+        
     
     return redirect()->back();
    }
@@ -221,6 +231,24 @@ public function buscaExamesProntos(Request $request){
     
   
    return view('pages.painel.farmacia.buscas.exames_prontos',compact('examesProntos'));
+}
+
+public function entradaEstoque(){
+
+    $exames=Exame::all();
+
+    return view('pages.painel.farmacia.exames.create', compact('exames'));
+
+
+}
+
+public function updateEstoque(Request $request){
+
+    $exame=Exame::find($request->exame);
+
+    $estoqueAtual=$exame->estoque;
+    $exame->update(['preco'=>$request->valor, 'estoque'=>$estoqueAtual+=$request->estoque, 'lote'=>$request->lote]);
+    return redirect()->route('painel.farmacia.exames.lista')->with('success','Dados do exame atualizados com sucesso!');
 }
 
 

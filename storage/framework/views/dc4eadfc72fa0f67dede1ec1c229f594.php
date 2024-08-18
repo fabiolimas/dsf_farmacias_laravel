@@ -15,14 +15,14 @@
 
                                 <!--  -->
                                 <div class=" px-1 px-lg-3 mb-3">
-                                    <a class="btn btn-primary d-block d-md-inline-block mb-3 me-lg-3   "
-                                        href="<?php echo e(route('painel.farmacia.exames.create')); ?>" role="button"
-                                        style="padding: 16px 24px;">
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <i data-feather="folder-plus"></i>
-                                            Cadastrar novo exame
-                                        </div>
-                                    </a>
+                                    <a name="" id="" class="btn btn-outline-primary d-block d-md-inline-block mb-3 "
+                                href="<?php echo e(route('painel.farmacia.exames.lista')); ?>" role="button"
+                                style="padding: 16px 24px;">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <i data-feather="archive"></i>
+                                    Ver exames prontos
+                                </div>
+                            </a>
 
                                 </div>
 

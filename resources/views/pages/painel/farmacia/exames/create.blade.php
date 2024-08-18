@@ -18,8 +18,8 @@
 
 
 
-                        <form action="#" method="post">
-
+                        <form action="{{route('painel.farmacia.exames.update-estoque')}}" method="post">
+                            @csrf
                             <div class="px-3">
 
                                 <!-- exame -->
@@ -32,13 +32,20 @@
 
                                         </label>
                                         <div class="position-relative">
-                                            <input type="text" class="form-control form-control-custom fs-18px fw-500"
-                                                name="" id="pesquisa" placeholder="Digite o nome..." />
+                                            <select name="exame" id="exame" class="form-select form-control-custom">
+                                                <option value="">Pesquisar</option>
+                                                @foreach($exames as $exame)
+                                                
+                                                    <option value="{{$exame->id}}">{{$exame->nome}}</option>
+                                                
+                                                
+                                                @endforeach
+                                            </select>
 
-                                            <button type="submit" class="btn btn-none text-green p-1"
-                                                style="position: absolute; top:7px; right: 12px">
-                                                <i data-feather="search"></i>
-                                            </button>
+                                        <button type="button" class="btn btn-none text-green p-1"
+                                            style="position: absolute; top:7px; right: 12px">
+                                            <i data-feather="search"></i>
+                                        </button>
                                         </div>
                                     </div>
                                 </div>
@@ -46,11 +53,11 @@
                                 <!-- Lote e validade -->
                                 <div class="mb-3 pb-3">
                                     <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
-                                        Lote e validade
+                                        Lote
                                     </label>
                                     <input type="text"
                                         class="form-control form-control-custom fs-18px fw-500 @error('lote_validade') is-invalid @enderror"
-                                        name="lote_validade" id="lote_validade" placeholder=""
+                                        name="lote" id="lote" placeholder=""
                                         value="{{ old('lote_validade', 0) }}" required />
                                     @error('lote_validade')
                                         <div class="invalid-feedback fw-500">{{ $message }}</div>
@@ -58,7 +65,7 @@
                                 </div>
 
                                 <!-- Escolha uma cor -->
-                                <div class="mb-3 pb-3">
+                                {{-- <div class="mb-3 pb-3">
                                     <label for="cor" class="form-label text-green fw-500 fs-18px">
                                         Escolha uma cor
                                     </label>
@@ -77,7 +84,7 @@
                                     @error('cor')
                                         <div class="invalid-feedback fw-500">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                </div> --}}
 
                                 <!-- Quantidade em estoque -->
                                 <div class="mb-2 pb-3">
@@ -91,7 +98,7 @@
                                         <div class="position-relative">
                                             <input type="text"
                                                 class="form-control form-control-custom @error('qtd_estoque') is-invallid @enderror fs-18px fw-500"
-                                                name="" id="qtd_estoque" value="{{ old('qtd_estoque') }}"
+                                                name="estoque" id="qtd_estoque" value="{{ old('qtd_estoque') }}"
                                                 placeholder="0" />
 
                                             <div class="text-green-2 fw-500"
@@ -117,7 +124,7 @@
                                 </div>
 
                                 <!-- Quantidade em estoque -->
-                                <div class="mb-2 pb-3">
+                                {{-- <div class="mb-2 pb-3">
                                     <div class="mb-0 position-relative">
                                         <label for="tempo_medio" class="form-label text-green fw-500 fs-18px w-100">
                                             <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
@@ -141,13 +148,13 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
 
 
                                 <div class="pt-3">
-                                    <button type="button" class="btn btn-primary w-100 py-2 fw-600">
+                                    <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
                                         Cadastrar exame
                                     </button>
                                 </div>
@@ -163,5 +170,10 @@
 
         </div>
     </div>
-
+    <script>
+       
+        $(document).ready(function() {
+    $('#exame').select2();
+});
+    </script>
 @endsection

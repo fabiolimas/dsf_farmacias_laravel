@@ -31,6 +31,7 @@ class AgendaController extends Controller
 
         $examesDia =   Agenda::join('cliente_farmacias', 'cliente_farmacias.id', '=', 'agendas.cliente_farmacia_id')
             ->join('users', 'users.id', '=', 'agendas.user_id')
+            ->join('exames', 'exames.id','agendas.exame_id')
 
             ->select(
                 'agendas.*',
@@ -39,7 +40,8 @@ class AgendaController extends Controller
                 'cliente_farmacias.email as emailCliente',
                 'cliente_farmacias.telefone as telefone',
                 'cliente_farmacias.cpf as cpf',
-                'users.*'
+                'users.*',
+                'exames.estoque as estoqueExame'
             )
             ->where('agendas.cliente_id', $farmacia->id)
             ->where('agendas.status', 'aberto')
