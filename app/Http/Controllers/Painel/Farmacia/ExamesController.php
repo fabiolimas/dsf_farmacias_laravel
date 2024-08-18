@@ -194,7 +194,7 @@ public function enviarPDFPorEmail(Request $request)
     $pdfContent = $pdf->output();
 
     // Enviar o PDF por e-mail
-    Mail::send('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'), function($message) use ($pdfContent, $clienteFarma) {
+    Mail::send('pages.painel.farmacia.exames.email', compact('array','clienteFarma','farmacia','resultado'), function($message) use ($pdfContent, $clienteFarma) {
         $message->to($clienteFarma->email, $clienteFarma->nome)
                 ->subject('Resultado de Exame')
                 ->attachData($pdfContent, 'Resultado_Exame.pdf', [
