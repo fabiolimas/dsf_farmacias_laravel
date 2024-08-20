@@ -27,9 +27,10 @@
     margin-bottom:5px;
     margin-left:5px;
 }
-tr{
-    
-    border-bottom:1px solid #ccc;
+table, th, td {
+    border-collapse: collapse;
+    border-bottom: 1px solid #b2d2d2;
+        width: 100%;
 }
     </style>
 <body style="font-family:sans-serif">
@@ -205,15 +206,15 @@ tr{
                                                 DCB : <?php echo e($resultado->dcb); ?>
 
                                             </td>
-                                            <td colspan="2">
+                                            <td colspan="3">
                                                 Via de Ministração : <?php echo e($resultado->via_ministracao); ?>
 
                                             </td>
-                                            <td class="col-m-4 "></td>
+                                           
                                             </tr>
                                            
                                             <tr>
-                                            <td colspan="3">
+                                            <td colspan="4">
                                                 Médico Responsavel : <?php echo e($resultado->medico_responsavel); ?>
 
                                             </td>
@@ -242,7 +243,7 @@ tr{
                                     <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
                                         <table>
                                         <tr class="row">
-                                            <td class="col-md-4 mt-3">
+                                            <td colspan="2">
                                                 Nome do Fabricante : <?php echo e($resultado->nome_fab_auricular); ?>
 
                                             </td>
@@ -250,17 +251,21 @@ tr{
                                                 CNPJ : <?php echo e($resultado->cnpj_fab_auricular); ?>
 
                                             </td>
+                                            
+                                        </tr>
+                                        <tr>
                                             <td class="col-md-4 mt-3">
                                                 Número lote pistola : <?php echo e($resultado->lote_pistola); ?>
 
                                             </td>
-                                        </tr>
-                                        <tr>
                                             <td class="col-md-4 mt-3">
                                                 Número lote brinco : <?php echo e($resultado->lote_brinco); ?>
 
                                             </td>
-                                            <td class="col-md-4 mt-3">
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
                                                 Responsavel pelo atendimento : <?php echo e($resultado->responsavel_atendimento); ?>
 
                                             </td>
@@ -277,7 +282,7 @@ tr{
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
+                                    <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
                                 </div>
                             </div>
                         </div>

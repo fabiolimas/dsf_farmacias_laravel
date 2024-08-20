@@ -30,9 +30,27 @@ class DatabaseSeeder extends Seeder
         $roleAdmin->givePermissionTo(Permission::all());
         Role::create(['name' => 'Financeiro']);
 
-        for ($i = 0; $i < 20; $i++) :
-            Role::create(['name' => 'Cargo' . $i + 1]);
-        endfor;
+        // for ($i = 0; $i < 20; $i++) :
+        //     Role::create(['name' => 'Cargo' . $i + 1]);
+        // endfor;
+
+ /* clientes farmaceuticos */
+ $arr = [
+    'Raia Drogasil',
+    'Drogarias DPSP',
+    'PagueMenos',
+    'Panvel',
+    'Drogaria Araújo',
+    'Clamed',
+    'Extrafarma',
+    'Nissei',
+];
+
+
+
+    \App\Models\Cliente::factory()->create([
+       
+    ]);
 
 
 
@@ -57,40 +75,27 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test Farmácia',
             'email' => 'farmacia@email.com',
             'profile' => 'farmaceutico',
-            'status' => 'ativo'
+            'status' => 'ativo',
+            'cliente_id'=>1
         ]);
         
         
-        \App\Models\User::factory(20)->create([
-            'profile' => 'colaborador'
-        ]);
+        // \App\Models\User::factory(20)->create([
+        //     'profile' => 'colaborador'
+        // ]);
 
-        \App\Models\User::factory(20)->create([
-            'profile' => 'colaborador'
-        ]);
+        // \App\Models\User::factory(20)->create([
+        //     'profile' => 'colaborador'
+        // ]);
 
-        /* clientes farmaceuticos */
-        $arr = [
-            'Raia Drogasil',
-            'Drogarias DPSP',
-            'PagueMenos',
-            'Panvel',
-            'Drogaria Araújo',
-            'Clamed',
-            'Extrafarma',
-            'Nissei',
-        ];
+        // for ($i = 0; $i < 20; $i++) {
+        //     \App\Models\User::factory(1)->create([
+        //         'name' => fake()->randomElement($arr),
+        //         'profile' => 'farmaceutico',
+             
+        //     ]);
+        // }
 
-        for ($i = 0; $i < 20; $i++) {
-            \App\Models\User::factory(1)->create([
-                'name' => fake()->randomElement($arr),
-                'profile' => 'farmaceutico'
-            ]);
-        }
-        foreach (\App\Models\User::where('profile', 'farmaceutico')->get() as $key => $value) {
-            \App\Models\Cliente::factory()->create([
-                'user_id' => $value->id
-            ]);
-        }
+       
     }
 }

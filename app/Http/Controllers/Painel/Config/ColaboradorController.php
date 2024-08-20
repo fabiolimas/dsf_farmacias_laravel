@@ -41,6 +41,7 @@ class ColaboradorController extends Controller
 
         $user = (new User)->fill($request->all());
         $user->password = bcrypt($request->password);
+        $user->cliente_id=auth()->user()->cliente_id;
 
         // atualizar permissões/roles
         $user->assignRole($request->cargo);

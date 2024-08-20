@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class ClienteController extends Controller
 {
     public function index(){
-        $farmacia=Cliente::where('user_id', auth()->id())->first();
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
 
         $clientesFarma=ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
 
@@ -19,7 +19,7 @@ class ClienteController extends Controller
 
     public function create(){
 
-        $farmacia=Cliente::where('user_id', auth()->id())->first();
+         $farmacia=Cliente::find(auth()->user()->cliente_id);
 
        
       
@@ -57,7 +57,7 @@ class ClienteController extends Controller
     public function buscaCliente(Request $request){
 
         $busca=$request->pesquisa;
-        $farmacia=Cliente::where('user_id', auth()->id())->first();
+         $farmacia=Cliente::find(auth()->user()->cliente_id);
         if($busca==''){
 
             $clientesFarma=ClienteFarmacia::where('cliente_id', $farmacia->id)

@@ -197,10 +197,10 @@
                             <select class="form-select form-control-custom fw-500 fs-18px"
                                 style="background-color: #CCEFEE"
                                 name="perguntas[${key}][tipo]" id="tipo-${key}" required>
-                                <option value="multipla-escolha">Múltipla escolha</option>
+                                // <option value="multipla-escolha">Múltipla escolha</option>
                                 <option value="selecao">Seleção</option>
-                                <option value="resposta-curta">Resposta curta</option>
-                                <option value="paragrafo">Parágrafo</option>
+                                // <option value="resposta-curta">Resposta curta</option>
+                                // <option value="paragrafo">Parágrafo</option>
                             </select>
                         </div>
                     </div>
@@ -379,10 +379,10 @@
                             <select class="form-select form-control-custom fw-500 fs-18px"
                                 style="background-color: #CCEFEE"
                                 name="perguntas[${key}][tipo]" id="tipo-${key}" required>
-                                <option value="multipla-escolha" ${ tipo == 'multipla-escolha' ? 'selected' : ''}>Múltipla escolha</option>
+                                // <option value="multipla-escolha" ${ tipo == 'multipla-escolha' ? 'selected' : ''}>Múltipla escolha</option>
                                 <option value="selecao" ${ tipo == 'selecao' ? 'selected' : ''}>Seleção</option>
-                                <option value="resposta-curta" ${ tipo == 'resposta-curta' ? 'selected' : ''}>Resposta curta</option>
-                                <option value="paragrafo" ${ tipo == 'paragrafo' ? 'selected' : ''}>Parágrafo</option>
+                                // <option value="resposta-curta" ${ tipo == 'resposta-curta' ? 'selected' : ''}>Resposta curta</option>
+                                // <option value="paragrafo" ${ tipo == 'paragrafo' ? 'selected' : ''}>Parágrafo</option>
                             </select>
                         </div>
                     </div>

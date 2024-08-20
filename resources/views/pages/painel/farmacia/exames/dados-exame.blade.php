@@ -62,7 +62,8 @@
                         <div class="border-green-light p-3 rounded-3 mb-4 ">
                             <span class="titleResult">Informações sobre o exame</span>
                             <div class="row mt-3">
-
+                                
+@if($exame->perguntas != null)
                                 @foreach ($exame->perguntas as $pergunta)
                                     <div class="col-md-3">
 
@@ -79,6 +80,10 @@
                                         </select>
                                     </div>
                                 @endforeach
+
+                                @else 
+
+                                @endif
 
                             </div>
 

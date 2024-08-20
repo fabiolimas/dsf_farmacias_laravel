@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'profile',
-        'img_perfil'
+        'img_perfil',
+        'clientes_id'
     ];
 
     protected $appends = [
@@ -62,6 +63,6 @@ class User extends Authenticatable
 
     public function cliente()
     {
-        return $this->hasOne(Cliente::class);
+        return $this->belongsTo(Cliente::class);
     }
 }

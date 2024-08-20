@@ -17,7 +17,7 @@ class ExamesController extends Controller
 {
    public function index(Request $request){
 
-    $farmacia = Cliente::where('user_id', auth()->id())->first();
+     $farmacia=Cliente::find(auth()->user()->cliente_id);
 
 
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
@@ -52,21 +52,25 @@ class ExamesController extends Controller
             ->get()
             ->groupBy('data_exame'); // Agrupa pelos exames na mesma data
 
-            $examesProntos=Agenda::where('status', 'pronto')->get();
+            $examesProntos=Agenda::where('status', 'pronto')
+            ->where('cliente_id', auth()->user()->cliente_id)
+            ->get();
 
     return view('pages.painel.farmacia.exames.index', compact('examesProntos','examesDia', 'agendas', 'farmacia', 'clientesFarma', 'exames'));
    }
 
    public function examesProntos(Request $request){
 
-    $examesProntos=Agenda::where('status', 'pronto')->get();
+    $examesProntos=Agenda::where('status', 'pronto')
+    ->where('cliente_id', auth()->user()->cliente_id)
+    ->get();
   
     return view('pages.painel.farmacia.exames.list',compact('examesProntos'));
 
    }
 
    public function ShowResult(Request $request){
-    $farmacia = Cliente::where('user_id', auth()->id())->first();
+     $farmacia=Cliente::find(auth()->user()->cliente_id);
  
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
@@ -101,7 +105,7 @@ class ExamesController extends Controller
 
    public function confirmados(){
 
-    $farmacia = Cliente::where('user_id', auth()->id())->first();
+     $farmacia=Cliente::find(auth()->user()->cliente_id);
 
     $examesConfirmados=Agenda::where('status','confirmado')
     ->where('cliente_id', $farmacia->id)->get();
@@ -172,7 +176,7 @@ class ExamesController extends Controller
    public function gerarPDF(Request $request)
 {
 
-    $farmacia = Cliente::where('user_id', auth()->id())->first();
+     $farmacia=Cliente::find(auth()->user()->cliente_id);
  
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
@@ -180,16 +184,16 @@ class ExamesController extends Controller
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-     return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
+     //return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
 
-    // $pdf = \PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+    $pdf = \PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
      return $pdf->download('resultado.pdf');
 }
 
 public function enviarPDFPorEmail(Request $request)
 {
 
-    $farmacia = Cliente::where('user_id', auth()->id())->first();
+     $farmacia=Cliente::find(auth()->user()->cliente_id);
  
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
@@ -217,7 +221,7 @@ public function enviarPDFPorEmail(Request $request)
 public function buscaExamesProntos(Request $request){
     $busca=$request->pesquisa;
 
-    $farmacia = Cliente::where('user_id', auth()->id())->first();
+     $farmacia=Cliente::find(auth()->user()->cliente_id);
 
     if ($busca == '') {
         $examesProntos=Agenda::where('status', 'pronto')->get();

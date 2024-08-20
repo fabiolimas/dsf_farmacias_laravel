@@ -10,13 +10,13 @@
             <ul class="list-unstyled d-flex d-lg-none gap-2 my-auto me-auto align-items-center ">
                 <!-- voltar -->
                 <li class="nav-item ps-lg-4">
-                    <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Voltar">
+                    <a class="nav-link" href="#" onclick="history.back()" data-bs-toggle="tooltip" data-bs-placement="top" title="Voltar">
                         <img src="{{ asset('assets/img/icons/voltar.svg') }}" alt="Voltar" width="37">
                     </a>
                 </li>
                 <!-- atualizar -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                    <a class="nav-link" href="#" onClick="window.location.reload()" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="Atualizar">
                         <img src="{{ asset('assets/img/icons/atualizar.svg') }}" alt="Atualizar" width="37">
                     </a>
@@ -45,7 +45,7 @@
                 <ul class="navbar-nav me-auto mt-2 mt-lg-0 align-items-center">
                     <!-- voltar -->
                     <li class="nav-item ps-lg-4 d-none d-lg-block">
-                        <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                        <a class="nav-link" href="#" onclick="history.back()" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Voltar">
                             <img src="{{ asset('assets/img/icons/voltar.svg') }}" alt="Voltar" width="37">
                         </a>

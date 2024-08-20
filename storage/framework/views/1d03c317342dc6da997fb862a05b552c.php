@@ -62,7 +62,8 @@
                         <div class="border-green-light p-3 rounded-3 mb-4 ">
                             <span class="titleResult">Informações sobre o exame</span>
                             <div class="row mt-3">
-
+                                
+<?php if($exame->perguntas != null): ?>
                                 <?php $__currentLoopData = $exame->perguntas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col-md-3">
 
@@ -80,6 +81,10 @@
                                         </select>
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                <?php else: ?> 
+
+                                <?php endif; ?>
 
                             </div>
 
@@ -188,8 +193,8 @@
                                     <label for="via_ministracao">Via de Ministração</label>
                                     <select class="form-select " name="via_ministracao" id="via_ministracao">
                                         <option value="">Selecione uma opção</option>
-                                        <option value="gluteo_direito">Gluteo Direito</option>
-                                        <option value="gluteo_esquerdo">Gluteo Esquerdo</option>
+                                        <option value="Gluteo Direito">Gluteo Direito</option>
+                                        <option value="Gluteo Esquerdo">Gluteo Esquerdo</option>
                                     </select>
                                 </div>
 
@@ -247,7 +252,7 @@
                                 <div class="col-md-4 mt-3">
                                     <label for="lote_brinco">Número de lote do brinco</label>
 
-                                    <input type="text" class="form-control " name="lote_pistola" id="lote_pistola">
+                                    <input type="text" class="form-control " name="lote_brinco" id="lote_pistola">
                                 </div>
                                 <div class="col-md-4 mt-3">
                                     <label for="responsavel_atendimento">Responsavel pelo atendimento</label>

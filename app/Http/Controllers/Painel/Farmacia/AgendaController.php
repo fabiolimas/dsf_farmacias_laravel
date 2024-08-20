@@ -15,7 +15,7 @@ class AgendaController extends Controller
     public function index()
     {
 
-        $farmacia = Cliente::where('user_id', auth()->id())->first();
+         $farmacia=Cliente::find(auth()->user()->cliente_id);
 
 
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
@@ -58,7 +58,7 @@ class AgendaController extends Controller
 
     public function create()
     {
-        $farmacia = Cliente::where('user_id', auth()->id())->first();
+         $farmacia=Cliente::find(auth()->user()->cliente_id);
 
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
         $exames = Exame::all();
@@ -72,7 +72,7 @@ class AgendaController extends Controller
 
         $agenda = Agenda::find($request->id);
 
-        $farmacia = Cliente::where('user_id', auth()->id())->first();
+         $farmacia=Cliente::find(auth()->user()->cliente_id);
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
         $clienteAgendado = ClienteFarmacia::find($agenda->cliente_farmacia_id);
         $exames = Exame::all();
@@ -122,7 +122,7 @@ class AgendaController extends Controller
 
 
 
-        $farmacia = Cliente::where('user_id', auth()->id())->first();
+         $farmacia=Cliente::find(auth()->user()->cliente_id);
 
 
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();

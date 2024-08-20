@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Cadastrar novo usuário'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">

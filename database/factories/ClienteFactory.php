@@ -33,7 +33,8 @@ class ClienteFactory extends Factory
             'validade_cartao' => '2024-05',
             'cvv' => rand(100, 999),
             'cnpj_cpf_cartao' => '69.662.546/0001-04',
-            'dt_pagamento' => date('Y-m-d', strtotime(' - ' . rand(-1, 5) . ' months'))
+            'dt_pagamento' => date('Y-m-d', strtotime(' - ' . rand(-1, 5) . ' months')),
+            'razao_social'=>fake()->name()
             // 'user_id',
         ];
     }

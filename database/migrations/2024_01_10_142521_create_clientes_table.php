@@ -34,7 +34,7 @@ return new class extends Migration
             
             $table->datetime('dt_pagamento')->nullable();
 
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

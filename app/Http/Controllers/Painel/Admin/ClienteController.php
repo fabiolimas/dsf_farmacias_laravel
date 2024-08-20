@@ -56,16 +56,18 @@ class ClienteController extends Controller
             'cnpj' => ['required', 'max:255'],
             'classe' => ['required', 'max:255'],
         ]);
+        $cliente = (new Cliente)->fill($request->all());
+
+        $cliente->razao_social=$request->name;
+        $cliente->save();
 
         $user = (new User)->fill($request->all());
         $user->password = bcrypt($request->password);
         $user->profile = 'farmaceutico';
+        $user->cliente_id=$cliente->id;
         $user->save();
 
-        $cliente = (new Cliente)->fill($request->all());
-        $cliente->user_id = $user->id;
-        $cliente->razao_social=$user->name;
-        $cliente->save();
+       
 
         return redirect()
             ->route('painel.admin.clientes.create-2', ['user' => $user->id])
