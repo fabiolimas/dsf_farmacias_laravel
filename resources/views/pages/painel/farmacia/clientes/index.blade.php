@@ -143,7 +143,7 @@
                                                                                     <div
                                                                                         class="text-green-2 fw-500 text-truncate">
                                                                                         {{ $cliente->nome }}</div>
-                                                                                    <div class="text-green">Masculino,
+                                                                                    <div class="text-green">{{$cliente->sexo}},
                                                                                         {{ date('Y', strtotime('now')) - date('Y', strtotime($cliente->data_nascimento)) }}
                                                                                         anos</div>
                                                                                 </a>

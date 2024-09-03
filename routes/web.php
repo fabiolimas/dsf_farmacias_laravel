@@ -6,6 +6,7 @@ use App\Http\Controllers\Painel\HomeController;
 use App\Http\Controllers\Painel\GraficosController;
 use App\Http\Controllers\Painel\Config\CargoController;
 use App\Http\Controllers\Painel\Admin\ClienteController;
+use App\Http\Controllers\Painel\Admin\ComprasController;
 use App\Http\Controllers\Painel\Config\ConfigController;
 use App\Http\Controllers\Painel\Admin\ExameAdmController;
 use App\Http\Controllers\Painel\Admin\PagamentoController;
@@ -62,7 +63,12 @@ Route::prefix('/')->group(function () {
     Route::get('clientes/pagamento/ultimas-assinaturas', [PagamentoController::class, 'ultimasAssinaturasJson'])
         ->name('painel.admin.clientes.pagamento.ultimas-assinaturas');
 
+/*Pedidos de compras*/
 
+Route::get('pedidos-de-compras/', [ComprasController::class, 'index'])->name('painel.admin.compras.index');
+Route::get('novo-peido/', [ComprasController::class, 'create'])->name('painel.admin.compras.create');
+Route::post('novo-peido/', [ComprasController::class, 'store'])->name('painel.admin.compras.store');
+Route::post('item-pedido/', [ComprasController::class, 'storeItem'])->name('painel.admin.compras.store.itemPedido');
     /* Exames */
 
 
@@ -130,6 +136,8 @@ Route::prefix('/fm')->group(function () {
         ->name('painel.farmacia.clientes.update');
         Route::post('/busca', [FarmaciaClienteController::class, 'buscaCliente'])
         ->name('painel.farmacia.clientes.busca');
+        Route::post('/busca-home', [FarmaciaClienteController::class, 'buscaClienteHome'])
+        ->name('painel.farmacia.clientes.busca-home');
     });
 
     /* agenda */
@@ -169,6 +177,7 @@ Route::prefix('/fm')->group(function () {
         Route::get('/enviar-pdf/{id}', [ExamesController::class, 'enviarPDFPorEmail'])->name('enviar.pdf');
 
         Route::get('/entrada-estoque', [ExamesController::class, 'entradaEstoque'])->name('painel.farmacia.exames.create');
+        Route::post('/busca-exame-entrada', [ExamesController::class, 'buscaExameCreate'])->name('busca-exame-entrada');
         Route::post('/update-estoque', [ExamesController::class, 'updateEstoque'])->name('painel.farmacia.exames.update-estoque');
 
         Route::get('/update-presenca/{id}/{status}', [ExamesController::class, 'updatePresenca'])->name('painel.farmacia.exames.presenca');

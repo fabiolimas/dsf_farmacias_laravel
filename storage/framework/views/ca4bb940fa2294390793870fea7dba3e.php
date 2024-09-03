@@ -125,7 +125,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        name="valor" id="valor" placeholder="R$ 0,00" value="<?php echo e(old('valor')); ?>"
+                                        name="valor" id="valor" placeholder="R$ 0,00" value=""
                                         required />
                                     <?php $__errorArgs = ['valor'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -167,6 +167,42 @@ unset($__errorArgs, $__bag); ?>
         $(document).ready(function() {
     $('#exame').select2();
 });
+    </script>
+    <script>
+        $('document').ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            let resultado = $('#valor');
+
+            $('#exame').change(function() {
+
+                $.ajax({
+                    url: "<?php echo e(route('busca-exame-entrada')); ?>", // Arquivo PHP que processará a busca
+                    type: "post",
+                    data: {
+                        id: $('#exame').val(),
+
+
+                    }, // Dados a serem enviados para o servidor
+                    success: function(response) {
+
+                        resultado.val(response);
+                    
+                    },
+                    error: function(result) {
+                        console.log(result);
+                    }
+
+
+
+                });
+            });
+
+        });
     </script>
 <?php $__env->stopSection(); ?>
 

@@ -69,17 +69,17 @@
                                                         <div class="d-flex gap-3 align-items-center">
 
                                                             <div class="fs-20px fw-500 ">
-                                                                <a href="{{ route('painel.farmacia.exames.show', ['id' => 1]) }}"
+                                                                <a href="{{ route('painel.admin.exames.edit', $exame->id) }}"
                                                                     class="text-decoration-none d-block">
                                                                     <div class="text-green-2">{{ $exame->nome }}</div>
-                                                                    <div class="text-green">Carla Silva</div>
+                                                                    {{-- <div class="text-green">Carla Silva</div> --}}
                                                                 </a>
                                                             </div>
                                                         </div>
                                                         <!-- img -->
                                                         <div class=" d-sm-flex gap-3 mt-2 mt-xl-0">
                                                             <div class="">
-                                                                <a href="{{ route('painel.farmacia.exames.show', ['id' => 1]) }}"
+                                                                <a href="{{ route('painel.admin.exames.edit', $exame->id) }}"
                                                                     class="text-decoration-none d-block">
                                                                     <img src="{{ asset('assets/img/ilustracoes/exame.jpg') }}"
                                                                         alt=""

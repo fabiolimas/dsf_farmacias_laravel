@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\ClienteFarmacia;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use App\Models\ExameFarmacia;
 use Illuminate\Support\Facades\Mail;
 
 class ExamesController extends Controller
@@ -74,8 +75,13 @@ class ExamesController extends Controller
  
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
+  
 
-    $array = json_decode($resultado->perguntas, true);
+  
+        $array = json_decode($resultado->perguntas, true);
+    
+
+ 
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
     return view('pages.painel.farmacia.exames.show',compact('array','clienteFarma','farmacia','resultado'));
@@ -84,7 +90,7 @@ class ExamesController extends Controller
    public function updatePresenca(Request $request){
 
         $agenda=Agenda::find($request->id);
-        $exame=Exame::find($agenda->exame_id);
+        $exame=ExameFarmacia::where('exame_id', $agenda->exame_id)->first();
 
         $estoqueAtual=$exame->estoque;
        if($request->status == 'confirmado'){
@@ -246,12 +252,38 @@ public function entradaEstoque(){
 
 }
 
+public function  buscaExameCreate(Request $request){
+
+    $exame=Exame::where('id',$request->id)->first();
+
+
+  // Verifique se o exame foi encontrado
+  if ($exame) {
+    return response()->json($exame);
+} else {
+    return response()->json(['message' => 'Exame não encontrado'], 404);
+}
+
+}
+
 public function updateEstoque(Request $request){
 
-    $exame=Exame::find($request->exame);
+    $exame=ExameFarmacia::where('exame_id', $request->exame)->first();
+
+if($exame == null){
+    $newExame= new ExameFarmacia();
+
+    $newExame->exame_id=$request->exame;
+    $newExame->valor=$request->valor;
+    $newExame->estoque=$request->estoque;
+    $newExame->lote=$request->lote;
+    $newExame->cliente_id=auth()->user()->cliente_id;
+    $newExame->save();
+    return redirect()->route('painel.farmacia.exames.lista')->with('success','Dados do exame atualizados com sucesso!');
+}
 
     $estoqueAtual=$exame->estoque;
-    $exame->update(['preco'=>$request->valor, 'estoque'=>$estoqueAtual+=$request->estoque, 'lote'=>$request->lote]);
+    $exame->update(['valor'=>$request->valor, 'estoque'=>$estoqueAtual+=$request->estoque, 'lote'=>$request->lote,'cliente_id'=>auth()->user()->cliente_id]);
     return redirect()->route('painel.farmacia.exames.lista')->with('success','Dados do exame atualizados com sucesso!');
 }
 

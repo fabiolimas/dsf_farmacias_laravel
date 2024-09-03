@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\ClienteFarmacia;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\ExameFarmacia;
 
 class AgendaController extends Controller
 {
@@ -31,7 +32,8 @@ class AgendaController extends Controller
 
         $examesDia =   Agenda::join('cliente_farmacias', 'cliente_farmacias.id', '=', 'agendas.cliente_farmacia_id')
             ->join('users', 'users.id', '=', 'agendas.user_id')
-            ->join('exames', 'exames.id','agendas.exame_id')
+            ->join('exame_farmacias', 'exame_farmacias.exame_id','agendas.exame_id')
+          
 
             ->select(
                 'agendas.*',
@@ -41,7 +43,8 @@ class AgendaController extends Controller
                 'cliente_farmacias.telefone as telefone',
                 'cliente_farmacias.cpf as cpf',
                 'users.*',
-                'exames.estoque as estoqueExame'
+                'exame_farmacias.estoque as estoqueExame'
+             
             )
             ->where('agendas.cliente_id', $farmacia->id)
             ->where('agendas.status', 'aberto')
@@ -61,7 +64,10 @@ class AgendaController extends Controller
          $farmacia=Cliente::find(auth()->user()->cliente_id);
 
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
-        $exames = Exame::all();
+        $exames = Exame::join('exame_farmacias','exame_farmacias.exame_id', 'exames.id')
+        ->where('exame_farmacias.cliente_id', $farmacia->id)
+        ->get();
+       
         $agendas = Agenda::join('cliente_farmacias', 'cliente_farmacias.id', 'agendas.cliente_farmacia_id')->where('agendas.cliente_id', $farmacia->id)->orderBy('agendas.hora_exame', 'asc')->get();
 
         return view('pages.painel.farmacia.agenda.create', compact('agendas', 'exames', 'farmacia', 'clientesFarma'));

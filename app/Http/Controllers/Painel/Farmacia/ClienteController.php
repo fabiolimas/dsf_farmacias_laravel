@@ -80,4 +80,30 @@ class ClienteController extends Controller
         }
     }
 
+    public function buscaClienteHome(Request $request){
+
+        $busca=$request->pesquisa;
+         $farmacia=Cliente::find(auth()->user()->cliente_id);
+        if($busca==''){
+
+            $clientes=ClienteFarmacia::where('cliente_id', $farmacia->id)
+       
+            ->get(); 
+        }else{
+            $clientes=ClienteFarmacia::where('nome', 'like', '%'.$busca.'%')->where('cliente_id', $farmacia->id)
+       
+            ->get();
+        }
+
+       
+
+      
+
+        if($clientes->count() >=1){
+            return view('pages.painel.farmacia.buscas.busca_cliente_home',compact('clientes', 'farmacia'));
+        }else{
+            return response()->json(['status'=>'Cliente não encontrado']);
+        }
+    }
+
 }

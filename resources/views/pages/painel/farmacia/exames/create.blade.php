@@ -116,7 +116,7 @@
                                     </label>
                                     <input type="text"
                                         class="form-control form-control-custom fs-18px fw-500 @error('valor') is-invalid @enderror"
-                                        name="valor" id="valor" placeholder="R$ 0,00" value="{{ old('valor') }}"
+                                        name="valor" id="valor" placeholder="R$ 0,00" value=""
                                         required />
                                     @error('valor')
                                         <div class="invalid-feedback fw-500">{{ $message }}</div>
@@ -175,5 +175,41 @@
         $(document).ready(function() {
     $('#exame').select2();
 });
+    </script>
+    <script>
+        $('document').ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            let resultado = $('#valor');
+
+            $('#exame').change(function() {
+
+                $.ajax({
+                    url: "{{ route('busca-exame-entrada') }}", // Arquivo PHP que processará a busca
+                    type: "post",
+                    data: {
+                        id: $('#exame').val(),
+
+
+                    }, // Dados a serem enviados para o servidor
+                    success: function(response) {
+
+                        resultado.val(response);
+                    
+                    },
+                    error: function(result) {
+                        console.log(result);
+                    }
+
+
+
+                });
+            });
+
+        });
     </script>
 @endsection

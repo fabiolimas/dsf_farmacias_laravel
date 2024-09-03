@@ -143,7 +143,7 @@
                                                                                     <div
                                                                                         class="text-green-2 fw-500 text-truncate">
                                                                                         <?php echo e($cliente->nome); ?></div>
-                                                                                    <div class="text-green">Masculino,
+                                                                                    <div class="text-green"><?php echo e($cliente->sexo); ?>,
                                                                                         <?php echo e(date('Y', strtotime('now')) - date('Y', strtotime($cliente->data_nascimento))); ?>
 
                                                                                         anos</div>

@@ -271,6 +271,9 @@ span.select2-selection__arrow {
     margin-left: 22%;
  
 }
+.apexcharts-tooltip.apexcharts-theme-light {
+    top: 50px !important;
+}
 .border-green-light.p-3.rounded-3.mb-4 {
     font-size: 13px;
 }

@@ -108,10 +108,14 @@
                                     </label>
                                     <select
                                         class="form-select form-control-custom fs-18px @error('exame') is-invalid @enderror"
-                                        name="exame_id" id="cargo" required>
+                                        name="exame_id" id="exame_id" required>
                                         <option value="">Selecione o Exame</option>
                                         @foreach($exames as $exame)
+                                        @if($exame->estoque == 0)
+                                        <option value="0" class="text-danger" id="semEstoque">{{$exame->nome}}</span></option>
+                                        @else
                                         <option value="{{$exame->id}}">{{$exame->nome}}</option>
+                                        @endif
                                         @endforeach
                                         
                                     </select>
@@ -178,6 +182,56 @@
                         {{--  --}}
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-custom fade" id="modal-sem-estoque" tabindex="-1"
+        data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+        aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg border-0"
+            role="document">
+            <div class="modal-content bg-transparent ">
+                <div class="modal-body p-lg-5  border-0">
+
+                    <div class="p-4 shadow rounded-3  bg-white border">
+
+                        <div class="d-flex flex-column flex-lg-row flex-wrap gap-4">
+
+                            <!--  -->
+                           <h4>Produto sem estoque?</h4>
+
+                            <!--  -->
+                            
+                        </div>
+
+                       
+
+                        <div class="row mt-4 pt-2 gy-2">
+                            <div class="col-12 col-lg-6">
+                                <a href="{{route('painel.farmacia.exames.create')}}" id="modal-link-editar-user"
+                                    class="btn btn-primary-light w-100 py-2 fs-20px text-green">
+                                    Adicionar Produto Estoque?
+                                </a>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <a href="#" id="modal-link-ver-mais"
+                                    class="btn btn-danger w-100 py-2 fs-20px" data-bs-dismiss="modal">Escolher outro produto</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="fechar-modal text-center pt-2 pt-lg-4">
+                        <button type="button"
+                            class="btn btn-ligth shadow bg-white text-green-2 py-1"
+                            data-bs-dismiss="modal">
+                            <i data-feather="x"></i>
+                            Fechar
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -458,6 +512,14 @@
        
         $(document).ready(function() {
     $('#cliente').select2();
+
+
+    $('#exame_id').change(function(){
+        if($('#exame_id').val() == 0){
+             $("#modal-sem-estoque").modal('show');
+           
+        }
+    });
 });
     </script>
 @endsection

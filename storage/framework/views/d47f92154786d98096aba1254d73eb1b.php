@@ -6,55 +6,40 @@
 
             <!-- Quantidade de exames gerados -->
             <div class="col-12 col-lg-12 col-xl-12">
-                <div class="card">
-                    <div class="card-body px-3 px-md-4 py-4">
-
+                <div class="card ">
+                    <div class="card-body px-3 px-md-4 py-4 resultFiltro">
                         <div class="d-sm-flex align-items-center  gap-4">
                             <h2 class="fs-24px fw-600 text-green-2 pt-1 ">Quantidade de exames</h2>
                             <div class="d-flex gap-3 ps-lg-3">
                                 <div class="">
-                                    <div class="dropdown">
-                                        <button class="btn btn-light fs-18px bg-white shadow-sm border text-green " type="button"
-                                            id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <div class="d-flex gap-1 align-items-center">
-                                                Todos
-                                                <img src="<?php echo e(asset('assets/img/icons/chevron-down-2.svg')); ?>" alt=""
-                                                    width="25">
-                                            </div>
-                                        </button>
-                                        <div class="dropdown-menu fs-18px" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="#">Todos</a>
-                                            <a class="dropdown-item" href="#">Todos</a>
-                                            <a class="dropdown-item" href="#">Todos</a>
-                                            <a class="dropdown-item" href="#">Todos</a>
-                                        </div>
+                                    <select name="filtro" id="filtro" class="form-select">
+                                        <option value="todos">Todos</option>
+                                        <option value="periodo">Periodo</option>
+                                    </select>
+                                    
                                     </div>
                                 </div>
                                 <div class="">
-                                    <div class="dropdown">
-                                        <button class="btn btn-light fs-18px bg-white shadow-sm border text-green " type="button"
-                                            id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <div class="d-flex gap-1 align-items-center">
-                                                7 dias
-                                                <img src="<?php echo e(asset('assets/img/icons/chevron-down-2.svg')); ?>" alt=""
-                                                    width="25">
-                                            </div>
-                                        </button>
-                                        <div class="dropdown-menu fs-18px" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
+                                    <div class="row periodos" style="display:none">
+                                        <div class="col-md-6">
+
+                                            <input type="date" name="data_ini" id="data_ini" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="date" name="data_fim" id="data_fim" class="form-control">
                                         </div>
                                     </div>
+
+                                   
+                                    
                                 </div>
                             </div>
                         </div>
+                     
 
                         <?php echo $qtdExames->container(); ?>
 
+            
 
                         <div class="line-chart mt-4 pt-3 position-relative pb-3">
                             <div class="line-chart-vertical"></div>
@@ -66,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+     
 
             <!-- Exames mais pedidos -->
             <div class="col-12 col-lg-6 col-xl-6">
@@ -218,6 +203,51 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
+<script>
+    $(document).ready(function(){
+        $('#filtro').change(function(){
+
+            if($('#filtro').val()=='periodo'){
+                $('.periodos').css('display','flex');
+            }else{
+                $('.periodos').css('display','none');
+            }
+        });
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        let resultado = $('.resultFiltro');
+
+        $('#data_fim').change(function() {
+
+            $.ajax({
+                url: "<?php echo e(route('painel.farmacia.graficos.index')); ?>", // Arquivo PHP que processará a busca
+                type: "get",
+                data: {
+                    data_ini: $('#data_ini').val(),
+                    data_fim: $('#data_fim').val(),
+
+
+                }, // Dados a serem enviados para o servidor
+                success: function(response) {
+
+                resultado.html(response);
+                },
+                error: function(result) {
+                    console.log(result);
+                }
+
+
+
+            });
+        });
+    })
+
+</script>
 
     <!-- scripts apexchart -->
     <script src="<?php echo e($qtdExames->cdn()); ?>"></script>
