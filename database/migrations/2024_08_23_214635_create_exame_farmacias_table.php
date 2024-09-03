@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('exame_farmacias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('exame_id')->constrained()->onDelete('cascade');
-            $table->double('valor',5,2)->nullable();
+            $table->double('valor',9,2)->nullable();
             $table->integer('estoque')->nullable();
             $table->string('lote')->nullable();
             $table->foreignId('cliente_id')->constrained()->onDelete('cascade');

@@ -15,7 +15,7 @@
                                 href="{{ route('painel.admin.clientes.create') }}" role="button" style="padding: 16px 24px;">
                                 <div class="d-flex gap-2 align-items-center">
                                     <i data-feather="user-plus"></i>
-                                    Cadastrar usuário
+                                    Cadastrar Farmácia
                                 </div>
                             </a>
                             <a name="" id="" class="btn btn-outline-primary d-block d-md-inline-block mb-3 "
@@ -30,11 +30,11 @@
                         <!-- lista -->
                         <div class="mt-2 pt-1 ">
                             <div class="">
-                                <h1 class="fs-4 fw-600 mb-4 text-green-2 px-1 px-md-4">Lista de usuários</h1>
+                                <h1 class="fs-4 fw-600 mb-4 text-green-2 px-1 px-md-4">Lista de Farmácias</h1>
                                 <!-- pesquisa -->
                                 <div class="px-1 px-md-4">
                                     <div class="mb-3 position-relative">
-                                        <label for="pesquisa-cliente" class="visually-hidden">Pesquisa-clienter</label>
+                                        <label for="pesquisa-cliente" class="visually-hidden">Pesquisa-farmacia</label>
                                         <input type="text" class="form-control input-pesquisar-cliente" name=""
                                             id="pesquisa-cliente" placeholder="Pesquisar" />
 
@@ -169,7 +169,7 @@
                                 <div class="mt-2 lista-scroll p-3 clientes-lista-assinantes "
                                     id="clientes-lista-assinantes">
 
-                                    {{-- 
+                                    {{--
     <div
                                             class="bg-green-light border-green-light rounded-3 d-flex gap-3 p-3 fw-500 text-green-2 align-items-center mb-3">
                                             <div class="">
@@ -183,7 +183,7 @@
                                                 5min
                                             </div>
                                         </div>
-    
+
      --}}
                                 </div>
                                 <div class="ver-mais-lista-scroll text-center">
@@ -525,7 +525,7 @@
                         </div>
 
 
-                        
+
                         `
                     }
 
@@ -608,7 +608,7 @@
 
                     docLoad.className = 'd-none'
                     document.getElementById('clientes-lista-assinantes').innerHTML = html
-                    
+
                     if(html == '') {
                         document.getElementById('clientes-lista-assinantes').innerHTML = `
                             <div class="alert alert-warning text-center fs-4 fw-300" role="alert">

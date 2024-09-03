@@ -46,7 +46,7 @@
 
                             </div>
                             <div class="pt-3">
-                                <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
+                                <button type="button" class="btn btn-primary w-100 py-2 fw-600" id="btnSalvarPedido">
                                     Salvar Pedido
                                 </button>
                             </div>
@@ -62,7 +62,7 @@
                     <div class="card-body py-3 px-2 px-lg-2  py-lg-4">
                         @if ($itensPedido->count() == 0)
                         @else
-                            <h3>Itens do pedido</h3>
+                        <h2 class="fs-4 fw-600 text-green-2 ">Itens do pedido</h2>
 
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -72,9 +72,11 @@
                                         <th scope="col">Quantidade</th>
                                         <th scope="col">Preço</th>
                                         <th scope="col">Total</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach ($itensPedido as $item)
                                         <tr>
                                             <td> {{ $loop->index + 1 }}</td>
@@ -82,9 +84,18 @@
                                             <td>{{ $item->quantidade }}</td>
                                             <td>R$ {{ number_format($item->preco, 2, ',', '.') }}</td>
                                             <td>R$ {{ number_format($item->quantidade * $item->preco, 2, ',', '.') }}</td>
+                                            <td><a href="{{route('painel.admin.compras.excluir-item', $item->id)}}"><i data-feather="trash-2"></i></a></td>
                                         </tr>
+
+
+                                        @php
+                                                    $totalPedido+=$item->quantidade * $item->preco;
+                                        @endphp
                                     @endforeach
+                                    <input type="hidden" id="totalPedido" value="{{$totalPedido}}">
                             </table>
+
+
                     </div>
                 </div>
             </div>
@@ -226,6 +237,35 @@
 
                     });
                 });
+
+
+                // salvar Pedido
+
+
+                $('#btnSalvarPedido').click(function() {
+
+$.ajax({
+    url: "{{ route('painel.admin.compras.salvar-pedido', $pedido->id) }}", // Arquivo PHP que processará a busca
+    type: "post",
+    data: {
+        id: {{$pedido->id}},
+        total_pedido:$('#totalPedido').val(),
+
+
+    }, // Dados a serem enviados para o servidor
+    success: function(response) {
+
+    window.location.href="{{route('painel.admin.compras.index')}}";
+
+    },
+    error: function(result) {
+        console.log(result);
+    }
+
+
+
+});
+});
 
             });
         </script>

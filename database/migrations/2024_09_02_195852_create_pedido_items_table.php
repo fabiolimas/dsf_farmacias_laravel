@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pedido_de_compras_id')->constrained()->onDelete('cascade');
             $table->foreignId('exame_id')->constrained()->onDelete('cascade');
-            $table->double('preco',5,2)->nullable();
+            $table->double('preco',9,2)->nullable();
             $table->integer('quantidade')->nullable();
             $table->string('lote')->nullable();
             $table->timestamps();

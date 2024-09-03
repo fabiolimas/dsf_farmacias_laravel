@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Lista de usuários'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -13,7 +12,7 @@
                         <!-- lista -->
                         <div class="mt-2 pt-1 ">
                             <div class="">
-                                <h1 class="fs-4 fw-600 mb-4 text-green-2 px-1 px-md-4">Lista de usuários</h1>
+                                <h1 class="fs-4 fw-600 mb-4 text-green-2 px-1 px-md-4">Lista de farmácias</h1>
                                 <!-- pesquisa -->
                                 <div class="px-1 px-md-4">
                                     <div class="mb-3 position-relative" style="max-width: 600px">
@@ -381,7 +380,7 @@
 
 
                         html += `
-                       
+
                         <div class="col-12 col-lg-3">
                             <div class=" border-green-light rounded-4 py-3 pb-2">
                                 <div class="d-flex flex-column mb-3 pt-1 align-items-center">
@@ -427,7 +426,7 @@
                         </div>
 
 
-                        
+
                         `
                     }
 

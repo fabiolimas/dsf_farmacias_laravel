@@ -69,6 +69,8 @@ Route::get('pedidos-de-compras/', [ComprasController::class, 'index'])->name('pa
 Route::get('novo-peido/', [ComprasController::class, 'create'])->name('painel.admin.compras.create');
 Route::post('novo-peido/', [ComprasController::class, 'store'])->name('painel.admin.compras.store');
 Route::post('item-pedido/', [ComprasController::class, 'storeItem'])->name('painel.admin.compras.store.itemPedido');
+Route::get('exclui-item/{id}', [ComprasController::class, 'destroy'])->name('painel.admin.compras.excluir-item');
+Route::post('salvar-pedido/{id}', [ComprasController::class, 'salvarPedido'])->name('painel.admin.compras.salvar-pedido');
     /* Exames */
 
 
@@ -124,10 +126,10 @@ Route::prefix('/fm')->group(function () {
         Route::get('/', [FarmaciaClienteController::class, 'index'])
         ->name('painel.farmacia.clientes.index');
 
-        Route::get('/create', [FarmaciaClienteController::class, 'create'])            
+        Route::get('/create', [FarmaciaClienteController::class, 'create'])
         ->name('painel.farmacia.clientes.create');
 
-        Route::post('/create', [FarmaciaClienteController::class, 'store'])            
+        Route::post('/create', [FarmaciaClienteController::class, 'store'])
         ->name('painel.farmacia.clientes.store');
 
         Route::get('/edit/{id}', [FarmaciaClienteController::class, 'edit'])
@@ -169,7 +171,7 @@ Route::prefix('/fm')->group(function () {
         })->name('painel.farmacia.exames.exame_pdf');
 
         Route::get('/show/{id}', [ExamesController::class, 'ShowResult'])->name('painel.farmacia.exames.show');
-        
+
 
         Route::get('/lista', [ExamesController::class, 'examesProntos'])->name('painel.farmacia.exames.lista');
         Route::get('/gerar-pdf/{id}', [ExamesController::class, 'gerarPDF'])->name('gerar.pdf');
@@ -187,7 +189,7 @@ Route::prefix('/fm')->group(function () {
         Route::post('/busca-exame-pronto', [ExamesController::class, 'buscaExamesProntos'])->name('painel.farmacia.exame.busca');
     });
 
-    
+
 
     Route::get('/graficos', [GraficosFarmaciaController::class, 'index'])->name('painel.farmacia.graficos.index');
 });
