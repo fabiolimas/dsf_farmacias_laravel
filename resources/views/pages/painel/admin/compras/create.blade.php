@@ -13,6 +13,7 @@
 
                         <div class="px-3 d-flex justify-content-between align-items-center mb-4 pt-2">
                             <h2 class="fs-4 fw-600 text-green-2 ">Pedido de Compra</h2>
+                            <p class="farmaName">{{$cliente->razao_social}}</p>
                         </div>
                         <form action="#" method="post">
                             @csrf
@@ -93,8 +94,14 @@
                                         @endphp
                                     @endforeach
                                     <input type="hidden" id="totalPedido" value="{{$totalPedido}}">
+                                   
                             </table>
+                            <div class="row">
 
+                                <div class="col-md-12 " style="display:flex; justify-content:flex-end">
+                                   <h5>R$ {{number_format($totalPedido,2,',','.')}}</h5> 
+                                </div>
+                            </div>
 
                     </div>
                 </div>

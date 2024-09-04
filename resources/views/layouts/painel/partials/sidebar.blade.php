@@ -63,6 +63,15 @@
                         </div>
                     </a>
                 </li>
+                <li class="">
+                    <a href="{{ route('painel.admin.compras.index') }}"
+                        class="sidebar-link d-flex align-items-center @if (Route::is('painel.admin.compras.*')) active @endif  gap-4 ">
+                        <i data-feather="list"></i>
+                        <div>
+                            Pedidos de compras
+                        </div>
+                    </a>
+                </li>
             @endcan
             @can('admin')
                 <li class="">

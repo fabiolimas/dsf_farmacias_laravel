@@ -1,641 +1,279 @@
 @extends('layouts.painel.app')
-@section('title', 'Editar exame')
+@section('title', 'Cadastrar novo exame')
 @section('content')
     <div class="">
-        <form action="{{ route('painel.admin.exames.update', $exame->id) }}" method="post">
-            @csrf
-            @method('PUT')
-            <div class="row gy-4">
+        <div class="row gy-4">
+
+            <!-- Cadastrar novo exame -->
+            <div class="col-12 col-lg-5 col-xl-4">
+
+                <div class="card ">
+                    <div class="card-body py-3 px-2 px-lg-2  py-lg-4">
 
 
-                <!--  exame -->
-                <div class="col-12 col-lg-4 col-xl-4">
-                    <div class="card ">
-                        <div class="card-body p-3 p-lg-4">
-
-                            <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Editar exame</h1>
-
-
-
-                            <!-- Nome do exame -->
-                            <div class="mb-3 pb-2">
-                                <label for="nome" class="form-label text-green fw-500 fs-18px">Nome do exame</label>
-                                <input type="text"
-                                    class="form-control form-control-custom fs-18px fw-500 @error('nome') is-invalid @enderror"
-                                    name="nome" id="nome" value="{{ old('nome', $exame->nome) }}"
-                                    placeholder="Ex: COVID-19" maxlength="255" required />
-                                @error('nome')
-                                    <div class="invalid-feedback fw-500">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!-- Laboratório -->
-                            <div class="mb-3 pb-2">
-                                <label for="laboratorio" class="form-label text-green fw-500 fs-18px">Laboratório</label>
-                                <input type="text"
-                                    class="form-control form-control-custom fs-18px fw-500 @error('laboratorio') is-invalid @enderror"
-                                    name="laboratorio" id="laboratorio" maxlength="255"
-                                    value="{{ old('laboratorio', $exame->laboratorio) }}" placeholder="Ex: Kovalent"
-                                    required />
-                                @error('laboratorio')
-                                    <div class="invalid-feedback fw-500">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <!-- Registro MS -->
-                            <div class="mb-3 pb-2">
-                                <label for="registro_ms" class="form-label text-green fw-500 fs-18px">
-                                    Registro MS
-                                </label>
-                                <input type="text"
-                                    class="form-control form-control-custom fs-18px fw-500 @error('registro_ms') is-invalid @enderror"
-                                    name="registro_ms" id="registro_ms" maxlength="255"
-                                    value="{{ old('registro_ms', $exame->registro_ms) }}" placeholder="00000" required />
-                                @error('registro_ms')
-                                    <div class="invalid-feedback fw-500">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="pt-3 mt-5">
-                                <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
-                                    Salvar
-                                </button>
-                                <button type="button" class="mt-3 btn btn-primary-light text-green  w-100 py-2 fw-600"
-                                    data-bs-toggle="modal" data-bs-target="#modal-remover">
-                                    Excluir exame
-                                </button>
-
-                            </div>
-
-
+                        <div class="px-3 d-flex justify-content-between align-items-center mb-4 pt-2">
+                            <h2 class="fs-4 fw-600 text-green-2 ">Pedido de Compra</h2>
+                            <p class="farmaName">{{$cliente->razao_social}}</p>
                         </div>
+                        <form action="#" method="post">
+                            @csrf
+                            <div class="px-3">
+
+
+
+                                <!-- exame -->
+                                <div class="mb-2 pb-3">
+                                    <div class="mb-0 position-relative">
+                                        <label for="pesquisa" class="form-label text-green fw-500 fs-18px w-100">
+                                            <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
+                                                Exame
+                                            </div>
+
+                                        </label>
+                                        <div class="position-relative">
+                                            <select name="exame" id="exame" class="form-select form-control-custom">
+                                                <option value="">Pesquisar</option>
+                                                @foreach ($exames as $exame)
+                                                    <option value="{{ $exame->id }}" data-bs-toggle="modal"
+                                                        data-bs-target="#detalhes-produto-{{ $exame->id }}">
+                                                        {{ $exame->nome }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            <div class="resultExame"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="pt-3">
+                                <button type="button" class="btn btn-primary w-100 py-2 fw-600" id="btnSalvarPedido">
+                                    Salvar Pedido
+                                </button>
+                            </div>
+
+
+                        </form>
                     </div>
-
                 </div>
+            </div>
 
-                <!-- perguntas -->
-                <div class="col-12 col-lg-8 col-xl-8">
-                    <div class="card ">
-                        <div class="card-body p-3 p-lg-4">
+            <div class="col-12 col-lg-5 col-xl-6 itensPedido">
+                <div class="card ">
+                    <div class="card-body py-3 px-2 px-lg-2  py-lg-4">
+                        @if ($itensPedido->count() == 0)
+                        @else
+                        <h2 class="fs-4 fw-600 text-green-2 ">Itens do pedido</h2>
 
-                            <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Perguntas do exame</h1>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Preço</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            <!-- lista de parguntas -->
-                            <div class="" id="lista-perguntas">
-                                @foreach ($exame->perguntas as $key => $pergunta)
-                                    <div class="">
-                                        <div class="border-green-light p-3 rounded-3 mb-4 pergunta-item"
-                                            id="pergunta-item-{{ $key }}">
-                                            <div class="row">
-                                                <!-- Pergunta -->
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3 pb-2">
-                                                        <label for="pergunta-{{ $key }}"
-                                                            class="form-label text-green fw-500 fs-18px">Pergunta</label>
-                                                        <input type="text"
-                                                            class="form-control form-control-custom fs-18px fw-500"
-                                                            name="perguntas[{{ $key }}][pergunta]"
-                                                            value="{{ $pergunta['pergunta'] }}"
-                                                            id="pergunta-{{ $key }}"
-                                                            placeholder="Forma de aplicação do exame?" required />
-                                                    </div>
+                                    @foreach ($itensPedido as $item)
+                                        <tr>
+                                            <td> {{ $loop->index + 1 }}</td>
+                                            <td> {{ $item->nome }}</td>
+                                            <td>{{ $item->quantidade }}</td>
+                                            <td>R$ {{ number_format($item->preco, 2, ',', '.') }}</td>
+                                            <td>R$ {{ number_format($item->quantidade * $item->preco, 2, ',', '.') }}</td>
+                                            <td><a href="{{route('painel.admin.compras.excluir-item', $item->id)}}"><i data-feather="trash-2"></i></a></td>
+                                        </tr>
+
+
+                                        @php
+                                                    $totalPedido+=$item->quantidade * $item->preco;
+                                        @endphp
+                                    @endforeach
+                                    <input type="hidden" id="totalPedido" value="{{$totalPedido}}">
+                            </table>
+
+                            <div class="row">
+
+                                <div class="col-md-12 " style="display:flex; justify-content:flex-end">
+                                   <h5>R$ {{number_format($totalPedido,2,',','.')}}</h5> 
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @endif
+        </div>
+        @foreach ($exames as $exame)
+            {{-- detalhes Produto --}}
+            <div class="modal modal-custom fade" id="detalhes-produto-{{ $exame->id }}" tabindex="-1"
+                data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
+                    <div class="modal-content bg-transparent ">
+                        <div class="modal-body p-lg-5  border-0">
+
+                            <div class="p-4 shadow rounded-3  bg-white border">
+
+
+                                <div class="fs-5 text-center">
+                                    Adicionar Exame
+                                </div>
+
+
+                                <form action="{{ route('painel.admin.compras.store.itemPedido') }}" method="post"
+                                    id="form-remover">
+
+                                    @csrf
+                                    <input type="hidden" name="cliente_id" value="{{ $pedido->cliente_id }}">
+                                    <input type="hidden" name="pedido_id" value="{{ $pedido->id }}">
+                                    <input type="hidden" name="exame_id" value="{{ $exame->id }}">
+                                    <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
+                                        {{ $exame->nome }}
+                                    </label>
+                                    <!-- Lote e validade -->
+                                    <div class="mb-3 pb-3">
+                                        <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
+                                            Lote
+                                        </label>
+                                        <input type="text"
+                                            class="form-control form-control-custom fs-18px fw-500 @error('lote_validade') is-invalid @enderror"
+                                            name="lote" id="lote" placeholder=""
+                                            value="{{ old('lote_validade', 0) }}" required />
+                                        @error('lote_validade')
+                                            <div class="invalid-feedback fw-500">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <!-- Quantidade em estoque -->
+                                    <div class="mb-2 pb-3">
+                                        <div class="mb-0 position-relative">
+                                            <label for="qtd_estoque" class="form-label text-green fw-500 fs-18px w-100">
+                                                <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
+                                                    Quantidade em estoque
                                                 </div>
 
-                                                <div class="col-12 col-lg-6">
-                                                    <!-- Tipo -->
-                                                    <div class="mb-3 pb-2">
-                                                        <label for="tipo-{{ $key }}"
-                                                            class="form-label text-green fw-500 fs-18px opacity-0">Tipo</label>
-                                                        <select class="form-select form-control-custom fw-500 fs-18px"
-                                                            style="background-color: #CCEFEE"
-                                                            name="perguntas[{{ $key }}][tipo]"
-                                                            id="tipo-{{ $key }}" required>
-                                                            <option value="multipla-escolha"
-                                                                @if ($pergunta['tipo'] == 'multipla-escolha') selected @endif>Múltipla
-                                                                escolha</option>
-                                                            <option value="selecao"
-                                                                @if ($pergunta['tipo'] == 'selecao') selected @endif>Seleção
-                                                            </option>
-                                                            <option value="resposta-curta"
-                                                                @if ($pergunta['tipo'] == 'resposta-curta') selected @endif>Resposta
-                                                                curta</option>
-                                                            <option value="paragrafo"
-                                                                @if ($pergunta['tipo'] == 'paragrafo') selected @endif>Parágrafo
-                                                            </option>
-                                                        </select>
-                                                    </div>
+                                            </label>
+                                            <div class="position-relative">
+                                                <input type="text"
+                                                    class="form-control form-control-custom @error('qtd_estoque') is-invallid @enderror fs-18px fw-500"
+                                                    name="quantidade" id="qtd_estoque" value="{{ old('qtd_estoque') }}"
+                                                    placeholder="0" />
+
+                                                <div class="text-green-2 fw-500"
+                                                    style="position: absolute; top:13px; right: 15px">
+                                                    Unidades
                                                 </div>
-
-
-                                                <!-- Opções -->
-                                                <!-- op -->
-                                                <div class="col-12">
-                                                    <div class="row flex-column" id="opcoes-resposta-{{ $key }}">
-
-                                                        <!--  -->
-                                                        @foreach ($pergunta['opcoes'] as $keyOp => $opcao)
-                                                            <div class="col-12 col-lg-6 item-opcoes-{{ $key }}">
-                                                                <div class="mb-3 pb-2 position-relative">
-                                                                    <label
-                                                                        for="opcao-{{ $key }}-{{ $keyOp }}"
-                                                                        class="form-label text-green fw-500 fs-18px">
-                                                                        Opção <span
-                                                                            class="numero-opcao-{{ $key }}">{{ $keyOp + 1 }}</span>
-                                                                    </label>
-                                                                    <div class=" "
-                                                                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                                                                        <button type="button"
-                                                                            onclick="this.parentNode.parentNode.remove(); setNumeroOpcao({{ $key }})"
-                                                                            class="btn btn-none border-0 p-1 text-green fs-18px">
-                                                                            <i class="" data-feather="x"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class=" @if ($keyOp != array_key_last($pergunta['opcoes'])) d-none @endif  "
-                                                                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                                                                        <button type="button"
-                                                                            class="btn btn-none border-0 p-1 text-green fs-18px"
-                                                                            onclick="this.parentNode.remove();setOpcao({{ $key }})">
-                                                                            <i class=""
-                                                                                data-feather="plus-circle"></i>
-                                                                        </button>
-                                                                    </div>
-
-                                                                    <input type="text"
-                                                                        class="form-control form-control-custom fs-18px fw-500 opcoes-item-{{ $key }}"
-                                                                        name="perguntas[{{ $key }}][opcoes][]"
-                                                                        id="opcao-{{ $key }}-{{ $keyOp }}"
-                                                                        placeholder="Nasal" value="{{ $opcao }}"
-                                                                        required />
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-
-                                                    </div>
-                                                </div>
-                                                <!-- op -->
-                                                <div class="col-12">
-                                                    <div class="form-control form-control-custom d-flex align-items-center justify-content-end gap-3  border-end-0 border-start-0 border-bottom-0"
-                                                        style="border-top-left-radius: 0;  border-top-right-radius: 0">
-
-                                                        <button type="button"
-                                                            class="btn btn-none border-0 p-0 text-green-3"
-                                                            title="Copiar pergunta"
-                                                            onclick="copiarPegunta({{ $key }})">
-                                                            <i class="" data-feather="copy"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            class="btn btn-none border-0 p-0 text-green-3"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="Remover"
-                                                            onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.remove()">
-                                                            <i class="" data-feather="trash"></i>
-                                                        </button>
-
-
-                                                        <div class=""
-                                                            style="height: 20px; border-left: 1px solid #B2D2D2">
-
-                                                        </div>
-                                                        <div class="fw-500 d-flex gap-1 align-items-center">
-
-                                                            <label class="form-check-label"
-                                                                for="pergunta-obrigatoria-{{ $key }}">Obrigatória</label>
-
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="perguntas[{{ $key }}][obrigatorio]"
-                                                                    role="switch"
-                                                                    id="pergunta-obrigatoria-{{ $key }}"
-                                                                    @if ($pergunta['obrigatorio']) checked @endif>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
 
-                            <div class="mt-3 text-end">
-                                <button type="button" class="btn btn-primary-light-3 px-4 fw-500"
-                                    onclick="setPergunta()">
-                                    <i class="" data-feather="plus-circle" width="20" height="20"></i>
-                                    Adicionar mais
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </form>
-    </div>
-
-
-    <!-- Modal remover -->
-    <div class="modal modal-custom fade" id="modal-remover" tabindex="-1" data-bs-backdrop="static"
-        data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
-            <div class="modal-content bg-transparent ">
-                <div class="modal-body p-lg-5  border-0">
-
-                    <div class="p-4 shadow rounded-3  bg-white border">
-
-
-                        <div class="fs-5 text-center">
-                            Tem certeza que deseja remover este exame?
-                        </div>
-
-
-                        <form action="{{ route('painel.admin.exames.destroy', $exame->id) }}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <div class="row mt-4 pt-2 gy-2">
-                                <div class="col-12 col-lg-6">
-                                    <button type="button" data-bs-dismiss="modal"
-                                        class="btn btn-danger w-100 py-2 fs-16px " id="modal-link-editar-user">
-                                        Cancelar
-                                    </button>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <button type="submit" id="modal-link-ver-mais"
-                                        class="btn btn-primary w-100 py-2 fs-16px">Sim</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-
-                    <div class="fechar-modal text-center pt-2 pt-lg-4">
-                        <button type="button" class="btn btn-ligth shadow bg-white text-green-2 py-1"
-                            data-bs-dismiss="modal">
-                            <i data-feather="x"></i>
-                            Fechar
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-@endsection
-
-
-@section('scripts')
-    <script>
-        /**
-         * Adicionar opção para pergunta
-         * @param {number} key - identificador principal da pergunta
-         */
-        function setOpcao(key) {
-            let elOpcoes = document.querySelector(`#opcoes-resposta-${key}`)
-
-            let newDiv = document.createElement('div')
-            newDiv.className = `col-12 col-lg-6 item-opcoes-${key}`
-            newDiv.innerHTML += `
-                <div class="mb-3 pb-2 position-relative">
-                    <label for="opcao2" class="form-label text-green fw-500 fs-18px">
-                        Opção <span class="numero-opcao-${key}"></span>
-                    </label>
-                    <div class=" "
-                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                        <button type="button"
-                            onclick="this.parentNode.parentNode.parentNode.remove(); setNumeroOpcao(${key})" title="Remover"
-                            class="btn btn-none border-0 p-1 text-green fs-18px">
-                            <i class="" data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class=" "
-                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                        <button type="button"
-                            class="btn btn-none border-0 p-1 text-green fs-18px"
-                            onclick="this.parentNode.remove();setOpcao(${key})" title="Adicionar">
-                            <i class="" data-feather="plus-circle"></i>
-                        </button>
-                    </div>
-
-                    <input type="text"
-                        class="form-control form-control-custom fs-18px fw-500 opcoes-item-${key}"
-                        name="perguntas[${key}][opcoes][]" id="opcao2"
-                        placeholder="Resposta" value="" required />
-                </div>
-            `
-            elOpcoes.appendChild(newDiv);
-            setNumeroOpcao(key)
-
-            /* activer feather icons */
-            feather.replace();
-        }
-
-        /**
-         * Organizar números de opções de perguntas
-         * 
-         * @param {number} key - identificador principal da pergunta
-         */
-        function setNumeroOpcao(key) {
-            /* setar número opão em cada item */
-            for (let i in document.querySelectorAll(`.numero-opcao-${key}`)) {
-                document.querySelectorAll(`.numero-opcao-${key}`)[i].innerText = parseInt(i) + 1
-            }
-        }
-
-        var contadorPerguntas = document.querySelectorAll('.pergunta-item').length + 2
-
-        /*
-         * Adicionar perguntas no html
-         */
-        function setPergunta() {
-
-            contadorPerguntas += 1;
-
-            let key = contadorPerguntas
-            let divPerguntas = document.getElementById('lista-perguntas')
-
-            console.log(key);
-
-            let newDiv = document.createElement('div');
-
-            newDiv.innerHTML = `
-            <div class="border-green-light p-3 rounded-3 mb-4 pergunta-item" id="pergunta-item-${key}">
-                <div class="row">
-                    <!-- Pergunta -->
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3 pb-2">
-                            <label for="pergunta-${key}"
-                                class="form-label text-green fw-500 fs-18px">Pergunta</label>
-                            <input type="text"
-                                class="form-control form-control-custom fs-18px fw-500"
-                                name="perguntas[${key}][pergunta]" id="pergunta-${key}"
-                                placeholder="Forma de aplicação do exame?" required />
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <!-- Tipo -->
-                        <div class="mb-3 pb-2">
-                            <label for="tipo-${key}"
-                                class="form-label text-green fw-500 fs-18px opacity-0">Tipo</label>
-                            <select class="form-select form-control-custom fw-500 fs-18px"
-                                style="background-color: #CCEFEE"
-                                name="perguntas[${key}][tipo]" id="tipo-${key}" required>
-                                <option value="multipla-escolha">Múltipla escolha</option>
-                                <option value="selecao">Seleção</option>
-                                <option value="resposta-curta">Resposta curta</option>
-                                <option value="paragrafo">Parágrafo</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <!-- Opções -->
-                    <!-- op -->
-                    <div class="col-12">
-                        <div class="row flex-column" id="opcoes-resposta-${key}">
-
-                            <!--  -->
-                            <div class="col-12 col-lg-6 item-opcoes-${key}">
-                                <div class="mb-3 pb-2 position-relative">
-                                    <label for="opcao-${key}"
-                                        class="form-label text-green fw-500 fs-18px">
-                                        Opção <span
-                                            class="numero-opcao-${key}">${ key }</span>
-                                    </label>
-                                    <div class=" "
-                                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                                        <button type="button"
-                                            onclick="this.parentNode.parentNode.remove(); setNumeroOpcao(${key})"
-                                            class="btn btn-none border-0 p-1 text-green fs-18px">
-                                            <i class="" data-feather="x"></i>
-                                        </button>
+                                    <!-- Valor de venda -->
+                                    <div class="mb-3 pb-3">
+                                        <label for="valor" class="form-label text-green fw-500 fs-18px">
+                                            Valor de venda
+                                        </label>
+                                        <input type="text"
+                                            class="form-control form-control-custom fs-18px fw-500 @error('valor') is-invalid @enderror"
+                                            name="preco" id="valor" placeholder="R$ 0,00" value="" required />
+                                        @error('valor')
+                                            <div class="invalid-feedback fw-500">{{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                    <div class=" "
-                                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                                        <button type="button"
-                                            class="btn btn-none border-0 p-1 text-green fs-18px"
-                                            onclick="this.parentNode.remove();setOpcao(${key})">
-                                            <i class="" data-feather="plus-circle"></i>
-                                        </button>
+                                    <div class="col-12 col-lg-12">
+                                        <button type="submit" id="modal-link-ver-mais"
+                                            class="btn btn-primary w-100 py-2 fs-16px">Salvar</button>
                                     </div>
-
-                                    <input type="text"
-                                        class="form-control form-control-custom fs-18px fw-500 opcoes-item-${key}"
-                                        name="perguntas[${key}][opcoes][]"
-                                        id="opcao-${key}" placeholder="Nasal" value=""
-                                        required />
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- op -->
-                    <div class="col-12">
-                        <div class="form-control form-control-custom d-flex align-items-center justify-content-end gap-3  border-end-0 border-start-0 border-bottom-0"
-                            style="border-top-left-radius: 0;  border-top-right-radius: 0">
-
-                            <button type="button" class="btn btn-none border-0 p-0 text-green-3"
-                                title="Copiar pergunta" onclick="copiarPegunta(${key})">
-                                <i class="" data-feather="copy"></i>
-                            </button>
-                            <button type="button" class="btn btn-none border-0 p-0 text-green-3"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Remover" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.remove()">
-                                <i class="" data-feather="trash"></i>
-                            </button>
-
-
-                            <div class=""
-                                style="height: 20px; border-left: 1px solid #B2D2D2">
-
-                            </div>
-                            <div class="fw-500 d-flex gap-1 align-items-center">
-
-                                <label class="form-check-label"
-                                    for="pergunta-obrigatoria-${key}">Obrigatória</label>
-
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox"
-                                        name="perguntas[${key}][obrigatorio]"
-                                        role="switch" id="pergunta-obrigatoria-${key}">
-                                </div>
-
-
+                                </form>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-            `
-
-            divPerguntas.appendChild(newDiv);
-
-            /* activer feather icons */
-            feather.replace();
-
-            setNumeroOpcao(key)
-        }
-
-        /**
-         * Copiar pergunta
-         * @param {number} key - identificador principal da pergunta
-         */
-        function copiarPegunta(keyOriginal) {
-            // let htmlOriginal= document.getElementById(`pergunta-item-${key}`).innerHTML
+        @endforeach
 
 
-            contadorPerguntas += 1;
-
-            let key = contadorPerguntas
-            let divPerguntas = document.getElementById('lista-perguntas')
-
-            console.log(key);
-
-            let newDiv = document.createElement('div');
-
-            let textPegunta = document.querySelector(`#pergunta-${keyOriginal}`).value
-            let tipo = document.querySelector(`#tipo-${keyOriginal}`).value
-            let opcoes = document.querySelectorAll(`.opcoes-item-${keyOriginal}`)
-            let obrigatorio = document.querySelector(`#pergunta-obrigatoria-${keyOriginal}`).checked
-
-            console.log(textPegunta, tipo, opcoes, obrigatorio);
-
-            let htmlOpcoes = ``
-            let countInteration = 0;
-            for (let item of opcoes) {
-
-                countInteration++;
-
-                htmlOpcoes += `
-                <div class="mb-3 pb-2 position-relative">
-                    <label for="opcao-${key}"
-                        class="form-label text-green fw-500 fs-18px">
-                        Opção <span
-                            class="numero-opcao-${key}">${ key }</span>
-                    </label>
-                    <div class=" "
-                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                        <button type="button"
-                            onclick="this.parentNode.parentNode.remove(); setNumeroOpcao(${key})"
-                            class="btn btn-none border-0 p-1 text-green fs-18px">
-                            <i class="" data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class=" "
-                        style="position: absolute; top: 42px; right: 13px; background: #E6F2F1">
-                        <button type="button"
-                            class="btn btn-none border-0 p-1 text-green fs-18px ${countInteration < opcoes.length ? 'd-none' : ''}"
-                            onclick="this.parentNode.remove();setOpcao(${key})">
-                            <i class="" data-feather="plus-circle"></i>
-                        </button>
-                    </div>
-
-                    <input type="text"
-                        class="form-control form-control-custom fs-18px fw-500 opcoes-item-${key}"
-                        name="perguntas[${key}][opcoes][]"
-                        id="opcao-${key}" value="${item.value}" placeholder="Nasal" value=""
-                        required />
-                </div>
-                `
-            }
-
-            newDiv.innerHTML = `
-            <div class="border-green-light p-3 rounded-3 mb-4 pergunta-item" id="pergunta-item-${key}">
-                <div class="row">
-                    <!-- Pergunta -->
-                    <div class="col-12 col-lg-6">
-                        <div class="mb-3 pb-2">
-                            <label for="pergunta-${key}"
-                                class="form-label text-green fw-500 fs-18px">Pergunta</label>
-                            <input type="text"
-                                class="form-control form-control-custom fs-18px fw-500"
-                                name="perguntas[${key}][pergunta]" value="${textPegunta}" id="pergunta-${key}"
-                                placeholder="Forma de aplicação do exame?" required />
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <!-- Tipo -->
-                        <div class="mb-3 pb-2">
-                            <label for="tipo-${key}"
-                                class="form-label text-green fw-500 fs-18px opacity-0">Tipo</label>
-                            <select class="form-select form-control-custom fw-500 fs-18px"
-                                style="background-color: #CCEFEE"
-                                name="perguntas[${key}][tipo]" id="tipo-${key}" required>
-                                <option value="multipla-escolha" ${ tipo == 'multipla-escolha' ? 'selected' : ''}>Múltipla escolha</option>
-                                <option value="selecao" ${ tipo == 'selecao' ? 'selected' : ''}>Seleção</option>
-                                <option value="resposta-curta" ${ tipo == 'resposta-curta' ? 'selected' : ''}>Resposta curta</option>
-                                <option value="paragrafo" ${ tipo == 'paragrafo' ? 'selected' : ''}>Parágrafo</option>
-                            </select>
-                        </div>
-                    </div>
 
 
-                    <!-- Opções -->
-                    <!-- op -->
-                    <div class="col-12">
-                        <div class="row flex-column" id="opcoes-resposta-${key}">
-
-                            <!--  -->
-                            <div class="col-12 col-lg-6 item-opcoes-${key}">
-                                ${htmlOpcoes}
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- op -->
-                    <div class="col-12">
-                        <div class="form-control form-control-custom d-flex align-items-center justify-content-end gap-3  border-end-0 border-start-0 border-bottom-0"
-                            style="border-top-left-radius: 0;  border-top-right-radius: 0">
-
-                            <button type="button" class="btn btn-none border-0 p-0 text-green-3"
-                                title="Copiar pergunta" onclick="copiarPegunta(${key})">
-                                <i class="" data-feather="copy"></i>
-                            </button>
-                            <button type="button" class="btn btn-none border-0 p-0 text-green-3"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Remover" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.remove()">
-                                <i class="" data-feather="trash"></i>
-                            </button>
 
 
-                            <div class=""
-                                style="height: 20px; border-left: 1px solid #B2D2D2">
 
-                            </div>
-                            <div class="fw-500 d-flex gap-1 align-items-center">
-
-                                <label class="form-check-label"
-                                    for="pergunta-obrigatoria-${key}">Obrigatória</label>
-
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox"
-                                        name="perguntas[${key}][obrigatorio]"
-                                        role="switch" id="pergunta-obrigatoria-${key}" ${obrigatorio ? 'checked' : ''}>
-                                </div>
+        <script>
+            $(document).ready(function() {
+                $('#exame').select2();
+            });
 
 
-                            </div>
-                        </div>
-                    </div>
+            $('document').ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                let resultado = $('.resultExame');
+
+                $('#exame').change(function() {
+
+                    $.ajax({
+                        url: "{{ route('busca-exame-entrada') }}", // Arquivo PHP que processará a busca
+                        type: "post",
+                        data: {
+                            id: $('#exame').val(),
 
 
-                </div>
-            </div>
-            `
+                        }, // Dados a serem enviados para o servidor
+                        success: function(response) {
 
-            divPerguntas.appendChild(newDiv);
+                            resultado.html(
+                                '<button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#detalhes-produto-' +
+                                response.id + '" >Adicionar</button>');
 
-            setNumeroOpcao(key)
+                        },
+                        error: function(result) {
+                            console.log(result);
+                        }
 
-            /* activer feather icons */
-            feather.replace();
 
-        }
-    </script>
-@endsection
+
+                    });
+                });
+
+
+                // salvar Pedido
+
+
+                $('#btnSalvarPedido').click(function() {
+
+$.ajax({
+    url: "{{ route('painel.admin.compras.salvar-pedido', $pedido->id) }}", // Arquivo PHP que processará a busca
+    type: "post",
+    data: {
+        id: {{$pedido->id}},
+        total_pedido:$('#totalPedido').val(),
+
+
+    }, // Dados a serem enviados para o servidor
+    success: function(response) {
+
+    window.location.href="{{route('painel.admin.compras.index')}}";
+
+    },
+    error: function(result) {
+        console.log(result);
+    }
+
+
+
+});
+});
+
+            });
+        </script>
+
+    @endsection

@@ -13,10 +13,19 @@ class ComprasController extends Controller
 {
   public function index(){
 
-    $pedidos=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
-    ->select('clientes.*', 'pedido_de_compras.*')
-    ->paginate(10);
+    if(auth()->user()->profile == 'admin'){
+      $pedidos=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
+      ->select('clientes.*', 'pedido_de_compras.*')
+      ->paginate(10);
+     
+    }else{
+      $pedidos=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
+      ->select('clientes.*', 'pedido_de_compras.*')
+      ->where('clientes.id',auth()->user()->cliente_id)
+      ->paginate(10);
+    }
     $clientes=Cliente::all();
+   
 
 
 
@@ -26,15 +35,32 @@ class ComprasController extends Controller
   public function create(){
 
     $exames=Exame::all();
-    $clientes=Cliente::all();
+   
     $pedido=PedidoDeCompra::where('status','novo')->first();
+    $cliente=Cliente::find($pedido->cliente_id);
     $itensPedido=PedidoItem::join('exames','exames.id','pedido_items.exame_id')
     ->select('exames.*','pedido_items.*')
     ->where('pedido_de_compras_id', $pedido->id)->get();
 
     $totalPedido=0;
 
-    return view('pages.painel.admin.compras.create', compact('totalPedido','exames','clientes','pedido','itensPedido'));
+    return view('pages.painel.admin.compras.create', compact('totalPedido','exames','cliente','pedido','itensPedido'));
+  }
+
+  public function edit(Request $request){
+    $exames=Exame::all();
+    
+    $pedido=PedidoDeCompra::find($request->id);
+    $cliente=Cliente::find($pedido->cliente_id);
+    $itensPedido=PedidoItem::join('exames','exames.id','pedido_items.exame_id')
+    ->select('exames.*','pedido_items.*')
+    ->where('pedido_de_compras_id', $pedido->id)->get();
+
+    $totalPedido=0;
+
+
+
+    return view('pages.painel.admin.compras.edit', compact('totalPedido','exames','cliente','pedido','itensPedido'));
   }
 
   public function store(Request $request){
@@ -77,6 +103,13 @@ class ComprasController extends Controller
     {
         $item=PedidoItem::find($request->id);
         $item->delete();
-        return redirect()->route('painel.admin.compras.create')->withSuccess('Item removido com sucesso!');
+        return redirect()->back()->withSuccess('Item removido com sucesso!');
+    }
+
+    public function destroyPedido(Request $request)
+    {
+      $pedido=PedidoDeCompra::find($request->id);
+        $pedido->delete();
+        return redirect()->back()->withSuccess('Pedido excluido com sucesso!');
     }
 }

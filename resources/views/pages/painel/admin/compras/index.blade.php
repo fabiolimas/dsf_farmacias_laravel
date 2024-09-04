@@ -10,6 +10,7 @@
                     <div class="card-body px-2 py-4">
 
                         <!--  -->
+                        @can('admin')
                         <div class=" px-4">
                             <a class="btn btn-primary d-block d-md-inline-block mb-3   " href="#" data-bs-toggle="modal"
                                 data-bs-target="#modal-novo-pedido" role="button" style="padding: 16px 24px;">
@@ -55,7 +56,7 @@
 
                                 </div>
 
-
+                                @endcan
 
 
                                 <!-- lista -->
@@ -69,10 +70,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="" id="lista-exames">
+                                        <div class="position-relative" id="lista-exames">
 
                                             @foreach ($pedidos as $pedido)
-                                                <div class="bg-green-light rounded-3  p-3 ">
+                                                <div class="bg-green-light rounded-3  p-3 mt-3 ">
 
                                                     <div class="row">
                                                         <div class="d-flex gap-3 align-items-center col-md-6">
@@ -87,22 +88,89 @@
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 ">
-                                                            <div class="mt-2 mt-sm-0">
-                                                                <div class="" data-bs-toggle="modal"
-                                                                    onclick="setRotaRemover(`{{ route('painel.admin.exames.destroy', $pedido->id) }}`)"
-                                                                    data-bs-target="#modal-remover">
-                                                                    <button type="button"
-                                                                        class="btn btn-ligth bg-white text-green px-2 w-100 "
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="Excluir">
-                                                                        <i class="" data-feather="trash"></i>
-                                                                    </button>
+                                                        @can('admin')
+                                                        <div class="col-md-6 acts">
+                                                            <div class="col-md-3 ms-2">
+                                                                <div class="mt-2 mt-sm-0">
+                                                                    <div class="" >
+                                                                        
+                                                                            <button type="button"
+                                                                            class="btn btn-ligth bg-white text-green px-2 w-100 "
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Editar">
+                                                                            <a href="{{route('painel.admin.compras.edit', $pedido->id)}}" class="text-green"><i class="" data-feather="edit"></i></a>
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
+                                                            </div>
+
+                                                            <div class="col-md-3 ms-2">
+                                                                <div class="mt-2 mt-sm-0">
+                                                                    <div class="" data-bs-toggle="modal"
+                                                                        onclick="setRotaRemover(`{{ route('painel.admin.exames.destroy', $pedido->id) }}`)"
+                                                                        data-bs-target="#modal-remover">
+                                                                        <button type="button"
+                                                                            class="btn btn-ligth bg-white text-green px-2 w-100 "
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Excluir">
+                                                                            <i class="" data-feather="trash"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        @endcan
+                                                        @can('farmacia')
+                                                        <div class="col-md-6 acts">
+                                                            <div class="col-md-3 ms-2">
+                                                                <div class="mt-2 mt-sm-0">
+                                                                    <div class="" >
+                                                                        
+                                                                            <button type="button"
+                                                                            class="btn btn-ligth bg-white text-green px-2 w-100 "
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Visualizar">
+                                                                            <a href="{{route('painel.admin.compras.edit', $pedido->id)}}" class="text-green"><i class="" data-feather="eye"></i></a>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="col-md-3 ms-2">
+                                                                <div class="mt-2 mt-sm-0">
+                                                                    <div class="" >
+                                                                        <button type="button"
+                                                                            class="btn btn-ligth bg-white text-green px-2 w-100 "
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Confirmar">
+                                                                            <i class="" data-feather="check"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        @endcan
+                                                    </div>
+                                                    <div class="row detalhesp">
+                                                        <div class="col-md-3">
+                                                            <span class="dtls">R$ {{number_format($pedido->total_pedido,2,',','.')}}</span>
+                                                        </div>
+                                                        {{-- <div class="col-md-3">
+                                                            <span class="dtls">{{$pedido->status}}</span>
+                                                        </div> --}}
+                                                        <div class="col-md-4">
+                                                            <span class="dtls" style="margin-left:-20px"><i class="" data-feather="clock"></i>{{date('d-m-Y H:i', strtotime($pedido->created_at))}}</span>
+                                                        </div>
+                                                        
+                                                    </div>
 
 
 
@@ -121,12 +189,12 @@
 
 
                                                                     <div class="fs-5 text-center">
-                                                                        Tem certeza que deseja remover este exame?
+                                                                        Tem certeza que deseja remover este Pedido?
                                                                     </div>
 
 
                                                                     <form
-                                                                        action="{{ route('painel.admin.exames.destroy', $pedido->id) }}"
+                                                                        action="{{ route('painel.admin.compras.excluir-pedido', $pedido->id) }}"
                                                                         method="post" id="form-remover">
                                                                         @method('delete')
                                                                         @csrf
