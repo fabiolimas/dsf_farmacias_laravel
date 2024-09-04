@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Cadastrar novo exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -12,7 +11,7 @@
 
 
                         <div class="px-3 d-flex justify-content-between align-items-center mb-4 pt-2">
-                            <h2 class="fs-4 fw-600 text-green-2 ">Pedido de Compra</h2>
+                            <h2 class="fs-4 fw-600 text-green-2 ">Pedido de Compra - #<?php echo e($pedido->id); ?></h2>
                             <p class="farmaName"><?php echo e($cliente->razao_social); ?></p>
                         </div>
                         <form action="#" method="post">
@@ -69,9 +68,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nome</th>
+                                        <th scope="col">Descrição</th>
                                         <th scope="col">Quantidade</th>
-                                        <th scope="col">Preço</th>
+                                        <th scope="col">Valor Unit.</th>
                                         <th scope="col">Total</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -94,12 +93,12 @@
                                         ?>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <input type="hidden" id="totalPedido" value="<?php echo e($totalPedido); ?>">
-                                   
+
                             </table>
                             <div class="row">
 
                                 <div class="col-md-12 " style="display:flex; justify-content:flex-end">
-                                   <h5>R$ <?php echo e(number_format($totalPedido,2,',','.')); ?></h5> 
+                                   <h5>R$ <?php echo e(number_format($totalPedido,2,',','.')); ?></h5>
                                 </div>
                             </div>
 
@@ -171,7 +170,7 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="mb-0 position-relative">
                                             <label for="qtd_estoque" class="form-label text-green fw-500 fs-18px w-100">
                                                 <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
-                                                    Quantidade em estoque
+                                                    Quantidade
                                                 </div>
 
                                             </label>
@@ -270,7 +269,7 @@ unset($__errorArgs, $__bag); ?>
                         success: function(response) {
 
                             resultado.html(
-                                '<button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#detalhes-produto-' +
+                                '<button type="button" class="btn btn-success mt-2" style="background:#01a09b" data-bs-toggle="modal" data-bs-target="#detalhes-produto-' +
                                 response.id + '" >Adicionar</button>');
 
                         },

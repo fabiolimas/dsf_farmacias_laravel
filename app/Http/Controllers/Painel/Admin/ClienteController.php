@@ -67,7 +67,7 @@ class ClienteController extends Controller
         $user->cliente_id=$cliente->id;
         $user->save();
 
-       
+
 
         return redirect()
             ->route('painel.admin.clientes.create-2', ['user' => $user->id])
@@ -144,7 +144,7 @@ class ClienteController extends Controller
         $user->cliente->telefone = $request->telefone;
         $user->cliente->cnpj = $request->cnpj;
         $user->cliente->razao_social = $request->name;
-    
+
         $user->cliente->classe = $request->classe;
         if ($request->has('password') && $request->password != '') :
             $user->password = bcrypt($request->password);
@@ -154,7 +154,7 @@ class ClienteController extends Controller
 
         $cliente = $user->cliente->fill($request->all());
         $cliente->user_id = $user->id;
-    
+
         $cliente->save();
 
         $farmacia=Cliente::where('user_id',$user->id)->first();
@@ -206,7 +206,14 @@ class ClienteController extends Controller
 
     public function getClientesJson(Request $request)
     {
-        $users = User::with('cliente')
+        // $users = User::join('clientes', 'clientes.id','users.cliente_id')
+        // ->select('users.*', 'clientes.created_at as criacaoCliente', 'clientes.updated_at as atualizacaoCliente')
+        //     ->where('profile', 'farmaceutico')
+        //     ->where('name', 'like', "%{$request->nome}%")
+        //     ->latest()
+        //     ->get();
+
+            $users= user::with('cliente')
             ->where('profile', 'farmaceutico')
             ->where('name', 'like', "%{$request->nome}%")
             ->latest()

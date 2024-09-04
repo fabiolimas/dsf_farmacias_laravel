@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Cadastrar novo cliente'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -9,7 +8,7 @@
                 <div class="card ">
                     <div class="card-body p-3 p-lg-4">
 
-                        <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Cadastrar novo usuário</h1>
+                        <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Cadastrar nova farmácia</h1>
 
                         <form action="<?php echo e(route('painel.admin.clientes.store')); ?>" method="post">
                             <?php echo csrf_field(); ?>

@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     public function getImgPerfilAttribute($value)
     {
-        return is_null($value) ? asset('assets/img/ilustracoes/profile.png') : asset($value); 
+        return is_null($value) ? asset('assets/img/ilustracoes/profile.png') : asset($value);
     }
 
     public function getTempoClienteAttribute()

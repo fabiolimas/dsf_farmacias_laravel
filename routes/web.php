@@ -68,11 +68,13 @@ Route::prefix('/')->group(function () {
 Route::get('pedidos-de-compras/', [ComprasController::class, 'index'])->name('painel.admin.compras.index');
 Route::get('novo-pedido/', [ComprasController::class, 'create'])->name('painel.admin.compras.create');
 Route::get('edit-pedido/{id}', [ComprasController::class, 'edit'])->name('painel.admin.compras.edit');
+Route::get('visualizar-pedido/{id}', [ComprasController::class, 'visualizar'])->name('painel.admin.compras.visualizar');
 Route::post('novo-peido/', [ComprasController::class, 'store'])->name('painel.admin.compras.store');
 Route::post('item-pedido/', [ComprasController::class, 'storeItem'])->name('painel.admin.compras.store.itemPedido');
 Route::get('exclui-item/{id}', [ComprasController::class, 'destroy'])->name('painel.admin.compras.excluir-item');
 Route::delete('exclui-pedido/{id}', [ComprasController::class, 'destroyPedido'])->name('painel.admin.compras.excluir-pedido');
 Route::post('salvar-pedido/{id}', [ComprasController::class, 'salvarPedido'])->name('painel.admin.compras.salvar-pedido');
+Route::get('confirmar-pedido/{id}', [ComprasController::class, 'confirmarPedido'])->name('painel.admin.compras.confirmar-pedido');
     /* Exames */
 
 

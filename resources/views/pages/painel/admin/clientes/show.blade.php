@@ -19,7 +19,7 @@
                 <div class="card ">
                     <div class="card-body p-3 p-lg-4">
 
-                        <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Dados do usuário</h1>
+                        <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Dados da farmácia</h1>
 
                         <form action="#" method="post">
                             @csrf

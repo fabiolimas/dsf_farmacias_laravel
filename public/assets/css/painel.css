@@ -45,6 +45,12 @@ span.tag {
     border-radius: 5px;
     font-weight: bold;
     height: 42px;
+    text-transform: capitalize;
+}
+span.situacaoPedido {
+    text-transform: capitalize;
+    color: #00b1ac;
+    font-weight: bold;
 }
 .pedidoRecebido{
     background: #00b1ac;
@@ -52,6 +58,16 @@ span.tag {
     border-radius: 5px;
     font-weight: bold;
     height: 42px;
+    text-transform: capitalize;
+}
+
+.pedidoNovo{
+    background: #db8502;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    height: 42px;
+    text-transform: capitalize;
 }
 
 

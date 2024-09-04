@@ -8,9 +8,28 @@
             <div class="col-12 col-lg-7 col-xl-7">
                 <div class="card min-vh-100">
                     <div class="card-body px-2 py-4">
+                        @can('farmacia')
+                        <h1 class="fs-4 fw-600 mb-4 text-green-2 px-0 ps-lg-4  " style="min-width: 260px">
+                            Pedidos de Compras <span class="badge rounded-pill text-bg-primary fs-16px fw-500 px-2" id="total-assinaturas-hoje">{{$pedidoNovo}}</span>
+                        </h1>
 
+
+                        @endcan
                         <!--  -->
                         @can('admin')
+                        @if($pedidoNovo >=1)
+
+                        <div class=" px-4 ">
+                            <a class="btn btn-primary d-block d-md-inline-block mb-3  " style="background:#db8502; border-color:#db8502" href="{{route('painel.admin.compras.create')}}"  role="button" style="padding: 16px 24px;">
+                                <div class="d-flex gap-2 align-items-center ">
+                                    <i data-feather="folder-plus"></i>
+                                    Finalizar pedido em aberto
+                                </div>
+                            </a>
+
+                        </div>
+
+                        @else
                         <div class=" px-4">
                             <a class="btn btn-primary d-block d-md-inline-block mb-3   " href="#" data-bs-toggle="modal"
                                 data-bs-target="#modal-novo-pedido" role="button" style="padding: 16px 24px;">
@@ -21,6 +40,7 @@
                             </a>
 
                         </div>
+                        @endif
 
                         <!-- lista -->
                         <div class="mt-2 pt-1 ">
@@ -78,22 +98,22 @@
                                                     <div class="row">
                                                         <div class="d-flex gap-3 align-items-center col-md-6">
                                                             <span
-                                                                class="tag @if ($pedido->status == 'recebido') pedidoRecebido @else @endif"></span>
+                                                                class="@if ($pedido->status == 'recebido') pedidoRecebido @elseif($pedido->status=='novo') pedidoNovo @else tag @endif"></span>
                                                             <div class="fs-20px fw-500 ">
-                                                                <a href="{{ route('painel.admin.exames.edit', $pedido->id) }}"
+                                                                <a href="@can('admmin')@if($pedido->status != 'aberto') {{route('painel.admin.compras.visualizar', $pedido->id)}} @else {{ route('painel.admin.compras.edit', $pedido->id) }} @endif @endcan @can('farmacia'){{route('painel.admin.compras.visualizar', $pedido->id)}}@endcan"
                                                                     class="text-decoration-none d-block">
                                                                     <div class="text-green-2">
-                                                                        {{ $pedido->razao_social }}</div>
+                                                                        {{ $pedido->razao_social }} - #Pedido {{$pedido->id}}</div>
                                                                     {{-- <div class="text-green">Carla Silva</div> --}}
                                                                 </a>
                                                             </div>
                                                         </div>
                                                         @can('admin')
-                                                        <div class="col-md-6 acts">
+                                                        <div class="col-md-6 @if($pedido->status =='recebido') d-none @else acts @endif"  >
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" >
-                                                                        
+
                                                                             <button type="button"
                                                                             class="btn btn-ligth bg-white text-green px-2 w-100 "
                                                                             data-bs-toggle="tooltip" data-bs-placement="top"
@@ -108,7 +128,7 @@
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" data-bs-toggle="modal"
-                                                                        onclick="setRotaRemover(`{{ route('painel.admin.exames.destroy', $pedido->id) }}`)"
+                                                                        onclick="setRotaRemover(`{{ route('painel.admin.compras.excluir-pedido', $pedido->id) }}`)"
                                                                         data-bs-target="#modal-remover">
                                                                         <button type="button"
                                                                             class="btn btn-ligth bg-white text-green px-2 w-100 "
@@ -120,8 +140,8 @@
                                                                 </div>
 
                                                             </div>
-                                                            
-                                                            
+
+
                                                         </div>
                                                         @endcan
                                                         @can('farmacia')
@@ -129,33 +149,38 @@
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" >
-                                                                        
+
                                                                             <button type="button"
                                                                             class="btn btn-ligth bg-white text-green px-2 w-100 "
                                                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="Visualizar">
-                                                                            <a href="{{route('painel.admin.compras.edit', $pedido->id)}}" class="text-green"><i class="" data-feather="eye"></i></a>
+                                                                            <a href="{{route('painel.admin.compras.visualizar', $pedido->id)}}" class="text-green"><i class="" data-feather="eye"></i></a>
                                                                         </button>
                                                                     </div>
                                                                 </div>
 
                                                             </div>
+                                                            @if($pedido->status != 'aberto')
 
+                                                            @else
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" >
+                                                                        <a href="{{route('painel.admin.compras.confirmar-pedido', $pedido->id)}} " >
                                                                         <button type="button"
                                                                             class="btn btn-ligth bg-white text-green px-2 w-100 "
                                                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="Confirmar">
                                                                             <i class="" data-feather="check"></i>
                                                                         </button>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
 
                                                             </div>
-                                                            
-                                                            
+                                                            @endif
+
+
                                                         </div>
                                                         @endcan
                                                     </div>
@@ -169,7 +194,7 @@
                                                         <div class="col-md-4">
                                                             <span class="dtls" style="margin-left:-20px"><i class="" data-feather="clock"></i>{{date('d-m-Y H:i', strtotime($pedido->created_at))}}</span>
                                                         </div>
-                                                        
+
                                                     </div>
 
 

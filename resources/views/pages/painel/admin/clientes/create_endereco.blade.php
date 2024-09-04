@@ -9,7 +9,7 @@
                 <div class="card ">
                     <div class="card-body p-3 p-lg-4">
 
-                        <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Cadastrar novo usuário</h1>
+                        <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2">Cadastrar farmácia</h1>
 
                         <form action="#" method="post">
                             @csrf
