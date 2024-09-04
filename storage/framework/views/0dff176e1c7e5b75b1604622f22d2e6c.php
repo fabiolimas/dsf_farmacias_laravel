@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Cadastrar novo exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -99,7 +98,7 @@
                             <div class="row">
 
                                 <div class="col-md-12 " style="display:flex; justify-content:flex-end">
-                                   <h5>R$ <?php echo e(number_format($totalPedido,2,',','.')); ?></h5> 
+                                   <h5>R$ <?php echo e(number_format($totalPedido,2,',','.')); ?></h5>
                                 </div>
                             </div>
                     </div>
@@ -136,6 +135,35 @@
                                         <?php echo e($exame->nome); ?>
 
                                     </label>
+                                    <!-- Quantidade em estoque -->
+                                    <div class="mb-2 pb-3">
+                                        <div class="mb-0 position-relative">
+                                            <label for="qtd_estoque" class="form-label text-green fw-500 fs-18px w-100">
+                                                <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
+                                                    Quantidade
+                                                </div>
+
+                                            </label>
+                                            <div class="position-relative">
+                                                <input type="text"
+                                                    class="form-control form-control-custom <?php $__errorArgs = ['qtd_estoque'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invallid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> fs-18px fw-500"
+                                                    name="quantidade" id="qtd_estoque" value="<?php echo e(old('qtd_estoque')); ?>"
+                                                    placeholder="0" />
+
+                                                <div class="text-green-2 fw-500"
+                                                    style="position: absolute; top:13px; right: 15px">
+                                                    Unidades
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Lote e validade -->
                                     <div class="mb-3 pb-3">
                                         <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
@@ -165,35 +193,37 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
-                                    <!-- Quantidade em estoque -->
-                                    <div class="mb-2 pb-3">
-                                        <div class="mb-0 position-relative">
-                                            <label for="qtd_estoque" class="form-label text-green fw-500 fs-18px w-100">
-                                                <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
-                                                    Quantidade em estoque
-                                                </div>
 
-                                            </label>
-                                            <div class="position-relative">
-                                                <input type="text"
-                                                    class="form-control form-control-custom <?php $__errorArgs = ['qtd_estoque'];
+                                    
+                                    <div class="mb-3 pb-3">
+                                        <label for="validade" class="form-label text-green fw-500 fs-18px">
+                                            Validade
+                                        </label>
+                                        <input type="date"
+                                            class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['validade'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invallid <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?> fs-18px fw-500"
-                                                    name="quantidade" id="qtd_estoque" value="<?php echo e(old('qtd_estoque')); ?>"
-                                                    placeholder="0" />
+unset($__errorArgs, $__bag); ?>"
+                                            name="validade" id="validade" placeholder=""
+                                            value="" required />
+                                        <?php $__errorArgs = ['validade'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="invalid-feedback fw-500"><?php echo e($message); ?>
 
-                                                <div class="text-green-2 fw-500"
-                                                    style="position: absolute; top:13px; right: 15px">
-                                                    Unidades
-                                                </div>
                                             </div>
-                                        </div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>
+
 
                                     <!-- Valor de venda -->
                                     <div class="mb-3 pb-3">

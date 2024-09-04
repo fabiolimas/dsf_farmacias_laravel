@@ -136,35 +136,6 @@
                                         <?php echo e($exame->nome); ?>
 
                                     </label>
-                                    <!-- Lote e validade -->
-                                    <div class="mb-3 pb-3">
-                                        <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
-                                            Lote
-                                        </label>
-                                        <input type="text"
-                                            class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['lote_validade'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                            name="lote" id="lote" placeholder=""
-                                            value="<?php echo e(old('lote_validade', 0)); ?>" required />
-                                        <?php $__errorArgs = ['lote_validade'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                            <div class="invalid-feedback fw-500"><?php echo e($message); ?>
-
-                                            </div>
-                                        <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                    </div>
                                     <!-- Quantidade em estoque -->
                                     <div class="mb-2 pb-3">
                                         <div class="mb-0 position-relative">
@@ -194,6 +165,66 @@ unset($__errorArgs, $__bag); ?> fs-18px fw-500"
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Lote e validade -->
+                                    <div class="mb-3 pb-3">
+                                        <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
+                                            Lote
+                                        </label>
+                                        <input type="text"
+                                            class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['lote_validade'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                            name="lote" id="lote" placeholder=""
+                                            value="<?php echo e(old('lote_validade', 0)); ?>" required />
+                                        <?php $__errorArgs = ['lote_validade'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="invalid-feedback fw-500"><?php echo e($message); ?>
+
+                                            </div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    </div>
+
+                                    
+                                    <div class="mb-3 pb-3">
+                                        <label for="validade" class="form-label text-green fw-500 fs-18px">
+                                            Validade
+                                        </label>
+                                        <input type="date"
+                                            class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['validade'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                            name="validade" id="validade" placeholder=""
+                                            value="" required />
+                                        <?php $__errorArgs = ['validade'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="invalid-feedback fw-500"><?php echo e($message); ?>
+
+                                            </div>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    </div>
+
 
                                     <!-- Valor de venda -->
                                     <div class="mb-3 pb-3">

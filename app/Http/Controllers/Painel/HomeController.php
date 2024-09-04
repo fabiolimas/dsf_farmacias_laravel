@@ -47,7 +47,8 @@ class HomeController extends Controller
 
         $examesAcabando=ExameFarmacia::join('exames','exames.id','exame_farmacias.exame_id')
         ->select('exames.nome', 'exame_farmacias.*')
-        ->where('estoque','<',5)
+        // ->where('estoque','<',5)
+        ->where('exame_farmacias.cliente_id', auth()->user()->cliente_id)
 
         ->get();
         $examesProntos=Agenda::where('status','pronto')

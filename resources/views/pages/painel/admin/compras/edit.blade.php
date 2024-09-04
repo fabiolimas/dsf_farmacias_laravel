@@ -99,7 +99,7 @@
                             <div class="row">
 
                                 <div class="col-md-12 " style="display:flex; justify-content:flex-end">
-                                   <h5>R$ {{number_format($totalPedido,2,',','.')}}</h5> 
+                                   <h5>R$ {{number_format($totalPedido,2,',','.')}}</h5>
                                 </div>
                             </div>
                     </div>
@@ -135,26 +135,12 @@
                                     <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
                                         {{ $exame->nome }}
                                     </label>
-                                    <!-- Lote e validade -->
-                                    <div class="mb-3 pb-3">
-                                        <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
-                                            Lote
-                                        </label>
-                                        <input type="text"
-                                            class="form-control form-control-custom fs-18px fw-500 @error('lote_validade') is-invalid @enderror"
-                                            name="lote" id="lote" placeholder=""
-                                            value="{{ old('lote_validade', 0) }}" required />
-                                        @error('lote_validade')
-                                            <div class="invalid-feedback fw-500">{{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
                                     <!-- Quantidade em estoque -->
                                     <div class="mb-2 pb-3">
                                         <div class="mb-0 position-relative">
                                             <label for="qtd_estoque" class="form-label text-green fw-500 fs-18px w-100">
                                                 <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
-                                                    Quantidade em estoque
+                                                    Quantidade
                                                 </div>
 
                                             </label>
@@ -171,6 +157,36 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Lote e validade -->
+                                    <div class="mb-3 pb-3">
+                                        <label for="lote_validade" class="form-label text-green fw-500 fs-18px">
+                                            Lote
+                                        </label>
+                                        <input type="text"
+                                            class="form-control form-control-custom fs-18px fw-500 @error('lote_validade') is-invalid @enderror"
+                                            name="lote" id="lote" placeholder=""
+                                            value="{{ old('lote_validade', 0) }}" required />
+                                        @error('lote_validade')
+                                            <div class="invalid-feedback fw-500">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    {{-- validade --}}
+                                    <div class="mb-3 pb-3">
+                                        <label for="validade" class="form-label text-green fw-500 fs-18px">
+                                            Validade
+                                        </label>
+                                        <input type="date"
+                                            class="form-control form-control-custom fs-18px fw-500 @error('validade') is-invalid @enderror"
+                                            name="validade" id="validade" placeholder=""
+                                            value="" required />
+                                        @error('validade')
+                                            <div class="invalid-feedback fw-500">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
 
                                     <!-- Valor de venda -->
                                     <div class="mb-3 pb-3">

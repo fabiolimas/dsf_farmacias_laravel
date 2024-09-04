@@ -114,6 +114,7 @@ class ComprasController extends Controller
     $itemPedido->preco=$request->preco;
     $itemPedido->quantidade=$request->quantidade;
     $itemPedido->lote=$request->lote;
+    $itemPedido->validade=$request->validade;
 
 
     $itemPedido->save();
@@ -157,6 +158,7 @@ class ComprasController extends Controller
         $novoExame->valor_de_compra=$item->preco;
         $novoExame->estoque=$item->quantidade;
         $novoExame->lote=$item->lote;
+        $novoExame->validade=$item->validade;
         $novoExame->save();
 
     $pedido->update(['status'=>'recebido']);
@@ -164,7 +166,7 @@ class ComprasController extends Controller
     }else{
         $estoqueAtual=$exameFarmacia->estoque;
        $estoqueAtual+=$item->quantidade;
-        $exameFarmacia->update(['estoque'=>$estoqueAtual, 'valor_de_compra'=>$item->preco,'lote'=>$item->lote]);
+        $exameFarmacia->update(['estoque'=>$estoqueAtual, 'valor_de_compra'=>$item->preco,'lote'=>$item->lote,'validade'=>$item->validade]);
         $pedido->update(['status'=>'recebido']);
     }
     }
