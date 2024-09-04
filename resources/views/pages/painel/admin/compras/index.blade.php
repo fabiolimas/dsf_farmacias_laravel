@@ -118,6 +118,20 @@
                                                                             <button type="button"
                                                                             class="btn btn-ligth bg-white text-green px-2 w-100 "
                                                                             data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Imprimir">
+                                                                            <a href="{{route('painel.admin.compras.printPedido', $pedido->id)}}" class="text-green"><i class="" data-feather="printer"></i></a>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-3 ms-2">
+                                                                <div class="mt-2 mt-sm-0">
+                                                                    <div class="" >
+
+                                                                            <button type="button"
+                                                                            class="btn btn-ligth bg-white text-green px-2 w-100 "
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                                             title="Editar">
                                                                             <a href="{{route('painel.admin.compras.edit', $pedido->id)}}" class="text-green"><i class="" data-feather="edit"></i></a>
                                                                         </button>

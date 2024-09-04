@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Painel\Admin;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Exame;
 use App\Models\Cliente;
+use App\Models\PedidoItem;
 use Illuminate\Http\Request;
+use App\Models\ExameFarmacia;
 use App\Models\PedidoDeCompra;
 use App\Http\Controllers\Controller;
-use App\Models\ExameFarmacia;
-use App\Models\PedidoItem;
 
 class ComprasController extends Controller
 {
@@ -188,5 +189,27 @@ class ComprasController extends Controller
       $pedido=PedidoDeCompra::find($request->id);
         $pedido->delete();
         return redirect()->back()->withSuccess('Pedido excluido com sucesso!');
+    }
+
+
+    public function gerarPDF(Request $request)
+    {
+    
+      $exames=Exame::all();
+
+      $pedido=PedidoDeCompra::find($request->id);
+      $cliente=Cliente::find($pedido->cliente_id);
+      $itensPedido=PedidoItem::join('exames','exames.id','pedido_items.exame_id')
+      ->select('exames.*','pedido_items.*')
+      ->where('pedido_de_compras_id', $pedido->id)->get();
+  
+      $totalPedido=0;
+  
+  //  return view('pages.painel.admin.compras.visualizar_pdf', compact('totalPedido','exames','cliente','pedido','itensPedido'));
+  
+      
+    
+        $pdf = PDF::loadView('pages.painel.admin.compras.visualizar_pdf', compact('totalPedido','exames','cliente','pedido','itensPedido'))->setOptions(['enable_remote' => true]);
+         return $pdf->download('Pedido.pdf');
     }
 }

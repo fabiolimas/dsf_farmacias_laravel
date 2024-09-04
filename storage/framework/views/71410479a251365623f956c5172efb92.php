@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Exames'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -110,6 +111,20 @@
                                                         </div>
                                                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?>
                                                         <div class="col-md-6 <?php if($pedido->status =='recebido'): ?> d-none <?php else: ?> acts <?php endif; ?>"  >
+                                                            <div class="col-md-3 ms-2">
+                                                                <div class="mt-2 mt-sm-0">
+                                                                    <div class="" >
+
+                                                                            <button type="button"
+                                                                            class="btn btn-ligth bg-white text-green px-2 w-100 "
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Imprimir">
+                                                                            <a href="<?php echo e(route('painel.admin.compras.printPedido', $pedido->id)); ?>" class="text-green"><i class="" data-feather="printer"></i></a>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" >

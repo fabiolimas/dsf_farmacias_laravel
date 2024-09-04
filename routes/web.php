@@ -75,7 +75,9 @@ Route::get('exclui-item/{id}', [ComprasController::class, 'destroy'])->name('pai
 Route::delete('exclui-pedido/{id}', [ComprasController::class, 'destroyPedido'])->name('painel.admin.compras.excluir-pedido');
 Route::post('salvar-pedido/{id}', [ComprasController::class, 'salvarPedido'])->name('painel.admin.compras.salvar-pedido');
 Route::get('confirmar-pedido/{id}', [ComprasController::class, 'confirmarPedido'])->name('painel.admin.compras.confirmar-pedido');
-    /* Exames */
+Route::get('/print-pedido/{id}', [ComprasController::class, 'gerarPDF'])->name('painel.admin.compras.printPedido');
+
+/* Exames */
 
 
     // Route::get('/', function () {
