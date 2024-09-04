@@ -110,11 +110,12 @@
                                                             </div>
                                                         </div>
                                                         @can('admin')
-                                                        <div class="col-md-6 @if($pedido->status =='recebido') d-none @else acts @endif"  >
+                                                        
+                                                        <div class="col-md-6 acts"  >
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" >
-
+    
                                                                             <button type="button"
                                                                             class="btn btn-ligth bg-white text-green px-2 w-100 "
                                                                             data-bs-toggle="tooltip" data-bs-placement="top"
@@ -123,9 +124,9 @@
                                                                         </button>
                                                                     </div>
                                                                 </div>
-
+    
                                                             </div>
-                                                            <div class="col-md-3 ms-2">
+                                                            <div class="col-md-3 ms-2 @if($pedido->status =='recebido') d-none @else  @endif">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" >
 
@@ -140,7 +141,7 @@
 
                                                             </div>
 
-                                                            <div class="col-md-3 ms-2">
+                                                            <div class="col-md-3 ms-2 @if($pedido->status =='recebido') d-none @else  @endif">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" data-bs-toggle="modal"
                                                                         onclick="setRotaRemover(`{{ route('painel.admin.compras.excluir-pedido', $pedido->id) }}`)"
@@ -161,6 +162,20 @@
                                                         @endcan
                                                         @can('farmacia')
                                                         <div class="col-md-6 acts">
+                                                            <div class="col-md-3 ms-2">
+                                                                <div class="mt-2 mt-sm-0">
+                                                                    <div class="" >
+
+                                                                            <button type="button"
+                                                                            class="btn btn-ligth bg-white text-green px-2 w-100 "
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            title="Imprimir">
+                                                                            <a href="{{route('painel.admin.compras.printPedido', $pedido->id)}}" class="text-green"><i class="" data-feather="printer"></i></a>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">
                                                                     <div class="" >
