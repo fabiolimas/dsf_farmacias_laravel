@@ -103,7 +103,8 @@
                                                                 <a href="@can('admmin')@if($pedido->status != 'aberto') {{route('painel.admin.compras.visualizar', $pedido->id)}} @else {{ route('painel.admin.compras.edit', $pedido->id) }} @endif @endcan @can('farmacia'){{route('painel.admin.compras.visualizar', $pedido->id)}}@endcan"
                                                                     class="text-decoration-none d-block">
                                                                     <div class="text-green-2">
-                                                                        {{ $pedido->razao_social }} - #Pedido {{$pedido->id}}</div>
+
+                                                                        {{ Str::limit($pedido->razao_social, 15, '...') }} - #Pedido {{$pedido->id}}</div>
                                                                     {{-- <div class="text-green">Carla Silva</div> --}}
                                                                 </a>
                                                             </div>

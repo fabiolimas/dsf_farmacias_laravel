@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Gráficos'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -202,25 +201,7 @@
 
                         <div class="px-3 d-md-flex justify-content-between gap-3 align-items-center">
                             <h2 class="fs-24px fw-600 text-green-2 ">Faturamento de clientes</h2>
-                            <div class="">
-                                <div class="dropdown">
-                                    <button class="btn btn-light bg-white shadow-sm border text-green " type="button"
-                                        id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        <div class="d-flex gap-1 align-items-center">
-                                            7 dias
-                                            <img src="<?php echo e(asset('assets/img/icons/chevron-down-2.svg')); ?>" alt=""
-                                                width="25">
-                                        </div>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                                        <a class="dropdown-item" href="#">7 dias</a>
-                                        <a class="dropdown-item" href="#">7 dias</a>
-                                        <a class="dropdown-item" href="#">7 dias</a>
-                                        <a class="dropdown-item" href="#">7 dias</a>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
 
                         <!-- pesquisa -->
@@ -240,34 +221,39 @@
                         <!-- Lista -->
                         <div class="position-relative">
                             <div class="mt-2 lista-scroll p-3 clientes-lista-assinantes " style="max-height: 300px">
-                                <?php $__currentLoopData = [3, 3, 3, 3, 3, 3, 3, 33, 3, 3, 33, 3, 3, 3, 3, 3, 33, 3, 33]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $faturamentoCliente; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $faturamento): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+
                                     <div class=" d-md-flex  gap-3 fw-500 text-green-2 align-items-center mb-3">
                                         <div class="d-flex gap-3 align-items-center">
                                             <div class="d-inline-block">
                                                 <div class="bg-green-light border-green-light rounded-3 p-2 py-1 fs-20px">
-                                                    #<?php echo e($key + 1); ?>
+                                                    #<?php echo e($loop->index + 1); ?>
 
                                                 </div>
                                             </div>
 
                                             <div class="fs-20px  fw-600 d-flex gap-2 align-items-center">
                                                 <div class="text-truncate">
-                                                    PagueMenos
+                                                   <?php echo e(Str::limit($faturamento->razao_social, 11, '...')); ?>
+
                                                 </div>
                                                 <div class="position-relative" style="">
                                                     <div
                                                         class="fatura-cliente-show-cnpj text-truncate bg-green-light border-green-light rounded-3 px-1 py-1 fs-12px fw-400">
                                                         <span class="fatura-cliente-show-cnpj-texto">CNPJ</span>
-                                                        <span class="fatura-cliente-show-cnpj-num">00.876.202/0001-00</span>
+                                                        <span class="fatura-cliente-show-cnpj-num"><?php echo e($faturamento->cnpj); ?></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="ms-auto fs-20px fw-600 text-green">
-                                            R$ 3.764,42
+                                            R$ <?php echo e(number_format($faturamento->total_faturado, 2, ',', '.')); ?>
+
                                         </div>
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 
 
 
@@ -294,13 +280,7 @@
 <?php $__env->startSection('scripts'); ?>
 
     <!-- scripts apexchart -->
-    <script src="<?php echo e($faturamento->cdn()); ?>"></script>
-    <?php echo e($faturamento->script()); ?>
-
-    <?php echo e($qtdExames->script()); ?>
-
-    <?php echo e($mapaClientes->script()); ?>
-
+    
 
 <?php $__env->stopSection(); ?>
 

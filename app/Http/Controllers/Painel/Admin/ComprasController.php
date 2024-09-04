@@ -17,6 +17,7 @@ class ComprasController extends Controller
     if(auth()->user()->profile == 'admin'){
       $pedidos=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
       ->select('clientes.*', 'pedido_de_compras.*')
+      ->orderBY('pedido_de_compras.id', 'asc')
       ->paginate(10);
 
 
@@ -34,6 +35,7 @@ class ComprasController extends Controller
       $pedidoNovo=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
       ->select('clientes.*', 'pedido_de_compras.*')
       ->where('status','aberto')
+      ->where('clientes.id', auth()->user()->cliente_id)
       ->count();
     }
     $clientes=Cliente::all();

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Painel;
 
+use Illuminate\Http\Request;
+use App\Models\PedidoDeCompra;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
-use Illuminate\Http\Request;
 
 class GraficosController extends Controller
 {
@@ -49,7 +51,20 @@ class GraficosController extends Controller
                 '#CCEFEE',
             ]);
 
+        $faturamentoCliente = PedidoDeCompra::join('clientes', 'clientes.id', '=', 'pedido_de_compras.cliente_id')
+            ->select(
+                'clientes.razao_social',
+                'clientes.cnpj',
+                DB::raw('SUM(pedido_de_compras.total_pedido) as total_faturado')
+            )
+            ->where('status', 'recebido')
 
-        return view('pages.painel.admin.graficos.index', compact('faturamento', 'qtdExames', 'mapaClientes'));
+            ->groupBy('clientes.razao_social', 'clientes.cnpj')
+            ->orderBy('total_faturado', 'desc') // Agrupa por cliente
+            ->get();
+
+
+
+        return view('pages.painel.admin.graficos.index', compact('faturamento', 'qtdExames', 'mapaClientes', 'faturamentoCliente'));
     }
 }

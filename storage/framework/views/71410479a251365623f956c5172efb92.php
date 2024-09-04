@@ -102,7 +102,8 @@
                                                                 <a href="<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admmin')): ?><?php if($pedido->status != 'aberto'): ?> <?php echo e(route('painel.admin.compras.visualizar', $pedido->id)); ?> <?php else: ?> <?php echo e(route('painel.admin.compras.edit', $pedido->id)); ?> <?php endif; ?> <?php endif; ?> <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?><?php echo e(route('painel.admin.compras.visualizar', $pedido->id)); ?><?php endif; ?>"
                                                                     class="text-decoration-none d-block">
                                                                     <div class="text-green-2">
-                                                                        <?php echo e($pedido->razao_social); ?> - #Pedido <?php echo e($pedido->id); ?></div>
+
+                                                                        <?php echo e(Str::limit($pedido->razao_social, 15, '...')); ?> - #Pedido <?php echo e($pedido->id); ?></div>
                                                                     
                                                                 </a>
                                                             </div>
