@@ -9,9 +9,22 @@
                 <div class="card min-vh-100">
                     <div class="card-body px-2 py-4">
                         @can('farmacia')
-                        <h1 class="fs-4 fw-600 mb-4 text-green-2 px-0 ps-lg-4  " style="min-width: 260px">
-                            Pedidos de Compras <span class="badge rounded-pill text-bg-primary fs-16px fw-500 px-2" id="total-assinaturas-hoje">{{$pedidoNovo}}</span>
-                        </h1>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="fs-4 fw-600 mb-4 text-green-2 px-0 ps-lg-4  " style="min-width: 260px">
+                                    Pedidos de Compras <span class="badge rounded-pill text-bg-primary fs-16px fw-500 px-2" id="total-assinaturas-hoje">{{$pedidoNovo}}</span>
+                                </h1>
+                            </div>
+                            <div class="col-md-6">
+                                <a class="btn btn-primary d-block d-md-inline-block mb-3   " href="{{route('painel.farmacia.estoque.index')}}" role="button" style="padding: 16px 24px;">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <i data-feather="folder-plus"></i>
+                                   Estoque
+                                </div>
+                            </a>
+                            </div>
+                        </div>
+                      
 
 
                         @endcan

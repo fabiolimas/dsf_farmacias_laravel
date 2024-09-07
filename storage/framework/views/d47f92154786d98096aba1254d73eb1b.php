@@ -12,25 +12,23 @@
                             <h2 class="fs-24px fw-600 text-green-2 pt-1 ">Quantidade de exames</h2>
                             <div class="d-flex gap-3 ps-lg-3">
                                 <div class="">
-                                    <select name="filtro" id="filtro" class="form-select">
-                                        <option value="todos">Todos</option>
-                                        <option value="periodo">Periodo</option>
-                                    </select>
-                                    
-                                    </div>
+                                    <form method="GET" action="#">
+                                        <div class="row mb-4">
+                                            <div class="col-md-5">
+                                                <label for="data_inicio">Data Inicial:</label>
+                                                <input type="date" name="data_inicio" class="form-control" value="<?php echo e($dataInicio); ?>">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label for="data_fim">Data Final:</label>
+                                                <input type="date" name="data_fim" class="form-control" value="<?php echo e($dataFim); ?>">
+                                            </div>
+                                            <div class="col-md-2 d-flex align-items-end">
+                                                <button type="submit" class="btn btn-primary">Filtrar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                 </div>
-                                <div class="">
-                                    <div class="row periodos" style="display:none">
-                                        <div class="col-md-6">
-
-                                            <input type="date" name="data_ini" id="data_ini" class="form-control">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="date" name="data_fim" id="data_fim" class="form-control">
-                                        </div>
-                                    </div>
-
-                                   
                                     
                                 </div>
                             </div>
@@ -76,7 +74,7 @@
                             <div class="mt-2 lista-scroll p-3 pt-0 clientes-lista-assinantes pb-5 "
                                 style="max-height: 500px">
 
-                                <?php $__currentLoopData = $maisvendidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $exame): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $maisVendidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $exame): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                
                                     <div
                                         class="d-flex gap-2 mb-3text-green-2 fw-600 bg-green-light  p-2 rounded-3 mb-3 align-items-center ">

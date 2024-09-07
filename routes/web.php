@@ -13,6 +13,7 @@ use App\Http\Controllers\Painel\Admin\PagamentoController;
 use App\Http\Controllers\Painel\Config\ColaboradorController;
 use App\Http\Controllers\Painel\Farmacia\AgendaController;
 use App\Http\Controllers\Painel\Farmacia\ClienteController as FarmaciaClienteController;
+use App\Http\Controllers\Painel\Farmacia\EstoqueController;
 use App\Http\Controllers\Painel\Farmacia\ExamesController;
 use App\Http\Controllers\Painel\Farmacia\GraficosFarmaciaController;
 
@@ -147,6 +148,14 @@ Route::prefix('/fm')->group(function () {
         Route::post('/busca-home', [FarmaciaClienteController::class, 'buscaClienteHome'])
         ->name('painel.farmacia.clientes.busca-home');
     });
+
+    /*estoque*/
+    Route::get('/', [EstoqueController::class, 'index'])
+    ->name('painel.farmacia.estoque.index');
+    Route::post('/update-exame/{id}', [EstoqueController::class, 'updateExameFarmacia'])
+    ->name('painel.farmacia.estoque.update');
+    Route::post('/busca-exame-farma', [EstoqueController::class, 'buscaExameFarma'])
+    ->name('painel.farmacia.estoque.busca-exame');
 
     /* agenda */
     Route::prefix('agenda')->group(function () {

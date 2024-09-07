@@ -13,36 +13,16 @@ class GraficosFarmaciaController extends Controller
 {
     public function index(Request $request)
     {
-        // $qtdExames = (new LarapexChart)->barChart()
-        //     ->setHorizontal(false)
-        //     ->setXAxis(['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'])
-        //     ->setDataset([[
-        //         'name'  =>  'Vendas',
-        //         'data'  =>  [90, 9, 3, 4, 10, 8, 5, 6, 9, 3, 4, 10, 8, 5]
-        //     ]])
-        //     ->setColors(['#0E6664'])
-        //     ->setSparkline()
-        //     ->setHeight(315);
-
-
-
-        if($request == null || $request->data_ini == null || $request->data_fim == null){
-            $examesPorId = Agenda::where('status', 'pronto')
-        ->where('cliente_id', auth()->user()->cliente_id)
         
-        ->select('exame_id', 'nome_exame')
-        ->get()
-        ->groupBy('exame_id')
-        ->map(function ($exames, $exameId) {
-            return [
-                'nome_exame' => $exames->first()->nome_exame,
-                'quantidade' => $exames->count(),
-            ];
-        });
-        }else{
+
+        $dataInicio = $request->input('data_inicio', '2024-01-01'); // Padrão: 1º de Janeiro de 2024
+        $dataFim = $request->input('data_fim', now()->format('Y-m-d')); // Padrão: Data atual
+
+      
+          
             $examesPorId = Agenda::where('status', 'pronto')
             ->where('cliente_id', auth()->user()->cliente_id)
-            ->whereBetween('data_exame', [$request->data_ini, $request->data_fim])
+            ->whereBetween('data_exame', [$dataInicio, $dataFim])
             ->select('exame_id', 'nome_exame')
             ->get()
             ->groupBy('exame_id')
@@ -52,7 +32,7 @@ class GraficosFarmaciaController extends Controller
                     'quantidade' => $exames->count(),
                 ];
             });
-        }
+        
       
     
     // Extraindo os nomes dos exames e as quantidades
@@ -68,31 +48,34 @@ class GraficosFarmaciaController extends Controller
     ->setSparkline()
     ->setHeight(315);
 
-    $maisvendidos = Venda::join('exames', 'exames.id', 'vendas.exame_id')
-    ->join('exame_farmacias', 'exame_farmacias.exame_id', 'vendas.exame_id')
-    ->select('vendas.exame_id', 'exames.nome', 'exame_farmacias.estoque', DB::raw('COUNT(vendas.exame_id) as total_vendas'))
-    ->where('vendas.cliente_id', auth()->user()->cliente_id)
-    ->groupBy('vendas.exame_id', 'exames.nome', 'exame_farmacias.estoque')
-    ->orderBy('total_vendas', 'desc')
-    ->get();
-
-    $ticketmedio = Venda::join('exames', 'exames.id', 'vendas.exame_id')
-    ->join('exame_farmacias', 'exame_farmacias.exame_id', 'vendas.exame_id')
-    ->select(
-        'vendas.exame_id', 
-        'exames.nome', 
-        'exame_farmacias.estoque', 
-        DB::raw('COUNT(vendas.exame_id) as total_vendas'), 
-        DB::raw('SUM(vendas.valor) as valor_total'),
-        DB::raw('AVG(vendas.valor) as ticket_medio')  // Calcula o ticket médio
-    )
-    ->where('vendas.cliente_id', auth()->user()->cliente_id)
-    ->groupBy('vendas.exame_id', 'exames.nome', 'exame_farmacias.estoque')
-    ->orderBy('total_vendas', 'desc')
-    ->get();
+       // Consulta para obter os exames mais vendidos
+       $maisVendidos = Venda::join('exames', 'exames.id', 'vendas.exame_id')
+       ->join('exame_farmacias', 'exame_farmacias.exame_id', 'vendas.exame_id')
+       ->select('vendas.exame_id', 'exames.nome', DB::raw('COUNT(vendas.exame_id) as total_vendas'), DB::raw('MAX(exame_farmacias.estoque) as estoque'))
+       ->where('vendas.cliente_id', auth()->user()->cliente_id)
+       ->groupBy('vendas.exame_id', 'exames.nome')
+       ->orderBy('total_vendas', 'desc')
+       ->get();
 
 
-        return view('pages.painel.farmacia.graficos.index', compact('qtdExames','maisvendidos','ticketmedio'));
+
+       $ticketmedio = Venda::join('exames', 'exames.id', 'vendas.exame_id')
+       ->join('exame_farmacias', 'exame_farmacias.exame_id', 'vendas.exame_id')
+       ->select(
+           'vendas.exame_id', 
+           'exames.nome', 
+           DB::raw('MAX(exame_farmacias.estoque) as estoque'), // Usar MAX para evitar duplicação
+           DB::raw('COUNT(vendas.exame_id) as total_vendas'), 
+           DB::raw('SUM(vendas.valor) as valor_total'),
+           DB::raw('AVG(vendas.valor) as ticket_medio')  // Calcula o ticket médio
+       )
+       ->where('vendas.cliente_id', auth()->user()->cliente_id)
+       ->groupBy('vendas.exame_id', 'exames.nome')
+       ->orderBy('total_vendas', 'desc')
+       ->get();
+
+
+        return view('pages.painel.farmacia.graficos.index', compact('dataInicio','dataFim','qtdExames','maisVendidos','ticketmedio'));
     }
 
     public function filtroGrafico(Request $request){
