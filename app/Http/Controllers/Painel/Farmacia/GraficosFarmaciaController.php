@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Painel\Farmacia;
 
+use App\Models\Venda;
 use App\Models\Agenda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
@@ -66,10 +68,31 @@ class GraficosFarmaciaController extends Controller
     ->setSparkline()
     ->setHeight(315);
 
+    $maisvendidos = Venda::join('exames', 'exames.id', 'vendas.exame_id')
+    ->join('exame_farmacias', 'exame_farmacias.exame_id', 'vendas.exame_id')
+    ->select('vendas.exame_id', 'exames.nome', 'exame_farmacias.estoque', DB::raw('COUNT(vendas.exame_id) as total_vendas'))
+    ->where('vendas.cliente_id', auth()->user()->cliente_id)
+    ->groupBy('vendas.exame_id', 'exames.nome', 'exame_farmacias.estoque')
+    ->orderBy('total_vendas', 'desc')
+    ->get();
+
+    $ticketmedio = Venda::join('exames', 'exames.id', 'vendas.exame_id')
+    ->join('exame_farmacias', 'exame_farmacias.exame_id', 'vendas.exame_id')
+    ->select(
+        'vendas.exame_id', 
+        'exames.nome', 
+        'exame_farmacias.estoque', 
+        DB::raw('COUNT(vendas.exame_id) as total_vendas'), 
+        DB::raw('SUM(vendas.valor) as valor_total'),
+        DB::raw('AVG(vendas.valor) as ticket_medio')  // Calcula o ticket médio
+    )
+    ->where('vendas.cliente_id', auth()->user()->cliente_id)
+    ->groupBy('vendas.exame_id', 'exames.nome', 'exame_farmacias.estoque')
+    ->orderBy('total_vendas', 'desc')
+    ->get();
 
 
-
-        return view('pages.painel.farmacia.graficos.index', compact('qtdExames'));
+        return view('pages.painel.farmacia.graficos.index', compact('qtdExames','maisvendidos','ticketmedio'));
     }
 
     public function filtroGrafico(Request $request){

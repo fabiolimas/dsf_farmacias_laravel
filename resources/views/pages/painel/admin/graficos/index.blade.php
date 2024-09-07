@@ -12,26 +12,26 @@
                         <div class="d-flex justify-content-between gap-3 align-items-center">
                             <h2 class="fs-24px fw-600 text-green-2 ">Faturamento</h2>
                             <div class="">
-                                <div class="dropdown">
-                                    <button class="btn btn-light bg-white shadow-sm border text-green " type="button"
-                                        id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <div class="d-flex gap-1 align-items-center">
-                                            7 dias
-                                            <img src="{{ asset('assets/img/icons/chevron-down-2.svg') }}" alt=""
-                                                width="25">
+                                <form method="GET" action="{{ route('painel.admin.graficos.index') }}">
+                                    <div class="row mb-4">
+                                        <div class="col-md-5">
+                                            <label for="data_inicio">Data Inicial:</label>
+                                            <input type="date" name="data_inicio" class="form-control" value="{{ $dataInicio }}">
                                         </div>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                                        <a class="dropdown-item" href="#">7 dias</a>
-                                        <a class="dropdown-item" href="#">7 dias</a>
-                                        <a class="dropdown-item" href="#">7 dias</a>
-                                        <a class="dropdown-item" href="#">7 dias</a>
+                                        <div class="col-md-5">
+                                            <label for="data_fim">Data Final:</label>
+                                            <input type="date" name="data_fim" class="form-control" value="{{ $dataFim }}">
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-end">
+                                            <button type="submit" class="btn btn-primary"> <i data-feather="search"></i></button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
+                               
                             </div>
                         </div>
 
-                        {!! $faturamento->container() !!}
+                        {!! $faturamentografico->container() !!}
 
                         <div class="line-chart mt-4 pt-3 position-relative pb-3">
                             <div class="line-chart-vertical"></div>
@@ -54,42 +54,10 @@
                             <h2 class="fs-24px fw-600 text-green-2 ">Quantidade de exames gerados</h2>
                             <div class="d-flex gap-2">
                                 <div class="">
-                                    <div class="dropdown">
-                                        <button class="btn btn-light bg-white shadow-sm border text-green " type="button"
-                                            id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <div class="d-flex gap-1 align-items-center">
-                                                7 dias
-                                                <img src="{{ asset('assets/img/icons/chevron-down-2.svg') }}" alt=""
-                                                    width="25">
-                                            </div>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="">
-                                    <div class="dropdown">
-                                        <button class="btn btn-light bg-white shadow-sm border text-green " type="button"
-                                            id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <div class="d-flex gap-1 align-items-center">
-                                                7 dias
-                                                <img src="{{ asset('assets/img/icons/chevron-down-2.svg') }}" alt=""
-                                                    width="25">
-                                            </div>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                            <a class="dropdown-item" href="#">7 dias</a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -171,11 +139,11 @@
                                         </div>
                                         <div class="carousel-item" data-bs-interval="10000000" style="">
                                             <ul class="list-unstyled">
-                                                @foreach ([3, 3, 3, 3, 3] as $item)
+                                                @foreach ($clientesMap as $item)
                                                     <li class=" d-flex justify-content-between py-2 text-green-4 fs-16px">
-                                                        São Paulo (SP)
+                                                        {{$item->cidade}}
                                                         <span class="d-flex bg-green-light rounded-3 py-1 px-2">
-                                                            18 Unidades
+                                                            {{$item->totalcidade}} Unidades
                                                         </span>
                                                     </li>
                                                 @endforeach
@@ -296,9 +264,9 @@
 @section('scripts')
 
     <!-- scripts apexchart -->
-    {{-- <script src="{{ $faturamento->cdn() }}"></script>
-    {{ $faturamento->script() }}
+    <script src="{{ $faturamentografico->cdn() }}"></script>
+    {{ $faturamentografico->script() }}
     {{ $qtdExames->script() }}
-    {{ $mapaClientes->script() }} --}}
+    {{ $mapaClientes->script() }}
 
 @endsection

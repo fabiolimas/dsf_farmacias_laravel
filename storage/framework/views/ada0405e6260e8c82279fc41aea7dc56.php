@@ -284,10 +284,12 @@
                                     </div>
                                     <?php if($examesProntos->count()>=4): ?>
                                     <div class="ver-mais-lista-scroll text-center">
+                                        <a href="<?php echo e(route('painel.farmacia.exames.lista')); ?>">
                                         <button type="button"
                                             class="btn btn-ligth shadow bg-white  py-1 text-green fs-20px fw-600">
                                             Ver mais
                                         </button>
+                                        </a>
                                     </div>
                                     <?php else: ?> 
                                     <?php endif; ?>

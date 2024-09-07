@@ -40,7 +40,7 @@ $chart = (new LarapexChart)->setTitle('Posts')
 Remember to import the Facade to your controller with 
 
 ```php
-use ArielMejiaDev\LarapexCharts\Facades\LarapexChart
+use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 ```
 
 Or importing the LarapexChart class:
@@ -89,7 +89,7 @@ $chart = (new LarapexChart)->setType('area')
         ]);
 ```
 
-You can create a variety of charts including: Line, Area, Bar, Horizantal Bar, Heatmap, pie, donut and Radialbar.
+You can create a variety of charts including: Line, Area, Bar, Horizontal Bar, Heatmap, pie, donut and Radialbar.
 
 ## More examples
 
@@ -110,9 +110,14 @@ Hey 👋 thanks for considering making a donation, with these donations I can co
     <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=arielmejiadev&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00">
 </a>
 
-## To do for version 4
+## Roadmap for future versions
 
 - [ ] Add blade directive `@apexchartscdn`
 - [ ] Add blade directive `@script($chart)`
-- [ ] Add a command to generate a blade component with the boilerplate directives just to include it on any blade file.
-- [ ] Add a command to generate a vue component with all the boilerplate to just pass a `chart` prop and include the component on any vue component.
+- [ ] Add a chain options setter for charts
+- [ ] Update Github Actions to run tests
+- [ ] Update the package in general for more efficient & modern practices (spatie skeleton package)
+- [ ] Add ReactJS + Inertia Support
+- [ ] Add More complex charts
+- [ ] Add More complex boilerplate code using Laravel/Prompts
+- [ ] Add more complex boilerplate code examples using Laravel Trends Package

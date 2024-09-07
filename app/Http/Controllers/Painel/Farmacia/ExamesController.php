@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Painel\Farmacia;
 
 use App\Models\Exame;
+use App\Models\Venda;
 use App\Models\Agenda;
-use App\Models\Cliente;
 
+use App\Models\Cliente;
 use App\Models\Resultado;
 use Illuminate\Http\Request;
+use App\Models\ExameFarmacia;
 use App\Models\ClienteFarmacia;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
-use App\Models\ExameFarmacia;
 use Illuminate\Support\Facades\Mail;
 
 class ExamesController extends Controller
@@ -22,7 +23,7 @@ class ExamesController extends Controller
 
 
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
-        $exames = Exame::all();
+        $exames = ExameFarmacia::all();
         $agendas = Agenda::join('cliente_farmacias', 'cliente_farmacias.id', 'agendas.cliente_farmacia_id')
             ->join('users', 'users.id', 'agendas.user_id')
             ->select('agendas.*', 'agendas.id as agendaId', 'cliente_farmacias.email as emailCliente', 'cliente_farmacias.telefone as telefone', 'cliente_farmacias.cpf as cpf', 'users.*')
@@ -34,6 +35,7 @@ class ExamesController extends Controller
 
         $examesDia =   Agenda::join('cliente_farmacias', 'cliente_farmacias.id', '=', 'agendas.cliente_farmacia_id')
             ->join('users', 'users.id', '=', 'agendas.user_id')
+            ->join('exame_farmacias', 'exame_farmacias.exame_id', 'agendas.exame_id')
 
             ->select(
                 'agendas.*',
@@ -42,7 +44,8 @@ class ExamesController extends Controller
                 'cliente_farmacias.email as emailCliente',
                 'cliente_farmacias.telefone as telefone',
                 'cliente_farmacias.cpf as cpf',
-                'users.*'
+                'users.*',
+                'exame_farmacias.estoque'
             )
             ->where('agendas.cliente_id', $farmacia->id)
             ->where('agendas.status', 'aberto')
@@ -91,12 +94,21 @@ class ExamesController extends Controller
 
         $agenda=Agenda::find($request->id);
         $exame=ExameFarmacia::where('exame_id', $agenda->exame_id)->first();
+        $venda = new Venda();
+
 
         $estoqueAtual=$exame->estoque;
        if($request->status == 'confirmado'){
         $agenda->update(['status'=>$request->status]);
         $estoqueAtual-=1;
         $exame->update(['estoque'=>$estoqueAtual]);
+        $venda->cliente_farmacia_id=$agenda->cliente_farmacia_id;
+        $venda->exame_id=$exame->exame_id;
+        $venda->cliente_id=auth()->user()->cliente_id;
+        $venda->valor=$exame->valor;
+        $venda->save();
+
+
 
 
        }else{

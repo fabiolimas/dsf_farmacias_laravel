@@ -229,7 +229,7 @@
                                                                                     Exame: <?php echo e($agenda->nome_exame); ?>
 
                                                                                 </div>
-                                                                                <div class="text-green text-truncate">38 em
+                                                                                <div class="text-green text-truncate"><?php echo e($agenda->estoque); ?> em
                                                                                     estoque</div>
                                                                             </a>
                                                                         </div>

@@ -226,7 +226,7 @@
                                                                                     class="text-green-2 fw-500 text-truncate">
                                                                                     Exame: {{ $agenda->nome_exame }}
                                                                                 </div>
-                                                                                <div class="text-green text-truncate">38 em
+                                                                                <div class="text-green text-truncate">{{$agenda->estoque}} em
                                                                                     estoque</div>
                                                                             </a>
                                                                         </div>

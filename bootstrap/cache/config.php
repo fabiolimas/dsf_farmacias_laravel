@@ -302,7 +302,7 @@
         'prefix' => '',
         'prefix_indexes' => true,
         'strict' => true,
-        'engine' => NULL,
+        'engine' => 'InnoDB',
         'options' => 
         array (
         ),
@@ -363,6 +363,55 @@
         'port' => '6379',
         'database' => '1',
       ),
+    ),
+  ),
+  'dompdf' => 
+  array (
+    'show_warnings' => false,
+    'public_path' => NULL,
+    'convert_entities' => true,
+    'options' => 
+    array (
+      'font_dir' => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel\\storage\\fonts',
+      'font_cache' => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel\\storage\\fonts',
+      'temp_dir' => 'C:\\Users\\House\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel',
+      'allowed_protocols' => 
+      array (
+        'file://' => 
+        array (
+          'rules' => 
+          array (
+          ),
+        ),
+        'http://' => 
+        array (
+          'rules' => 
+          array (
+          ),
+        ),
+        'https://' => 
+        array (
+          'rules' => 
+          array (
+          ),
+        ),
+      ),
+      'artifactPathValidation' => NULL,
+      'log_output_file' => NULL,
+      'enable_font_subsetting' => false,
+      'pdf_backend' => 'CPDF',
+      'default_media_type' => 'screen',
+      'default_paper_size' => 'a4',
+      'default_paper_orientation' => 'portrait',
+      'default_font' => 'serif',
+      'dpi' => 96,
+      'enable_php' => false,
+      'enable_javascript' => true,
+      'enable_remote' => true,
+      'allowed_remote_hosts' => NULL,
+      'font_height_ratio' => 1.1,
+      'enable_html5_parser' => true,
     ),
   ),
   'filesystems' => 
@@ -546,11 +595,11 @@
       array (
         'transport' => 'smtp',
         'url' => NULL,
-        'host' => 'mailpit',
-        'port' => '1025',
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'smtp-mail.outlook.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'fabiolima01@live.com',
+        'password' => 'S1imagine01',
         'timeout' => NULL,
         'local_domain' => NULL,
       ),
@@ -592,7 +641,7 @@
     ),
     'from' => 
     array (
-      'address' => 'hello@example.com',
+      'address' => 'fabiolima01@live.com',
       'name' => 'DSF',
     ),
     'markdown' => 
@@ -791,55 +840,6 @@
       0 => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel\\resources\\views',
     ),
     'compiled' => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel\\storage\\framework\\views',
-  ),
-  'dompdf' => 
-  array (
-    'show_warnings' => false,
-    'public_path' => NULL,
-    'convert_entities' => true,
-    'options' => 
-    array (
-      'font_dir' => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel\\storage\\fonts',
-      'font_cache' => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel\\storage\\fonts',
-      'temp_dir' => 'C:\\Users\\House\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\xampp\\htdocs\\indutiva\\dsf_farmacias_laravel',
-      'allowed_protocols' => 
-      array (
-        'file://' => 
-        array (
-          'rules' => 
-          array (
-          ),
-        ),
-        'http://' => 
-        array (
-          'rules' => 
-          array (
-          ),
-        ),
-        'https://' => 
-        array (
-          'rules' => 
-          array (
-          ),
-        ),
-      ),
-      'artifactPathValidation' => NULL,
-      'log_output_file' => NULL,
-      'enable_font_subsetting' => false,
-      'pdf_backend' => 'CPDF',
-      'default_media_type' => 'screen',
-      'default_paper_size' => 'a4',
-      'default_paper_orientation' => 'portrait',
-      'default_font' => 'serif',
-      'dpi' => 96,
-      'enable_php' => false,
-      'enable_javascript' => true,
-      'enable_remote' => false,
-      'allowed_remote_hosts' => NULL,
-      'font_height_ratio' => 1.1,
-      'enable_html5_parser' => true,
-    ),
   ),
   'flare' => 
   array (

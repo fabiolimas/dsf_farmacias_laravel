@@ -1,9 +1,11 @@
 <?php namespace ArielMejiaDev\LarapexCharts;
 
+use ArielMejiaDev\LarapexCharts\Traits\HasOptions;
 use Illuminate\Support\Facades\View;
 
 class LarapexChart
 {
+    use HasOptions;
     /*
     |--------------------------------------------------------------------------
     | Chart
@@ -32,10 +34,12 @@ class LarapexChart
     protected string $grid;
     protected string $markers;
     protected bool $stacked = false;
+    protected bool $showLegend = true;
     protected string $stroke = '';
     protected string $toolbar;
     protected string $zoom;
     protected string $dataLabels;
+    protected string $theme = 'light';
     protected string $sparkline;
     private string $chartLetters = 'abcdefghijklmnopqrstuvwxyz';
 
@@ -59,6 +63,7 @@ class LarapexChart
         $this->sparkline = json_encode(['enabled' => false]);
         $this->fontFamily = config('larapex-charts.font_family');
         $this->foreColor = config('larapex-charts.font_color');
+        return $this;
     }
 
     public function pieChart() :PieChart
@@ -228,7 +233,7 @@ class LarapexChart
         return $this;
     }
 
-    public function setStroke(int $width, array $colors = []) :LarapexChart
+    public function setStroke(int $width, array $colors = [], string $curve = 'straight') :LarapexChart
     {
         if(empty($colors)) {
             $colors = config('larapex-charts.colors');
@@ -238,6 +243,7 @@ class LarapexChart
             'show'    =>  true,
             'width'   =>  $width,
             'colors'  =>  $colors,
+            'curve'   =>  $curve,
         ]);
         return $this;
     }
@@ -255,6 +261,12 @@ class LarapexChart
         return $this;
     }
 
+    public function setTheme(string $theme) :LarapexChart
+    {
+        $this->theme = $theme;
+	return $this;
+    }
+  
     public function setSparkline(bool $enabled = true): LarapexChart
     {
         $this->sparkline = json_encode(['enabled' => $enabled]);
@@ -264,6 +276,12 @@ class LarapexChart
     public function setStacked(bool $stacked = true): LarapexChart
     {
         $this->stacked = $stacked;
+        return $this;
+    }
+
+    public function setShowLegend(bool $showLegend = true): self
+    {
+        $this->showLegend = $showLegend;
         return $this;
     }
 
@@ -406,6 +424,11 @@ class LarapexChart
         return $this->stacked;
     }
 
+    public function showLegend(): string
+    {
+        return $this->showLegend ? 'true' : 'false';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | JSON Options Builder
@@ -432,6 +455,9 @@ class LarapexChart
             'colors' => json_decode($this->colors()),
             'series' => json_decode($this->dataset()),
             'dataLabels' => json_decode($this->dataLabels()),
+            'theme' => [
+                'mode' => $this->theme
+            ],
             'title' => [
                 'text' => $this->title()
             ],
@@ -444,6 +470,9 @@ class LarapexChart
             ],
             'grid' => json_decode($this->grid()),
             'markers' => json_decode($this->markers()),
+            'legend' => [
+                'show' => $this->showLegend()
+            ],
         ];
 
         if($this->labels()) {
@@ -483,6 +512,9 @@ class LarapexChart
             ],
             'colors' => json_decode($this->colors()),
             'dataLabels' => json_decode($this->dataLabels()),
+            'theme' => [
+                'mode' => $this->theme
+            ],
             'title' => [
                 'text' => $this->title()
             ],
@@ -495,6 +527,9 @@ class LarapexChart
             ],
             'grid' => json_decode($this->grid()),
             'markers' => json_decode($this->markers()),
+            'legend' => [
+                'show' => $this->showLegend()
+            ]
         ];
 
         if($this->labels()) {

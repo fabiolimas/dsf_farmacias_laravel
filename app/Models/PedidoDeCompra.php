@@ -9,4 +9,10 @@ class PedidoDeCompra extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function pedidoItem()
+    {
+        return $this->hasMany(PedidoItem::class);
+    }
+
 }

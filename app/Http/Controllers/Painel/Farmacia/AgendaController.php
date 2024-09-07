@@ -64,7 +64,7 @@ class AgendaController extends Controller
          $farmacia=Cliente::find(auth()->user()->cliente_id);
 
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
-        $exames = Exame::join('exame_farmacias','exame_farmacias.exame_id', 'exames.id')
+        $exames = ExameFarmacia::join('exames','exames.id', 'exame_farmacias.exame_id')
         ->where('exame_farmacias.cliente_id', $farmacia->id)
         ->get();
        
@@ -105,7 +105,10 @@ class AgendaController extends Controller
 
         $cliente = ClienteFarmacia::find($request->cliente_farmacia_id);
 
-        $exame = Exame::find($request->exame_id);
+        $exame = ExameFarmacia::join('exames','exames.id', 'exame_farmacias.exame_id')
+        ->where('exame_id', $request->exame_id)->first();
+
+       
 
         $agenda = new Agenda();
         $agenda->cliente_farmacia_id = $cliente->id;

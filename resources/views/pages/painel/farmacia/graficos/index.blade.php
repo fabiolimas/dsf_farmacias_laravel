@@ -93,7 +93,7 @@
                             <!-- dropdown -->
                             <div class="d-flex gap-3 ps-lg-3 ">
                                 <div class=" ">
-                                    <div class="dropdown">
+                                    {{-- <div class="dropdown">
                                         <button class="btn btn-light fs-18px bg-white shadow-sm border text-green " type="button"
                                             id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -109,7 +109,7 @@
                                             <a class="dropdown-item" href="#">6 meses</a>
                                             <a class="dropdown-item" href="#">6 meses</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -121,25 +121,27 @@
                             <div class="mt-2 lista-scroll p-3 pt-0 clientes-lista-assinantes pb-5 "
                                 style="max-height: 500px">
 
-                                @foreach ([3, 3, 3, 3, 3, 3, 3] as $key => $item)
+                                @foreach ($maisvendidos as $key => $exame)
+                               
                                     <div
                                         class="d-flex gap-2 mb-3text-green-2 fw-600 bg-green-light  p-2 rounded-3 mb-3 align-items-center ">
                                         <div class="">
                                             <div class="bg-white border-green-light px-2 py-2  text-center lh-1 rounded-3">
-                                                <div class="fs-24px text-green-2 py-1 px-1">#{{ $key + 1 }}</div>
+                                                <div class="fs-24px text-green-2 py-1 px-1">#{{ $loop->index+1 }}</div>
                                             </div>
                                         </div>
                                         <div class="d-flex  align-items-center">
                                             <div class="">
-                                                <div class="text-green-2 fs-18px">PSA Teste Rápido</div>
-                                                <div class="text-green fs-16px">456 realizados</div>
+                                                <div class="text-green-2 fs-18px">{{$exame->nome}}</div>
+                                                <div class="text-green fs-16px">{{$exame->total_vendas}} realizados</div>
                                             </div>
                                         </div>
                                         <div class="fs-18px text-green-2 ms-auto pe-3">
-                                            50 em estoque
+                                            {{$exame->estoque}} em estoque
                                         </div>
 
                                     </div>
+                                    
                                 @endforeach
 
                             </div>
@@ -167,7 +169,7 @@
                             <!-- dropdown -->
                             <div class="d-flex gap-3 ps-lg-3 ">
                                 <div class="">
-                                    <div class="dropdown">
+                                    {{-- <div class="dropdown">
                                         <button class="btn btn-light fs-18px bg-white shadow-sm border text-green " type="button"
                                             id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -183,7 +185,7 @@
                                             <a class="dropdown-item" href="#">24h</a>
                                             <a class="dropdown-item" href="#">24h</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -195,17 +197,17 @@
                             <div class="mt-2 lista-scroll p-3 pt-0 clientes-lista-assinantes pb-5 "
                                 style="max-height: 500px">
 
-                                @foreach ([3, 3, 3, 3, 3, 3, 3] as $key => $item)
+                                @foreach ($ticketmedio as $key => $item)
                                     <div
                                         class="d-flex gap-2 mb-3text-green-2 fw-600 bg-green-light  p-2 rounded-3 mb-3 align-items-center ">
                                         <div class="d-flex  align-items-center">
                                             <div class="">
-                                                <div class="text-green-2 fs-18px">PSA Teste Rápido</div>
-                                                <div class="text-green fs-16px">6 realizados</div>
+                                                <div class="text-green-2 fs-18px">{{$item->nome}}</div>
+                                                <div class="text-green fs-16px">{{$item->total_vendas}} realizados</div>
                                             </div>
                                         </div>
                                         <div class="fs-20px text-green-2 ms-auto pe-3">
-                                            R$ 120,00
+                                            R$ {{number_format($item->ticket_medio,2,',','.')}}
                                         </div>
 
                                     </div>
