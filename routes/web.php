@@ -77,6 +77,7 @@ Route::delete('exclui-pedido/{id}', [ComprasController::class, 'destroyPedido'])
 Route::post('salvar-pedido/{id}', [ComprasController::class, 'salvarPedido'])->name('painel.admin.compras.salvar-pedido');
 Route::get('confirmar-pedido/{id}', [ComprasController::class, 'confirmarPedido'])->name('painel.admin.compras.confirmar-pedido');
 Route::get('/print-pedido/{id}', [ComprasController::class, 'gerarPDF'])->name('painel.admin.compras.printPedido');
+Route::post('/busca-pedido', [ComprasController::class, 'buscaPedidoCliente'])->name('painel.admin.compras.busca');
 
 /* Exames */
 

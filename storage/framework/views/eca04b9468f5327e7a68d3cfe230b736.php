@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Agendar novo exame'); ?>
 
 <?php $__env->startSection('head'); ?>
@@ -11,10 +10,10 @@
        themeSystem: 'bootstrap5',
 
        headerToolbar: { left: 'title' },
-       
-        
+
+
         selectMirror: true,
-       
+
         initialView: 'dayGridMonth',
         selectable: true,
 
@@ -74,13 +73,13 @@
                                         </label>
                                         <div class="position-relative">
                                             
-                                                <select name="cliente_farmacia_id" id="cliente" class="form-select form-control-custom">
+                                                <select name="cliente_farmacia_id" id="cliente" class="form-select form-control-custom" required>
                                                     <option value="">Pesquisar</option>
                                                     <?php $__currentLoopData = $clientesFarma; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    
+
                                                         <option value="<?php echo e($cliente->id); ?>"><?php echo e($cliente->nome); ?></option>
-                                                    
-                                                    
+
+
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
 
@@ -98,9 +97,9 @@
                                     <label for="pesquisa" class="form-label text-green fw-500 fs-18px w-100">
                                         <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
                                             Exame
-                                            <a href="<?php echo e(route('painel.farmacia.exames.create')); ?>"
+                                            <a href="<?php echo e(route('painel.farmacia.estoque.index')); ?>"
                                                 class="text-green-3 text-decoration-none fs-14px">
-                                                Cadastrar novo exame ↗
+                                                Verificar Estoque ↗
                                             </a>
                                         </div>
 
@@ -123,7 +122,7 @@ unset($__errorArgs, $__bag); ?>"
                                         <option value="<?php echo e($exame->id); ?>"><?php echo e($exame->nome); ?></option>
                                         <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        
+
                                     </select>
                                     <?php $__errorArgs = ['cargo'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -244,10 +243,10 @@ unset($__errorArgs, $__bag); ?>
                            <h4>Produto sem estoque?</h4>
 
                             <!--  -->
-                            
+
                         </div>
 
-                       
+
 
                         <div class="row mt-4 pt-2 gy-2">
                             <div class="col-12 col-lg-6">
@@ -550,7 +549,7 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->startSection('scripts'); ?>
     <script>
-       
+
         $(document).ready(function() {
     $('#cliente').select2();
 
@@ -558,7 +557,7 @@ unset($__errorArgs, $__bag); ?>
     $('#exame_id').change(function(){
         if($('#exame_id').val() == 0){
              $("#modal-sem-estoque").modal('show');
-           
+
         }
     });
 });

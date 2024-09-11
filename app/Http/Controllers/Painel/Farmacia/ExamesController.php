@@ -49,10 +49,10 @@ class ExamesController extends Controller
             )
             ->where('agendas.cliente_id', $farmacia->id)
             ->where('agendas.status', 'aberto')
-            
+
             ->orderBy('agendas.data_exame', 'asc')
             ->orderBy('agendas.hora_exame', 'asc')
-            
+
             ->get()
             ->groupBy('data_exame'); // Agrupa pelos exames na mesma data
 
@@ -68,23 +68,23 @@ class ExamesController extends Controller
     $examesProntos=Agenda::where('status', 'pronto')
     ->where('cliente_id', auth()->user()->cliente_id)
     ->get();
-  
+
     return view('pages.painel.farmacia.exames.list',compact('examesProntos'));
 
    }
 
    public function ShowResult(Request $request){
      $farmacia=Cliente::find(auth()->user()->cliente_id);
- 
+
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
-  
 
-  
+
+
         $array = json_decode($resultado->perguntas, true);
-    
 
- 
+
+
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
     return view('pages.painel.farmacia.exames.show',compact('array','clienteFarma','farmacia','resultado'));
@@ -95,8 +95,8 @@ class ExamesController extends Controller
         $agenda=Agenda::find($request->id);
         $exame=ExameFarmacia::where('exame_id', $agenda->exame_id)->first();
         $venda = new Venda();
-
-
+        $valor=$exame->valor;
+        $val_formatado=str_replace(',', '.', $valor);
         $estoqueAtual=$exame->estoque;
        if($request->status == 'confirmado'){
         $agenda->update(['status'=>$request->status]);
@@ -105,7 +105,7 @@ class ExamesController extends Controller
         $venda->cliente_farmacia_id=$agenda->cliente_farmacia_id;
         $venda->exame_id=$exame->exame_id;
         $venda->cliente_id=auth()->user()->cliente_id;
-        $venda->valor=$exame->valor;
+        $venda->valor=$val_formatado;
         $venda->save();
 
 
@@ -115,8 +115,8 @@ class ExamesController extends Controller
         $agenda->update(['status'=>$request->status]);
        }
 
-        
-    
+
+
     return redirect()->back();
    }
 
@@ -128,7 +128,7 @@ class ExamesController extends Controller
     $examesConfirmados=Agenda::where('status','confirmado')
     ->where('cliente_id', $farmacia->id)->get();
 
-   
+
 
     return view('pages.painel.farmacia.exames.confirmados', compact('examesConfirmados'));
    }
@@ -146,12 +146,12 @@ class ExamesController extends Controller
    }
 
    public function storeResultado(Request $request){
-    
+
 
     $perguntas=['perguntas'=>$request->perguntas,'respostas'=>$request->respostas];
 
-  
- 
+
+
 
         $resultado= new Resultado();
        $resultado->cliente_farmacia_id=$request->cliente_farmacia_id;
@@ -195,7 +195,7 @@ class ExamesController extends Controller
 {
 
      $farmacia=Cliente::find(auth()->user()->cliente_id);
- 
+
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
 
@@ -212,14 +212,14 @@ public function enviarPDFPorEmail(Request $request)
 {
 
      $farmacia=Cliente::find(auth()->user()->cliente_id);
- 
+
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
 
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-    
+
      $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
       // Converter o PDF para uma string binária
     $pdfContent = $pdf->output();
@@ -247,11 +247,11 @@ public function buscaExamesProntos(Request $request){
         $examesProntos=Agenda::
         where('nome_exame','like','%'.$busca.'%')
         ->orWhere('nome_cliente','like','%'.$busca.'%')->get();
-     
+
 
     }
-    
-  
+
+
    return view('pages.painel.farmacia.buscas.exames_prontos',compact('examesProntos'));
 }
 
@@ -281,12 +281,13 @@ public function  buscaExameCreate(Request $request){
 public function updateEstoque(Request $request){
 
     $exame=ExameFarmacia::where('exame_id', $request->exame)->first();
-
+    $valor=$request->valor;
+    $val_formatado=str_replace(',', '.', $valor);
 if($exame == null){
     $newExame= new ExameFarmacia();
 
     $newExame->exame_id=$request->exame;
-    $newExame->valor=$request->valor;
+    $newExame->valor=$val_formatado;
     $newExame->estoque=$request->estoque;
     $newExame->lote=$request->lote;
     $newExame->cliente_id=auth()->user()->cliente_id;

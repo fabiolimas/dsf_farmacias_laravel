@@ -33,7 +33,7 @@ class AgendaController extends Controller
         $examesDia =   Agenda::join('cliente_farmacias', 'cliente_farmacias.id', '=', 'agendas.cliente_farmacia_id')
             ->join('users', 'users.id', '=', 'agendas.user_id')
             ->join('exame_farmacias', 'exame_farmacias.exame_id','agendas.exame_id')
-          
+
 
             ->select(
                 'agendas.*',
@@ -44,14 +44,14 @@ class AgendaController extends Controller
                 'cliente_farmacias.cpf as cpf',
                 'users.*',
                 'exame_farmacias.estoque as estoqueExame'
-             
+
             )
             ->where('agendas.cliente_id', $farmacia->id)
             ->where('agendas.status', 'aberto')
-            
+
             ->orderBy('agendas.data_exame', 'asc')
             ->orderBy('agendas.hora_exame', 'asc')
-            
+
             ->get()
             ->groupBy('data_exame'); // Agrupa pelos exames na mesma data
 
@@ -66,8 +66,10 @@ class AgendaController extends Controller
         $clientesFarma = ClienteFarmacia::where('cliente_id', $farmacia->id)->get();
         $exames = ExameFarmacia::join('exames','exames.id', 'exame_farmacias.exame_id')
         ->where('exame_farmacias.cliente_id', $farmacia->id)
+        ->where('exame_farmacias.valor', '!=', null)
+        ->where('exame_farmacias.valor', '>=', 1)
         ->get();
-       
+
         $agendas = Agenda::join('cliente_farmacias', 'cliente_farmacias.id', 'agendas.cliente_farmacia_id')->where('agendas.cliente_id', $farmacia->id)->orderBy('agendas.hora_exame', 'asc')->get();
 
         return view('pages.painel.farmacia.agenda.create', compact('agendas', 'exames', 'farmacia', 'clientesFarma'));
@@ -108,7 +110,7 @@ class AgendaController extends Controller
         $exame = ExameFarmacia::join('exames','exames.id', 'exame_farmacias.exame_id')
         ->where('exame_id', $request->exame_id)->first();
 
-       
+
 
         $agenda = new Agenda();
         $agenda->cliente_farmacia_id = $cliente->id;
@@ -151,19 +153,19 @@ class AgendaController extends Controller
             )
             ->where('agendas.cliente_id', $farmacia->id)
             ->where('agendas.status', 'aberto')
-            
+
             ->orderBy('agendas.data_exame', 'asc')
             ->orderBy('agendas.hora_exame', 'asc')
-            
+
             ->get()
             ->limit(3)
             ->groupBy('data_exame');
         } else {
-      
+
 
                 $examesDia =   Agenda::join('cliente_farmacias', 'cliente_farmacias.id', '=', 'agendas.cliente_farmacia_id')
                 ->join('users', 'users.id', '=', 'agendas.user_id')
-    
+
                 ->select(
                     'agendas.*',
                     'agendas.data_exame',
@@ -177,10 +179,10 @@ class AgendaController extends Controller
                 ->where('agendas.status', 'aberto')
                 ->where('agendas.nome_cliente', 'like', '%' . $busca . '%')
                 ->orWhere('agendas.nome_exame', 'like', '%' . $busca . '%')
-                
+
                 ->orderBy('agendas.data_exame', 'asc')
                 ->orderBy('agendas.hora_exame', 'asc')
-                
+
                 ->get()
                 ->groupBy('data_exame');
         }

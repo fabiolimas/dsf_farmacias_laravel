@@ -29,6 +29,11 @@
                                             </div>
                                         </a>
                                     </div> --}}
+                                    @if($exameSemPreco >=1)
+                                    <span class="produtoSemPreco text-danger bg-warning"><i data-feather="alert-triangle" title="Configurar preço de venda"></i>Existem exames sem preço de venda!</span>
+                                    @else
+
+                                    @endif
                                 </div>
                                 <!-- pesquisa -->
                                 <div class="pt-3">
@@ -58,33 +63,41 @@
                                                 <th scope="col"><span class="text-green-2 d-inline-block pb-3">Valor de Compra</span></th>
                                                 <th scope="col"><span
                                                         class="text-green-2 d-inline-block pb-3">Valor de Venda</span></th>
+                                                        <th scope="col"><span
+                                                            class="text-green-2 d-inline-block pb-3">Opção</span></th>
 
-                                                       
-                                                
+
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($exames as $exame)
-                                                <tr class=" table-tr-cliente fw-500 fs-18px" data-bs-toggle="modal"
-                        data-bs-target="#detalhes-produto-{{ $exame->id }}"
+                                                <tr class=" table-tr-cliente fw-500 fs-18px " data-bs-toggle="modal"
+                                                    data-bs-target="#detalhes-produto-{{ $exame->id }}"
                                                     style="cursor:pointer">
-                                                    <td>
-                                                        <span class="text-green">{{ $exame->nome }}</span>
+                                                    <td class="@if($exame->valor == null || $exame->valor < 1) text-danger @else @endif">
+                                                        <span  class="@if($exame->valor == null || $exame->valor < 1) text-danger @else text-green @endif "> @if($exame->valor == null || $exame->valor < 1)
+
+                                                        @else  @endif {{ $exame->nome }}</span>
                                                     </td>
                                                     <td>
-                                                        <span class="text-green">{{ $exame->estoque }}</span>
+                                                        <span class="@if($exame->valor == null || $exame->valor < 1) text-danger @else text-green @endif">{{ $exame->estoque }}</span>
                                                     </td>
                                                     <td>
                                                         <span
-                                                            class="text-green">R$ {{number_format($exame->valor_de_compra,2,',','.')}}</span>
+                                                        class="@if($exame->valor == null || $exame->valor < 1) text-danger @else text-green @endif">R$ {{number_format($exame->valor_de_compra,2,',','.')}}</span>
                                                     </td>
                                                     <td>
                                                         <span
-                                                            class="text-green">R$ {{number_format($exame->valor,2,',','.')}}</span>
+                                                        class="@if($exame->valor == null || $exame->valor < 1) text-danger @else text-green @endif">R$ {{number_format($exame->valor,2,',','.')}}</span>
                                                     </td>
-                                                   
-                                                    
-                                                 
+                                                    <td>
+                                                        <span
+                                                        class="text-green"><i data-feather="edit"></i></span>
+                                                    </td>
+
+
+
                                                 </tr>
 
                                                 <div class="modal modal-custom fade" id="detalhes-produto-{{ $exame->id }}" tabindex="-1"
@@ -92,23 +105,23 @@
                                                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
                                                         <div class="modal-content bg-transparent ">
                                                             <div class="modal-body p-lg-5  border-0">
-                                    
+
                                                                 <div class="p-4 shadow rounded-3  bg-white border">
-                                    
-                                    
+
+
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title"> Atualizar Preço de Venda</h5>
-                                                                       
+
                                                                       </div>
-                                    
+
                                                                     <form action="{{ route('painel.farmacia.estoque.update', $exame->id) }}" method="post"
                                                                         id="form-remover">
-                                    
+
                                                                         @csrf
-                                                                      
-                                                                       
+
+
                                                                         <input type="hidden" name="exame_id" value="{{ $exame->id }}">
-                                                                    
+
                                                                         <!-- Quantidade em estoque -->
                                                                         <div class="mb-2 pb-3">
                                                                             <div class="mb-0 position-relative">
@@ -116,14 +129,14 @@
                                                                                     <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
                                                                                         Quantidade
                                                                                     </div>
-                                    
+
                                                                                 </label>
                                                                                 <div class="position-relative">
                                                                                     <input type="text"
                                                                                         class="form-control form-control-custom @error('qtd_estoque') is-invallid @enderror fs-18px fw-500"
                                                                                         name="quantidade" id="qtd_estoque" value="{{ $exame->estoque }}"
                                                                                         placeholder="0" disabled/>
-                                    
+
                                                                                     <div class="text-green-2 fw-500"
                                                                                         style="position: absolute; top:13px; right: 15px">
                                                                                         Unidades
@@ -131,7 +144,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                                                           
+
                                                                         <!-- Valor de venda -->
                                                                         <div class="mb-3 pb-3">
                                                                             <label for="valor" class="form-label text-green fw-500 fs-18px">
@@ -153,19 +166,19 @@
                                                                                   </button>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                            
+
                                                                                 <button type="submit" id="modal-link-ver-mais"
                                                                                     class="btn btn-primary w-100 py-2 fs-16px">Salvar</button>
                                                                             </div>
                                                                         </div>
-                                                                        
+
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                             @endforeach
                                         </tbody>
                                     </table>

@@ -39,6 +39,7 @@ class ComprasController extends Controller
       ->where('clientes.id', auth()->user()->cliente_id)
       ->count();
     }
+
     $clientes=Cliente::all();
 
 
@@ -109,10 +110,10 @@ class ComprasController extends Controller
   public function storeItem(Request $request){
 
     $itemPedido= new PedidoItem();
-
+    $val_formatado=str_replace(',', '.', $request->preco);
     $itemPedido->pedido_de_compras_id=$request->pedido_id;
     $itemPedido->exame_id=$request->exame_id;
-    $itemPedido->preco=$request->preco;
+    $itemPedido->preco=$val_formatado;
     $itemPedido->quantidade=$request->quantidade;
     $itemPedido->lote=$request->lote;
     $itemPedido->validade=$request->validade;
@@ -141,14 +142,13 @@ class ComprasController extends Controller
     $pedido=PedidoDeCompra::find($request->id);
     $itensPedido=PedidoItem::where('pedido_de_compras_id', $pedido->id)->get();
 
-
-
     foreach($itensPedido as $item){
 
         $exameFarmacia=ExameFarmacia::where('cliente_id', $pedido->cliente_id)
         ->where('exame_id', $item->exame_id)
-    ->first();
+        ->first();
 
+        $val_formatado=str_replace(',', '.', $item->preco);
 
    if($exameFarmacia == null){
 
@@ -156,22 +156,22 @@ class ComprasController extends Controller
 
         $novoExame->exame_id=$item->exame_id;
         $novoExame->cliente_id=$pedido->cliente_id;
-        $novoExame->valor_de_compra=$item->preco;
+        $novoExame->valor_de_compra=$val_formatado;
         $novoExame->estoque=$item->quantidade;
         $novoExame->lote=$item->lote;
         $novoExame->validade=$item->validade;
         $novoExame->save();
-
-    $pedido->update(['status'=>'recebido']);
+        $pedido->update(['status'=>'recebido']);
 
     }else{
+
         $estoqueAtual=$exameFarmacia->estoque;
-       $estoqueAtual+=$item->quantidade;
-        $exameFarmacia->update(['estoque'=>$estoqueAtual, 'valor_de_compra'=>$item->preco,'lote'=>$item->lote,'validade'=>$item->validade]);
+        $estoqueAtual+=$item->quantidade;
+        $exameFarmacia->update(['estoque'=>$estoqueAtual, 'valor_de_compra'=>$val_formatado,'lote'=>$item->lote,'validade'=>$item->validade]);
         $pedido->update(['status'=>'recebido']);
     }
     }
-    return redirect()->route('painel.admin.compras.index')->withSuccess('Pedido recebido com sucesso!');
+    return redirect()->route('painel.farmacia.estoque.index')->withSuccess('Pedido recebido com sucesso!');
 
   }
 
@@ -194,7 +194,7 @@ class ComprasController extends Controller
 
     public function gerarPDF(Request $request)
     {
-    
+
       $exames=Exame::all();
 
       $pedido=PedidoDeCompra::find($request->id);
@@ -202,14 +202,55 @@ class ComprasController extends Controller
       $itensPedido=PedidoItem::join('exames','exames.id','pedido_items.exame_id')
       ->select('exames.*','pedido_items.*')
       ->where('pedido_de_compras_id', $pedido->id)->get();
-  
+
       $totalPedido=0;
-  
+
   //  return view('pages.painel.admin.compras.visualizar_pdf', compact('totalPedido','exames','cliente','pedido','itensPedido'));
-  
-      
-    
+
+
+
         $pdf = PDF::loadView('pages.painel.admin.compras.visualizar_pdf', compact('totalPedido','exames','cliente','pedido','itensPedido'))->setOptions(['enable_remote' => true]);
          return $pdf->download('Pedido.pdf');
     }
+
+    public function buscaPedidoCliente(Request $request){
+
+
+
+            if($request->id == ""){
+                $pedidos=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
+                ->select('clientes.*', 'pedido_de_compras.*')
+                ->orderBY('pedido_de_compras.id', 'asc')
+                ->paginate(10);
+
+
+                $pedidoNovo=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
+                ->select('clientes.*', 'pedido_de_compras.*')
+                ->where('status','novo')
+                ->count();
+
+            }else{
+                $pedidos=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
+                ->select('clientes.*', 'pedido_de_compras.*')
+                ->where('pedido_de_compras.cliente_id', $request->id)
+                ->orderBY('pedido_de_compras.id', 'asc')
+                ->paginate(10);
+
+
+                $pedidoNovo=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
+                ->select('clientes.*', 'pedido_de_compras.*')
+                ->where('pedido_de_compras.cliente_id', $request->id)
+                ->where('status','novo')
+                ->count();
+            }
+
+
+
+
+        return view('pages.painel.admin.buscas.busca_clientes',compact('pedidos','pedidoNovo'));
+
+    }
+
+
+
 }

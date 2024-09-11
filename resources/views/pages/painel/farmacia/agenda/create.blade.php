@@ -11,10 +11,10 @@
        themeSystem: 'bootstrap5',
 
        headerToolbar: { left: 'title' },
-       
-        
+
+
         selectMirror: true,
-       
+
         initialView: 'dayGridMonth',
         selectable: true,
 
@@ -75,13 +75,13 @@
                                         <div class="position-relative">
                                             {{-- <input type="text" class="form-control form-control-custom fs-18px fw-500"
                                                 name="" id="pesquisa" placeholder="Pesquisar" /> --}}
-                                                <select name="cliente_farmacia_id" id="cliente" class="form-select form-control-custom">
+                                                <select name="cliente_farmacia_id" id="cliente" class="form-select form-control-custom" required>
                                                     <option value="">Pesquisar</option>
                                                     @foreach($clientesFarma as $cliente)
-                                                    
+
                                                         <option value="{{$cliente->id}}">{{$cliente->nome}}</option>
-                                                    
-                                                    
+
+
                                                     @endforeach
                                                 </select>
 
@@ -99,9 +99,9 @@
                                     <label for="pesquisa" class="form-label text-green fw-500 fs-18px w-100">
                                         <div class="d-flex justify-content-between gap-2 w-100 align-items-center">
                                             Exame
-                                            <a href="{{ route('painel.farmacia.exames.create') }}"
+                                            <a href="{{ route('painel.farmacia.estoque.index') }}"
                                                 class="text-green-3 text-decoration-none fs-14px">
-                                                Cadastrar novo exame ↗
+                                                Verificar Estoque ↗
                                             </a>
                                         </div>
 
@@ -117,7 +117,7 @@
                                         <option value="{{$exame->id}}">{{$exame->nome}}</option>
                                         @endif
                                         @endforeach
-                                        
+
                                     </select>
                                     @error('cargo')
                                         <div class="invalid-feedback fw-500">{{ $message }}</div>
@@ -203,10 +203,10 @@
                            <h4>Produto sem estoque?</h4>
 
                             <!--  -->
-                            
+
                         </div>
 
-                       
+
 
                         <div class="row mt-4 pt-2 gy-2">
                             <div class="col-12 col-lg-6">
@@ -509,7 +509,7 @@
 
 @section('scripts')
     <script>
-       
+
         $(document).ready(function() {
     $('#cliente').select2();
 
@@ -517,7 +517,7 @@
     $('#exame_id').change(function(){
         if($('#exame_id').val() == 0){
              $("#modal-sem-estoque").modal('show');
-           
+
         }
     });
 });

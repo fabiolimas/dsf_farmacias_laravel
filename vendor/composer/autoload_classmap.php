@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\Painel\\Config\\ConfigController' => $baseDir . '/app/Http/Controllers/Painel/Config/ConfigController.php',
     'App\\Http\\Controllers\\Painel\\Farmacia\\AgendaController' => $baseDir . '/app/Http/Controllers/Painel/Farmacia/AgendaController.php',
     'App\\Http\\Controllers\\Painel\\Farmacia\\ClienteController' => $baseDir . '/app/Http/Controllers/Painel/Farmacia/ClienteController.php',
+    'App\\Http\\Controllers\\Painel\\Farmacia\\EstoqueController' => $baseDir . '/app/Http/Controllers/Painel/Farmacia/EstoqueController.php',
     'App\\Http\\Controllers\\Painel\\Farmacia\\ExamesController' => $baseDir . '/app/Http/Controllers/Painel/Farmacia/ExamesController.php',
     'App\\Http\\Controllers\\Painel\\Farmacia\\GraficosFarmaciaController' => $baseDir . '/app/Http/Controllers/Painel/Farmacia/GraficosFarmaciaController.php',
     'App\\Http\\Controllers\\Painel\\GraficosController' => $baseDir . '/app/Http/Controllers/Painel/GraficosController.php',
