@@ -73,7 +73,7 @@
                                         <tbody>
                                             @foreach ($exames as $exame)
                                                 <tr class=" table-tr-cliente fw-500 fs-18px " data-bs-toggle="modal"
-                                                    data-bs-target="#detalhes-produto-{{ $exame->id }}"
+                                                    data-bs-target="#detalhes-produto-{{ $exame->exame_farma_id }}"
                                                     style="cursor:pointer">
                                                     <td class="@if($exame->valor == null || $exame->valor < 1) text-danger @else @endif">
                                                         <span  class="@if($exame->valor == null || $exame->valor < 1) text-danger @else text-green @endif "> @if($exame->valor == null || $exame->valor < 1)
@@ -100,7 +100,7 @@
 
                                                 </tr>
 
-                                                <div class="modal modal-custom fade" id="detalhes-produto-{{ $exame->id }}" tabindex="-1"
+                                                <div class="modal modal-custom fade" id="detalhes-produto-{{ $exame->exame_farma_id }}" tabindex="-1"
                                                     data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
                                                         <div class="modal-content bg-transparent ">
@@ -114,13 +114,13 @@
 
                                                                       </div>
 
-                                                                    <form action="{{ route('painel.farmacia.estoque.update', $exame->id) }}" method="post"
+                                                                    <form action="{{ route('painel.farmacia.estoque.update', $exame->exame_farma_id) }}" method="post"
                                                                         id="form-remover">
 
                                                                         @csrf
 
 
-                                                                        <input type="hidden" name="exame_id" value="{{ $exame->id }}">
+                                                                        <input type="hidden" name="exame_id" value="{{ $exame->exame_farma_id }}">
 
                                                                         <!-- Quantidade em estoque -->
                                                                         <div class="mb-2 pb-3">

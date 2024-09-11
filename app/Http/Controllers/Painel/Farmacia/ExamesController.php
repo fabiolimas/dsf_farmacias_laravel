@@ -248,7 +248,6 @@ public function buscaExamesProntos(Request $request){
         where('nome_exame','like','%'.$busca.'%')
         ->orWhere('nome_cliente','like','%'.$busca.'%')->get();
 
-
     }
 
 

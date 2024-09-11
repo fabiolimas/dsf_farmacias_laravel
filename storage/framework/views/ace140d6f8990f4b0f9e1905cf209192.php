@@ -63,7 +63,7 @@
                                         <tbody>
                                             <?php $__currentLoopData = $exames; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $exame): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr class=" table-tr-cliente fw-500 fs-18px " data-bs-toggle="modal"
-                                                    data-bs-target="#detalhes-produto-<?php echo e($exame->id); ?>"
+                                                    data-bs-target="#detalhes-produto-<?php echo e($exame->exame_farma_id); ?>"
                                                     style="cursor:pointer">
                                                     <td class="<?php if($exame->valor == null || $exame->valor < 1): ?> text-danger <?php else: ?> <?php endif; ?>">
                                                         <span  class="<?php if($exame->valor == null || $exame->valor < 1): ?> text-danger <?php else: ?> text-green <?php endif; ?> "> <?php if($exame->valor == null || $exame->valor < 1): ?>
@@ -90,7 +90,7 @@
 
                                                 </tr>
 
-                                                <div class="modal modal-custom fade" id="detalhes-produto-<?php echo e($exame->id); ?>" tabindex="-1"
+                                                <div class="modal modal-custom fade" id="detalhes-produto-<?php echo e($exame->exame_farma_id); ?>" tabindex="-1"
                                                     data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
                                                         <div class="modal-content bg-transparent ">
@@ -104,13 +104,13 @@
 
                                                                       </div>
 
-                                                                    <form action="<?php echo e(route('painel.farmacia.estoque.update', $exame->id)); ?>" method="post"
+                                                                    <form action="<?php echo e(route('painel.farmacia.estoque.update', $exame->exame_farma_id)); ?>" method="post"
                                                                         id="form-remover">
 
                                                                         <?php echo csrf_field(); ?>
 
 
-                                                                        <input type="hidden" name="exame_id" value="<?php echo e($exame->id); ?>">
+                                                                        <input type="hidden" name="exame_id" value="<?php echo e($exame->exame_farma_id); ?>">
 
                                                                         <!-- Quantidade em estoque -->
                                                                         <div class="mb-2 pb-3">

@@ -11,7 +11,7 @@ class EstoqueController extends Controller
    public function index(Request $request){
 
     $exames=ExameFarmacia::join('exames','exames.id', 'exame_farmacias.exame_id')
-    ->select('exames.*', 'exame_farmacias.valor', 'exame_farmacias.estoque','exame_farmacias.valor_de_compra')
+    ->select('exames.*', 'exame_farmacias.id as exame_farma_id','exame_farmacias.valor', 'exame_farmacias.estoque','exame_farmacias.valor_de_compra')
 
     ->where('cliente_id', auth()->user()->cliente_id)->get();
 
@@ -31,8 +31,9 @@ class EstoqueController extends Controller
    public function updateExameFarmacia(Request $request){
 
 
-        $exameFarma=ExameFarmacia::where('exame_id',$request->id)->first();
+        $exameFarma=ExameFarmacia::where('id',$request->id)->first();
     $valor=$request->valor;
+
 
     $val_formatado=str_replace(',', '.', $valor);
 
