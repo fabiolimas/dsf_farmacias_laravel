@@ -128,12 +128,12 @@ table, th, td {
                                         @endif
                                     </tr>
                                         </table>
-                                       {{-- <table>
+                                       <table>
 
 
                                        
-                                        <tr class="row">
-                                            <td colspan="2">
+                                      {{-- <tr class="row">
+                                              <td colspan="2">
                                                 Aferição de pressão arterial braço: {{ $resultado->braco_aferido }}
                                             </td>
                                             <td class="col-md-4 mt-3">
@@ -193,9 +193,9 @@ table, th, td {
                                                 Via de Ministração : {{ $resultado->via_ministracao }}
                                             </td>
                                            
-                                            </tr>
+                                            </tr>--}}
                                            
-                                            <tr> --}}
+                                            <tr>
                                             <td colspan="4">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
                                             </td>
@@ -204,7 +204,7 @@ table, th, td {
                                             <td class="col-md-2 mt-3">
                                                 CRM : {{ $resultado->crm }}
                                             </td>
-                                            <td colspan="2">
+                                            <td >
                                                 Endereço : {{ $resultado->endereco_medico }}
                                             </td>
                                             <td class="col-md-3 mt-3">
@@ -218,9 +218,9 @@ table, th, td {
                                 
                                 <div class="row mt-3">
                                     {{-- <span class="titleResult">Perfuração de Lóbulo Auricular</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
+                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">--}}
                                         <table>
-                                        <tr class="row">
+                                        {{--<tr class="row">
                                             <td colspan="2">
                                                 Nome do Fabricante : {{ $resultado->nome_fab_auricular }}
                                             </td>

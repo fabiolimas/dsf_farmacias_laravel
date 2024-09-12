@@ -93,7 +93,9 @@ class ExamesController extends Controller
    public function updatePresenca(Request $request){
 
         $agenda=Agenda::find($request->id);
-        $exame=ExameFarmacia::where('exame_id', $agenda->exame_id)->first();
+        $exame=ExameFarmacia::where('exame_id', $agenda->exame_id)
+        ->where('cliente_id', $agenda->cliente_id)
+        ->first();
         $venda = new Venda();
         $valor=$exame->valor;
         $val_formatado=str_replace(',', '.', $valor);
