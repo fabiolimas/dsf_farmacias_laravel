@@ -76,15 +76,7 @@
 
                                         </div>
                                         <hr class='mt-2'>
-                                        <?php if($array != null): ?>
-                                        <?php $__currentLoopData = $array['perguntas']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="col-md-4 mt-3">
-                                                <?php echo e($pergunta); ?>: <?php echo e($array['respostas'][$index]); ?>
-
-                                            </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php else: ?> 
-                                        <?php endif; ?>
+                                       
                                     </div>
                                 </div>
 
@@ -92,71 +84,20 @@
                                     <span class="titleResult">Atenção Farmaceutica</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 ">
                                         <div class="row">
-                                            <div class="col-md-4 mt-3">
-                                                Aferição de pressão arterial braço: <?php echo e($resultado->braco_aferido); ?>
 
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Resultado Sistólica: <?php echo e($resultado->resultado_sistolica); ?>
+                                            <?php if($array != null): ?>
+                                      
+                                            <?php $__currentLoopData = $array['perguntas']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    
+                                       
+                                                <div class="col-md-4 mt-3">
+                                                    <?php echo e($pergunta); ?>: <?php echo e($array['respostas'][$index]); ?>
 
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Resultado Diastolica: <?php echo e($resultado->resultado_distolica); ?>mmHG
-                                            </div>
-                                            <hr>
-
-                                            <div class="col-md-4 mt-3">
-                                                Aferição Glicemia Capilar: <?php echo e($resultado->glicemia); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                 Resultado : <?php echo e($resultado->result_glicemia); ?>mg/dll
-                                            </div>
-                                            <div class="col-m-4 "></div>
-                                            <hr>
-                                            <div class="col-md-4 mt-3">
-                                                Aferição de Temp. Corporal: <?php echo e($resultado->temperatura); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Resultado : <?php echo e($resultado->result_temperatura); ?>Cº
-                                            </div>
-                                            <div class="col-m-4 "></div>
-                                            <hr>
-                                            <div class="col-md-4 mt-3">
-                                                Aplicação de injetaveis : <?php echo e($resultado->injetaveis); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Medicamento : <?php echo e($resultado->medicamento); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Concentração : <?php echo e($resultado->concentracao); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Lote : <?php echo e($resultado->lote); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Validade : <?php echo e(date('d/m/H', strtotime($resultado->validade))); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                MS : <?php echo e($resultado->ms); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                DCB : <?php echo e($resultado->dcb); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Via de Ministração : <?php echo e($resultado->via_ministracao); ?>
-
-                                            </div>
-                                            <div class="col-m-4 "></div>
-                                            <hr>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php else: ?> 
+                                            <?php endif; ?>
+                                            
                                             <div class="col-md-3 mt-3">
                                                 Médico Responsavel : <?php echo e($resultado->medico_responsavel); ?>
 
@@ -174,39 +115,18 @@
 
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <span class="titleResult">Perfuração de Lóbulo Auricular</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 ">
-                                        <div class="row">
-                                            <div class="col-md-4 mt-3">
-                                                Nome do Fabricante : <?php echo e($resultado->nome_fab_auricular); ?>
 
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                CNPJ : <?php echo e($resultado->cnpj_fab_auricular); ?>
+                                        <div class="col-md-4 mt-3">
+                                            Responsavel pelo atendimento : <?php echo e($resultado->responsavel_atendimento); ?>
 
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Número lote pistola : <?php echo e($resultado->lote_pistola); ?>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            Observações ao paciente: <?php echo e($resultado->observacoes); ?>
 
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Número lote brinco : <?php echo e($resultado->lote_brinco); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Responsavel pelo atendimento : <?php echo e($resultado->responsavel_atendimento); ?>
-
-                                            </div>
-                                            <div class="col-md-12 mt-3">
-                                                Observações ao paciente: <?php echo e($resultado->observacoes); ?>
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="row">
                                     <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
                                 </div>

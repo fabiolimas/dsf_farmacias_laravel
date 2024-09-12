@@ -197,10 +197,10 @@
                             <select class="form-select form-control-custom fw-500 fs-18px"
                                 style="background-color: #CCEFEE"
                                 name="perguntas[${key}][tipo]" id="tipo-${key}" required>
-                                // <option value="multipla-escolha">Múltipla escolha</option>
+                                
                                 <option value="selecao">Seleção</option>
                                 // <option value="resposta-curta">Resposta curta</option>
-                                // <option value="paragrafo">Parágrafo</option>
+                               
                             </select>
                         </div>
                     </div>

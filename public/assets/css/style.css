@@ -273,6 +273,20 @@ span.select2-selection__arrow {
     border-color: #B2D2D2;
     color: #0E6664;
 }
+
+img.w-100.rounded-3.border-green-light {
+    filter: opacity(.5) !important;
+    width: 278px !important;
+    height: 70px;
+    }
+
+    .row.capaExame {
+        font-size: 12px;
+        background: #fff;
+        padding-top: 12px;
+        border-radius: 7px;
+        color: #0e6664;
+    }
 .logoResultado {
     width: 104px;
     margin-left: 22%;

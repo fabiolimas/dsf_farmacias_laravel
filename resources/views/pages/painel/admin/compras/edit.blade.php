@@ -47,7 +47,7 @@
 
                             </div>
                             <div class="pt-3">
-                                <button type="button" class="btn btn-primary w-100 py-2 fw-600" id="btnSalvarPedido">
+                                <button type="button" class="btn btn-primary w-100 py-2 fw-600" id="btnSalvarPedido" @if($itensPedido->count() == 0) disabled @else @endif>
                                     Salvar Pedido
                                 </button>
                             </div>
@@ -148,7 +148,7 @@
                                                 <input type="text"
                                                     class="form-control form-control-custom @error('qtd_estoque') is-invallid @enderror fs-18px fw-500"
                                                     name="quantidade" id="qtd_estoque" value="{{ old('qtd_estoque') }}"
-                                                    placeholder="0" />
+                                                    placeholder="0" required/>
 
                                                 <div class="text-green-2 fw-500"
                                                     style="position: absolute; top:13px; right: 15px">

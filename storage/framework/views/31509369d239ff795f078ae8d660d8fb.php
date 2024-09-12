@@ -151,18 +151,14 @@ unset($__errorArgs, $__bag); ?>
                                                             style="background-color: #CCEFEE"
                                                             name="perguntas[<?php echo e($key); ?>][tipo]"
                                                             id="tipo-<?php echo e($key); ?>" required>
-                                                            <option value="multipla-escolha"
-                                                                <?php if($pergunta['tipo'] == 'multipla-escolha'): ?> selected <?php endif; ?>>Múltipla
-                                                                escolha</option>
+                                                            
                                                             <option value="selecao"
                                                                 <?php if($pergunta['tipo'] == 'selecao'): ?> selected <?php endif; ?>>Seleção
                                                             </option>
                                                             <option value="resposta-curta"
                                                                 <?php if($pergunta['tipo'] == 'resposta-curta'): ?> selected <?php endif; ?>>Resposta
                                                                 curta</option>
-                                                            <option value="paragrafo"
-                                                                <?php if($pergunta['tipo'] == 'paragrafo'): ?> selected <?php endif; ?>>Parágrafo
-                                                            </option>
+                                                            
                                                         </select>
                                                     </div>
                                                 </div>

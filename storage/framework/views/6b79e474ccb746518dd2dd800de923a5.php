@@ -81,7 +81,7 @@
                                                             <div class="">
                                                                 <a href="<?php echo e(route('painel.admin.exames.edit', $exame->id)); ?>"
                                                                     class="text-decoration-none d-block">
-                                                                    <img src="<?php echo e(asset('assets/img/ilustracoes/exame.jpg')); ?>"
+                                                                    <img src="<?php echo e(asset('assets/img/logos/logo.svg')); ?>"
                                                                         alt=""
                                                                         class="w-100 rounded-3 border-green-light"
                                                                         style="filter: blur(0px)">

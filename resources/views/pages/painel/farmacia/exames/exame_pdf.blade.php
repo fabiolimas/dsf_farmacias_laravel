@@ -108,6 +108,13 @@ table, th, td {
                                     </tr>
                                     </table>
                                         <hr class='mt-2'>
+                                      
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <span class="titleResult">Atenção Farmaceutica</span>
+                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
                                         <table>
                                             <tr>
                                         @if($array != null)
@@ -121,14 +128,7 @@ table, th, td {
                                         @endif
                                     </tr>
                                         </table>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-2">
-                                    <span class="titleResult">Atenção Farmaceutica</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
-                                       
-                                       <table>
+                                       {{-- <table>
 
 
                                        
@@ -195,7 +195,7 @@ table, th, td {
                                            
                                             </tr>
                                            
-                                            <tr>
+                                            <tr> --}}
                                             <td colspan="4">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
                                             </td>
@@ -217,7 +217,7 @@ table, th, td {
                                 </div>
                                 
                                 <div class="row mt-3">
-                                    <span class="titleResult">Perfuração de Lóbulo Auricular</span>
+                                    {{-- <span class="titleResult">Perfuração de Lóbulo Auricular</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
                                         <table>
                                         <tr class="row">
@@ -242,7 +242,7 @@ table, th, td {
                                             <td colspan="3">
                                                 Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td colspan="3">
                                                 Observações ao paciente: {{ $resultado->observacoes }}

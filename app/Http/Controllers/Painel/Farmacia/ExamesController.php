@@ -64,12 +64,12 @@ class ExamesController extends Controller
    }
 
    public function examesProntos(Request $request){
-
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
     $examesProntos=Agenda::where('status', 'pronto')
     ->where('cliente_id', auth()->user()->cliente_id)
     ->get();
 
-    return view('pages.painel.farmacia.exames.list',compact('examesProntos'));
+    return view('pages.painel.farmacia.exames.list',compact('examesProntos','farmacia'));
 
    }
 
@@ -130,7 +130,7 @@ class ExamesController extends Controller
 
 
 
-    return view('pages.painel.farmacia.exames.confirmados', compact('examesConfirmados'));
+    return view('pages.painel.farmacia.exames.confirmados', compact('examesConfirmados','farmacia'));
    }
 
    public function dadosExame(Request $request){
@@ -204,7 +204,7 @@ class ExamesController extends Controller
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
      //return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
 
-    $pdf = \PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+    $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
      return $pdf->download('resultado.pdf');
 }
 
@@ -251,7 +251,7 @@ public function buscaExamesProntos(Request $request){
     }
 
 
-   return view('pages.painel.farmacia.buscas.exames_prontos',compact('examesProntos'));
+   return view('pages.painel.farmacia.buscas.exames_prontos',compact('examesProntos','farmacia'));
 }
 
 public function entradaEstoque(){

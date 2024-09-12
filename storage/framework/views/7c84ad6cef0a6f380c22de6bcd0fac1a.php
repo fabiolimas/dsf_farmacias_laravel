@@ -113,6 +113,13 @@ table, th, td {
                                     </tr>
                                     </table>
                                         <hr class='mt-2'>
+                                      
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <span class="titleResult">Atenção Farmaceutica</span>
+                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
                                         <table>
                                             <tr>
                                         <?php if($array != null): ?>
@@ -127,93 +134,7 @@ table, th, td {
                                         <?php endif; ?>
                                     </tr>
                                         </table>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-2">
-                                    <span class="titleResult">Atenção Farmaceutica</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
                                        
-                                       <table>
-
-
-                                       
-                                        <tr class="row">
-                                            <td colspan="2">
-                                                Aferição de pressão arterial braço: <?php echo e($resultado->braco_aferido); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Resultado Sistólica: <?php echo e($resultado->resultado_sistolica); ?>
-
-                                            </td>
-                                            <td colspan="2">
-                                                Resultado Diastolica: <?php echo e($resultado->resultado_distolica); ?>mmHG
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                Aferição Glicemia Capilar: <?php echo e($resultado->glicemia); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                 Resultado : <?php echo e($resultado->result_glicemia); ?>mg/dll
-                                            </td>
-                                            <td class="col-m-4 "></td>
-                                        </tr>
-                                       
-                                            <tr>
-                                            <td colspan="2">
-                                                Aferição de Temp. Corporal: <?php echo e($resultado->temperatura); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Resultado : <?php echo e($resultado->result_temperatura); ?>Cº
-                                            </td>
-                                            <td class="col-m-4 "></td>
-                                            </tr>
-                                    
-                                            <tr>
-                                            <td colspan="2">
-                                                Aplicação de injetaveis : <?php echo e($resultado->injetaveis); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Medicamento : <?php echo e($resultado->medicamento); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Concentração : <?php echo e($resultado->concentracao); ?>
-
-                                            </td>
-                                            </tr>
-                                            <tr>
-                                            <td class="col-md-4 mt-3">
-                                                Lote : <?php echo e($resultado->lote); ?>
-
-                                            </td>
-                                            <td colspan="2">
-                                                Validade : <?php echo e(date('d/m/H', strtotime($resultado->validade))); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                MS : <?php echo e($resultado->ms); ?>
-
-                                            </td>
-                                            </tr>
-                                            <tr>
-                                            <td class="col-md-4 mt-3">
-                                                DCB : <?php echo e($resultado->dcb); ?>
-
-                                            </td>
-                                            <td colspan="3">
-                                                Via de Ministração : <?php echo e($resultado->via_ministracao); ?>
-
-                                            </td>
-                                           
-                                            </tr>
-                                           
-                                            <tr>
                                             <td colspan="4">
                                                 Médico Responsavel : <?php echo e($resultado->medico_responsavel); ?>
 
@@ -239,37 +160,7 @@ table, th, td {
                                 </div>
                                 
                                 <div class="row mt-3">
-                                    <span class="titleResult">Perfuração de Lóbulo Auricular</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
-                                        <table>
-                                        <tr class="row">
-                                            <td colspan="2">
-                                                Nome do Fabricante : <?php echo e($resultado->nome_fab_auricular); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                CNPJ : <?php echo e($resultado->cnpj_fab_auricular); ?>
-
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-4 mt-3">
-                                                Número lote pistola : <?php echo e($resultado->lote_pistola); ?>
-
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Número lote brinco : <?php echo e($resultado->lote_brinco); ?>
-
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3">
-                                                Responsavel pelo atendimento : <?php echo e($resultado->responsavel_atendimento); ?>
-
-                                            </td>
-                                        </tr>
+                                    
                                         <tr>
                                             <td colspan="3">
                                                 Observações ao paciente: <?php echo e($resultado->observacoes); ?>

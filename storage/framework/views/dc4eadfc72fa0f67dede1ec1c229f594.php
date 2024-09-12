@@ -81,10 +81,17 @@
                                                         <div class="">
                                                             <a href="<?php echo e(route('painel.farmacia.exames.dados-exame', $confirmado->id)); ?>"
                                                                 class="text-decoration-none d-block">
-                                                                <img src="<?php echo e(asset('assets/img/ilustracoes/exame.jpg')); ?>"
-                                                                    alt=""
-                                                                    class="w-100 rounded-3 border-green-light"
-                                                                    style="filter: blur(0px)">
+                                                                
+                                                                    <div class="row capaExame">
+                                                            
+                                                                     
+                                                                            <div class="dados text-center">
+                                                                                <h6><?php echo e($farmacia->razao_social); ?></h6>
+                                                                                <p>Fone: <?php echo e($farmacia->telefone); ?> CNPJ: <?php echo e($farmacia->cnpj); ?></p>
+                                                                              
+                                                                            </div>
+                                                                       
+                                                                    </div>
                                                             </a>
                                                         </div>
 

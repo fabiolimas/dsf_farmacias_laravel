@@ -14,7 +14,7 @@
                             <div class="">
 
                                 <!--  -->
-                                <div class=" px-1 px-lg-3 mb-3">
+                                {{-- <div class=" px-1 px-lg-3 mb-3">
                                     <a class="btn btn-primary d-block d-md-inline-block mb-3 me-lg-3   "
                                         href="{{ route('painel.farmacia.exames.create') }}" role="button"
                                         style="padding: 16px 24px;">
@@ -24,7 +24,7 @@
                                         </div>
                                     </a>
 
-                                </div>
+                                </div> --}}
 
                                 <div class="d-flex pb-1  flex-column flex-lg-row gap-2 align-items-center pt-3 ">
                                     <h1 class="fs-4 fw-600  text-green-2 px-0 ps-lg-4  text-center text-md-start" style="min-width: 280px">
@@ -82,10 +82,20 @@
                                                         <div class="">
                                                             <a href="{{ route('painel.farmacia.exames.show', ['id' => 1]) }}"
                                                                 class="text-decoration-none d-block">
-                                                                <img src="{{ asset('assets/img/ilustracoes/exame.jpg') }}"
+                                                                {{-- <img src="{{ asset('assets/img/ilustracoes/exame.jpg') }}"
                                                                     alt=""
                                                                     class="w-100 rounded-3 border-green-light"
-                                                                    style="filter: blur(0px)">
+                                                                    style="filter: blur(0px)"> --}}
+                                                                    <div class="row capaExame">
+                                                            
+                                                                     
+                                                                        <div class="dados text-center">
+                                                                            <h6>{{ $farmacia->razao_social }}</h6>
+                                                                            <p>Fone: {{ $farmacia->telefone }} CNPJ: {{ $farmacia->cnpj }}</p>
+                                                                          
+                                                                        </div>
+                                                                   
+                                                                </div>
                                                             </a>
                                                         </div>
 

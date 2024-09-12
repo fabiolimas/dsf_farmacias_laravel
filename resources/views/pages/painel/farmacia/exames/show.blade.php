@@ -70,14 +70,7 @@
                                             Sexo: {{ $clienteFarma->sexo }}
                                         </div>
                                         <hr class='mt-2'>
-                                        @if($array != null)
-                                        @foreach ($array['perguntas'] as $index => $pergunta)
-                                            <div class="col-md-4 mt-3">
-                                                {{ $pergunta }}: {{ $array['respostas'][$index] }}
-                                            </div>
-                                        @endforeach
-                                        @else 
-                                        @endif
+                                       
                                     </div>
                                 </div>
 
@@ -85,7 +78,19 @@
                                     <span class="titleResult">Atenção Farmaceutica</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 ">
                                         <div class="row">
-                                            <div class="col-md-4 mt-3">
+
+                                            @if($array != null)
+                                      
+                                            @foreach ($array['perguntas'] as $index => $pergunta)
+    
+                                       
+                                                <div class="col-md-4 mt-3">
+                                                    {{ $pergunta }}: {{ $array['respostas'][$index] }}
+                                                </div>
+                                            @endforeach
+                                            @else 
+                                            @endif
+                                            {{-- <div class="col-md-4 mt-3">
                                                 Aferição de pressão arterial braço: {{ $resultado->braco_aferido }}
                                             </div>
                                             <div class="col-md-4 mt-3">
@@ -137,7 +142,7 @@
                                                 Via de Ministração : {{ $resultado->via_ministracao }}
                                             </div>
                                             <div class="col-m-4 "></div>
-                                            <hr>
+                                            <hr> --}}
                                             <div class="col-md-3 mt-3">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
                                             </div>
@@ -151,9 +156,16 @@
                                                 Telefone : {{ $resultado->telefone_medico }}
                                             </div>
                                         </div>
+
+                                        <div class="col-md-4 mt-3">
+                                            Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            Observações ao paciente: {{ $resultado->observacoes }}
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
+                                {{-- <div class="row mt-3">
                                     <span class="titleResult">Perfuração de Lóbulo Auricular</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 ">
                                         <div class="row">
@@ -177,7 +189,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
                                 </div>

@@ -109,18 +109,18 @@
                                                             style="background-color: #CCEFEE"
                                                             name="perguntas[{{ $key }}][tipo]"
                                                             id="tipo-{{ $key }}" required>
-                                                            <option value="multipla-escolha"
+                                                            {{-- <option value="multipla-escolha"
                                                                 @if ($pergunta['tipo'] == 'multipla-escolha') selected @endif>Múltipla
-                                                                escolha</option>
+                                                                escolha</option> --}}
                                                             <option value="selecao"
                                                                 @if ($pergunta['tipo'] == 'selecao') selected @endif>Seleção
                                                             </option>
                                                             <option value="resposta-curta"
                                                                 @if ($pergunta['tipo'] == 'resposta-curta') selected @endif>Resposta
                                                                 curta</option>
-                                                            <option value="paragrafo"
+                                                            {{-- <option value="paragrafo"
                                                                 @if ($pergunta['tipo'] == 'paragrafo') selected @endif>Parágrafo
-                                                            </option>
+                                                            </option> --}}
                                                         </select>
                                                     </div>
                                                 </div>
