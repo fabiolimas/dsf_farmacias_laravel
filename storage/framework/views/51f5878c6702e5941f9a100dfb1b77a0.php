@@ -53,7 +53,7 @@
                     </a>
                 </li>
             <?php endif; ?>
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['farmacia'])): ?>
                 <li class="">
                     <a href="<?php echo e(route('painel.farmacia.clientes.index')); ?>"
                         class="sidebar-link d-flex align-items-center <?php if(Route::is('painel.farmacia.clientes.*')): ?> active <?php endif; ?>  gap-4 ">
@@ -63,16 +63,24 @@
                         </div>
                     </a>
                 </li>
-                <li class="">
-                    <a href="<?php echo e(route('painel.admin.compras.index')); ?>"
-                        class="sidebar-link d-flex align-items-center <?php if(Route::is('painel.admin.compras.*')): ?> active <?php endif; ?>  gap-4 ">
-                        <i data-feather="list"></i>
-                        <div>
-                            Pedidos de compras
-                        </div>
-                    </a>
-                </li>
+
+
             <?php endif; ?>
+
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('adminFarmacia')): ?>
+
+            <li class="">
+                <a href="<?php echo e(route('painel.admin.compras.index')); ?>"
+                    class="sidebar-link d-flex align-items-center <?php if(Route::is('painel.admin.compras.*')): ?> active <?php endif; ?>  gap-4 ">
+                    <i data-feather="list"></i>
+                    <div>
+                        Pedidos de compras
+                    </div>
+                </a>
+            </li>
+
+            <?php endif; ?>
+
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?>
                 <li class="">
                     <a href="<?php echo e(route('painel.admin.exames.index')); ?>"
@@ -107,7 +115,7 @@
                     </a>
                 </li>
             <?php endif; ?>
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('adminFarmacia')): ?>
                 <li class="">
                     <a href="<?php echo e(route('painel.farmacia.graficos.index')); ?>"
                         class="sidebar-link d-flex align-items-center <?php if(Route::is('painel.farmacia.graficos.*')): ?> active <?php endif; ?>  gap-4 ">
@@ -123,6 +131,7 @@
         </ul>
 
         <ul class="list-unstyled mt-auto mb-0">
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['admin','adminFarmacia'])): ?>
             <li class="">
                 <a href="<?php echo e(route('painel.config.index')); ?>"
                     class="sidebar-link d-flex align-items-center <?php if(Route::is('painel.config.*')): ?> active <?php endif; ?>  gap-4 ">
@@ -132,6 +141,7 @@
                     </div>
                 </a>
             </li>
+        <?php endif; ?>
             <li class="">
                 <a href="<?php echo e(route('logout')); ?>"
                     onclick="event.preventDefault();

@@ -13,23 +13,23 @@ class ConfigController extends Controller
 {
     public function index()
     {
-
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
         if(auth()->user()->profile == "admin"){
             $colaboradores = User::latest()->get();
-     
+
         }else{
             $colaboradores = User::where('cliente_id', auth()->user()->cliente_id)
             ->whereNot('profile','admin')
             ->latest()->get();
         }
-        
+
         $cargos = DB::table('roles')->latest()->get();
-        return view('pages.painel.config.index', compact('colaboradores', 'cargos'));
+        return view('pages.painel.config.index', compact('farmacia','colaboradores', 'cargos'));
     }
 
     public function updateProfile(Request $request)
     {
-        
+
 
         $user = User::find(auth()->user()->id);
         $cliente=Cliente::find( $user->cliente_id);
@@ -50,7 +50,7 @@ class ConfigController extends Controller
             $cliente->update(['logo'=>$this->imgBase64ToFileUpload($request->img_profile)]);
 
         }
-            
+
 
         $user->save();
 

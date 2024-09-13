@@ -136,14 +136,14 @@ class ExamesController extends Controller
    }
 
    public function dadosExame(Request $request){
-
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
     $agenda=Agenda::find($request->id);
 
     $exame=Exame::find($agenda->exame_id);
 
     $cliente=ClienteFarmacia::find($agenda->cliente_farmacia_id);
 
-    return view('pages.painel.farmacia.exames.dados-exame', compact('agenda', 'exame','cliente'));
+    return view('pages.painel.farmacia.exames.dados-exame', compact('farmacia','agenda', 'exame','cliente'));
 
    }
 

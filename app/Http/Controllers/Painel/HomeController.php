@@ -99,6 +99,6 @@ class HomeController extends Controller
 
 
 
-        return view('pages.painel.home', compact('examesAcabando', 'examesPendentes','faturamento', 'mapaClientes','clientes','examesProntos'));
+        return view('pages.painel.home', compact('farmacia', 'examesAcabando', 'examesPendentes','faturamento', 'mapaClientes','clientes','examesProntos'));
     }
 }

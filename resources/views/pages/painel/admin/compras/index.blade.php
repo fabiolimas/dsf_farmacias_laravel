@@ -8,7 +8,7 @@
             <div class="col-12 col-lg-7 col-xl-7">
                 <div class="card min-vh-100">
                     <div class="card-body px-2 py-4">
-                        @can('farmacia')
+                        @can('adminFarmacia')
                         <div class="row">
                             <div class="col-md-6">
                                 <h1 class="fs-4 fw-600 mb-4 text-green-2 px-0 ps-lg-4  " style="min-width: 260px">

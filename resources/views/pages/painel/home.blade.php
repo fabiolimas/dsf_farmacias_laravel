@@ -2,7 +2,7 @@
 @section('title', 'Início')
 @section('content')
 
-    @can('farmacia')
+    @canany(['farmacia','adminFarmacia'])
         <div class="row gy-4 graficos">
 
             <div class="col-12 col-xl-8">
@@ -225,7 +225,7 @@
                                             Ver mais
                                         </button>
                                     </div>
-                                    @else 
+                                    @else
 
                                     @endif
                                 </div>
@@ -287,7 +287,7 @@
                                         </button>
                                         </a>
                                     </div>
-                                    @else 
+                                    @else
                                     @endif
                                 </div>
 
@@ -569,7 +569,7 @@
                                                 </div>
 
                                                 <!-- modal ver cliente -->
-                                                
+
                                             @endcan
                                         @endforeach
 
@@ -585,7 +585,7 @@
                                             Ver mais
                                         </button>
                                     </div>
-                                    @else 
+                                    @else
                                     @endif
                                 </div>
 
@@ -599,7 +599,7 @@
                             <div class="card-body px-2 py-4">
 
                                 <div class="text-center px-3">
-                                    <h2 class="fs-24px fw-600 text-green-2 ">Quase acabando</h2>
+                                    <h2 class="fs-24px fw-600 text-green-2 ">Estoque Atual</h2>
                                 </div>
 
 
@@ -635,7 +635,7 @@
                                             Ver mais
                                         </button>
                                     </div>
-                                    @else 
+                                    @else
                                     @endif
                                 </div>
 
@@ -647,7 +647,7 @@
             </div>
 
         </div>
-    @endcan
+    @endcanany
 
     @can('admin')
         <div class="">
@@ -685,13 +685,13 @@
 
 @section('scripts')
 
-    @can('farmacia')
+    @canany(['farmacia','adminFarmacia'])
         <!-- scripts apexchart -->
         <script src="{{ $faturamento->cdn() }}"></script>
         {{ $faturamento->script() }}
         {{ $mapaClientes->script() }}
 
- 
+
         <script>
             $('document').ready(function() {
                 $.ajaxSetup({
@@ -699,35 +699,35 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-    
+
                 let resultado = $('.resultBusca');
-    
+
                 $('#pesquisa').keyup(function() {
-    
+
                     $.ajax({
                         url: "{{ route('busca-exame-entrada') }}", // Arquivo PHP que processará a busca
                         type: "post",
                         data: {
                             pesquisa: $('#pesquisa').val(),
-    
-    
+
+
                         }, // Dados a serem enviados para o servidor
                         success: function(response) {
-    
+
                             resultado.html(response);
                             resultado.html(response.status);
                         },
                         error: function(result) {
                             console.log(result);
                         }
-    
-    
-    
+
+
+
                     });
                 });
-    
+
             });
         </script>
-    @endcan
+    @endcanany
 
 @endsection

@@ -271,7 +271,7 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
-    <?php if($examesDia->count() >= 3): ?>
+    <?php if($examesDia->count() >= 4): ?>
         <div class="ver-mais-lista-scroll text-center">
             <button type="button"
                 class="btn btn-ligth shadow bg-white  py-1 text-green fs-20px fw-600">

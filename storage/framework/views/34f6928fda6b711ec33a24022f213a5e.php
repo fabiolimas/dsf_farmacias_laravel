@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Visualizar Exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -76,7 +75,7 @@
 
                                         </div>
                                         <hr class='mt-2'>
-                                       
+
                                     </div>
                                 </div>
 
@@ -86,16 +85,16 @@
                                         <div class="row">
 
                                             <?php if($array != null): ?>
-                                      
+
                                             <?php $__currentLoopData = $array['perguntas']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    
-                                       
+
+
                                                 <div class="col-md-4 mt-3">
                                                     <?php echo e($pergunta); ?>: <?php echo e($array['respostas'][$index]); ?>
 
                                                 </div>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            <?php else: ?> 
+                                            <?php else: ?>
                                             <?php endif; ?>
                                             
                                             <div class="col-md-3 mt-3">

@@ -15,6 +15,8 @@ class ComprasController extends Controller
 {
   public function index(){
 
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
+
     if(auth()->user()->profile == 'admin'){
       $pedidos=PedidoDeCompra::join('clientes', 'clientes.id','pedido_de_compras.cliente_id')
       ->select('clientes.*', 'pedido_de_compras.*')
@@ -45,11 +47,11 @@ class ComprasController extends Controller
 
 
 
-    return view('pages.painel.admin.compras.index', compact('pedidos','clientes','pedidoNovo'));
+    return view('pages.painel.admin.compras.index', compact('farmacia', 'pedidos','clientes','pedidoNovo'));
   }
 
   public function create(){
-
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
     $exames=Exame::all();
 
     $pedido=PedidoDeCompra::where('status','novo')->first();
@@ -60,10 +62,11 @@ class ComprasController extends Controller
 
     $totalPedido=0;
 
-    return view('pages.painel.admin.compras.create', compact('totalPedido','exames','cliente','pedido','itensPedido'));
+    return view('pages.painel.admin.compras.create', compact('farmacia', 'totalPedido','exames','cliente','pedido','itensPedido'));
   }
 
   public function edit(Request $request){
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
     $exames=Exame::all();
 
     $pedido=PedidoDeCompra::find($request->id);
@@ -76,10 +79,11 @@ class ComprasController extends Controller
 
 
 
-    return view('pages.painel.admin.compras.edit', compact('totalPedido','exames','cliente','pedido','itensPedido'));
+    return view('pages.painel.admin.compras.edit', compact('farmacia','totalPedido','exames','cliente','pedido','itensPedido'));
   }
 
   public function visualizar(Request $request){
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
     $exames=Exame::all();
 
     $pedido=PedidoDeCompra::find($request->id);
@@ -92,7 +96,7 @@ class ComprasController extends Controller
 
 
 
-    return view('pages.painel.admin.compras.visualizar', compact('totalPedido','exames','cliente','pedido','itensPedido'));
+    return view('pages.painel.admin.compras.visualizar', compact('farmacia','totalPedido','exames','cliente','pedido','itensPedido'));
   }
 
   public function store(Request $request){

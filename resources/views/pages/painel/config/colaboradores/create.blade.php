@@ -95,8 +95,8 @@
                                     name="cargo" id="cargo" required>
                                     <option value="" selected>Selecione um cargo</option>
                                     @foreach ($rolesAdmin as $item)
-                                        <option value="{{ $item->name }}"
-                                            @if (old('cargo') == $item->name) selected @endif>{{ $item->name }}</option>
+                                        <option value="{{ $item->profile }}"
+                                            @if (old('cargo') == $item->profile) selected @endif>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('cargo')

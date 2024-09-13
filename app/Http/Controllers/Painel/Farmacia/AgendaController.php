@@ -28,7 +28,7 @@ class AgendaController extends Controller
             ->where('agendas.status', 'aberto')
             ->orderBy('agendas.hora_exame', 'asc')->get();
 
-        // $unlock = DB::statement('SET SESSION sql_mode=(SELECT REPLACE(@@SESSION.sql_mode, "ONLY_FULL_GROUP_BY", ""));');
+         $unlock = DB::statement('SET SESSION sql_mode=(SELECT REPLACE(@@SESSION.sql_mode, "ONLY_FULL_GROUP_BY", ""));');
 
         $examesDia =   Agenda::join('cliente_farmacias', 'cliente_farmacias.id', '=', 'agendas.cliente_farmacia_id')
             ->join('users', 'users.id', '=', 'agendas.user_id')
@@ -44,6 +44,7 @@ class AgendaController extends Controller
                 'cliente_farmacias.cpf as cpf',
                 'users.*',
                 'exame_farmacias.estoque as estoqueExame'
+
 
             )
             ->where('agendas.cliente_id', $farmacia->id)

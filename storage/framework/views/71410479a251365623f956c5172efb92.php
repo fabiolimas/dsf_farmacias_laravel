@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Exames'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -8,7 +7,7 @@
             <div class="col-12 col-lg-7 col-xl-7">
                 <div class="card min-vh-100">
                     <div class="card-body px-2 py-4">
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('adminFarmacia')): ?>
                         <div class="row">
                             <div class="col-md-6">
                                 <h1 class="fs-4 fw-600 mb-4 text-green-2 px-0 ps-lg-4  " style="min-width: 260px">

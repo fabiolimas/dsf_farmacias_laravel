@@ -63,7 +63,7 @@
                         <div class="border-green-light p-3 rounded-3 mb-4 ">
                             <span class="titleResult">Informações sobre o exame</span>
                             <div class="row mt-3">
-                                
+
                         @if($exame->perguntas != null)
                                 @foreach ($exame->perguntas as $pergunta)
                                     <div class="col-md-3">
@@ -108,7 +108,7 @@
                                     </div>
                                 @endforeach
 
-                                @else 
+                                @else
 
                                 @endif
 
@@ -201,7 +201,7 @@
                                     <input type="text" class="form-control " name="result_temperatura"
                                         id="result_temperatura">
                                 </div>
-                                {{-- <span class="infoTemp">Temperatura (auxiliar) do corpo: Hipotermia <35º C | Normal 36,5ºC | Estado Febril >37ºC</span> 
+                                {{-- <span class="infoTemp">Temperatura (auxiliar) do corpo: Hipotermia <35º C | Normal 36,5ºC | Estado Febril >37ºC</span>
 
                             </div>
 
@@ -311,14 +311,15 @@
                                     <label for="lote_brinco">Número de lote do brinco</label>
 
                                     <input type="text" class="form-control " name="lote_brinco" id="lote_pistola">
-                                </div>
+                                </div>--}}
                                 <div class="col-md-4 mt-3">
                                     <label for="responsavel_atendimento">Responsavel pelo atendimento</label>
 
                                     <input type="text" class="form-control " name="responsavel_atendimento"
-                                        id="responsavel_atendimento">
+                                        id="responsavel_atendimento" value="{{auth()->user()->name}}">
                                 </div>
-                                <div class="col-md-12 mt-3">
+
+                                {{--<div class="col-md-12 mt-3">
                                     <label for="observacao">Observações ao paciante</label>
 
                                     <textarea class="form-control" name="observacao" id="observacao"></textarea>
@@ -333,7 +334,7 @@
     justify-content: flex-end;
     align-content: flex-end;
 "> --}}
-                                <button type="submit" class="btn btn-success">Salvar</button>
+                                <button type="submit" class="btn btn-success mt-3">Salvar</button>
                             </div>
                             </form>
                         </div>

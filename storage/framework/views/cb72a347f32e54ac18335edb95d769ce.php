@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Agenda'); ?>
 <?php $__env->startSection('head'); ?>
     <script>
@@ -77,7 +76,7 @@
                         <div class="position-relative mt-4 resultBusca">
                             <!-- Lista -->
                             <div class=" lista-scroll p-3 pt-0 clientes-lista-assinantes " style="max-height: 550px">
-                               
+
                                 <?php $__currentLoopData = $examesDia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dataExame => $exame): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class=" mb-2 pb-1">
                                     <div class="fs-20 text-green fw-600">
@@ -85,7 +84,7 @@
 
                                     </div>
                                 </div>
-                             
+
                                 <?php $__currentLoopData = $exame; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agenda): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="px-2 pb-4">
                                         <!--  -->
@@ -361,10 +360,10 @@
                                                            <h4>Confirma Presença?</h4>
 
                                                             <!--  -->
-                                                            
+
                                                         </div>
 
-                                                       
+
 
                                                         <div class="row mt-4 pt-2 gy-2">
                                                             <div class="col-12 col-lg-6">

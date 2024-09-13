@@ -59,13 +59,17 @@
                     </li>
                     <li class="nav-item ps-lg-5 ">
                         <span class="nav-link">
-                          
+
                             <?php echo e($dataAtual= date('H:i - d  M  Y')); ?>
 
-                          
+
                         </span>
                     </li>
                 </ul>
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['farmacia','adminFarmacia'])): ?>
+                <div class="nomeFarmacia">  <?php echo e($farmacia->razao_social); ?></div>
+
+                <?php endif; ?>
                 <div class="d-none d-lg-block">
                     <a href="#" class="d-flex align-items-center gap-2 nav-link-user">
                         <?php echo e(auth()->user()->name); ?>

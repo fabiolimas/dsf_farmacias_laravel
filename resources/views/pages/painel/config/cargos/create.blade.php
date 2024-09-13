@@ -68,7 +68,7 @@
                 </div>
 
                 <!-- Acessos do cargo -->
-                <div class="col-12 col-lg-6 col-xl-4 order-1 order-lg-2">
+                {{-- <div class="col-12 col-lg-6 col-xl-4 order-1 order-lg-2">
                     <div class="card ">
                         <div class="card-body p-3 p-lg-4">
 
@@ -148,7 +148,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
 
 
 
@@ -186,7 +186,7 @@
                                     ${data[i].name}
                                 </div>
                                 <div class="ms-auto">
-                                    <button type="button" class="btn btn-sm btn-primary p-1 rounded-2" 
+                                    <button type="button" class="btn btn-sm btn-primary p-1 rounded-2"
                                         onclick="setColaborador(${data[i].id}, '${data[i].name}', '${data[i].img_perfil}')">
                                         <img src="{{ asset('assets/img/icons/plus-white.svg') }}" class="" data-feather="plus" style="max-width: 23px" />
                                     </button>
@@ -245,7 +245,7 @@
                 </div>
                 <div class="">
                     <button type="button" class="btn btn-none border-0 p-1 text-green" onclick="this.parentNode.parentNode.remove()">
-                        <img src="{{ asset('assets/img/icons/x.svg') }}" style="max-width: 23px"> 
+                        <img src="{{ asset('assets/img/icons/x.svg') }}" style="max-width: 23px">
                     </button>
                 </div>
                 <input type="text" class="colaboradores visually-hidden" name="colaboradores[]" value="${id}">

@@ -14,7 +14,7 @@ class GraficosController extends Controller
 {
     public function index(Request $request)
     {
-    
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
         $dataInicio = $request->input('data_inicio', '2024-01-01'); // Padrão: 1º de Janeiro de 2024
         $dataFim = $request->input('data_fim', now()->format('Y-m-d')); // Padrão: Data atual
 
@@ -74,7 +74,7 @@ $faturamentografico = (new LarapexChart)->barChart()
     select('cidade', DB::raw('COUNT(*) as totalcidade'))
     ->groupBy('cidade')
     ->get();
-   
+
 
      $labelscity = $clientesMap->pluck('cidade')->toArray(); // IDs dos clientes
      $datasetcity = $clientesMap->pluck('totalcidade')->toArray(); // Quantidade de exames
@@ -93,8 +93,8 @@ $mapaClientes = (new LarapexChart)->pieChart()
         '#CCEFEE',
     ]);
 
-   
 
-        return view('pages.painel.admin.graficos.index', compact('clientesMap','dataInicio','dataFim','faturamentografico', 'qtdExames', 'mapaClientes', 'faturamentoCliente'));
+
+        return view('pages.painel.admin.graficos.index', compact('farmacia','clientesMap','dataInicio','dataFim','faturamentografico', 'qtdExames', 'mapaClientes', 'faturamentoCliente'));
     }
 }

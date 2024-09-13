@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Editar Cargo'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -100,87 +99,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <!-- Acessos do cargo -->
-                <div class="col-12 col-lg-6 col-xl-4 order-1 order-lg-2">
-                    <div class="card ">
-                        <div class="card-body p-3 p-lg-4">
-
-                            <h1 class="fs-4 fw-600 mb-4 text-green-2 pt-2 pb-3">Acessos do cargo</h1>
-
-                            <!--  -->
-                            <div
-                                class="d-flex align-items-center gap-3 bg-green-light border-green-light p-2 rounded-3 mb-4">
-                                <div class="fw-500 ps-2">
-                                    <div class="fs-20px text-green-2 fw-600 ps-lg-1">Agenda</div>
-                                </div>
-                                <div class="ms-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" name="permissoes[0]"
-                                            value="agenda" id="flexSwitchCheckDefault"
-                                            <?php if(old('permissoes.0', in_array('agenda', $nomePermissoes))): ?> checked <?php endif; ?>>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <div
-                                class="d-flex align-items-center gap-3 bg-green-light border-green-light p-2 rounded-3 mb-4">
-                                <div class="fw-500 ps-2">
-                                    <div class="fs-20px text-green-2 fw-600 ps-lg-1">Clientes</div>
-                                </div>
-                                <div class="ms-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" name="permissoes[1]"
-                                            value="clientes" id="flexSwitchCheckDefault"
-                                            <?php if(old('permissoes.1', in_array('clientes', $nomePermissoes))): ?> checked <?php endif; ?>>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <div
-                                class="d-flex align-items-center gap-3 bg-green-light border-green-light p-2 rounded-3 mb-4">
-                                <div class="fw-500 ps-2">
-                                    <div class="fs-20px text-green-2 fw-600 ps-lg-1">Exames</div>
-                                </div>
-                                <div class="ms-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" name="permissoes[2]"
-                                            value="exames" id="flexSwitchCheckDefault"
-                                            <?php if(old('permissoes.2', in_array('exames', $nomePermissoes))): ?> checked <?php endif; ?>>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <div
-                                class="d-flex align-items-center gap-3 bg-green-light border-green-light p-2 rounded-3 mb-4">
-                                <div class="fw-500 ps-2">
-                                    <div class="fs-20px text-green-2 fw-600 ps-lg-1">Gráficos</div>
-                                </div>
-                                <div class="ms-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            name="permissoes[3]" value="graficos" id="flexSwitchCheckDefault"
-                                            <?php if(old('permissoes.3', in_array('graficos', $nomePermissoes))): ?> checked <?php endif; ?>>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <div
-                                class="d-flex align-items-center gap-3 bg-green-light border-green-light p-2 rounded-3 mb-4">
-                                <div class="fw-500 ps-2">
-                                    <div class="fs-20px text-green-2 fw-600 ps-lg-1">Ajustes</div>
-                                </div>
-                                <div class="ms-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            name="permissoes[4]" value="ajustes"
-                                            <?php if(old('permissoes.4', in_array('ajustes', $nomePermissoes))): ?> checked <?php endif; ?> id="flexSwitchCheckDefault">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
+                
 
 
 
@@ -219,7 +138,7 @@ unset($__errorArgs, $__bag); ?>
                                     ${data[i].name}
                                 </div>
                                 <div class="ms-auto">
-                                    <button type="button" class="btn btn-sm btn-primary p-1 rounded-2" 
+                                    <button type="button" class="btn btn-sm btn-primary p-1 rounded-2"
                                         onclick="setColaborador(${data[i].id}, '${data[i].name}', '${data[i].img_perfil}')">
                                         <img src="<?php echo e(asset('assets/img/icons/plus-white.svg')); ?>" class="" data-feather="plus" style="max-width: 23px" />
                                     </button>
@@ -278,7 +197,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
                 <div class="">
                     <button type="button" class="btn btn-none border-0 p-1 text-green" onclick="this.parentNode.parentNode.remove()">
-                        <img src="<?php echo e(asset('assets/img/icons/x.svg')); ?>" style="max-width: 23px"> 
+                        <img src="<?php echo e(asset('assets/img/icons/x.svg')); ?>" style="max-width: 23px">
                     </button>
                 </div>
                 <input type="text" class="colaboradores visually-hidden" name="colaboradores[]" value="${id}">

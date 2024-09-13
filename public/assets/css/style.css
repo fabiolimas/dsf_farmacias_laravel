@@ -19,7 +19,11 @@ span.produtoSemPreco.text-danger.bg-warning {
     left: 33%;
     top: 23px;
 }
-
+.nomeFarmacia {
+    margin: 0 auto;
+    font-weight: bold;
+    color: #046865;
+}
 .fw-400 {
     font-weight: 400;
 }

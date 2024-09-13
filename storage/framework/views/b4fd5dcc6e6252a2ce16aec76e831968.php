@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Exames'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -70,18 +69,18 @@
                                                     <div
                                                         class="flex-bloco-img d-xl-flex gap-3 mt-lg-3 mt-lg-0 justify-content-center justify-content-lg-start">
                                                         <div class="">
-                                                            <a href="<?php echo e(route('painel.farmacia.exames.show', ['id' => 1])); ?>"
+                                                            <a href="<?php echo e(route('painel.farmacia.exames.show', ['id' => $examePronto->id])); ?>"
                                                                 class="text-decoration-none d-block">
                                                                 
                                                                     <div class="row capaExame">
-                                                            
-                                                                     
+
+
                                                                         <div class="dados text-center">
                                                                             <h6><?php echo e($farmacia->razao_social); ?></h6>
                                                                             <p>Fone: <?php echo e($farmacia->telefone); ?> CNPJ: <?php echo e($farmacia->cnpj); ?></p>
-                                                                          
+
                                                                         </div>
-                                                                   
+
                                                                 </div>
                                                             </a>
                                                         </div>
@@ -125,33 +124,33 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-    
+
             let resultado = $('.resultExames');
-    
+
             $('#pesquisa_exames_prontos').keyup(function() {
-    
+
                 $.ajax({
                     url: "<?php echo e(route('painel.farmacia.exame.busca')); ?>", // Arquivo PHP que processará a busca
                     type: "post",
                     data: {
                         pesquisa: $('#pesquisa_exames_prontos').val(),
-    
-    
+
+
                     }, // Dados a serem enviados para o servidor
                     success: function(response) {
-    
+
                         resultado.html(response);
                         resultado.html(response.status);
                     },
                     error: function(result) {
                         console.log(result);
                     }
-    
-    
-    
+
+
+
                 });
             });
-    
+
         });
     </script>
 <?php $__env->stopSection(); ?>

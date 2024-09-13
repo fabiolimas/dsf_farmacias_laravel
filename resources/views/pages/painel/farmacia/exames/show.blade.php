@@ -70,7 +70,7 @@
                                             Sexo: {{ $clienteFarma->sexo }}
                                         </div>
                                         <hr class='mt-2'>
-                                       
+
                                     </div>
                                 </div>
 
@@ -80,15 +80,15 @@
                                         <div class="row">
 
                                             @if($array != null)
-                                      
+
                                             @foreach ($array['perguntas'] as $index => $pergunta)
-    
-                                       
+
+
                                                 <div class="col-md-4 mt-3">
                                                     {{ $pergunta }}: {{ $array['respostas'][$index] }}
                                                 </div>
                                             @endforeach
-                                            @else 
+                                            @else
                                             @endif
                                             {{-- <div class="col-md-4 mt-3">
                                                 Aferição de pressão arterial braço: {{ $resultado->braco_aferido }}
@@ -182,7 +182,7 @@
                                                 Número lote brinco : {{ $resultado->lote_brinco }}
                                             </div>
                                             <div class="col-md-4 mt-3">
-                                                Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
+                                                Realizado por : {{ $resultado->responsavel_atendimento }}
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 Observações ao paciente: {{ $resultado->observacoes }}

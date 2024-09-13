@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Painel\Config;
 
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -24,7 +25,8 @@ class CargoController extends Controller
      */
     public function create()
     {
-        return view('pages.painel.config.cargos.create');
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
+        return view('pages.painel.config.cargos.create',compact('farmacia'));
     }
 
     /**
@@ -33,6 +35,7 @@ class CargoController extends Controller
     public function store(Request $request)
     {
 
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
         $request->validate(
             [
                 'titulo' => ['required', 'max:255', 'unique:roles,name']
@@ -98,6 +101,7 @@ class CargoController extends Controller
      */
     public function edit(string $cargo)
     {
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
         $cargo = DB::table('roles')->find($cargo);
         if (is_null($cargo))
             abort(404, 'Item não encontrado');
@@ -122,7 +126,7 @@ class CargoController extends Controller
         $role = Role::where('id', $cargo->id)->first();
         $colaboradores = $role->users()->get();
 
-        return view('pages.painel.config.cargos.edit', compact('cargo', 'nomePermissoes', 'colaboradores'));
+        return view('pages.painel.config.cargos.edit', compact('farmacia', 'cargo', 'nomePermissoes', 'colaboradores'));
     }
 
     /**
@@ -201,7 +205,7 @@ class CargoController extends Controller
         $colaboradores = User::where('profile', '!=', 'admin')
             ->where('name', 'like', "%{$request->name}%")
             ->get();
-            
+
         return $colaboradores;
     }
 

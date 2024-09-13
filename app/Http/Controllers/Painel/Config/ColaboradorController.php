@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Painel\Config;
 
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -21,9 +22,11 @@ class ColaboradorController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
+
     {
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
         $rolesAdmin = DB::table('roles')->orderBy('name')->get();
-        return view('pages.painel.config.colaboradores.create', compact('rolesAdmin'));
+        return view('pages.painel.config.colaboradores.create', compact('farmacia','rolesAdmin'));
     }
 
     /**
@@ -45,7 +48,7 @@ class ColaboradorController extends Controller
 
         // atualizar permissões/roles
         $user->assignRole($request->cargo);
-        
+
         if ($request->img_profile != null && $request->img_profile != '') :
             $configController = new ConfigController;
             $user->img_perfil = $configController->imgBase64ToFileUpload($request->img_profile);
@@ -69,11 +72,12 @@ class ColaboradorController extends Controller
      */
     public function edit(User $user)
     {
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
         if ($user->profile == 'admin')
             abort(403);
 
         $rolesAdmin = DB::table('roles')->orderBy('name')->get();
-        return view('pages.painel.config.colaboradores.edit', compact('user', 'rolesAdmin'));
+        return view('pages.painel.config.colaboradores.edit', compact('farmacia','user', 'rolesAdmin'));
     }
 
     /**

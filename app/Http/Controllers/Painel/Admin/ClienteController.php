@@ -63,7 +63,7 @@ class ClienteController extends Controller
 
         $user = (new User)->fill($request->all());
         $user->password = bcrypt($request->password);
-        $user->profile = 'farmaceutico';
+        $user->profile = 'adminFarmacia';
         $user->cliente_id=$cliente->id;
         $user->save();
 
@@ -153,12 +153,12 @@ class ClienteController extends Controller
         $user->save();
 
         $cliente = $user->cliente->fill($request->all());
-        $cliente->user_id = $user->id;
+
 
         $cliente->save();
 
-        $farmacia=Cliente::where('user_id',$user->id)->first();
-        $farmacia->update(['razao_social'=>$user->name]);
+        // $farmacia=Cliente::where('user_id',$user->id)->first();
+        // $farmacia->update(['razao_social'=>$user->name]);
 
         return redirect()
             ->back()
@@ -214,7 +214,7 @@ class ClienteController extends Controller
         //     ->get();
 
             $users= user::with('cliente')
-            ->where('profile', 'farmaceutico')
+            ->where('profile', 'adminFarmacia')
             ->where('name', 'like', "%{$request->nome}%")
             ->latest()
             ->get();

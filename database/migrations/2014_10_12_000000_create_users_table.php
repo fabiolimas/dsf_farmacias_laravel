@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('profile', ['admin', 'colaborador', 'farmaceutico'])->default('farmaceutico'); 
+            $table->enum('profile', ['admin', 'colaborador', 'farmaceutico','adminFarmacia'])->default('farmaceutico');
             $table->string('img_perfil')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

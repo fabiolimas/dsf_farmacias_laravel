@@ -59,12 +59,16 @@
                     </li>
                     <li class="nav-item ps-lg-5 ">
                         <span class="nav-link">
-                          
+
                             {{$dataAtual= date('H:i - d  M  Y');}}
-                          
+
                         </span>
                     </li>
                 </ul>
+                @canany(['farmacia','adminFarmacia'])
+                <div class="nomeFarmacia">  {{$farmacia->razao_social}}</div>
+
+                @endcanany
                 <div class="d-none d-lg-block">
                     <a href="#" class="d-flex align-items-center gap-2 nav-link-user">
                         {{ auth()->user()->name }}

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Painel\Farmacia;
 
-use App\Http\Controllers\Controller;
-use App\Models\ExameFarmacia;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Models\ExameFarmacia;
+use App\Http\Controllers\Controller;
 
 class EstoqueController extends Controller
 {
    public function index(Request $request){
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
 
     $exames=ExameFarmacia::join('exames','exames.id', 'exame_farmacias.exame_id')
     ->select('exames.*', 'exame_farmacias.id as exame_farma_id','exame_farmacias.valor', 'exame_farmacias.estoque','exame_farmacias.valor_de_compra')
@@ -25,7 +27,7 @@ class EstoqueController extends Controller
 
 
 
-    return view('pages.painel.farmacia.estoque.index', compact('exames','exameSemPreco'));
+    return view('pages.painel.farmacia.estoque.index', compact('farmacia', 'exames','exameSemPreco'));
    }
 
    public function updateExameFarmacia(Request $request){

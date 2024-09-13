@@ -1,8 +1,7 @@
-
 <?php $__env->startSection('title', 'Início'); ?>
 <?php $__env->startSection('content'); ?>
 
-    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?>
+    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['farmacia','adminFarmacia'])): ?>
         <div class="row gy-4 graficos">
 
             <div class="col-12 col-xl-8">
@@ -229,7 +228,7 @@
                                             Ver mais
                                         </button>
                                     </div>
-                                    <?php else: ?> 
+                                    <?php else: ?>
 
                                     <?php endif; ?>
                                 </div>
@@ -291,7 +290,7 @@
                                         </button>
                                         </a>
                                     </div>
-                                    <?php else: ?> 
+                                    <?php else: ?>
                                     <?php endif; ?>
                                 </div>
 
@@ -575,7 +574,7 @@
                                                 </div>
 
                                                 <!-- modal ver cliente -->
-                                                
+
                                             <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -591,7 +590,7 @@
                                             Ver mais
                                         </button>
                                     </div>
-                                    <?php else: ?> 
+                                    <?php else: ?>
                                     <?php endif; ?>
                                 </div>
 
@@ -605,7 +604,7 @@
                             <div class="card-body px-2 py-4">
 
                                 <div class="text-center px-3">
-                                    <h2 class="fs-24px fw-600 text-green-2 ">Quase acabando</h2>
+                                    <h2 class="fs-24px fw-600 text-green-2 ">Estoque Atual</h2>
                                 </div>
 
 
@@ -641,7 +640,7 @@
                                             Ver mais
                                         </button>
                                     </div>
-                                    <?php else: ?> 
+                                    <?php else: ?>
                                     <?php endif; ?>
                                 </div>
 
@@ -691,7 +690,7 @@
 
 <?php $__env->startSection('scripts'); ?>
 
-    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?>
+    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['farmacia','adminFarmacia'])): ?>
         <!-- scripts apexchart -->
         <script src="<?php echo e($faturamento->cdn()); ?>"></script>
         <?php echo e($faturamento->script()); ?>
@@ -699,7 +698,7 @@
         <?php echo e($mapaClientes->script()); ?>
 
 
- 
+
         <script>
             $('document').ready(function() {
                 $.ajaxSetup({
@@ -707,33 +706,33 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-    
+
                 let resultado = $('.resultBusca');
-    
+
                 $('#pesquisa').keyup(function() {
-    
+
                     $.ajax({
                         url: "<?php echo e(route('busca-exame-entrada')); ?>", // Arquivo PHP que processará a busca
                         type: "post",
                         data: {
                             pesquisa: $('#pesquisa').val(),
-    
-    
+
+
                         }, // Dados a serem enviados para o servidor
                         success: function(response) {
-    
+
                             resultado.html(response);
                             resultado.html(response.status);
                         },
                         error: function(result) {
                             console.log(result);
                         }
-    
-    
-    
+
+
+
                     });
                 });
-    
+
             });
         </script>
     <?php endif; ?>

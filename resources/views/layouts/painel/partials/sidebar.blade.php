@@ -53,7 +53,7 @@
                     </a>
                 </li>
             @endcan
-            @can('farmacia')
+            @canany(['farmacia'])
                 <li class="">
                     <a href="{{ route('painel.farmacia.clientes.index') }}"
                         class="sidebar-link d-flex align-items-center @if (Route::is('painel.farmacia.clientes.*')) active @endif  gap-4 ">
@@ -63,16 +63,24 @@
                         </div>
                     </a>
                 </li>
-                <li class="">
-                    <a href="{{ route('painel.admin.compras.index') }}"
-                        class="sidebar-link d-flex align-items-center @if (Route::is('painel.admin.compras.*')) active @endif  gap-4 ">
-                        <i data-feather="list"></i>
-                        <div>
-                            Pedidos de compras
-                        </div>
-                    </a>
-                </li>
+
+
+            @endcanany
+
+            @can('adminFarmacia')
+
+            <li class="">
+                <a href="{{ route('painel.admin.compras.index') }}"
+                    class="sidebar-link d-flex align-items-center @if (Route::is('painel.admin.compras.*')) active @endif  gap-4 ">
+                    <i data-feather="list"></i>
+                    <div>
+                        Pedidos de compras
+                    </div>
+                </a>
+            </li>
+
             @endcan
+
             @can('admin')
                 <li class="">
                     <a href="{{ route('painel.admin.exames.index') }}"
@@ -107,7 +115,7 @@
                     </a>
                 </li>
             @endcan
-            @can('farmacia')
+            @can('adminFarmacia')
                 <li class="">
                     <a href="{{ route('painel.farmacia.graficos.index') }}"
                         class="sidebar-link d-flex align-items-center @if (Route::is('painel.farmacia.graficos.*')) active @endif  gap-4 ">
@@ -123,6 +131,7 @@
         </ul>
 
         <ul class="list-unstyled mt-auto mb-0">
+            @canany(['admin','adminFarmacia'])
             <li class="">
                 <a href="{{ route('painel.config.index') }}"
                     class="sidebar-link d-flex align-items-center @if (Route::is('painel.config.*')) active @endif  gap-4 ">
@@ -132,6 +141,7 @@
                     </div>
                 </a>
             </li>
+        @endcanany
             <li class="">
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault();

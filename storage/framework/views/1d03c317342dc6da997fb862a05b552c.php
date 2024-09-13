@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Dados do Exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -63,7 +62,7 @@
                         <div class="border-green-light p-3 rounded-3 mb-4 ">
                             <span class="titleResult">Informações sobre o exame</span>
                             <div class="row mt-3">
-                                
+
                         <?php if($exame->perguntas != null): ?>
                                 <?php $__currentLoopData = $exame->perguntas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col-md-3">
@@ -111,7 +110,7 @@
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                <?php else: ?> 
+                                <?php else: ?>
 
                                 <?php endif; ?>
 
@@ -155,7 +154,15 @@
                         
 
                         
-                                <button type="submit" class="btn btn-success">Salvar</button>
+                                <div class="col-md-4 mt-3">
+                                    <label for="responsavel_atendimento">Responsavel pelo atendimento</label>
+
+                                    <input type="text" class="form-control " name="responsavel_atendimento"
+                                        id="responsavel_atendimento" value="<?php echo e(auth()->user()->name); ?>">
+                                </div>
+
+                                
+                                <button type="submit" class="btn btn-success mt-3">Salvar</button>
                             </div>
                             </form>
                         </div>

@@ -77,14 +77,14 @@
                         <div class="position-relative mt-4 resultBusca">
                             <!-- Lista -->
                             <div class=" lista-scroll p-3 pt-0 clientes-lista-assinantes " style="max-height: 550px">
-                               
+
                                 @foreach ($examesDia as $dataExame => $exame)
                                 <div class=" mb-2 pb-1">
                                     <div class="fs-20 text-green fw-600">
                                         {{   date('d  M  ', strtotime($dataExame)) }}
                                     </div>
                                 </div>
-                             
+
                                 @foreach($exame as $agenda)
                                     <div class="px-2 pb-4">
                                         <!--  -->
@@ -355,10 +355,10 @@
                                                            <h4>Confirma Presença?</h4>
 
                                                             <!--  -->
-                                                            
+
                                                         </div>
 
-                                                       
+
 
                                                         <div class="row mt-4 pt-2 gy-2">
                                                             <div class="col-12 col-lg-6">

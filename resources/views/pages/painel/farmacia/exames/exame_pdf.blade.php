@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Resultado - DSF</title>
-   
+
 </head>
 <style>
     td {
@@ -18,10 +18,10 @@
 }
 .logoResultado {
     width: 104px;
-   
-    position:absolute; 
+
+    position:absolute;
     left:20px;
- 
+
 }
 .titleResult{
     margin-bottom:5px;
@@ -70,10 +70,10 @@ table, th, td {
                                   <span style="text-align: center; font-weight:700; margin-left: 20%">Declaração de serviços farmaceuticos</span> <span style="margin-left:25%">  Nº {{ $resultado->id }}</span></p>
                                 </div>
                                 <div class="col-md-8">
-                                   
+
                                 </div>
                                 <div class="col-md-1">
-                                  
+
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -83,7 +83,7 @@ table, th, td {
                                         (Sra.).</p>
                                     <table>
                                     <tr>
-                                        
+
                                         <td>
                                             Nome: {{ $clienteFarma->nome }}
                                         </td>
@@ -108,7 +108,7 @@ table, th, td {
                                     </tr>
                                     </table>
                                         <hr class='mt-2'>
-                                      
+
                                     </div>
                                 </div>
 
@@ -119,19 +119,19 @@ table, th, td {
                                             <tr>
                                         @if($array != null)
                                         @foreach ($array['perguntas'] as $index => $pergunta)
-                                       
+
                                             <td class="col-md-4 mt-3">
                                                 {{ $pergunta }}: {{ $array['respostas'][$index] }}
                                             </td>
                                         @endforeach
-                                        @else 
+                                        @else
                                         @endif
                                     </tr>
                                         </table>
                                        <table>
 
 
-                                       
+
                                       {{-- <tr class="row">
                                               <td colspan="2">
                                                 Aferição de pressão arterial braço: {{ $resultado->braco_aferido }}
@@ -152,7 +152,7 @@ table, th, td {
                                             </td>
                                             <td class="col-m-4 "></td>
                                         </tr>
-                                       
+
                                             <tr>
                                             <td colspan="2">
                                                 Aferição de Temp. Corporal: {{ $resultado->temperatura }}
@@ -162,7 +162,7 @@ table, th, td {
                                             </td>
                                             <td class="col-m-4 "></td>
                                             </tr>
-                                    
+
                                             <tr>
                                             <td colspan="2">
                                                 Aplicação de injetaveis : {{ $resultado->injetaveis }}
@@ -192,9 +192,9 @@ table, th, td {
                                             <td colspan="3">
                                                 Via de Ministração : {{ $resultado->via_ministracao }}
                                             </td>
-                                           
+
                                             </tr>--}}
-                                           
+
                                             <tr>
                                             <td colspan="4">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
@@ -215,7 +215,7 @@ table, th, td {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row mt-3">
                                     {{-- <span class="titleResult">Perfuração de Lóbulo Auricular</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">--}}
@@ -227,7 +227,7 @@ table, th, td {
                                             <td class="col-md-4 mt-3">
                                                 CNPJ : {{ $resultado->cnpj_fab_auricular }}
                                             </td>
-                                            
+
                                         </tr>
                                         <tr>
                                             <td class="col-md-4 mt-3">
@@ -236,30 +236,39 @@ table, th, td {
                                             <td class="col-md-4 mt-3">
                                                 Número lote brinco : {{ $resultado->lote_brinco }}
                                             </td>
-                                            
-                                        </tr>
+
+                                        </tr>--}}
                                         <tr>
                                             <td colspan="3">
                                                 Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
                                             </td>
-                                        </tr> --}}
+                                        </tr>
                                         <tr>
                                             <td colspan="3">
                                                 Observações ao paciente: {{ $resultado->observacoes }}
                                             </td>
                                         </tr>
-                                        
+
                                         </div>
                                     </table>
                                     </div>
                                 </div>
+                                    <div class="row">
+                                        <table>
+                                            <tr>
+                                                <td style="font-size: 12px">Ass. Usuário/Responsavel:__________________________ </td>
+                                                <td style="font-size: 12px">Ass. do Farmaceutico:__________________________</td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
                                 <div class="row">
                                     <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
                                 </div>
                             </div>
                         </div>
 
-                        
+
 
 
                     </div>
@@ -274,4 +283,4 @@ table, th, td {
     </div>
 </body>
 </html>
-    
+

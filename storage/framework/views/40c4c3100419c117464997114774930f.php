@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Adicionar colaborador'); ?>
 <?php $__env->startSection('head'); ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">
@@ -144,8 +143,8 @@ unset($__errorArgs, $__bag); ?>"
                                     name="cargo" id="cargo" required>
                                     <option value="" selected>Selecione um cargo</option>
                                     <?php $__currentLoopData = $rolesAdmin; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($item->name); ?>"
-                                            <?php if(old('cargo') == $item->name): ?> selected <?php endif; ?>><?php echo e($item->name); ?></option>
+                                        <option value="<?php echo e($item->profile); ?>"
+                                            <?php if(old('cargo') == $item->profile): ?> selected <?php endif; ?>><?php echo e($item->name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <?php $__errorArgs = ['cargo'];
