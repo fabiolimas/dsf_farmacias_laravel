@@ -68,6 +68,7 @@
                                 @enderror
                             </div>
 
+
                             <!-- E-mail para login -->
                             <div class="mb-3 pb-2">
                                 <label for="email" class="form-label text-green fw-500 fs-18px">
@@ -91,6 +92,20 @@
                                     name="telefone" id="telefone" placeholder="(99) 99999-9999"
                                     value="{{ old('telefone') }}" required />
                                 @error('telefone')
+                                    <div class="invalid-feedback fw-500">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Responsavel  -->
+                            <div class="mb-3 pb-2 " style="display:none" id="responsaveis">
+                                <label for="responsavel" class="form-label text-green fw-500 fs-18px">
+                                    Responsavel
+                                </label>
+                                <input type="text"
+                                    class="form-control form-control-custom fs-18px fw-500 @error('responsavel') is-invalid @enderror"
+                                    name="responsavel" id="responsavel" placeholder="Nome do responsavel"
+                                    value="{{ old('responsavel') }}"/>
+                                @error('responsavel')
                                     <div class="invalid-feedback fw-500">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -118,4 +133,51 @@
     </div>
 
 
+
+@section('scripts')
+<script src="https://unpkg.com/imask"></script>
+<script>
+    
+
+    const cpf = document.getElementById('cpf');
+    const telefone=document.getElementById('telefone');
+const maskOptions = {
+  mask: '000.000.000-00',
+
+};
+
+const maskphone={
+    mask:'(00) 00000-0000',
+}
+const maskcpf = IMask(cpf, maskOptions);
+const maskfone = IMask(telefone, maskphone);
+
+function calcularIdade(dataNascimento) {
+    const hoje = new Date();
+    const nascimento = new Date(dataNascimento);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+    return idade;
+}
+    $(document).ready(function(){
+        $('#data_nascimento').change(function(){
+            
+           if(calcularIdade($('#data_nascimento').val())<18){
+                $('#responsaveis').css('display','block');
+           }else{
+            $('#responsaveis').css('display','none');
+           }
+
+
+
+        })
+       
+       
+    });
+    
+    </script>
+@endsection
 @endsection

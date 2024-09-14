@@ -143,7 +143,8 @@
                                                                                     <div
                                                                                         class="text-green-2 fw-500 text-truncate">
                                                                                         {{ $cliente->nome }}</div>
-                                                                                    <div class="text-green">{{$cliente->sexo}},
+                                                                                    <div class="text-green">
+                                                                                        {{ $cliente->sexo }},
                                                                                         {{ date('Y', strtotime('now')) - date('Y', strtotime($cliente->data_nascimento)) }}
                                                                                         anos</div>
                                                                                 </a>
@@ -204,8 +205,31 @@
                                                                             </div>
 
                                                                         </div>
-                                                                    </div>
+                                                                </div>
 
+
+                                                                @if($cliente->responsavel != null)                                                                   <!-- Responsavel -->
+<div class="mb-3">
+    <div class="d-flex align-items-center p-3 rounded-3 px-4 w-100"
+        style="border: 1px solid #B2D2D2">
+        <div class=" fs-20px">
+            <a href="#"
+                class="text-decoration-none d-block">
+                <div
+                    class="text-green-2 fw-500 text-truncate">
+                    
+                Responsavel</div>
+                <div class="text-green">
+                    {{ $cliente->responsavel }}</div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+@else
+
+@endif
                                                                     <div class="">
                                                                         <a href="{{ route('painel.farmacia.clientes.edit', ['id' => $cliente->id]) }}"
                                                                             class="btn btn-primary-light w-100  py-2 fs-20px text-green fw-500">
@@ -218,7 +242,9 @@
                                                                 <div class="fechar-modal text-center pt-2 pt-lg-4">
                                                                     <button type="button"
                                                                         class="btn btn-ligth shadow bg-white text-green-2 py-1"
-                                                                        class="btn-close" data-bs-toggle="modal" data-bs-target="#modal-ver-todas-agenda-{{ $cliente->id }}" data-bs-backdrop="static">
+                                                                        class="btn-close" data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-ver-todas-agenda-{{ $cliente->id }}"
+                                                                        data-bs-backdrop="static">
                                                                         <i data-feather="x"></i>
                                                                         Fechar
                                                                     </button>

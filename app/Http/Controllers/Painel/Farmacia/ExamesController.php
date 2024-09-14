@@ -75,10 +75,12 @@ class ExamesController extends Controller
 
    public function ShowResult(Request $request){
      $farmacia=Cliente::find(auth()->user()->cliente_id);
-
+  
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
 
+
+    $agenda=Agenda::find($resultado->agendas_id);
 
 
         $array = json_decode($resultado->perguntas, true);
@@ -87,7 +89,7 @@ class ExamesController extends Controller
 
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-    return view('pages.painel.farmacia.exames.show',compact('array','clienteFarma','farmacia','resultado'));
+    return view('pages.painel.farmacia.exames.show',compact('agenda','array','clienteFarma','farmacia','resultado'));
    }
 
    public function updatePresenca(Request $request){
@@ -159,21 +161,6 @@ class ExamesController extends Controller
        $resultado->cliente_farmacia_id=$request->cliente_farmacia_id;
        $resultado->agendas_id=$request->agendas_id;
        $resultado->perguntas=json_encode($perguntas);
-       $resultado->braco_aferido=$request->braco_aferido;
-       $resultado->resultado_sistolica=$request->sistolica;
-       $resultado->resultado_distolica=$request->distolica;
-       $resultado->glicemia=$request->glicemia;
-       $resultado->result_glicemia=$request->result_glicemia;
-       $resultado->temperatura=$request->temperatura;
-       $resultado->result_temperatura=$request->result_temperatura;
-       $resultado->injetaveis=$request->injetaveis;
-       $resultado->medicamento=$request->medicamento;
-       $resultado->concentracao=$request->concentracao;
-       $resultado->lote=$request->lote;
-       $resultado->validade=$request->validade;
-       $resultado->ms=$request->ms;
-       $resultado->dcb=$request->dcb;
-       $resultado->via_ministracao=$request->via_ministracao;
        $resultado->medico_responsavel=$request->medico_responsavel;
        $resultado->crm=$request->crm;
        $resultado->endereco_medico=$request->endereco_medico;
@@ -184,6 +171,13 @@ class ExamesController extends Controller
        $resultado->lote_brinco=$request->lote_brinco;
        $resultado->responsavel_atendimento=$request->responsavel_atendimento;
        $resultado->observacoes=$request->observacao;
+       $resultado->fumante=$request->fumante;
+       $resultado->gestante=$request->gestante;
+       $resultado->peso=$request->peso;
+       $resultado->usa_insulina=$request->usa_insulina;
+       $resultado->uso_de_medicamentos=$request->uso_de_medicamentos;
+       $resultado->bibliografia=$request->bibliografia;
+       $resultado->crf_responsavel;
 
         $resultado->save();
 
@@ -200,14 +194,15 @@ class ExamesController extends Controller
 
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
+    $agenda=Agenda::find($resultado->agendas_id);
 
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-     //return view('pages.painel.farmacia.exames.exame_pdf',compact('array','clienteFarma','farmacia','resultado'));
+    return view('pages.painel.farmacia.exames.exame_pdf',compact('agenda','array','clienteFarma','farmacia','resultado'));
 
-    $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
-     return $pdf->download('resultado.pdf');
+    // $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+    //  return $pdf->download('resultado.pdf');
 }
 
 public function enviarPDFPorEmail(Request $request)

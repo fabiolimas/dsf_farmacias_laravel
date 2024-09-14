@@ -95,6 +95,13 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
+                            <div class="mb-3 pb-2">
+                                <label for="registro_ms" class="form-label text-green fw-500 fs-18px">
+                                   Bibliografia
+                                </label>
+                            <textarea name="bibliografia" id="" cols="30" rows="10" class="form-control"></textarea>
+
+                            </div>
 
                             <div class="pt-3 mt-5">
                                 <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
@@ -137,7 +144,44 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </form>
     </div>
+  <!-- Modal bibliografia -->
+  <div class="modal modal-custom fade" id="modal_bibliografia" tabindex="-1" data-bs-backdrop="static"
+  data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md border-0" role="document">
+      <div class="modal-content bg-transparent ">
+          <div class="modal-body p-lg-12  border-0">
 
+              <div class="p-4 shadow rounded-3  bg-white border">
+
+                <div class="fs-5 text-center mb-3">
+                    Bibliografia
+                </div>
+                  <form action="#" method="post"
+                      id="form-remover">
+                     
+                      <?php echo csrf_field(); ?>
+                      <textarea name="bibliografia" id="" cols="30" rows="10" class="form-control"></textarea>
+                      <div class="col-12 col-lg-6 mt-3">
+                        <button type="submit"
+                            id="modal-link-ver-mais"
+                            class="btn btn-primary w-100 py-2 fs-16px">Salvar</button>
+                    </div>
+                  </form>
+
+              </div>
+
+              <div class="fechar-modal text-center pt-2 pt-lg-4">
+                  <button type="button" class="btn btn-ligth shadow bg-white text-green-2 py-1"
+                      data-bs-dismiss="modal">
+                      <i data-feather="x"></i>
+                      Fechar
+                  </button>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div>
 
 <?php $__env->stopSection(); ?>
 

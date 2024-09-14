@@ -124,6 +124,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
 
+
                             <!-- E-mail para login -->
                             <div class="mb-3 pb-2">
                                 <label for="email" class="form-label text-green fw-500 fs-18px">
@@ -178,6 +179,34 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
+
+                            <!-- Responsavel  -->
+                            <div class="mb-3 pb-2 " style="display:none" id="responsaveis">
+                                <label for="responsavel" class="form-label text-green fw-500 fs-18px">
+                                    Responsavel
+                                </label>
+                                <input type="text"
+                                    class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['responsavel'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                    name="responsavel" id="responsavel" placeholder="Nome do responsavel"
+                                    value="<?php echo e(old('responsavel')); ?>"/>
+                                <?php $__errorArgs = ['responsavel'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback fw-500"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
                             <input type="hidden" name="cliente_id" value="<?php echo e($farmacia->id); ?>">
                            
 
@@ -202,6 +231,53 @@ unset($__errorArgs, $__bag); ?>
     </div>
 
 
+
+<?php $__env->startSection('scripts'); ?>
+<script src="https://unpkg.com/imask"></script>
+<script>
+    
+
+    const cpf = document.getElementById('cpf');
+    const telefone=document.getElementById('telefone');
+const maskOptions = {
+  mask: '000.000.000-00',
+
+};
+
+const maskphone={
+    mask:'(00) 00000-0000',
+}
+const maskcpf = IMask(cpf, maskOptions);
+const maskfone = IMask(telefone, maskphone);
+
+function calcularIdade(dataNascimento) {
+    const hoje = new Date();
+    const nascimento = new Date(dataNascimento);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+    return idade;
+}
+    $(document).ready(function(){
+        $('#data_nascimento').change(function(){
+            
+           if(calcularIdade($('#data_nascimento').val())<18){
+                $('#responsaveis').css('display','block');
+           }else{
+            $('#responsaveis').css('display','none');
+           }
+
+
+
+        })
+       
+       
+    });
+    
+    </script>
+<?php $__env->stopSection(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.painel.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\indutiva\dsf_farmacias_laravel\resources\views/pages/painel/farmacia/clientes/create.blade.php ENDPATH**/ ?>

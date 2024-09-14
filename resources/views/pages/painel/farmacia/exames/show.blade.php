@@ -78,71 +78,54 @@
                                     <span class="titleResult">Atenção Farmaceutica</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 ">
                                         <div class="row">
+                                            <div class="col-md-3 mt-3">
+                                                <label for="peso">Peso: {{$resultado->peso}}</label>
+                                             
+                                            </div>
+            
+                                            <div class="col-md-3 mt-3">
+                                                <label for="gestante">Gestante: {{$resultado->gestante}}</label>
+                                              
+                                                
+                                            </div>
+                                            <div class="col-md-3 mt-3">
+                                                <label for="fumante">Fumante: {{$resultado->fumante}}</label>
+                                              
+                                            </div>
+            
+                                            <div class="col-md-3 mt-3">
+                                                <label for="usa_insulina">Usa Insulina: {{$resultado->usa_insulina}}</label>
+                                               
+                                            </div>
+            
+                                            <div class="col-md-3 mt-3">
+                                                <label for="uso_de_medicamentos">Faz uso de medicamentos? quais: {{$resultado->uso_de_medicamentos}}</label>
+                                               
+                                            </div>
+                                        </div>
+                                        
+
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <span class="titleResult">{{$agenda->nome_exame}}</span>
+                                    <div class="border-green-light p-3 rounded-3 mb-4 ">
+                                        <div class="row">
 
                                             @if($array != null)
 
                                             @foreach ($array['perguntas'] as $index => $pergunta)
 
 
-                                                <div class="col-md-4 mt-3">
+                                                <div class="col-md-4 mt-3 mb-3">
                                                     {{ $pergunta }}: {{ $array['respostas'][$index] }}
                                                 </div>
                                             @endforeach
                                             @else
                                             @endif
-                                            {{-- <div class="col-md-4 mt-3">
-                                                Aferição de pressão arterial braço: {{ $resultado->braco_aferido }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Resultado Sistólica: {{ $resultado->resultado_sistolica }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Resultado Diastolica: {{ $resultado->resultado_distolica }}mmHG
-                                            </div>
-                                            <hr>
-
-                                            <div class="col-md-4 mt-3">
-                                                Aferição Glicemia Capilar: {{ $resultado->glicemia }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                 Resultado : {{ $resultado->result_glicemia }}mg/dll
-                                            </div>
-                                            <div class="col-m-4 "></div>
-                                            <hr>
-                                            <div class="col-md-4 mt-3">
-                                                Aferição de Temp. Corporal: {{ $resultado->temperatura }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Resultado : {{ $resultado->result_temperatura }}Cº
-                                            </div>
-                                            <div class="col-m-4 "></div>
-                                            <hr>
-                                            <div class="col-md-4 mt-3">
-                                                Aplicação de injetaveis : {{ $resultado->injetaveis }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Medicamento : {{ $resultado->medicamento }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Concentração : {{ $resultado->concentracao }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Lote : {{ $resultado->lote }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Validade : {{ date('d/m/H', strtotime($resultado->validade)) }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                MS : {{ $resultado->ms }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                DCB : {{ $resultado->dcb }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Via de Ministração : {{ $resultado->via_ministracao }}
-                                            </div>
-                                            <div class="col-m-4 "></div>
-                                            <hr> --}}
+                                            
                                             <div class="col-md-3 mt-3">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
                                             </div>
@@ -156,7 +139,6 @@
                                                 Telefone : {{ $resultado->telefone_medico }}
                                             </div>
                                         </div>
-
                                         <div class="col-md-4 mt-3">
                                             Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
                                         </div>
@@ -164,34 +146,14 @@
                                             Observações ao paciente: {{ $resultado->observacoes }}
                                         </div>
                                     </div>
-                                </div>
-                                {{-- <div class="row mt-3">
-                                    <span class="titleResult">Perfuração de Lóbulo Auricular</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 ">
-                                        <div class="row">
-                                            <div class="col-md-4 mt-3">
-                                                Nome do Fabricante : {{ $resultado->nome_fab_auricular }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                CNPJ : {{ $resultado->cnpj_fab_auricular }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Número lote pistola : {{ $resultado->lote_pistola }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Número lote brinco : {{ $resultado->lote_brinco }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Realizado por : {{ $resultado->responsavel_atendimento }}
-                                            </div>
-                                            <div class="col-md-12 mt-3">
-                                                Observações ao paciente: {{ $resultado->observacoes }}
-                                            </div>
-                                        </div>
+                                    <div class="row">
+                                        <h5 class="text-center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</h5>
                                     </div>
-                                </div> --}}
                                 <div class="row">
                                     <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
+                                </div>
+                                <div class="row">
+                                    {{$resultado->bibliografia}}
                                 </div>
                             </div>
                         </div>

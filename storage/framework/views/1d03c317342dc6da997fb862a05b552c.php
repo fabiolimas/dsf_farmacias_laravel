@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Dados do Exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -55,131 +56,184 @@
                                             value="<?php echo e($cliente->sexo); ?>" id="sexo" disabled>
                                     </div>
 
+                                    <?php if( date('Y', strtotime('now')) - date('Y', strtotime($cliente->data_nascimento))  < 18): ?>
+
+                                    <div class="col-md-3 mt-3">
+                                        <label for="responsavel">Responsavel:</label>
+                                        <input type="text" class="form-control" name='responsavel'
+                                            value="<?php echo e($cliente->responsavel); ?>" id="responsavel" disabled>
+                                    </div>
+
+                                    <?php else: ?>
+
+                                    <?php endif; ?>
+
 
                                 </div>
                         </div>
-                       <h5> Atenção Farmaceutica</h5>
+                        <h5> Atenção Farmaceutica</h5>
+                        <div class="border-green-light p-3 rounded-3 mb-4 ">
+                           
+                            <div class="row">
+                                <div class="col-md-3 mt-3">
+                                    <label for="peso">Peso:</label>
+                                    <input type="text" class="form-control" name='peso' value=""
+                                        id="peso">
+                                </div>
+
+                                <div class="col-md-3 mt-3">
+                                    <label for="gestante">Gestante?</label>
+                                    <select class="form-select" name="gestante" id="gestante">
+                                        <option value="">Selecione</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                    
+                                </div>
+                                <div class="col-md-3 mt-3">
+                                    <label for="fumante">Fumante?</label>
+                                    <select class="form-select" name="fumante" id="fumante">
+                                        <option value="">Selecione</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mt-3">
+                                    <label for="usa_insulina">Usa Insulina?</label>
+                                    <select class="form-select" name="usa_insulina" id="usa_insulina">
+                                        <option value="">Selecione</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mt-3">
+                                    <label for="uso_de_medicamentos">Faz uso de medicamentos? quais:</label>
+                                    <input type="text" class="form-control" name='uso_de_medicamentos' value=""
+                                        id="uso_de_medicamentos">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <h5> <?php echo e($exame->nome); ?></h5>
                         <div class="border-green-light p-3 rounded-3 mb-4 ">
                             <span class="titleResult">Informações sobre o exame</span>
                             <div class="row mt-3">
 
-                        <?php if($exame->perguntas != null): ?>
-                                <?php $__currentLoopData = $exame->perguntas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <div class="col-md-3">
+                                <?php if($exame->perguntas != null): ?>
+                                    <?php $__currentLoopData = $exame->perguntas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div class="col-md-3">
 
-                                        <?php switch($pergunta['tipo']):
+                                            <?php switch($pergunta['tipo']):
+                                                case ('selecao'): ?>
+                                                    <?php echo e($pergunta['pergunta']); ?>
 
-                                        case ('selecao'): ?>
-
-                                        <?php echo e($pergunta['pergunta']); ?>
-
-                                        <input type="hidden" name="perguntas[]" value="<?php echo e($pergunta['pergunta']); ?>">
-                                        <select class="form-select" name="respostas[]">
-                                            <option value="">Selecione uma opção</option>
-                                            <?php $__currentLoopData = $pergunta['opcoes']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opcao): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($opcao); ?>"><?php echo e($opcao); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <input type="hidden" name="perguntas[]"
+                                                        value="<?php echo e($pergunta['pergunta']); ?>">
+                                                    <select class="form-select" name="respostas[]">
+                                                        <option value="">Selecione uma opção</option>
+                                                        <?php $__currentLoopData = $pergunta['opcoes']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opcao): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($opcao); ?>"><?php echo e($opcao); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-                                        </select>
-                                        <?php break; ?>
+                                                    </select>
+                                                <?php break; ?>
 
-                                        <?php case ('multipla-escolha'): ?>
-                                        <?php echo e($pergunta['pergunta']); ?>
+                                                <?php case ('multipla-escolha'): ?>
+                                                    <?php echo e($pergunta['pergunta']); ?>
 
-                                        <input type="hidden" name="perguntas[]" value="<?php echo e($pergunta['pergunta']); ?>" >
-                                        <br>
-                                       <?php $__currentLoopData = $pergunta['opcoes']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opcao): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                          <label for="<?php echo e($opcao); ?>"><?php echo e($opcao); ?></label>
-                                            <input type="checkbox" id="<?php echo e($opcao); ?>" name="respostas[]" value="<?php echo e($opcao); ?>" class="form-check-input">
+                                                    <input type="hidden" name="perguntas[]"
+                                                        value="<?php echo e($pergunta['pergunta']); ?>">
+                                                    <br>
+                                                    <?php $__currentLoopData = $pergunta['opcoes']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opcao): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <label for="<?php echo e($opcao); ?>"><?php echo e($opcao); ?></label>
+                                                        <input type="checkbox" id="<?php echo e($opcao); ?>" name="respostas[]"
+                                                            value="<?php echo e($opcao); ?>" class="form-check-input">
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php break; ?>
 
-                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php case ('resposta-curta'): ?>
+                                                    <?php echo e($pergunta['pergunta']); ?>
 
-                                       <?php break; ?>
+                                                    <input type="hidden" class="form-control" name="perguntas[]"
+                                                        value="<?php echo e($pergunta['pergunta']); ?>">
 
-                                       <?php case ('resposta-curta'): ?>
-                                       <?php echo e($pergunta['pergunta']); ?>
+                                                    <input class="form-control" type="text" name="respostas[]">
+                                                <?php break; ?>
+                                            <?php endswitch; ?>
 
-                                       <input type="hidden" class="form-control" name="perguntas[]" value="<?php echo e($pergunta['pergunta']); ?>">
-
-                                   <input class="form-control" type="text" name="respostas[]">
-                                       <?php break; ?>
-
-                                       <?php endswitch; ?>
-
-                                    </div>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+                                        </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <?php else: ?>
-
                                 <?php endif; ?>
 
                             </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-3 mt-3">
+                                    <label for="medico_responsavel">Médico Responsavel</label>
+
+                                    <input type="text" class="form-control " name="medico_responsavel"
+                                        id="medico_responsavel">
+                                </div>
+                                <div class="col-md-3 mt-3">
+                                    <label for="crm">CRM</label>
+
+                                    <input type="text" class="form-control " name="crm" id="crm">
+                                </div>
+                                <div class="col-md-3 mt-3">
+                                    <label for="endereco_medico">Endereço</label>
+
+                                    <input type="text" class="form-control " name="endereco_medico"
+                                        id="endereco_medico">
+                                </div>
+                                <div class="col-md-3 mt-3">
+                                    <label for="telefone_medico">Telefone</label>
+
+                                    <input type="text" class="form-control " name="telefone_medico"
+                                        id="telefone_medico">
+                                </div>
+                            </div>
                             <div class="row">
-                            <div class="col-md-3 mt-3">
-                                <label for="medico_responsavel">Médico Responsavel</label>
+                                <div class="col-md-12 mt-3">
+                                    <label for="observacao">Observações ao paciante</label>
 
-                                <input type="text" class="form-control " name="medico_responsavel"
-                                    id="medico_responsavel">
-                            </div>
-                            <div class="col-md-3 mt-3">
-                                <label for="crm">CRM</label>
-
-                                <input type="text" class="form-control " name="crm" id="crm">
-                            </div>
-                            <div class="col-md-3 mt-3">
-                                <label for="endereco_medico">Endereço</label>
-
-                                <input type="text" class="form-control " name="endereco_medico"
-                                    id="endereco_medico">
-                            </div>
-                            <div class="col-md-3 mt-3">
-                                <label for="telefone_medico">Telefone</label>
-
-                                <input type="text" class="form-control " name="telefone_medico"
-                                    id="telefone_medico">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mt-3">
-                                <label for="observacao">Observações ao paciante</label>
-
-                                <textarea class="form-control" name="observacao" id="observacao"></textarea>
-                            </div>
-
-                        </div>
-
-                        </div>
-
-                        
-
-                        
-                                <div class="col-md-4 mt-3">
-                                    <label for="responsavel_atendimento">Responsavel pelo atendimento</label>
-
-                                    <input type="text" class="form-control " name="responsavel_atendimento"
-                                        id="responsavel_atendimento" value="<?php echo e(auth()->user()->name); ?>">
+                                    <textarea class="form-control" name="observacao" id="observacao"></textarea>
                                 </div>
 
-                                
-                                <button type="submit" class="btn btn-success mt-3">Salvar</button>
                             </div>
-                            </form>
                         </div>
 
+                        
+                        <div class="col-md-4 mt-3">
+                            <label for="responsavel_atendimento">Responsavel pelo atendimento</label>
+
+                            <input type="text" class="form-control " name="responsavel_atendimento"
+                                id="responsavel_atendimento" value="<?php echo e(auth()->user()->name); ?>">
+                        </div>
+
+                        <input type="hidden" value="<?php echo e($exame->bibliografia); ?>" name="bibliografia">
+                        <button type="submit" class="btn btn-success mt-3">Salvar</button>
                     </div>
-
-
-
-
-
-
-
+                    </form>
                 </div>
 
-
             </div>
+
+
+
+
+
+
+
         </div>
+
+
+    </div>
+    </div>
 
     </div>
 

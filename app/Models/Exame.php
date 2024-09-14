@@ -16,7 +16,8 @@ class Exame extends Model
         'perguntas',
         'preco',
         'estoque',
-        'lote'
+        'lote',
+        'bibliografia'
     ];
 
     protected $casts = [

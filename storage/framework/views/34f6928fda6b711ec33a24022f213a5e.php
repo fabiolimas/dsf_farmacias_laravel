@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Visualizar Exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -83,13 +84,48 @@
                                     <span class="titleResult">Atenção Farmaceutica</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 ">
                                         <div class="row">
+                                            <div class="col-md-3 mt-3">
+                                                <label for="peso">Peso: <?php echo e($resultado->peso); ?></label>
+                                             
+                                            </div>
+            
+                                            <div class="col-md-3 mt-3">
+                                                <label for="gestante">Gestante: <?php echo e($resultado->gestante); ?></label>
+                                              
+                                                
+                                            </div>
+                                            <div class="col-md-3 mt-3">
+                                                <label for="fumante">Fumante: <?php echo e($resultado->fumante); ?></label>
+                                              
+                                            </div>
+            
+                                            <div class="col-md-3 mt-3">
+                                                <label for="usa_insulina">Usa Insulina: <?php echo e($resultado->usa_insulina); ?></label>
+                                               
+                                            </div>
+            
+                                            <div class="col-md-3 mt-3">
+                                                <label for="uso_de_medicamentos">Faz uso de medicamentos? quais: <?php echo e($resultado->uso_de_medicamentos); ?></label>
+                                               
+                                            </div>
+                                        </div>
+                                        
+
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <span class="titleResult"><?php echo e($agenda->nome_exame); ?></span>
+                                    <div class="border-green-light p-3 rounded-3 mb-4 ">
+                                        <div class="row">
 
                                             <?php if($array != null): ?>
 
                                             <?php $__currentLoopData = $array['perguntas']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
 
-                                                <div class="col-md-4 mt-3">
+                                                <div class="col-md-4 mt-3 mb-3">
                                                     <?php echo e($pergunta); ?>: <?php echo e($array['respostas'][$index]); ?>
 
                                                 </div>
@@ -114,7 +150,6 @@
 
                                             </div>
                                         </div>
-
                                         <div class="col-md-4 mt-3">
                                             Responsavel pelo atendimento : <?php echo e($resultado->responsavel_atendimento); ?>
 
@@ -124,10 +159,15 @@
 
                                         </div>
                                     </div>
-                                </div>
-                                
+                                    <div class="row">
+                                        <h5 class="text-center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</h5>
+                                    </div>
                                 <div class="row">
                                     <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
+                                </div>
+                                <div class="row">
+                                    <?php echo e($resultado->bibliografia); ?>
+
                                 </div>
                             </div>
                         </div>

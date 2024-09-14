@@ -283,7 +283,15 @@ img.w-100.rounded-3.border-green-light {
     width: 278px !important;
     height: 70px;
     }
-
+    .logofarmacia {
+        width: 51px;
+        margin-right: 15px;
+    }
+    .farmacialogada {
+        display: flex;
+        align-items: center;
+        margin-right: 254px;
+    }
     .row.capaExame {
         font-size: 12px;
         background: #fff;

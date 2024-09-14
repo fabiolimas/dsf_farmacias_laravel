@@ -67,8 +67,13 @@
                     </li>
                 </ul>
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['farmacia','adminFarmacia'])): ?>
-                <div class="nomeFarmacia">  <?php echo e($farmacia->razao_social); ?></div>
-
+                <div class="farmacialogada">
+                <div class="logofarmacia">
+                    <img src="<?php echo e(asset($farmacia->logo)); ?>" class="w-100">
+                </div>
+                <div class="nomeFarmacia">  
+                    <?php echo e($farmacia->razao_social); ?></div>
+                </div>
                 <?php endif; ?>
                 <div class="d-none d-lg-block">
                     <a href="#" class="d-flex align-items-center gap-2 nav-link-user">

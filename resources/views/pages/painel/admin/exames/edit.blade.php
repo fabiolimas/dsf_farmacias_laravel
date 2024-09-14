@@ -54,6 +54,13 @@
                                     <div class="invalid-feedback fw-500">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="mb-3 pb-2">
+                                <label for="registro_ms" class="form-label text-green fw-500 fs-18px">
+                                   Bibliografia
+                                </label>
+                            <textarea name="bibliografia" id="" cols="30" rows="10" class="form-control">{{$exame->bibliografia}}</textarea>
+
+                            </div>
 
                             <div class="pt-3 mt-5">
                                 <button type="submit" class="btn btn-primary w-100 py-2 fw-600">

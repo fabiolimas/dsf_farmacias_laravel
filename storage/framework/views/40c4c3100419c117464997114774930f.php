@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Adicionar colaborador'); ?>
 <?php $__env->startSection('head'); ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">
@@ -158,6 +159,33 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
+                            <!-- CRF -->
+                            <div class="mb-3 pb-2 " style="display: none" id="crfNumber">
+                                <label for="crf" class="form-label text-green fw-500 fs-18px">
+                                    Número do CRF
+                                </label>
+                                <input type="text"
+                                    class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['crf'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                    name="crf" id="crf" value="<?php echo e(old('crf')); ?>" />
+                                <?php $__errorArgs = ['crf'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback fw-500"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
 
                             <div class="pt-3">
                                 <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
@@ -207,7 +235,8 @@ unset($__errorArgs, $__bag); ?>
                                     <i class="" data-feather="upload"></i>
                                     Selecionar imagem
                                 </label>
-                                <button type="button" class="btn btn-primary rounded-2 py-2 px-4 ms-auto" onclick="crop()">
+                                <button type="button" class="btn btn-primary rounded-2 py-2 px-4 ms-auto"
+                                    onclick="crop()">
                                     Recortar
                                 </button>
 
@@ -237,6 +266,19 @@ unset($__errorArgs, $__bag); ?>
         const myModal = new bootstrap.Modal(document.getElementById("modal-foto-perfil"), {});
     </script>
 
+    <script>
+
+        $(document).ready(function(){
+            $('#cargo').change(function(){
+
+                if($('#cargo').val() == 'farmaceutico'){
+                    $('#crfNumber').css('display','block');
+                }else{
+                    $('#crfNumber').css('display','none');
+                }
+            });
+        });
+    </script>
 
     <script>
         /* Exibir modal recortar img ao selecionar input img */

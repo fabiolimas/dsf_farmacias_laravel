@@ -16,21 +16,7 @@ return new class extends Migration
             $table->foreignId('cliente_farmacia_id')->constrained()->onDelete('cascade');
             $table->foreignId('agendas_id')->constrained()->onDelete('cascade');
             $table->longText('perguntas')->nullable();
-            $table->string('braco_aferido')->nullable();
-            $table->string('resultado_sistolica')->nullable();
-            $table->string('resultado_distolica')->nullable();
-            $table->string('glicemia')->nullable();
-            $table->string('result_glicemia')->nullable();
-            $table->string('temperatura')->nullable();
-            $table->string('result_temperatura')->nullable();
-            $table->string('injetaveis')->nullable();
-            $table->string('medicamento')->nullable();
-            $table->string('concentracao')->nullable();
-            $table->string('lote')->nullable();
-            $table->string('validade')->nullable();
-            $table->string('ms')->nullable();
-            $table->string('dcb')->nullable();
-            $table->string('via_ministracao')->nullable();
+             
             $table->string('medico_responsavel')->nullable();
             $table->string('crm')->nullable();
             $table->string('endereco_medico')->nullable();

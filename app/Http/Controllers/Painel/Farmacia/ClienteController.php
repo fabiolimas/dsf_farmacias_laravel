@@ -38,9 +38,9 @@ class ClienteController extends Controller
     }
 
     public function edit(Request $request){
-
+        $farmacia=Cliente::find(auth()->user()->cliente_id);
         $cliente=ClienteFarmacia::find($request->id);
-        return view('pages.painel.farmacia.clientes.edit', compact('cliente'));
+        return view('pages.painel.farmacia.clientes.edit', compact('cliente','farmacia'));
 
     }
 

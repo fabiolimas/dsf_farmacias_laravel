@@ -91,13 +91,17 @@ class ColaboradorController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', "unique:users,email,{$user->id}"],
-            'password' => ['required', 'string', 'min:8'],
+            // 'password' => ['required', 'string', 'min:8'],
             'cargo' => ['required', 'exists:roles,name']
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        if($request->password != ''){
+            $user->password = bcrypt($request->password);
+        }
+        
+        $user->crf=$request->crf;
 
         // remover permissões/roles
         foreach ($user->getRoleNames() as $key => $value) :

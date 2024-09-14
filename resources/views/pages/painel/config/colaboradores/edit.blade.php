@@ -84,7 +84,7 @@
 
                                 <input type="password"
                                     class="form-control form-control-custom fs-18px fw-500 @error('password') is-invalid @enderror"
-                                    name="password" id="password" placeholder="" value="" required />
+                                    name="password" id="password" placeholder="" value=""  />
                                 @error('password')
                                     <div class="invalid-feedback fw-500">{{ $message }}</div>
                                 @enderror
@@ -97,7 +97,7 @@
                                     name="cargo" id="cargo" required>
                                     <option value="" selected>Selecione um cargo</option>
                                     @foreach ($rolesAdmin as $item)
-                                        <option value="{{ $item->name }}"
+                                        <option value="{{ $item->profile }}"
                                             @if (old('cargo', $user->getRoleNames()->first()) == $item->name) selected @endif>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
@@ -105,6 +105,19 @@
                                     <div class="invalid-feedback fw-500">{{ $message }}</div>
                                 @enderror
                             </div>
+ <!-- CRF -->
+ <div class="mb-3 pb-2 "   id="crfNumber">
+    <label for="crf" class="form-label text-green fw-500 fs-18px">
+        Número do CRF
+    </label>
+    <input type="text"
+        class="form-control form-control-custom fs-18px fw-500 @error('crf') is-invalid @enderror"
+        name="crf" id="crf" value="{{ $user->crf }}" />
+    @error('crf')
+        <div class="invalid-feedback fw-500">{{ $message }}</div>
+    @enderror
+</div>
+                           
 
                             <div class="pt-3">
                                 <button type="submit" class="btn btn-primary w-100 py-2 fw-600">
@@ -153,7 +166,8 @@
                                     <i class="" data-feather="upload"></i>
                                     Selecionar imagem
                                 </label>
-                                <button type="button" class="btn btn-primary rounded-2 py-2 px-4 ms-auto" onclick="crop()">
+                                <button type="button" class="btn btn-primary rounded-2 py-2 px-4 ms-auto"
+                                    onclick="crop()">
                                     Recortar
                                 </button>
 
@@ -184,6 +198,18 @@
         const myModal = new bootstrap.Modal(document.getElementById("modal-foto-perfil"), {});
     </script>
 
+    <script>
+        $(document).ready(function() {
+            $('#cargo').change(function() {
+
+                if ($('#cargo').val() == 'farmaceutico') {
+                    $('#crfNumber').css('display', 'block');
+                } else {
+                    $('#crfNumber').css('display', 'none');
+                }
+            });
+        });
+    </script>
 
     <script>
         /* Exibir modal recortar img ao selecionar input img */

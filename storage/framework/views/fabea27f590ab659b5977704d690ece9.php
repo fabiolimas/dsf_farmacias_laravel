@@ -157,7 +157,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="d-flex justify-content-between align-items-center mb-4 pt-2">
-                            <h2 class="fs-4 fw-600 text-green-2 ">Colaboradores</h2>
+                            <h2 class="fs-4 fw-600 text-green-2 ">Usuarios</h2>
                             <div class="">
 
                                 <a href="<?php echo e(route('painel.config.colaboradores.create')); ?>" data-bs-toggle="tooltip"

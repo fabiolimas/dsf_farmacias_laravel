@@ -64,6 +64,7 @@ class ExameAdmController extends Controller
         $exame->laboratorio = $request->laboratorio;
         $exame->registro_ms = $request->registro_ms;
         $exame->perguntas = $this->setObrigatorioOuNao($request->perguntas);
+      $exame->bibliografia=$request->bibliografia;
         $exame->save();
 
         return redirect()->route('painel.admin.exames.index')->withSuccess('Exame cadastrado com sucesso!');
@@ -114,6 +115,7 @@ class ExameAdmController extends Controller
         $exame->laboratorio = $request->laboratorio;
         $exame->registro_ms = $request->registro_ms;
         $exame->perguntas = $this->setObrigatorioOuNao($request->perguntas);
+       $exame->bibliografia=$request->bibliografia;
         $exame->save();
 
         return redirect()->back()->withSuccess('Exame editado com sucesso!');

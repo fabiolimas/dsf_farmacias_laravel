@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Resultado - DSF</title>
-   
+
 </head>
 <style>
     td {
-    padding: 9px;
-}
-.row.mt-2, .row.mt-3, .row.mt-4 {
-    margin-top:20px;
-    margin-bottom:5px;
-    font-size: 13px;
-}
-.logoResultado {
-    width: 104px;
-   
-    position:absolute; 
-    left:20px;
- 
-}
-.titleResult{
-    margin-bottom:5px;
-    margin-left:5px;
-}
-table, th, td {
-    border-collapse: collapse;
-    border-bottom: 1px solid #b2d2d2;
+        padding: 9px;
+    }
+
+    .row.mt-2,
+    .row.mt-3,
+    .row.mt-4 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        font-size: 13px;
+    }
+
+    .logoResultado {
+        width: 104px;
+
+        position: absolute;
+        left: 20px;
+
+    }
+
+    .titleResult {
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+        border-bottom: 1px solid #b2d2d2;
         width: 100%;
-}
-    </style>
+    }
+</style>
+
 <body style="font-family:sans-serif">
     <div class="">
         <div class="row gy-4" style="padding:5px">
@@ -64,88 +74,133 @@ table, th, td {
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-3">
-                                   <p> Data:<?php echo e(date('d/m/Y')); ?>
+                                    <p> Data:<?php echo e(date('d/m/Y')); ?>
 
-                                  <span style="text-align: center; font-weight:700; margin-left: 20%">Declaração de serviços farmaceuticos</span> <span style="margin-left:25%">  Nº <?php echo e($resultado->id); ?></span></p>
+                                        <span style="text-align: center; font-weight:700; margin-left: 20%">Declaração
+                                            de serviços farmaceuticos</span> <span style="margin-left:25%"> Nº
+                                            <?php echo e($resultado->id); ?></span>
+                                    </p>
                                 </div>
                                 <div class="col-md-8">
-                                   
+
                                 </div>
                                 <div class="col-md-1">
-                                  
+
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
+                                <div class="border-green-light p-3 rounded-3 mb-4 "
+                                    style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
                                     <p style="font-size: 12px; text-align: center;">Este estabelecimento através de seu
                                         responsável tecnico, prestou assistência farmacêutica conforme abaixo. O(a) Sr.
                                         (Sra.).</p>
                                     <table>
-                                    <tr>
-                                        
-                                        <td>
-                                            Nome: <?php echo e($clienteFarma->nome); ?>
-
-                                        </td>
-                                        <td>
-                                            CPF: <?php echo e($clienteFarma->cpf); ?>
-
-                                        </td>
-                                        <td class="col-md-4 mt-3">
-                                            Telefone: <?php echo e($clienteFarma->telefone); ?>
-
-                                        </td>
-                                    </tr>
                                         <tr>
-                                        <td class="col-md-4 mt-3">
-                                            E-mail: <?php echo e($clienteFarma->email); ?>
 
-                                        </td>
-                                        <td class="col-md-4 mt-3">
-                                            Idade:
-                                            <?php echo e(date('Y', strtotime('now')) - date('Y', strtotime($clienteFarma->data_nascimento))); ?>
-
-                                        </td>
-                                        <td class="col-md-4 mt-3">
-                                            Sexo: <?php echo e($clienteFarma->sexo); ?>
-
-                                        </td>
-                                    </tr>
-                                    </table>
-                                        <hr class='mt-2'>
-                                      
-                                    </div>
-                                </div>
-
-                                <div class="row mt-2">
-                                    <span class="titleResult">Atenção Farmaceutica</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
-                                        <table>
-                                            <tr>
-                                        <?php if($array != null): ?>
-                                        <?php $__currentLoopData = $array['perguntas']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                       
-                                            <td class="col-md-4 mt-3">
-                                                <?php echo e($pergunta); ?>: <?php echo e($array['respostas'][$index]); ?>
+                                            <td>
+                                                Nome: <?php echo e($clienteFarma->nome); ?>
 
                                             </td>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php else: ?> 
-                                        <?php endif; ?>
-                                    </tr>
-                                        </table>
-                                       
+                                            <td>
+                                                CPF: <?php echo e($clienteFarma->cpf); ?>
+
+                                            </td>
+                                            <td class="col-md-4 mt-3">
+                                                Telefone: <?php echo e($clienteFarma->telefone); ?>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4 mt-3">
+                                                E-mail: <?php echo e($clienteFarma->email); ?>
+
+                                            </td>
+                                            <td class="col-md-4 mt-3">
+                                                Idade:
+                                                <?php echo e(date('Y', strtotime('now')) - date('Y', strtotime($clienteFarma->data_nascimento))); ?>
+
+                                            </td>
+                                            <td class="col-md-4 mt-3">
+                                                Sexo: <?php echo e($clienteFarma->sexo); ?>
+
+                                            </td>
+
+                                            <?php if($clienteFarma->responsavel != null): ?>
+                                                <td class="col-md-4 mt-3">
+                                                    Respnsavel: <?php echo e($clienteFarma->responsavel); ?>
+
+                                                </td>
+                                            <?php else: ?>
+                                            <?php endif; ?>
+                                        </tr>
+                                    </table>
+                                    <hr class='mt-2'>
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <span class="titleResult">Atenção Farmaceutica</span>
+                                <div class="border-green-light p-3 rounded-3 mb-4 "
+                                    style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
+                                    <table>
+                                        <tr>
+                                           <td>Peso:</td>
+                                           <td><?php echo e($resultado->peso); ?></td>
+                                           <td>Fumante:</td>
+                                           <td><?php echo e($resultado->fumante); ?></td>
+                                           <td>Gestante:</td>
+                                           <td><?php echo e($resultado->gestante); ?></td>
+                                           <td>Usa Insulina:</td>
+                                           <td><?php echo e($resultado->usa_insulina); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Medicamentos que faz uso:</td>
+                                            <td>
+                                                <?php echo e($resultado->uso_de_medicamentos); ?>
+
+                                            </td>
+
+
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <span class="titleResult"><?php echo e($agenda->nome_exame); ?></span>
+                                <div class="border-green-light p-3 rounded-3 mb-4 "
+                                    style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
+                                    <table>
+                                        <tr>
+                                            <?php if($array != null): ?>
+                                                <?php $__currentLoopData = $array['perguntas']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $pergunta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <td class="col-md-4 mt-3">
+                                                        <?php echo e($pergunta); ?>: <?php echo e($array['respostas'][$index]); ?>
+
+                                                    </td>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php else: ?>
+                                            <?php endif; ?>
+                                        </tr>
+                                    </table>
+                                    <table>
+
+
+
+
+                                        <tr>
                                             <td colspan="4">
                                                 Médico Responsavel : <?php echo e($resultado->medico_responsavel); ?>
 
                                             </td>
-                                            </tr>
-                                            <tr>
+                                        </tr>
+                                        <tr>
                                             <td class="col-md-2 mt-3">
                                                 CRM : <?php echo e($resultado->crm); ?>
 
                                             </td>
-                                            <td colspan="2">
+                                            <td>
                                                 Endereço : <?php echo e($resultado->endereco_medico); ?>
 
                                             </td>
@@ -153,45 +208,69 @@ table, th, td {
                                                 Telefone : <?php echo e($resultado->telefone_medico); ?>
 
                                             </td>
-                                            </tr>
-                                       </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="row mt-3">
-                                    
-                                        <tr>
-                                            <td colspan="3">
-                                                Observações ao paciente: <?php echo e($resultado->observacoes); ?>
-
-                                            </td>
                                         </tr>
-                                        
-                                        </div>
                                     </table>
-                                    </div>
                                 </div>
-                                <div class="row">
-                                    <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
-                                </div>
-                            </div>
                         </div>
 
-                        
+                        <div class="row mt-3">
+           
+                            <table>
+                               
+                                <tr>
+                                    <td colspan="3">
+                                        Responsavel pelo atendimento : <?php echo e($resultado->responsavel_atendimento); ?>
 
+                                    </td>
+                                    <td>Numero CRF: <?php echo e($resultado->crf_responsavel); ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        Observações ao paciente: <?php echo e($resultado->observacoes); ?>
 
+                                    </td>
+                                </tr>
+
+                        </div>
+                        </table>
                     </div>
                 </div>
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td style="font-size: 12px">Ass. Usuário/Responsavel:__________________________ </td>
+                            <td style="font-size: 12px">Ass. do Farmaceutico:__________________________</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</td>
+                        </tr>
+                    </table>
 
+                </div>
+                <div class="row">
+                    <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a
+                        cosulta medica ou a realização de exames laboratoriais.</h5>
+                </div>
+                <div class="row bibliografia"><?php echo e($resultado->bibliografia); ?></div>
+
+                <div><h4 style="text-align: center"><?php echo e($agenda->nome_exame); ?></h4></div>
             </div>
-
-
-
         </div>
+
+
+
+
+    </div>
+    </div>
+
+    </div>
+
+
+
+    </div>
 
     </div>
 </body>
+
 </html>
-    
 <?php /**PATH C:\xampp\htdocs\indutiva\dsf_farmacias_laravel\resources\views/pages/painel/farmacia/exames/exame_pdf.blade.php ENDPATH**/ ?>

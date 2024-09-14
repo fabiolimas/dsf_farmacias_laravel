@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,30 +10,39 @@
 </head>
 <style>
     td {
-    padding: 9px;
-}
-.row.mt-2, .row.mt-3, .row.mt-4 {
-    margin-top:20px;
-    margin-bottom:5px;
-    font-size: 13px;
-}
-.logoResultado {
-    width: 104px;
+        padding: 9px;
+    }
 
-    position:absolute;
-    left:20px;
+    .row.mt-2,
+    .row.mt-3,
+    .row.mt-4 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        font-size: 13px;
+    }
 
-}
-.titleResult{
-    margin-bottom:5px;
-    margin-left:5px;
-}
-table, th, td {
-    border-collapse: collapse;
-    border-bottom: 1px solid #b2d2d2;
+    .logoResultado {
+        width: 104px;
+
+        position: absolute;
+        left: 20px;
+
+    }
+
+    .titleResult {
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+        border-bottom: 1px solid #b2d2d2;
         width: 100%;
-}
-    </style>
+    }
+</style>
+
 <body style="font-family:sans-serif">
     <div class="">
         <div class="row gy-4" style="padding:5px">
@@ -66,8 +76,11 @@ table, th, td {
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-3">
-                                   <p> Data:{{ date('d/m/Y') }}
-                                  <span style="text-align: center; font-weight:700; margin-left: 20%">Declaração de serviços farmaceuticos</span> <span style="margin-left:25%">  Nº {{ $resultado->id }}</span></p>
+                                    <p> Data:{{ date('d/m/Y') }}
+                                        <span style="text-align: center; font-weight:700; margin-left: 20%">Declaração
+                                            de serviços farmaceuticos</span> <span style="margin-left:25%"> Nº
+                                            {{ $resultado->id }}</span>
+                                    </p>
                                 </div>
                                 <div class="col-md-8">
 
@@ -77,210 +90,172 @@ table, th, td {
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
+                                <div class="border-green-light p-3 rounded-3 mb-4 "
+                                    style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
                                     <p style="font-size: 12px; text-align: center;">Este estabelecimento através de seu
                                         responsável tecnico, prestou assistência farmacêutica conforme abaixo. O(a) Sr.
                                         (Sra.).</p>
                                     <table>
-                                    <tr>
-
-                                        <td>
-                                            Nome: {{ $clienteFarma->nome }}
-                                        </td>
-                                        <td>
-                                            CPF: {{ $clienteFarma->cpf }}
-                                        </td>
-                                        <td class="col-md-4 mt-3">
-                                            Telefone: {{ $clienteFarma->telefone }}
-                                        </td>
-                                    </tr>
                                         <tr>
-                                        <td class="col-md-4 mt-3">
-                                            E-mail: {{ $clienteFarma->email }}
-                                        </td>
-                                        <td class="col-md-4 mt-3">
-                                            Idade:
-                                            {{ date('Y', strtotime('now')) - date('Y', strtotime($clienteFarma->data_nascimento)) }}
-                                        </td>
-                                        <td class="col-md-4 mt-3">
-                                            Sexo: {{ $clienteFarma->sexo }}
-                                        </td>
-                                    </tr>
+
+                                            <td>
+                                                Nome: {{ $clienteFarma->nome }}
+                                            </td>
+                                            <td>
+                                                CPF: {{ $clienteFarma->cpf }}
+                                            </td>
+                                            <td class="col-md-4 mt-3">
+                                                Telefone: {{ $clienteFarma->telefone }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4 mt-3">
+                                                E-mail: {{ $clienteFarma->email }}
+                                            </td>
+                                            <td class="col-md-4 mt-3">
+                                                Idade:
+                                                {{ date('Y', strtotime('now')) - date('Y', strtotime($clienteFarma->data_nascimento)) }}
+                                            </td>
+                                            <td class="col-md-4 mt-3">
+                                                Sexo: {{ $clienteFarma->sexo }}
+                                            </td>
+
+                                            @if ($clienteFarma->responsavel != null)
+                                                <td class="col-md-4 mt-3">
+                                                    Respnsavel: {{ $clienteFarma->responsavel }}
+                                                </td>
+                                            @else
+                                            @endif
+                                        </tr>
                                     </table>
-                                        <hr class='mt-2'>
+                                    <hr class='mt-2'>
 
-                                    </div>
                                 </div>
+                            </div>
 
-                                <div class="row mt-2">
-                                    <span class="titleResult">Atenção Farmaceutica</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
-                                        <table>
-                                            <tr>
-                                        @if($array != null)
-                                        @foreach ($array['perguntas'] as $index => $pergunta)
-
-                                            <td class="col-md-4 mt-3">
-                                                {{ $pergunta }}: {{ $array['respostas'][$index] }}
-                                            </td>
-                                        @endforeach
-                                        @else
-                                        @endif
-                                    </tr>
-                                        </table>
-                                       <table>
-
-
-
-                                      {{-- <tr class="row">
-                                              <td colspan="2">
-                                                Aferição de pressão arterial braço: {{ $resultado->braco_aferido }}
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Resultado Sistólica: {{ $resultado->resultado_sistolica }}
-                                            </td>
-                                            <td colspan="2">
-                                                Resultado Diastolica: {{ $resultado->resultado_distolica }}mmHG
-                                            </td>
+                            <div class="row mt-2">
+                                <span class="titleResult">Atenção Farmaceutica</span>
+                                <div class="border-green-light p-3 rounded-3 mb-4 "
+                                    style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
+                                    <table>
+                                        <tr>
+                                           <td>Peso:</td>
+                                           <td>{{$resultado->peso}}</td>
+                                           <td>Fumante:</td>
+                                           <td>{{$resultado->fumante}}</td>
+                                           <td>Gestante:</td>
+                                           <td>{{$resultado->gestante}}</td>
+                                           <td>Usa Insulina:</td>
+                                           <td>{{$resultado->usa_insulina}}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">
-                                                Aferição Glicemia Capilar: {{ $resultado->glicemia }}
+                                            <td>Medicamentos que faz uso:</td>
+                                            <td>
+                                                {{$resultado->uso_de_medicamentos}}
                                             </td>
-                                            <td class="col-md-4 mt-3">
-                                                 Resultado : {{ $resultado->result_glicemia }}mg/dll
-                                            </td>
-                                            <td class="col-m-4 "></td>
+
+
                                         </tr>
+                                    </table>
+                                </div>
+                            </div>
 
-                                            <tr>
-                                            <td colspan="2">
-                                                Aferição de Temp. Corporal: {{ $resultado->temperatura }}
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Resultado : {{ $resultado->result_temperatura }}Cº
-                                            </td>
-                                            <td class="col-m-4 "></td>
-                                            </tr>
+                            <div class="row mt-2">
+                                <span class="titleResult">{{$agenda->nome_exame}}</span>
+                                <div class="border-green-light p-3 rounded-3 mb-4 "
+                                    style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
+                                    <table>
+                                        <tr>
+                                            @if ($array != null)
+                                                @foreach ($array['perguntas'] as $index => $pergunta)
+                                                    <td class="col-md-4 mt-3">
+                                                        {{ $pergunta }}: {{ $array['respostas'][$index] }}
+                                                    </td>
+                                                @endforeach
+                                            @else
+                                            @endif
+                                        </tr>
+                                    </table>
+                                    <table>
 
-                                            <tr>
-                                            <td colspan="2">
-                                                Aplicação de injetaveis : {{ $resultado->injetaveis }}
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Medicamento : {{ $resultado->medicamento }}
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Concentração : {{ $resultado->concentracao }}
-                                            </td>
-                                            </tr>
-                                            <tr>
-                                            <td class="col-md-4 mt-3">
-                                                Lote : {{ $resultado->lote }}
-                                            </td>
-                                            <td colspan="2">
-                                                Validade : {{ date('d/m/H', strtotime($resultado->validade)) }}
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                MS : {{ $resultado->ms }}
-                                            </td>
-                                            </tr>
-                                            <tr>
-                                            <td class="col-md-4 mt-3">
-                                                DCB : {{ $resultado->dcb }}
-                                            </td>
-                                            <td colspan="3">
-                                                Via de Ministração : {{ $resultado->via_ministracao }}
-                                            </td>
 
-                                            </tr>--}}
 
-                                            <tr>
+
+                                        <tr>
                                             <td colspan="4">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
                                             </td>
-                                            </tr>
-                                            <tr>
+                                        </tr>
+                                        <tr>
                                             <td class="col-md-2 mt-3">
                                                 CRM : {{ $resultado->crm }}
                                             </td>
-                                            <td >
+                                            <td>
                                                 Endereço : {{ $resultado->endereco_medico }}
                                             </td>
                                             <td class="col-md-3 mt-3">
                                                 Telefone : {{ $resultado->telefone_medico }}
                                             </td>
-                                            </tr>
-                                       </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
-                                    {{-- <span class="titleResult">Perfuração de Lóbulo Auricular</span>
-                                    <div class="border-green-light p-3 rounded-3 mb-4 " style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">--}}
-                                        <table>
-                                        {{--<tr class="row">
-                                            <td colspan="2">
-                                                Nome do Fabricante : {{ $resultado->nome_fab_auricular }}
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                CNPJ : {{ $resultado->cnpj_fab_auricular }}
-                                            </td>
-
                                         </tr>
-                                        <tr>
-                                            <td class="col-md-4 mt-3">
-                                                Número lote pistola : {{ $resultado->lote_pistola }}
-                                            </td>
-                                            <td class="col-md-4 mt-3">
-                                                Número lote brinco : {{ $resultado->lote_brinco }}
-                                            </td>
-
-                                        </tr>--}}
-                                        <tr>
-                                            <td colspan="3">
-                                                Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3">
-                                                Observações ao paciente: {{ $resultado->observacoes }}
-                                            </td>
-                                        </tr>
-
-                                        </div>
                                     </table>
-                                    </div>
                                 </div>
-                                    <div class="row">
-                                        <table>
-                                            <tr>
-                                                <td style="font-size: 12px">Ass. Usuário/Responsavel:__________________________ </td>
-                                                <td style="font-size: 12px">Ass. do Farmaceutico:__________________________</td>
-                                            </tr>
-                                        </table>
-
-                                    </div>
-                                <div class="row">
-                                    <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
-                                </div>
-                            </div>
                         </div>
 
+                        <div class="row mt-3">
+           
+                            <table>
+                               
+                                <tr>
+                                    <td colspan="3">
+                                        Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
+                                    </td>
+                                    <td>Numero CRF: {{$resultado->crf_responsavel}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        Observações ao paciente: {{ $resultado->observacoes }}
+                                    </td>
+                                </tr>
 
-
-
+                        </div>
+                        </table>
                     </div>
                 </div>
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td style="font-size: 12px">Ass. Usuário/Responsavel:__________________________ </td>
+                            <td style="font-size: 12px">Ass. do Farmaceutico:__________________________</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</td>
+                        </tr>
+                    </table>
 
+                </div>
+                <div class="row">
+                    <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a
+                        cosulta medica ou a realização de exames laboratoriais.</h5>
+                </div>
+                <div class="row bibliografia">{{$resultado->bibliografia}}</div>
+
+                <div><h4 style="text-align: center">{{$agenda->nome_exame}}</h4></div>
             </div>
-
-
-
         </div>
+
+
+
+
+    </div>
+    </div>
+
+    </div>
+
+
+
+    </div>
 
     </div>
 </body>
-</html>
 
+</html>

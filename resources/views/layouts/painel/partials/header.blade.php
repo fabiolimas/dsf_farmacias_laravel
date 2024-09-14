@@ -66,8 +66,13 @@
                     </li>
                 </ul>
                 @canany(['farmacia','adminFarmacia'])
-                <div class="nomeFarmacia">  {{$farmacia->razao_social}}</div>
-
+                <div class="farmacialogada">
+                <div class="logofarmacia">
+                    <img src="{{asset($farmacia->logo)}}" class="w-100">
+                </div>
+                <div class="nomeFarmacia">  
+                    {{$farmacia->razao_social}}</div>
+                </div>
                 @endcanany
                 <div class="d-none d-lg-block">
                     <a href="#" class="d-flex align-items-center gap-2 nav-link-user">

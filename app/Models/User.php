@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password',
         'profile',
         'img_perfil',
-        'clientes_id'
+        'clientes_id',
+        'crf'
     ];
 
     protected $appends = [
