@@ -38,10 +38,12 @@
     th,
     td {
         border-collapse: collapse;
-        border-bottom: 1px solid #b2d2d2;
+      
         width: 100%;
     }
-</style>
+    p{font-size:12px;}
+    
+    </style>
 
 <body style="font-family:sans-serif">
     <div class="">
@@ -90,6 +92,7 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
+                                <span class="titleResult">Dados do Paciente</span>
                                 <div class="border-green-light p-3 rounded-3 mb-4 "
                                     style="border:1px solid #b2d2d2; border-radius:5px; padding:10px; ">
                                     <p style="font-size: 12px; text-align: center;">Este estabelecimento através de seu
@@ -128,7 +131,7 @@
                                             @endif
                                         </tr>
                                     </table>
-                                    <hr class='mt-2'>
+                                    
 
                                 </div>
                             </div>
@@ -149,8 +152,8 @@
                                            <td>{{$resultado->usa_insulina}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Medicamentos que faz uso:</td>
-                                            <td>
+                                            <td colspan=3>Medicamentos que faz uso:</td>
+                                            <td colspan=4>
                                                 {{$resultado->uso_de_medicamentos}}
                                             </td>
 
@@ -161,7 +164,7 @@
                             </div>
 
                             <div class="row mt-2">
-                                <span class="titleResult">{{$agenda->nome_exame}}</span>
+                                <span class="titleResult">Exame: {{$agenda->nome_exame}}</span>
                                 <div class="border-green-light p-3 rounded-3 mb-4 "
                                     style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
                                     <table>
@@ -206,13 +209,13 @@
                             <table>
                                
                                 <tr>
-                                    <td colspan="3">
+                                    <td colspan="2">
                                         Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
                                     </td>
-                                    <td>Numero CRF: {{$resultado->crf_responsavel}}</td>
+                                    <td colspan="2">Numero CRF: {{$resultado->crf_responsavel}}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3">
+                                    <td colspan="4">
                                         Observações ao paciente: {{ $resultado->observacoes }}
                                     </td>
                                 </tr>
@@ -224,22 +227,28 @@
                 <div class="row">
                     <table>
                         <tr>
-                            <td style="font-size: 12px">Ass. Usuário/Responsavel:__________________________ </td>
+                            <td style="font-size: 12px">Ass. Paciente/Responsavel:__________________________ </td>
                             <td style="font-size: 12px">Ass. do Farmaceutico:__________________________</td>
                         </tr>
-                        <tr>
-                            <td style="text-align: center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</td>
-                        </tr>
+                        
                     </table>
 
                 </div>
+                     <p style="text-align:center; font-wight:bold">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</p>
                 <div class="row">
-                    <h5 style="text-align:center">Este Procedimento não tem finalidade de diagnóstico e não substitui a
-                        cosulta medica ou a realização de exames laboratoriais.</h5>
+                    <p style="text-align:center; font-wight:bold">Este Procedimento não tem finalidade de diagnóstico e não substitui a
+                        cosulta medica ou a realização de exames laboratoriais.</p>
                 </div>
-                <div class="row bibliografia">{{$resultado->bibliografia}}</div>
-
                 <div><h4 style="text-align: center">{{$agenda->nome_exame}}</h4></div>
+             
+                
+                
+                <div class="row bibliografia">
+                    <p style="font-wight:bold">Bibliografia</p>
+                    <p>{{$resultado->bibliografia}}</p>
+                    </div>
+
+               
             </div>
         </div>
 

@@ -61,7 +61,7 @@
                                     <div class="col-md-3 mt-3">
                                         <label for="responsavel">Responsavel:</label>
                                         <input type="text" class="form-control" name='responsavel'
-                                            value="{{ $cliente->responsavel }}" id="responsavel" disabled>
+                                            value="{{ $cliente->responsavel }}" id="responsavel" >
                                     </div>
 
                                     @else

@@ -76,7 +76,7 @@
                                 </label>
                                 <input type="email"
                                     class="form-control form-control-custom fs-18px fw-500 @error('email') is-invalid @enderror"
-                                    name="email" value="{{old('email')}}" id="email" placeholder="usuario@email.com" required />
+                                    name="email" value="{{old('email')}}" id="email" placeholder="usuario@email.com" />
                                 @error('email')
                                     <div class="invalid-feedback fw-500">{{ $message }}</div>
                                 @enderror

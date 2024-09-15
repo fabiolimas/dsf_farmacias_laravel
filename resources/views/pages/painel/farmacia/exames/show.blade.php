@@ -43,6 +43,7 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
+                                <span class="titleResult">Dados do Paciente</span>
                                 <div class="border-green-light p-3 rounded-3 mb-4 ">
                                     <p style="font-size: 13px;
     text-align: center;">Este estabelecimento através de seu
@@ -159,14 +160,28 @@
                         </div>
 
                         <div class=" px-3 mt-4 d-lg-flex">
-                            <a class="w-100  btn btn-primary d-block d-md-inline-block mb-3 me-lg-3   "
-                                href="{{ route('enviar.pdf',$resultado->agendas_id ) }}" role="button"
+                            @if($clienteFarma->email == null)
+                          
+
+                            <a class="w-100  btn btn-danger d-block d-md-inline-block mb-3 me-lg-3   disabled"
+                                href="#" role="button"
                                 style="padding: 16px 24px;">
-                                <div class="d-flex gap-2 align-items-center justify-content-center">
-                                    <i data-feather="send"></i>
-                                    Enviar por email
+                                <div class="d-flex gap-2 align-items-center justify-content-center" disabled>
+                                    <i data-feather="x"></i>
+                                  Paciente não possui e-mail
                                 </div>
                             </a>
+                            @else
+                            <a class="w-100  btn btn-primary d-block d-md-inline-block mb-3 me-lg-3   "
+                            href="{{ route('enviar.pdf',$resultado->agendas_id ) }}" role="button"
+                            style="padding: 16px 24px;">
+                            <div class="d-flex gap-2 align-items-center justify-content-center">
+                                <i data-feather="send"></i>
+                                Enviar por email
+                            </div>
+                        </a>
+                            @endif
+                            
                             <a name="" id=""
                                 class="w-100  btn btn-outline-primary d-block d-md-inline-block mb-3 " href="{{route('gerar.pdf',$resultado->agendas_id)}}"
                                 role="button" style="padding: 16px 24px;">

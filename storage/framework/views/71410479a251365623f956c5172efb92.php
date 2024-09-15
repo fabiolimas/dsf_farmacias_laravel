@@ -113,7 +113,7 @@
                                                             <span
                                                                 class="<?php if($pedido->status == 'recebido'): ?> pedidoRecebido <?php elseif($pedido->status=='novo'): ?> pedidoNovo <?php else: ?> tag <?php endif; ?>"></span>
                                                             <div class="fs-20px fw-500 ">
-                                                                <a href="<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admmin')): ?><?php if($pedido->status != 'aberto'): ?> <?php echo e(route('painel.admin.compras.visualizar', $pedido->id)); ?> <?php else: ?> <?php echo e(route('painel.admin.compras.edit', $pedido->id)); ?> <?php endif; ?> <?php endif; ?> <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?><?php echo e(route('painel.admin.compras.visualizar', $pedido->id)); ?><?php endif; ?>"
+                                                                <a href="<?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admmin')): ?><?php if($pedido->status != 'aberto'): ?> <?php echo e(route('painel.admin.compras.visualizar', $pedido->id)); ?> <?php else: ?> <?php echo e(route('painel.admin.compras.edit', $pedido->id)); ?> <?php endif; ?> <?php endif; ?> <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('adminFarmacia')): ?><?php echo e(route('painel.admin.compras.visualizar', $pedido->id)); ?><?php endif; ?>"
                                                                     class="text-decoration-none d-block">
                                                                     <div class="text-green-2">
 
@@ -173,7 +173,7 @@
 
                                                         </div>
                                                         <?php endif; ?>
-                                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('farmacia')): ?>
+                                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('adminFarmacia')): ?>
                                                         <div class="col-md-6 acts">
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">

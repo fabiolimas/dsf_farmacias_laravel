@@ -39,7 +39,7 @@ class ColaboradorController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', "unique:users"],
             'password' => ['required', 'string', 'min:8'],
-            'cargo' => ['required', 'exists:roles,name']
+            // 'cargo' => ['required', 'exists:roles,profile']
         ]);
 
         $user = (new User)->fill($request->all());
@@ -47,7 +47,7 @@ class ColaboradorController extends Controller
         $user->cliente_id=auth()->user()->cliente_id;
 
         // atualizar permissões/roles
-        $user->assignRole($request->cargo);
+        // $user->assignRole($request->cargo);
 
         if ($request->img_profile != null && $request->img_profile != '') :
             $configController = new ConfigController;
@@ -92,24 +92,17 @@ class ColaboradorController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', "unique:users,email,{$user->id}"],
             // 'password' => ['required', 'string', 'min:8'],
-            'cargo' => ['required', 'exists:roles,name']
+         
         ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->update(['name'=>$request->name,'email'=>$request->email,'profile'=>$request->cargo,'crf'=>$request->crf]);
+     
         if($request->password != ''){
-            $user->password = bcrypt($request->password);
+           
+            $user->update(['password'=>bcrypt($request->password)]);
         }
         
-        $user->crf=$request->crf;
-
-        // remover permissões/roles
-        foreach ($user->getRoleNames() as $key => $value) :
-            $user->removeRole($value);
-        endforeach;
-
-        // atualizar permissões/roles
-        $user->assignRole($request->cargo);
+      
 
         if ($request->img_profile != null && $request->img_profile != '') :
             $configController = new ConfigController;

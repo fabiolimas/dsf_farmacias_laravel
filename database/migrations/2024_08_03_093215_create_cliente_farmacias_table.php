@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('cpf');
             $table->string('data_nascimento');
             $table->string('sexo');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('telefone');
             $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
             $table->timestamps();

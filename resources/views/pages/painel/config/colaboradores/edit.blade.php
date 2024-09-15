@@ -95,10 +95,21 @@
                                 <label for="cargo" class="form-label text-green fw-500 fs-18px">Cargo</label>
                                 <select class="form-select form-control-custom fs-18px @error('cargo') is-invalid @enderror"
                                     name="cargo" id="cargo" required>
-                                    <option value="" selected>Selecione um cargo</option>
+                                    @switch($user->profile)
+
+                                    @case ('farmaceutico')
+                                    <option value="{{$user->profile}}" selected>Farmacêutico</option>
+                                    @break
+                                    @case ('adminFarmacia')
+                                    <option value="{{$user->profile}}" selected>Administrador</option>
+                                    @break
+                                    @endswitch
+
+
                                     @foreach ($rolesAdmin as $item)
+                                   
                                         <option value="{{ $item->profile }}"
-                                            @if (old('cargo', $user->getRoleNames()->first()) == $item->name) selected @endif>{{ $item->name }}</option>
+                                           >{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('cargo')
@@ -200,6 +211,12 @@
 
     <script>
         $(document).ready(function() {
+
+            if ($('#cargo').val() == 'farmaceutico') {
+                    $('#crfNumber').css('display', 'block');
+                } else {
+                    $('#crfNumber').css('display', 'none');
+                }
             $('#cargo').change(function() {
 
                 if ($('#cargo').val() == 'farmaceutico') {

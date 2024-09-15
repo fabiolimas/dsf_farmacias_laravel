@@ -169,7 +169,16 @@
                                                 <div class="fw-500">
                                                     <div class="fs-20px text-green-2 fw-600">{{ $colaborador->name }}</div>
                                                     <div class="fs-16px text-green">
-                                                        {{ $colaborador->getRoleNames()->first() ?? 'Sem cargo' }}
+                                                        @switch($colaborador->profile)
+
+                                                        @case ('farmaceutico')
+                                                        Farmacêutico
+                                                        @break
+
+                                                        @case ('adminFarmacia')
+                                                        Administrador
+                                                      @break
+                                                      @endswitch
                                                     </div>
                                                 </div>
 

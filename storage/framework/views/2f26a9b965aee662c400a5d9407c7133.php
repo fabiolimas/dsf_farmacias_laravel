@@ -144,10 +144,21 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                     name="cargo" id="cargo" required>
-                                    <option value="" selected>Selecione um cargo</option>
+                                    <?php switch($user->profile):
+
+                                    case ('farmaceutico'): ?>
+                                    <option value="<?php echo e($user->profile); ?>" selected>Farmacêutico</option>
+                                    <?php break; ?>
+                                    <?php case ('adminFarmacia'): ?>
+                                    <option value="<?php echo e($user->profile); ?>" selected>Administrador</option>
+                                    <?php break; ?>
+                                    <?php endswitch; ?>
+
+
                                     <?php $__currentLoopData = $rolesAdmin; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                   
                                         <option value="<?php echo e($item->profile); ?>"
-                                            <?php if(old('cargo', $user->getRoleNames()->first()) == $item->name): ?> selected <?php endif; ?>><?php echo e($item->name); ?></option>
+                                           ><?php echo e($item->name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <?php $__errorArgs = ['cargo'];
@@ -270,6 +281,12 @@ unset($__errorArgs, $__bag); ?>
 
     <script>
         $(document).ready(function() {
+
+            if ($('#cargo').val() == 'farmaceutico') {
+                    $('#crfNumber').css('display', 'block');
+                } else {
+                    $('#crfNumber').css('display', 'none');
+                }
             $('#cargo').change(function() {
 
                 if ($('#cargo').val() == 'farmaceutico') {

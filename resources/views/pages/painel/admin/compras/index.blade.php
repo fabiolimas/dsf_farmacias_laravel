@@ -113,7 +113,7 @@
                                                             <span
                                                                 class="@if ($pedido->status == 'recebido') pedidoRecebido @elseif($pedido->status=='novo') pedidoNovo @else tag @endif"></span>
                                                             <div class="fs-20px fw-500 ">
-                                                                <a href="@can('admmin')@if($pedido->status != 'aberto') {{route('painel.admin.compras.visualizar', $pedido->id)}} @else {{ route('painel.admin.compras.edit', $pedido->id) }} @endif @endcan @can('farmacia'){{route('painel.admin.compras.visualizar', $pedido->id)}}@endcan"
+                                                                <a href="@can('admmin')@if($pedido->status != 'aberto') {{route('painel.admin.compras.visualizar', $pedido->id)}} @else {{ route('painel.admin.compras.edit', $pedido->id) }} @endif @endcan @can('adminFarmacia'){{route('painel.admin.compras.visualizar', $pedido->id)}}@endcan"
                                                                     class="text-decoration-none d-block">
                                                                     <div class="text-green-2">
 
@@ -173,7 +173,7 @@
 
                                                         </div>
                                                         @endcan
-                                                        @can('farmacia')
+                                                        @can('adminFarmacia')
                                                         <div class="col-md-6 acts">
                                                             <div class="col-md-3 ms-2">
                                                                 <div class="mt-2 mt-sm-0">

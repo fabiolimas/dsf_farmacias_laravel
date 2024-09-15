@@ -208,8 +208,16 @@ unset($__errorArgs, $__bag); ?>
                                                 <div class="fw-500">
                                                     <div class="fs-20px text-green-2 fw-600"><?php echo e($colaborador->name); ?></div>
                                                     <div class="fs-16px text-green">
-                                                        <?php echo e($colaborador->getRoleNames()->first() ?? 'Sem cargo'); ?>
+                                                        <?php switch($colaborador->profile):
 
+                                                        case ('farmaceutico'): ?>
+                                                        Farmacêutico
+                                                        <?php break; ?>
+
+                                                        <?php case ('adminFarmacia'): ?>
+                                                        Administrador
+                                                      <?php break; ?>
+                                                      <?php endswitch; ?>
                                                     </div>
                                                 </div>
 

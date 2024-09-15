@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('fumante')->nullable();
             $table->string('gestante')->nullable();
             $table->string('usa_insulina')->nullable();
-            $table->string('fumante')->nullable();
+           
             $table->string('uso_de_medicamentos')->nullable();
             $table->string('responsavel')->nullable();
             $table->longText('bibliografia')->nullable();

@@ -199,10 +199,10 @@ class ExamesController extends Controller
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-    return view('pages.painel.farmacia.exames.exame_pdf',compact('agenda','array','clienteFarma','farmacia','resultado'));
+    //return view('pages.painel.farmacia.exames.exame_pdf',compact('agenda','array','clienteFarma','farmacia','resultado'));
 
-    // $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
-    //  return $pdf->download('resultado.pdf');
+     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('agenda','array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+      return $pdf->download('resultado.pdf');
 }
 
 public function enviarPDFPorEmail(Request $request)
@@ -212,17 +212,17 @@ public function enviarPDFPorEmail(Request $request)
 
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
-
+    $agenda=Agenda::find($resultado->agendas_id);
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
 
-     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('agenda','array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
       // Converter o PDF para uma string binária
     $pdfContent = $pdf->output();
 
     // Enviar o PDF por e-mail
-    Mail::send('pages.painel.farmacia.exames.email', compact('array','clienteFarma','farmacia','resultado'), function($message) use ($pdfContent, $clienteFarma) {
+    Mail::send('pages.painel.farmacia.exames.email', compact('agenda','array','clienteFarma','farmacia','resultado'), function($message) use ($pdfContent, $clienteFarma) {
         $message->to($clienteFarma->email, $clienteFarma->nome)
                 ->subject('Resultado de Exame')
                 ->attachData($pdfContent, 'Resultado_Exame.pdf', [
