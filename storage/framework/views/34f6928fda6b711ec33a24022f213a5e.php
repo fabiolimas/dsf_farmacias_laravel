@@ -167,7 +167,7 @@
                                     <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
                                 </div>
                                 <div class="row">
-                                    <?php echo e($resultado->bibliografia); ?>
+                                    <?php echo $exame->bibliografia; ?>
 
                                 </div>
                             </div>

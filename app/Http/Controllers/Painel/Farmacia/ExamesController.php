@@ -82,6 +82,8 @@ class ExamesController extends Controller
 
     $agenda=Agenda::find($resultado->agendas_id);
 
+    
+$exame=Exame::find($agenda->exame_id);
 
         $array = json_decode($resultado->perguntas, true);
 
@@ -89,7 +91,7 @@ class ExamesController extends Controller
 
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
-    return view('pages.painel.farmacia.exames.show',compact('agenda','array','clienteFarma','farmacia','resultado'));
+    return view('pages.painel.farmacia.exames.show',compact('exame','agenda','array','clienteFarma','farmacia','resultado'));
    }
 
    public function updatePresenca(Request $request){
@@ -195,13 +197,13 @@ class ExamesController extends Controller
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
     $agenda=Agenda::find($resultado->agendas_id);
-
+    $exame=Exame::find($agenda->exame_id);
     $array = json_decode($resultado->perguntas, true);
 
     $clienteFarma=ClienteFarmacia::find($resultado->cliente_farmacia_id);
     //return view('pages.painel.farmacia.exames.exame_pdf',compact('agenda','array','clienteFarma','farmacia','resultado'));
 
-     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('agenda','array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
+     $pdf = PDF::loadView('pages.painel.farmacia.exames.exame_pdf', compact('exame','agenda','array','clienteFarma','farmacia','resultado'))->setOptions(['enable_remote' => true]);
       return $pdf->download('resultado.pdf');
 }
 

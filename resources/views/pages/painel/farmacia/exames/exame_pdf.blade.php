@@ -245,7 +245,7 @@
                 
                 <div class="row bibliografia">
                     <p style="font-wight:bold">Bibliografia</p>
-                    <p>{{$resultado->bibliografia}}</p>
+                    <p>{!!$exame->bibliografia!!}</p>
                     </div>
 
                
