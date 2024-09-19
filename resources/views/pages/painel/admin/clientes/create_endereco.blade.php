@@ -250,17 +250,27 @@
                                     <div class="invalid-feedback fw-500">{{ $message }}</div>
                                 @enderror
                             </div>
-
                             <!-- complemento -->
                             <div class="mb-3 pb-2">
-                                <label for="complemento" class="form-label text-green fw-500 fs-18px">
-                                    Complemento
+                                <label for="hospital_proximo" class="form-label text-green fw-500 fs-18px">
+                                    Hospital mais próximo
                                 </label>
                                 <input type="text"
-                                    class="form-control form-control-custom fs-18px fw-500 @error('complemento') is-invalid @enderror"
-                                    name="complemento" value="{{ old('complemento', $user->cliente->complemento) }}"
-                                    id="complemento" placeholder="" maxlength="255" />
-                                @error('complemento')
+                                    class="form-control form-control-custom fs-18px fw-500 @error('hospital_proximo') is-invalid @enderror"
+                                    name="hospital_proximo" id="hospital_proximo" placeholder="" maxlength="255" value="{{ old('hospital_proximo', $user->cliente->hospital_proximo) }}" required />
+                                @error('hospital_proximo')
+                                    <div class="invalid-feedback fw-500">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3 pb-2">
+                                <label for="end_hospital" class="form-label text-green fw-500 fs-18px">
+                                    Endereço hospital
+                                </label>
+                                <input type="text"
+                                    class="form-control form-control-custom fs-18px fw-500 @error('end_hospital') is-invalid @enderror"
+                                    name="end_hospital" id="end_hospital" placeholder="" maxlength="255" value="{{ old('end_hospital', $user->cliente->end_hospital) }}" required/>
+                                @error('end_hospital')
                                     <div class="invalid-feedback fw-500">{{ $message }}</div>
                                 @enderror
                             </div>
