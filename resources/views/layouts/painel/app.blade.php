@@ -68,7 +68,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
     <!-- scripts -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script type="text/javascript">
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() }); // convert all text areas to rich text editor on that page
+       // convert all text areas to rich text editor on that page
 
         bkLib.onDomLoaded(function() {
              new nicEditor().panelInstance('bibliografia');
