@@ -149,6 +149,7 @@
                                     </div>
                                     <div class="row">
                                         <h5 class="text-center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</h5>
+                                        <p class="text-center">{{$farmacia->hospital_proximo}} - {{$farmacia->end_hospital}}</p>
                                     </div>
                                 <div class="row">
                                     <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>

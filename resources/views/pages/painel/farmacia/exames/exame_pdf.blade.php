@@ -235,6 +235,7 @@
 
                 </div>
                      <p style="text-align:center; font-wight:bold">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</p>
+                     <p class="text-center" style="text-align:center;">{{$farmacia->hospital_proximo}} - {{$farmacia->end_hospital}}</p>
                 <div class="row">
                     <p style="text-align:center; font-wight:bold">Este Procedimento não tem finalidade de diagnóstico e não substitui a
                         cosulta medica ou a realização de exames laboratoriais.</p>

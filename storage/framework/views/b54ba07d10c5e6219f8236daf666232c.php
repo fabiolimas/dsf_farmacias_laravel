@@ -86,15 +86,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
 
     <!-- scripts -->
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
-    <script type="text/javascript">
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() }); // convert all text areas to rich text editor on that page
-
-        bkLib.onDomLoaded(function() {
-             new nicEditor().panelInstance('bibliografia');
-        }); // convert text area with id area1 to rich text editor.
-
-       // convert text area with id area2 to rich text editor with full panel.
-</script>
+  
     
     <?php echo $__env->yieldContent('scripts'); ?>
 

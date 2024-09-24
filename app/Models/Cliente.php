@@ -33,6 +33,9 @@ class Cliente extends Model
         'dt_pagamento',
         'logo',
         'razao_social',
+        'hospital_proximo',
+        'end_hospital'
+
     ];
 
     protected $appends = [
