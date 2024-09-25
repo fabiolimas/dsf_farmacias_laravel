@@ -16,7 +16,7 @@ class GraficosController extends Controller
     {
         $farmacia=Cliente::find(auth()->user()->cliente_id);
         $dataInicio = $request->input('data_inicio', '2024-01-01'); // Padrão: 1º de Janeiro de 2024
-        $dataFim = $request->input('data_fim', now()->format('Y-m-d')); // Padrão: Data atual
+        $dataFim = $request->input('data_fim', now()->addDay()->format('Y-m-d')); // Padrão: Data atual
 
         // Filtrar os pedidos de compra entre as datas
         $faturamentoCliente = PedidoDeCompra::join('clientes', 'clientes.id', '=', 'pedido_de_compras.cliente_id')

@@ -1,4 +1,4 @@
-# Módulo de linguagem pt_BR (português brasileiro) para Laravel
+# Módulo de linguagem pt-BR (português brasileiro) para Laravel
 
 ![example workflow](https://github.com/lucascudo/laravel-pt-br-localization/actions/workflows/master.yml/badge.svg) [![Total Downloads](https://poser.pugx.org/lucascudo/laravel-pt-br-localization/downloads)](https://packagist.org/packages/lucascudo/laravel-pt-br-localization) [![Latest Stable Version](https://poser.pugx.org/lucascudo/laravel-pt-br-localization/v/stable)](https://packagist.org/packages/lucascudo/laravel-pt-br-localization) [![License](https://poser.pugx.org/lucascudo/laravel-pt-br-localization/license)](https://packagist.org/packages/lucascudo/laravel-pt-br-localization)
 
@@ -28,8 +28,13 @@ php artisan vendor:publish --tag=laravel-pt-br-localization
 // Altere Linha 85 do arquivo config/app.php para:
 'locale' => 'pt_BR'
 
+// Para versões 11.x altere a linha 8 do arquivo .env
+APP_LOCALE=pt_BR
+```
+
 ## Versões do Laravel suportadas
 
+-   11.x
 -   10.x
 -   9.x
 -   8.x

@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Visualizar Exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -38,7 +37,7 @@
                                     <h5>Declaração de serviços farmaceuticos</h5>
                                 </div>
                                 <div class="col-md-1">
-                                    Nº <?php echo e($resultado->id); ?>
+                                    Nº <?php echo e($resultado->numero_exame); ?>
 
                                 </div>
                             </div>
@@ -87,32 +86,32 @@
                                         <div class="row">
                                             <div class="col-md-3 mt-3">
                                                 <label for="peso">Peso: <?php echo e($resultado->peso); ?></label>
-                                             
+
                                             </div>
-            
+
                                             <div class="col-md-3 mt-3">
                                                 <label for="gestante">Gestante: <?php echo e($resultado->gestante); ?></label>
-                                              
-                                                
+
+
                                             </div>
                                             <div class="col-md-3 mt-3">
                                                 <label for="fumante">Fumante: <?php echo e($resultado->fumante); ?></label>
-                                              
+
                                             </div>
-            
+
                                             <div class="col-md-3 mt-3">
                                                 <label for="usa_insulina">Usa Insulina: <?php echo e($resultado->usa_insulina); ?></label>
-                                               
+
                                             </div>
-            
+
                                             <div class="col-md-3 mt-3">
                                                 <label for="uso_de_medicamentos">Faz uso de medicamentos? quais: <?php echo e($resultado->uso_de_medicamentos); ?></label>
-                                               
+
                                             </div>
                                         </div>
-                                        
 
-                                        
+
+
                                     </div>
                                 </div>
 
@@ -133,7 +132,7 @@
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <?php else: ?>
                                             <?php endif; ?>
-                                            
+
                                             <div class="col-md-3 mt-3">
                                                 Médico Responsavel : <?php echo e($resultado->medico_responsavel); ?>
 
@@ -176,7 +175,7 @@
 
                         <div class=" px-3 mt-4 d-lg-flex">
                             <?php if($clienteFarma->email == null): ?>
-                          
+
 
                             <a class="w-100  btn btn-danger d-block d-md-inline-block mb-3 me-lg-3   disabled"
                                 href="#" role="button"
@@ -196,7 +195,7 @@
                             </div>
                         </a>
                             <?php endif; ?>
-                            
+
                             <a name="" id=""
                                 class="w-100  btn btn-outline-primary d-block d-md-inline-block mb-3 " href="<?php echo e(route('gerar.pdf',$resultado->agendas_id)); ?>"
                                 role="button" style="padding: 16px 24px;">

@@ -75,14 +75,14 @@ class ExamesController extends Controller
 
    public function ShowResult(Request $request){
      $farmacia=Cliente::find(auth()->user()->cliente_id);
-  
+
 
     $resultado=Resultado::where('agendas_id',$request->id)->first();
 
 
     $agenda=Agenda::find($resultado->agendas_id);
 
-    
+
 $exame=Exame::find($agenda->exame_id);
 
         $array = json_decode($resultado->perguntas, true);
@@ -154,11 +154,11 @@ $exame=Exame::find($agenda->exame_id);
    public function updateDadosExame(Request $request){
 
 
-   
+
     $resultado=Resultado::find($request->id);
     $perguntas=['perguntas'=>$request->perguntas,'respostas'=>$request->respostas];
 
-        
+
         $resultado->update([
             'perguntas'=>json_encode($perguntas),
             'gestante'=>$request->gestante,
@@ -172,10 +172,10 @@ $exame=Exame::find($agenda->exame_id);
             'telefone_medico'=>$request->telefone_medico,
             'observacoes'=>$request->observacao,
             'responsavel_atendimento'=>$request->responsavel_atendimento
-        
+
         ]);
- 
-    
+
+
     return redirect()->route('painel.farmacia.exames.index')->withsuccess('resultado atualizado com sucesso');
    }
 
@@ -204,7 +204,15 @@ $exame=Exame::find($agenda->exame_id);
 
     $perguntas=['perguntas'=>$request->perguntas,'respostas'=>$request->respostas];
 
+    $farmacia=cliente::find(auth()->user()->cliente_id);
 
+
+    $ultimoexame=$farmacia->numero_exame;
+    if($ultimoexame == null){
+
+        $ultimoexame=0;
+    }
+    $farmacia->update(['numero_exame'=>$ultimoexame+=1]);
 
 
         $resultado= new Resultado();
@@ -228,8 +236,11 @@ $exame=Exame::find($agenda->exame_id);
        $resultado->uso_de_medicamentos=$request->uso_de_medicamentos;
        $resultado->bibliografia=$request->bibliografia;
        $resultado->crf_responsavel;
+       $resultado->numero_exame=$ultimoexame;
 
         $resultado->save();
+
+
 
         $agenda=Agenda::find($request->agendas_id);
         $agenda->update(['status'=>'pronto']);

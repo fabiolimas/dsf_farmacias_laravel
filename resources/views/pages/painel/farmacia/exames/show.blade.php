@@ -36,7 +36,7 @@
                                     Data:{{ date('d/m/Y') }}
                                 </div>
                                 <div class="col-md-8">
-                                    <h5>Declaração de serviços farmaceuticos</h5>
+                                    <h5>Declaração de Serviços Farmacêuticos</h5>
                                 </div>
                                 <div class="col-md-1">
                                     Nº {{ $resultado->id }}
@@ -76,37 +76,37 @@
                                 </div>
 
                                 <div class="row mt-2">
-                                    <span class="titleResult">Atenção Farmaceutica</span>
+                                    <span class="titleResult">Atenção Farmacêutica</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 ">
                                         <div class="row">
                                             <div class="col-md-3 mt-3">
                                                 <label for="peso">Peso: {{$resultado->peso}}</label>
-                                             
+
                                             </div>
-            
+
                                             <div class="col-md-3 mt-3">
                                                 <label for="gestante">Gestante: {{$resultado->gestante}}</label>
-                                              
-                                                
+
+
                                             </div>
                                             <div class="col-md-3 mt-3">
                                                 <label for="fumante">Fumante: {{$resultado->fumante}}</label>
-                                              
+
                                             </div>
-            
+
                                             <div class="col-md-3 mt-3">
                                                 <label for="usa_insulina">Usa Insulina: {{$resultado->usa_insulina}}</label>
-                                               
+
                                             </div>
-            
+
                                             <div class="col-md-3 mt-3">
                                                 <label for="uso_de_medicamentos">Faz uso de medicamentos? quais: {{$resultado->uso_de_medicamentos}}</label>
-                                               
+
                                             </div>
                                         </div>
-                                        
 
-                                        
+
+
                                     </div>
                                 </div>
 
@@ -126,7 +126,7 @@
                                             @endforeach
                                             @else
                                             @endif
-                                            
+
                                             <div class="col-md-3 mt-3">
                                                 Médico Responsavel : {{ $resultado->medico_responsavel }}
                                             </div>
@@ -152,7 +152,7 @@
                                         <p class="text-center">{{$farmacia->hospital_proximo}} - {{$farmacia->end_hospital}}</p>
                                     </div>
                                 <div class="row">
-                                    <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
+                                    <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta médica ou a realização de exames laboratoriais.</h5>
                                 </div>
                                 <div class="row">
                                     {!!$exame->bibliografia!!}
@@ -162,7 +162,7 @@
 
                         <div class=" px-3 mt-4 d-lg-flex">
                             @if($clienteFarma->email == null)
-                          
+
 
                             <a class="w-100  btn btn-danger d-block d-md-inline-block mb-3 me-lg-3   disabled"
                                 href="#" role="button"
@@ -182,7 +182,7 @@
                             </div>
                         </a>
                             @endif
-                            
+
                             <a name="" id=""
                                 class="w-100  btn btn-outline-primary d-block d-md-inline-block mb-3 " href="{{route('gerar.pdf',$resultado->agendas_id)}}"
                                 role="button" style="padding: 16px 24px;">

@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'graficos']);
         Permission::create(['name' => 'ajustes']);
         //
-        $roleAdmin = Role::create(['name' => 'Administrador']);
+        $roleAdmin = Role::create(['name' => 'Administrador','profile'=>'adminFarmacia']);
         $roleAdmin->givePermissionTo(Permission::all());
-        Role::create(['name' => 'Financeiro']);
+        Role::create(['name' => 'Farmacêutico', 'profile'=>'farmaceutico']);
 
         // for ($i = 0; $i < 20; $i++) :
         //     Role::create(['name' => 'Cargo' . $i + 1]);
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
 
     \App\Models\Cliente::factory()->create([
-       
+
     ]);
 
 
@@ -78,8 +78,8 @@ class DatabaseSeeder extends Seeder
             'status' => 'ativo',
             'cliente_id'=>1
         ]);
-        
-        
+
+
         // \App\Models\User::factory(20)->create([
         //     'profile' => 'colaborador'
         // ]);
@@ -92,10 +92,10 @@ class DatabaseSeeder extends Seeder
         //     \App\Models\User::factory(1)->create([
         //         'name' => fake()->randomElement($arr),
         //         'profile' => 'farmaceutico',
-             
+
         //     ]);
         // }
 
-       
+
     }
 }

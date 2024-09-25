@@ -34,7 +34,8 @@ class Cliente extends Model
         'logo',
         'razao_social',
         'hospital_proximo',
-        'end_hospital'
+        'end_hospital',
+        'numero_exame'
     ];
 
     protected $appends = [

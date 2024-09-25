@@ -38,11 +38,11 @@
     th,
     td {
         border-collapse: collapse;
-      
+
         width: 100%;
     }
     p{font-size:12px;}
-    
+
     </style>
 
 <body style="font-family:sans-serif">
@@ -80,8 +80,8 @@
                                 <div class="col-md-3">
                                     <p> Data:{{ date('d/m/Y') }}
                                         <span style="text-align: center; font-weight:700; margin-left: 20%">Declaração
-                                            de serviços farmaceuticos</span> <span style="margin-left:25%"> Nº
-                                            {{ $resultado->id }}</span>
+                                            de Serviços Farmacêuticos</span> <span style="margin-left:25%"> Nº
+                                            {{ $resultado->numero_exame }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-8">
@@ -131,13 +131,13 @@
                                             @endif
                                         </tr>
                                     </table>
-                                    
+
 
                                 </div>
                             </div>
 
                             <div class="row mt-2">
-                                <span class="titleResult">Atenção Farmaceutica</span>
+                                <span class="titleResult">Atenção Farmacêutica</span>
                                 <div class="border-green-light p-3 rounded-3 mb-4 "
                                     style="border:1px solid #b2d2d2; border-radius:5px; padding:7px; ">
                                     <table>
@@ -205,9 +205,9 @@
                         </div>
 
                         <div class="row mt-3">
-           
+
                             <table>
-                               
+
                                 <tr>
                                     <td colspan="2">
                                         Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
@@ -227,10 +227,10 @@
                 <div class="row">
                     <table>
                         <tr>
-                            <td style="font-size: 12px">Ass. Paciente/Responsavel:__________________________ </td>
-                            <td style="font-size: 12px">Ass. do Farmaceutico:__________________________</td>
+                            <td style="font-size: 12px">Ass. Paciente/Responsável:__________________________ </td>
+                            <td style="font-size: 12px">Ass. do Farmacêutico:__________________________</td>
                         </tr>
-                        
+
                     </table>
 
                 </div>
@@ -238,18 +238,18 @@
                      <p class="text-center" style="text-align:center;">{{$farmacia->hospital_proximo}} - {{$farmacia->end_hospital}}</p>
                 <div class="row">
                     <p style="text-align:center; font-wight:bold">Este Procedimento não tem finalidade de diagnóstico e não substitui a
-                        cosulta medica ou a realização de exames laboratoriais.</p>
+                        cosulta médica ou a realização de exames laboratoriais.</p>
                 </div>
                 <div><h4 style="text-align: center">{{$agenda->nome_exame}}</h4></div>
-             
-                
-                
+
+
+
                 <div class="row bibliografia">
                     <p style="font-wight:bold">Bibliografia</p>
                     <p>{!!$exame->bibliografia!!}</p>
                     </div>
 
-               
+
             </div>
         </div>
 

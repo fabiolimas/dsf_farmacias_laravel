@@ -250,12 +250,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                         <div class="row mt-4 pt-2 gy-2">
-                            <div class="col-12 col-lg-6">
-                                <a href="<?php echo e(route('painel.farmacia.exames.create')); ?>" id="modal-link-editar-user"
-                                    class="btn btn-primary-light w-100 py-2 fs-20px text-green">
-                                    Adicionar Produto Estoque?
-                                </a>
-                            </div>
+                            
                             <div class="col-12 col-lg-6">
                                 <a href="#" id="modal-link-ver-mais"
                                     class="btn btn-danger w-100 py-2 fs-20px" data-bs-dismiss="modal">Escolher outro produto</a>

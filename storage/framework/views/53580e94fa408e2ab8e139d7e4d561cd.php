@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Cadastrar novo usuário'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -404,14 +403,13 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
-
                             <!-- complemento -->
                             <div class="mb-3 pb-2">
-                                <label for="complemento" class="form-label text-green fw-500 fs-18px">
-                                    Complemento
+                                <label for="hospital_proximo" class="form-label text-green fw-500 fs-18px">
+                                    Hospital mais próximo
                                 </label>
                                 <input type="text"
-                                    class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['complemento'];
+                                    class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['hospital_proximo'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -419,9 +417,34 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                    name="complemento" value="<?php echo e(old('complemento', $user->cliente->complemento)); ?>"
-                                    id="complemento" placeholder="" maxlength="255" />
-                                <?php $__errorArgs = ['complemento'];
+                                    name="hospital_proximo" id="hospital_proximo" placeholder="" maxlength="255" value="<?php echo e(old('hospital_proximo', $user->cliente->hospital_proximo)); ?>" required />
+                                <?php $__errorArgs = ['hospital_proximo'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback fw-500"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <div class="mb-3 pb-2">
+                                <label for="end_hospital" class="form-label text-green fw-500 fs-18px">
+                                    Endereço hospital
+                                </label>
+                                <input type="text"
+                                    class="form-control form-control-custom fs-18px fw-500 <?php $__errorArgs = ['end_hospital'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                    name="end_hospital" id="end_hospital" placeholder="" maxlength="255" value="<?php echo e(old('end_hospital', $user->cliente->end_hospital)); ?>" required/>
+                                <?php $__errorArgs = ['end_hospital'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

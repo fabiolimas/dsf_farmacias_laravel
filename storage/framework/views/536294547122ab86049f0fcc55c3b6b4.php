@@ -535,6 +535,15 @@ unset($__errorArgs, $__bag); ?>
 
         }
     </script>
+      <script type="text/javascript">
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() }); // convert all text areas to rich text editor on that page
+
+        bkLib.onDomLoaded(function() {
+             new nicEditor().panelInstance('bibliografia');
+        }); // convert text area with id area1 to rich text editor.
+
+       // convert text area with id area2 to rich text editor with full panel.
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.painel.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\indutiva\dsf_farmacias_laravel\resources\views/pages/painel/admin/exames/create_2.blade.php ENDPATH**/ ?>

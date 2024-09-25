@@ -40,6 +40,10 @@
         <?php if($chart->stroke()): ?>
             stroke: <?php echo $chart->stroke(); ?>,
         <?php endif; ?>
+        legend: {
+            show: <?php echo $chart->showLegend(); ?>
+
+        }
     }
 
     var chart = new ApexCharts(document.querySelector("#<?php echo $chart->id(); ?>"), options);
