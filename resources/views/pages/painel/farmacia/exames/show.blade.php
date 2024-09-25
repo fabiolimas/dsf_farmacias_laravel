@@ -39,7 +39,7 @@
                                     <h5>Declaração de Serviços Farmacêuticos</h5>
                                 </div>
                                 <div class="col-md-1">
-                                    Nº {{ $resultado->id }}
+                                    Nº {{ $resultado->numero_exame }}
                                 </div>
                             </div>
                             <div class="row mt-3">
