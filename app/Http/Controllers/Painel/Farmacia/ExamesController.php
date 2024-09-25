@@ -235,7 +235,7 @@ $exame=Exame::find($agenda->exame_id);
        $resultado->usa_insulina=$request->usa_insulina;
        $resultado->uso_de_medicamentos=$request->uso_de_medicamentos;
        $resultado->bibliografia=$request->bibliografia;
-       $resultado->crf_responsavel;
+       $resultado->crf_responsavel=auth()->user()->crf;
        $resultado->numero_exame=$ultimoexame;
 
         $resultado->save();

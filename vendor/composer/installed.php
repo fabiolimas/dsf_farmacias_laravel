@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '70b5d3042bfb545d7e130e450fea72ee4642550f',
+        'reference' => 'e66ddc902f97f2b500afe458132732b2c48c4fdc',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -140,12 +140,12 @@
             'dev_requirement' => true,
         ),
         'filp/whoops' => array(
-            'pretty_version' => '2.15.4',
-            'version' => '2.15.4.0',
+            'pretty_version' => '2.16.0',
+            'version' => '2.16.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../filp/whoops',
             'aliases' => array(),
-            'reference' => 'a139776fa3f5985a50b509f2a02ff0f709d2a546',
+            'reference' => 'befcdc0e5dce67252aa6322d82424be928214fa2',
             'dev_requirement' => true,
         ),
         'fruitcake/php-cors' => array(
@@ -430,7 +430,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '70b5d3042bfb545d7e130e450fea72ee4642550f',
+            'reference' => 'e66ddc902f97f2b500afe458132732b2c48c4fdc',
             'dev_requirement' => false,
         ),
         'laravel/pint' => array(

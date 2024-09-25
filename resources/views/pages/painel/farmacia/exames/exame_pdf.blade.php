@@ -184,26 +184,29 @@
 
 
 
-                                        <tr>
-                                            <td colspan="4">
-                                                Médico Responsavel : {{ $resultado->medico_responsavel }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-2 mt-3">
-                                                CRM : {{ $resultado->crm }}
-                                            </td>
-                                            <td>
-                                                Endereço : {{ $resultado->endereco_medico }}
-                                            </td>
-                                            <td class="col-md-3 mt-3">
-                                                Telefone : {{ $resultado->telefone_medico }}
-                                            </td>
-                                        </tr>
+                                      
                                     </table>
                                 </div>
                         </div>
+                        <table>
 
+                            <tr>
+                                <td colspan="4">
+                                    Médico Responsavel : {{ $resultado->medico_responsavel }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2 mt-3">
+                                    CRM : {{ $resultado->crm }}
+                                </td>
+                                <td>
+                                    Endereço : {{ $resultado->endereco_medico }}
+                                </td>
+                                <td class="col-md-3 mt-3">
+                                    Telefone : {{ $resultado->telefone_medico }}
+                                </td>
+                            </tr>
+                        </table>
                         <div class="row mt-3">
 
                             <table>
@@ -237,7 +240,7 @@
                      <p style="text-align:center; font-wight:bold">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</p>
                      <p class="text-center" style="text-align:center;">{{$farmacia->hospital_proximo}} - {{$farmacia->end_hospital}}</p>
                 <div class="row">
-                    <p style="text-align:center; font-wight:bold">Este Procedimento não tem finalidade de diagnóstico e não substitui a
+                    <p style="text-align:center; font-wight:bold; text-transform:uppercase">Este Procedimento não tem finalidade de diagnóstico e não substitui a
                         cosulta médica ou a realização de exames laboratoriais.</p>
                 </div>
                 <div><h4 style="text-align: center">{{$agenda->nome_exame}}</h4></div>

@@ -71,6 +71,7 @@ return array(
     'ArielMejiaDev\\LarapexCharts\\RadarChart' => $vendorDir . '/arielmejiadev/larapex-charts/src/RadarChart.php',
     'ArielMejiaDev\\LarapexCharts\\RadialChart' => $vendorDir . '/arielmejiadev/larapex-charts/src/RadialChart.php',
     'ArielMejiaDev\\LarapexCharts\\Traits\\ComplexChartDataAggregator' => $vendorDir . '/arielmejiadev/larapex-charts/src/Traits/ComplexChartDataAggregator.php',
+    'ArielMejiaDev\\LarapexCharts\\Traits\\HasOptions' => $vendorDir . '/arielmejiadev/larapex-charts/src/Traits/HasOptions.php',
     'ArielMejiaDev\\LarapexCharts\\Traits\\SimpleChartDataAggregator' => $vendorDir . '/arielmejiadev/larapex-charts/src/Traits/SimpleChartDataAggregator.php',
     'ArielMejiaDev\\LarapexCharts\\Traits\\WithModelStub' => $vendorDir . '/arielmejiadev/larapex-charts/src/Traits/WithModelStub.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

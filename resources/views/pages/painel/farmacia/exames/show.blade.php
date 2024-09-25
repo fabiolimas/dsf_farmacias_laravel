@@ -127,25 +127,31 @@
                                             @else
                                             @endif
 
-                                            <div class="col-md-3 mt-3">
-                                                Médico Responsavel : {{ $resultado->medico_responsavel }}
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                CRM : {{ $resultado->crm }}
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Endereço : {{ $resultado->endereco_medico }}
-                                            </div>
-                                            <div class="col-md-3 mt-3">
-                                                Telefone : {{ $resultado->telefone_medico }}
-                                            </div>
+                                           
                                         </div>
+                                       
                                         <div class="col-md-4 mt-3">
                                             Responsavel pelo atendimento : {{ $resultado->responsavel_atendimento }}
                                         </div>
                                         <div class="col-md-12 mt-3">
                                             Observações ao paciente: {{ $resultado->observacoes }}
                                         </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                      
+                                            <div class="col-md-8 mt-3">
+                                                Médico Responsavel : {{ $resultado->medico_responsavel }}
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                CRM : {{ $resultado->crm }}
+                                            </div>
+                                            <div class="col-md-8 mt-3">
+                                                Endereço : {{ $resultado->endereco_medico }}
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                Telefone : {{ $resultado->telefone_medico }}
+                                            </div>
+                                       
                                     </div>
                                     <div class="row">
                                         <h5 class="text-center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</h5>
