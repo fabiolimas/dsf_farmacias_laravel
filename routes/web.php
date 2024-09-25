@@ -201,7 +201,9 @@ Route::prefix('/fm')->group(function () {
         Route::get('/update-presenca/{id}/{status}', [ExamesController::class, 'updatePresenca'])->name('painel.farmacia.exames.presenca');
         Route::get('/exames-confirmados', [ExamesController::class, 'confirmados'])->name('painel.farmacia.exames.confirmados');
         Route::get('/dados-exame/{id}', [ExamesController::class, 'dadosExame'])->name('painel.farmacia.exames.dados-exame');
+        Route::get('/edit-dados-exame/{id}', [ExamesController::class, 'editDadosExame'])->name('painel.farmacia.exames.edit-dados-exame');
         Route::post('/dados-exame', [ExamesController::class, 'storeResultado'])->name('painel.farmacia.exames.result-exame');
+        Route::post('/update-dados-exame/{id}', [ExamesController::class, 'updateDadosExame'])->name('painel.farmacia.exames.update-dados-exame');
         Route::post('/busca-exame-pronto', [ExamesController::class, 'buscaExamesProntos'])->name('painel.farmacia.exame.busca');
     });
 

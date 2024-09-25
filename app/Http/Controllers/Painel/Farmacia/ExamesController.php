@@ -151,6 +151,54 @@ $exame=Exame::find($agenda->exame_id);
 
    }
 
+   public function updateDadosExame(Request $request){
+
+
+   
+    $resultado=Resultado::find($request->id);
+    $perguntas=['perguntas'=>$request->perguntas,'respostas'=>$request->respostas];
+
+        
+        $resultado->update([
+            'perguntas'=>json_encode($perguntas),
+            'gestante'=>$request->gestante,
+            'fumante'=>$request->fumante,
+            'usa_insulina'=>$request->usa_insulina,
+            'peso'=>$request->peso,
+            'uso_de_medicamentos'=>$request->uso_de_medicamentos,
+            'medico_responsavel'=>$request->medico_responsavel,
+            'crm'=>$request->crm,
+            'endereco_medico'=>$request->endereco_medico,
+            'telefone_medico'=>$request->telefone_medico,
+            'observacoes'=>$request->observacao,
+            'responsavel_atendimento'=>$request->responsavel_atendimento
+        
+        ]);
+ 
+    
+    return redirect()->route('painel.farmacia.exames.index')->withsuccess('resultado atualizado com sucesso');
+   }
+
+
+
+   public function editDadosExame(Request $request){
+
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
+    $agenda=Agenda::find($request->id);
+
+    $exame=Exame::find($agenda->exame_id);
+
+    $resultado=Resultado::where('agendas_id',$request->id)
+    ->first();
+
+    $cliente=ClienteFarmacia::find($agenda->cliente_farmacia_id);
+
+
+    return view('pages.painel.farmacia.exames.edit-dados-exame', compact('resultado','farmacia','agenda', 'exame','cliente'));
+
+
+   }
+
    public function storeResultado(Request $request){
 
 
@@ -254,10 +302,10 @@ public function buscaExamesProntos(Request $request){
 }
 
 public function entradaEstoque(){
-
+    $farmacia=Cliente::find(auth()->user()->cliente_id);
     $exames=Exame::all();
 
-    return view('pages.painel.farmacia.exames.create', compact('exames'));
+    return view('pages.painel.farmacia.exames.create', compact('exames','farmacia'));
 
 
 }

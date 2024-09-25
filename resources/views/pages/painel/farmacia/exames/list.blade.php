@@ -108,6 +108,12 @@
                                                             <i class="mx-auto" data-feather="printer"
                                                                 style="min-width: 70px; min-height: 45px; stroke-width: 1.6"></i>
                                                         </a>
+                                                        <a href="{{ route('painel.farmacia.exames.edit-dados-exame', ['id' => $examePronto->id]) }}"
+                                                            class="btn btn-primary-light text-center  py-2  text-green d-flex align-items-center"
+                                                            style="background: #B2D2D2" title="Editar">
+                                                            <i class="mx-auto" data-feather="edit"
+                                                                style="min-width: 70px; min-height: 45px; stroke-width: 1.6"></i>
+                                                        </a>
 
 
                                                     </div>
