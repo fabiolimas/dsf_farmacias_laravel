@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Visualizar Exame'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="">
@@ -34,7 +35,7 @@
 
                                 </div>
                                 <div class="col-md-8">
-                                    <h5>Declaração de serviços farmaceuticos</h5>
+                                    <h5>Declaração de Serviços Farmacêuticos</h5>
                                 </div>
                                 <div class="col-md-1">
                                     Nº <?php echo e($resultado->numero_exame); ?>
@@ -81,7 +82,7 @@
                                 </div>
 
                                 <div class="row mt-2">
-                                    <span class="titleResult">Atenção Farmaceutica</span>
+                                    <span class="titleResult">Atenção Farmacêutica</span>
                                     <div class="border-green-light p-3 rounded-3 mb-4 ">
                                         <div class="row">
                                             <div class="col-md-3 mt-3">
@@ -133,23 +134,9 @@
                                             <?php else: ?>
                                             <?php endif; ?>
 
-                                            <div class="col-md-3 mt-3">
-                                                Médico Responsavel : <?php echo e($resultado->medico_responsavel); ?>
-
-                                            </div>
-                                            <div class="col-md-2 mt-3">
-                                                CRM : <?php echo e($resultado->crm); ?>
-
-                                            </div>
-                                            <div class="col-md-4 mt-3">
-                                                Endereço : <?php echo e($resultado->endereco_medico); ?>
-
-                                            </div>
-                                            <div class="col-md-3 mt-3">
-                                                Telefone : <?php echo e($resultado->telefone_medico); ?>
-
-                                            </div>
+                                           
                                         </div>
+                                       
                                         <div class="col-md-4 mt-3">
                                             Responsavel pelo atendimento : <?php echo e($resultado->responsavel_atendimento); ?>
 
@@ -159,12 +146,32 @@
 
                                         </div>
                                     </div>
+                                    <div class="row mb-4">
+                                      
+                                            <div class="col-md-8 mt-3">
+                                                Médico Responsavel : <?php echo e($resultado->medico_responsavel); ?>
+
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                CRM : <?php echo e($resultado->crm); ?>
+
+                                            </div>
+                                            <div class="col-md-8 mt-3">
+                                                Endereço : <?php echo e($resultado->endereco_medico); ?>
+
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                Telefone : <?php echo e($resultado->telefone_medico); ?>
+
+                                            </div>
+                                       
+                                    </div>
                                     <div class="row">
                                         <h5 class="text-center">HOSPITAL 24H MAIS PRÓXIMO EM CASO DE EMERGÊNCIA</h5>
                                         <p class="text-center"><?php echo e($farmacia->hospital_proximo); ?> - <?php echo e($farmacia->end_hospital); ?></p>
                                     </div>
                                 <div class="row">
-                                    <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta medica ou a realização de exames laboratoriais.</h5>
+                                    <h5 class="text-center">Este Procedimento não tem finalidade de diagnóstico e não substitui a cosulta médica ou a realização de exames laboratoriais.</h5>
                                 </div>
                                 <div class="row">
                                     <?php echo $exame->bibliografia; ?>
